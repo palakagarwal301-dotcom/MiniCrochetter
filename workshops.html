@@ -7,69 +7,71 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F9F6F0; color: #4A4238; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F9F6F0; 
+            background-image: url('https://www.transparenttextures.com/patterns/felt.png'); 
+            color: #4A4238; 
+        }
         h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
-        .pattern-paper { background: white; box-shadow: 10px 10px 0px #E5D3B3; border: 1px solid #E5D3B3; }
+        .pattern-card { background: white; border: 1px solid #E5D3B3; box-shadow: 15px 15px 0px #E5D3B3; }
     </style>
 </head>
-<body>
-    <nav class="flex justify-between items-center px-8 py-6 sticky top-0 bg-[#F9F6F0]/80 backdrop-blur-md z-50 border-b border-stone-100">
-        <a href="index.html" class="text-xl tracking-[0.2em] lowercase serif">mini.crochetter</a>
-        <div class="flex space-x-6 text-[10px] uppercase tracking-widest">
+<body class="antialiased">
+
+    <nav class="flex justify-between items-center px-6 py-6 bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
+        <a href="index.html" class="text-xl tracking-[0.1em] lowercase serif font-semibold">mini.crochetter</a>
+        <div class="flex space-x-5 text-[10px] uppercase tracking-widest font-medium">
             <a href="index.html">Home</a>
             <a href="shop.html">Shop</a>
-            <a href="workshops.html" class="font-bold border-b border-stone-800">Workshops</a>
+            <a href="workshops.html" class="border-b-2 border-stone-800">Workshops</a>
         </div>
     </nav>
 
-    <header class="max-w-5xl mx-auto px-8 py-20 text-center">
-        <h1 class="text-5xl serif italic mb-6">The Workshop Series</h1>
-        <p class="text-stone-500 max-w-xl mx-auto leading-relaxed font-light">
-            Bringing the "Hook & Tea" community to life through offline sessions in the heart of Kolkata.
+    <header class="max-w-5xl mx-auto px-6 py-16 text-center">
+        <h1 class="text-5xl serif italic lowercase mb-6">learn the craft</h1>
+        <p class="text-stone-500 max-w-xl mx-auto leading-relaxed font-light italic">
+            Join me in Kolkata for slow stitching and tea. Beginner-friendly sessions focused on minimalist design.
         </p>
     </header>
 
-    <section class="max-w-7xl mx-auto px-8 py-12 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <div class="pattern-paper aspect-[3/4] p-12 flex flex-col justify-center items-center text-center">
-            <h3 class="serif text-2xl italic mb-4">The Daisy Pattern</h3>
-            <p class="text-[10px] uppercase tracking-widest text-stone-400 mb-8 underline">Printable Guide</p>
-            <p class="text-xs text-stone-500 leading-relaxed italic">"A clear, four-page technical guide designed for your first stitches."</p>
+    <section class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div class="pattern-card aspect-[3/4] p-6 flex flex-col justify-center items-center">
+            <img src="./mandala-centerpiece.png" alt="Daisy Pattern" class="w-full h-auto drop-shadow-lg mb-8">
+            <h3 class="serif text-xl italic">The Daisy Guide</h3>
+            <p class="text-[9px] uppercase tracking-[0.4em] text-stone-400 mt-2">4-Page Technical Printable</p>
         </div>
+
         <div>
-            <span class="bg-stone-800 text-white text-[9px] px-3 py-1 uppercase tracking-widest">April Session</span>
-            <h2 class="text-4xl serif mt-6 italic">Beginner Daisy Workshop</h2>
-            <p class="mt-4 text-stone-500 leading-relaxed mb-8 italic">
-                Learn the minimalist cream aesthetic through hands-on practice. We cover everything from the magic ring to final petals.
-            </p>
-            <ul class="space-y-4 text-sm border-t border-stone-200 pt-8 mb-10">
-                <li class="flex justify-between">
-                    <span class="uppercase tracking-widest text-[10px] text-stone-400">Venue</span>
-                    <span>Rabindra Sadan (Exide Crossing), Kolkata</span>
+            <div class="mb-10 text-center md:text-left">
+                <span class="bg-stone-800 text-[#F9F6F0] text-[9px] px-3 py-1 uppercase tracking-widest">Next: April 11</span>
+                <h2 class="text-4xl serif mt-6 italic">Beginner Daisy Workshop</h2>
+                <p class="mt-4 text-stone-500 leading-relaxed font-light">
+                    Master the magic ring and petal tension at our studio near Rabindra Sadan. 
+                </p>
+            </div>
+
+            <ul class="space-y-6 text-sm border-t border-stone-200 pt-8 mb-10">
+                <li class="flex justify-between uppercase tracking-tighter">
+                    <span class="text-stone-400 text-[10px] tracking-widest">Location</span>
+                    <span class="font-medium">Exide Crossing, Kolkata</span>
                 </li>
-                <li class="flex justify-between">
-                    <span class="uppercase tracking-widest text-[10px] text-stone-400">Date</span>
-                    <span>Saturday, April 11th, 2026</span>
-                </li>
-                <li class="flex justify-between">
-                    <span class="uppercase tracking-widest text-[10px] text-stone-400">Fee</span>
-                    <span>₹1,500 <span class="text-[10px] text-stone-400">(Materials & Guide included)</span></span>
+                <li class="flex justify-between uppercase tracking-tighter">
+                    <span class="text-stone-400 text-[10px] tracking-widest">Investment</span>
+                    <span class="font-medium">₹1,500</span>
                 </li>
             </ul>
-            <button class="w-full bg-stone-800 text-white py-5 text-[10px] uppercase tracking-[0.3em] hover:opacity-90 transition">
-                Secure a Seat
-            </button>
+
+            <a href="https://wa.me/918886122232?text=Hi%20Palak!%20I'd%20like%20to%20book%20a%20seat%20for%20the%20Daisy%20Workshop." 
+               class="block w-full bg-stone-800 text-[#F9F6F0] py-5 text-[10px] uppercase tracking-[0.3em] text-center hover:opacity-90 transition shadow-xl font-bold">
+                Book via WhatsApp
+            </a>
         </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-8 py-32 border-t border-stone-200 mt-20 text-center">
-        <h4 class="serif text-xl italic mb-6">Our Studio</h4>
-        <p class="text-xs text-stone-500 leading-relaxed font-light max-w-lg mx-auto">
-            Located near Rowland Road, our studio is a quiet space designed for focus and creativity. Just a short commute from Rabindra Sadan, it’s where all our custom amigurumi and "Hook & Tea" updates come to life.
-        </p>
-    </section>
-
-    <footer class="text-center py-20 text-[9px] uppercase tracking-[0.3em] text-stone-400 border-t border-stone-100">
+    <footer class="py-20 text-center text-[9px] uppercase tracking-[0.4em] text-stone-300">
         &copy; 2026 mini.crochetter | Kolkata
     </footer>
+
 </body>
 </html>
