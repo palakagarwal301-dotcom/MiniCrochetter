@@ -38,7 +38,7 @@
       <button class="tab">Flowers</button>
     </div>
     <div class="products">
-      <!-- Example product card -->
+      <!-- Product cards -->
       <div class="product-card">
         <div class="product-img-wrap">
           <img src="santa_plushie.jpg" alt="Santa Plushie">
@@ -54,7 +54,39 @@
           </div>
         </div>
       </div>
-      <!-- Add more product-card blocks here for other items -->
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="shark_plushie.jpg" alt="Shark Plushie">
+          <span class="badge best">Best Seller</span>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Plushie</div>
+          <div class="product-name">Shark Plushie</div>
+          <div class="product-desc-short">Crochet shark with a big smile.</div>
+          <div class="product-footer">
+            <div class="product-price">₹599 <span>per piece</span></div>
+            <button class="view-btn" onclick="openModal()">View</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="daisy_flower.jpg" alt="Crochet Daisy">
+          <span class="badge custom">Custom</span>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">Flower</div>
+          <div class="product-name">Crochet Daisy</div>
+          <div class="product-desc-short">Handmade crochet daisy flower for decor.</div>
+          <div class="product-footer">
+            <div class="product-price">₹299 <span>per piece</span></div>
+            <button class="view-btn" onclick="openModal()">View</button>
+          </div>
+        </div>
+      </div>
+      <!-- Add more products similarly -->
     </div>
   </section>
 
@@ -73,8 +105,8 @@
         <div class="modal-desc">Festive crochet Santa doll, handmade with love.</div>
         <div class="modal-actions">
           <button class="modal-add">Add to Cart</button>
-          <a href="https://wa.me/919812345678" class="modal-wa" target="_blank">Order via WhatsApp</a>
-          <a href="mailto:palakagarwal@example.com" class="modal-wa" target="_blank">Email Us</a>
+          <a href="https://wa.me/918886122232" class="modal-wa" target="_blank">Order via WhatsApp</a>
+          <a href="mailto:palakagarwal301@gmail.com" class="modal-wa" target="_blank">Email Us</a>
         </div>
       </div>
     </div>
@@ -88,22 +120,12 @@
         <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan‑India.</p>
         <div class="foot-soc">
           <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
-          <a href="https://wa.me/919812345678" class="soc-btn" target="_blank">💬</a>
+          <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">💬</a>
         </div>
       </div>
-      <div class="foot-col"><h4>Shop</h4>
-        <a href="shop.html">Baby Booties</a>
-        <a href="shop.html">Mini Plushies</a>
-        <a href="shop.html">Coasters & Mats</a>
-        <a href="shop.html">Flowers</a>
-      </div>
-      <div class="foot-col"><h4>Learn</h4>
-        <a href="workshops.html">Crochet Workshops</a>
-        <a href="https://www.instagram.com/mini.crochetter/" target="_blank">Instagram</a>
-      </div>
       <div class="foot-col"><h4>Order</h4>
-        <a href="mailto:palakagarwal@example.com">Email Us</a>
-        <a href="https://wa.me/919812345678">WhatsApp Us</a>
+        <a href="mailto:palakagarwal301@gmail.com">Email Us</a>
+        <a href="https://wa.me/918886122232">WhatsApp Us</a>
       </div>
     </div>
     <div class="foot-bot">
@@ -114,15 +136,7 @@
 
   <!-- CART + TOAST -->
   <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-  <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-head"><h3>Your Cart 🧶</h3><button class="close-c" onclick="closeCart()">✕</button></div>
-    <div class="cart-items" id="cart-items"></div>
-    <div class="cart-foot" id="cart-foot" style="display:none">
-      <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">₹0</span></div>
-      <button class="checkout-btn" onclick="checkout()">Order via WhatsApp →</button>
-      <p class="wa-note">Opens WhatsApp with your full order.<br>We confirm availability & arrange payment.</p>
-    </div>
-  </div>
+  <div class="cart-drawer" id="cart-drawer">…</div>
   <div class="toast" id="toast"></div>
 
   <!-- SCRIPTS -->
@@ -144,7 +158,7 @@
       document.getElementById("cart-drawer").classList.remove("open");
     }
     function checkout(){
-      window.open("https://wa.me/919812345678","_blank");
+      window.open("https://wa.me/918886122232","_blank");
     }
   </script>
 </body>
