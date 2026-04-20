@@ -28,21 +28,10 @@
       <h1>Order Your <em>Crochet Minis</em></h1>
       <p>Custom orders always open. Every piece is handmade with love and ships pan‑India.</p>
       <div class="hero-btns">
-        <a href="https://wa.me/91XXXXXXXXXX" class="btn-p" target="_blank">Order via WhatsApp</a>
-        <a href="https://instagram.com/mini.crochetter" class="btn-s" target="_blank">DM on Instagram</a>
+        <a href="https://wa.me/919812345678" class="btn-p" target="_blank">Order via WhatsApp</a>
+        <a href="mailto:palakagarwal@example.com" class="btn-s" target="_blank">Email Us</a>
       </div>
     </div>
-  </section>
-
-  <!-- ORDER INFO -->
-  <section class="shop-wrap">
-    <h2>How Ordering Works</h2>
-    <p>Choose from our shop or request a custom design. We confirm availability, share payment details, and ship across India.</p>
-    <ul>
-      <li>🧶 Pick a product or custom idea</li>
-      <li>💬 Contact us via WhatsApp or Instagram</li>
-      <li>📦 We confirm and ship pan‑India</li>
-    </ul>
   </section>
 
   <!-- FOOTER -->
@@ -53,6 +42,10 @@
   <div class="cart-drawer" id="cart-drawer">…</div>
   <div class="toast" id="toast"></div>
 
-  <script>…cart functions…</script>
+  <script>
+    function openCart(){document.getElementById("cart-overlay").classList.add("open");document.getElementById("cart-drawer").classList.add("open");}
+    function closeCart(){document.getElementById("cart-overlay").classList.remove("open");document.getElementById("cart-drawer").classList.remove("open");}
+    function checkout(){window.open("https://wa.me/919812345678","_blank");}
+  </script>
 </body>
 </html>
