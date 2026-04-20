@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Crochetter — Order</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="workshops.html">Workshops</a></li>
+      <li><a href="order.html" class="active">Order</a></li>
+    </ul>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
+  </nav>
+
+  <!-- ORDER HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Order Your <em>Crochet Minis</em></h1>
+      <p>Custom orders always open. Every piece is handmade with love and ships pan‑India.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/91XXXXXXXXXX" class="btn-p" target="_blank">Order via WhatsApp</a>
+        <a href="https://instagram.com/mini.crochetter" class="btn-s" target="_blank">DM on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER INFO -->
+  <section class="shop-wrap">
+    <h2>How Ordering Works</h2>
+    <p>Choose from our shop or request a custom design. We confirm availability, share payment details, and ship across India.</p>
+    <ul>
+      <li>🧶 Pick a product or custom idea</li>
+      <li>💬 Contact us via WhatsApp or Instagram</li>
+      <li>📦 We confirm and ship pan‑India</li>
+    </ul>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>…same as index.html…</footer>
+
+  <!-- CART + TOAST -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cart-drawer">…</div>
+  <div class="toast" id="toast"></div>
+
+  <script>…cart functions…</script>
+</body>
+</html>
