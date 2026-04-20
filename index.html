@@ -1,117 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mini.crochetter | The Collection</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #F9F6F0; background-image: url('https://www.transparenttextures.com/patterns/felt.png'); color: #4A4238; }
-        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
-        .product-card { background: white; border: 1px solid #E5D3B3; transition: all 0.4s ease; }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(74, 66, 56, 0.08); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Crochetter — Handmade Crochet Shop</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased">
+<body>
 
-    <nav class="flex justify-between items-center px-8 py-8 bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
-        <a href="index.html" class="text-2xl tracking-[0.1em] lowercase serif font-semibold">mini.crochetter</a>
-        <div class="flex space-x-6 text-[10px] uppercase tracking-[0.2em] font-medium">
-            <a href="index.html" class="border-b border-stone-800">Shop</a>
-            <a href="workshops.html">Workshops</a>
-        </div>
-    </nav>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#booties">Booties</a></li>
+      <li><a href="#plushies">Plushies</a></li>
+      <li><a href="#coasters">Coasters & Mats</a></li>
+      <li><a href="#flowers">Flowers</a></li>
+      <li><a href="#bags">Bags</a></li>
+      <li><a href="#accessories">Accessories</a></li>
+      <li><a href="#rakhis">Rakhis</a></li>
+      <li><a href="#workshops">Workshops</a></li>
+      <li><a href="#contact">Order</a></li>
+    </ul>
+  </nav>
 
-    <header class="max-w-7xl mx-auto px-8 pt-24 pb-12 text-center">
-        <h1 class="text-5xl md:text-6xl serif italic lowercase">the collection</h1>
-        <p class="text-stone-400 text-[10px] mt-6 tracking-[0.4em] uppercase font-light">Handmade with love in Kolkata</p>
-    </header>
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Crochet Minis Made with Love</h1>
+    <p>Every piece handcrafted stitch by stitch – booties, plushies, coasters, flowers & more.</p>
+    <div class="cta-buttons">
+      <a href="#shop" class="btn">Shop Now</a>
+      <a href="#workshops" class="btn">Join a Workshop</a>
+    </div>
+  </header>
 
-    <main class="max-w-7xl mx-auto px-8 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            
-            <div class="group">
-                <div class="product-card aspect-[4/5] flex items-center justify-center p-10 relative overflow-hidden">
-                    <img src="./sunflower-coaster.png" alt="Sunflower" class="w-full h-full object-contain">
-                    <a href="https://wa.me/918886122232?text=Hi%20Palak!%20I'd%20like%20to%20order%20the%20Sunflower%20Coaster%20Set." class="absolute bottom-0 left-0 w-full bg-stone-800 text-[#F9F6F0] py-6 text-[10px] uppercase tracking-[0.4em] text-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all">Order via WhatsApp</a>
-                </div>
-                <div class="mt-6 flex justify-between items-baseline">
-                    <h3 class="serif italic text-xl">Sunflower Coaster</h3>
-                    <span class="text-sm">₹1,299</span>
-                </div>
-            </div>
+  <!-- Booties -->
+  <section id="booties">
+    <h2>Booties</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="red_booties.jpg" alt="Red Booties & Bow Headband Set">
+        <h3>Red Booties & Bow Headband Set</h3>
+        <p>Classic red booties with white scallop trim, paired with a pink bow headband.</p>
+        <span>₹649 onwards</span>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product">
+        <img src="navy_booties.jpg" alt="Navy Bow Booties">
+        <h3>Navy Bow Booties</h3>
+        <p>Soft light-blue booties with oversized navy bow.</p>
+        <span>₹549 onwards</span>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </section>
 
-            <div class="group">
-                <div class="product-card aspect-[4/5] flex items-center justify-center p-10 relative overflow-hidden">
-                    <img src="./mandala-centerpiece.jpg" alt="Mandala" class="w-full h-full object-contain">
-                    <a href="https://wa.me/918886122232?text=Hi%20Palak!%20I'd%20like%20to%20order%20the%20Mandala." class="absolute bottom-0 left-0 w-full bg-stone-800 text-[#F9F6F0] py-6 text-[10px] uppercase tracking-[0.4em] text-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all">Order via WhatsApp</a>
-                </div>
-                <div class="mt-6 flex justify-between items-baseline">
-                    <h3 class="serif italic text-xl">Spring Mandala</h3>
-                    <span class="text-sm">₹1,850</span>
-                </div>
-            </div>
+  <!-- Repeat similar sections for Plushies, Coasters, Flowers, Bags, Accessories, Rakhis -->
 
-            <div class="group">
-                <div class="product-card aspect-[4/5] flex items-center justify-center p-10 relative overflow-hidden">
-                    <img src="./minion.png" alt="Minion" class="w-full h-full object-contain">
-                    <a href="https://wa.me/918886122232?text=Hi%20Palak!%20I'd%20like%20to%20order%20the%20Minion." class="absolute bottom-0 left-0 w-full bg-stone-800 text-[#F9F6F0] py-6 text-[10px] uppercase tracking-[0.4em] text-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all">Order via WhatsApp</a>
-                </div>
-                <div class="mt-6 flex justify-between items-baseline">
-                    <h3 class="serif italic text-xl">The Minion Friend</h3>
-                    <span class="text-sm">₹950</span>
-                </div>
-            </div>
+  <!-- Workshops -->
+  <section id="workshops">
+    <h2>Learn Crochet with Me</h2>
+    <p>From zero to your first crochet mini – in one session. All materials included.</p>
+    <ul>
+      <li>Beginner friendly</li>
+      <li>Materials included (hook, yarn & pattern)</li>
+      <li>Small batches, personal attention</li>
+      <li>Online & in-person, flexible timing</li>
+    </ul>
+    <a href="https://instagram.com/mini.crochetter" class="btn">DM to Book Your Spot</a>
+  </section>
 
-            <div class="group">
-                <div class="product-card aspect-[4/5] flex items-center justify-center p-10 relative overflow-hidden">
-                    <img src="./pooh.png" alt="Pooh Bear" class="w-full h-full object-contain">
-                    <a href="https://wa.me/918886122232?text=Hi%20Palak!%20I'd%20like%20to%20order%20the%20Pooh%20Bear." class="absolute bottom-0 left-0 w-full bg-stone-800 text-[#F9F6F0] py-6 text-[10px] uppercase tracking-[0.4em] text-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all">Order via WhatsApp</a>
-                </div>
-                <div class="mt-6 flex justify-between items-baseline">
-                    <h3 class="serif italic text-xl">Classic Pooh</h3>
-                    <span class="text-sm">₹1,100</span>
-                </div>
-            </div>
-
-            <div class="group">
-                <div class="product-card aspect-[4/5] flex items-center justify-center p-10 relative overflow-hidden">
-                    <img src="./booties.png" alt="Baby Booties" class="w-full h-full object-contain">
-                    <a href="https://wa.me/918886122232?text=Hi%20Palak!%20I'd%20like%20to%20order%20the%20Baby%20Booties." class="absolute bottom-0 left-0 w-full bg-stone-800 text-[#F9F6F0] py-6 text-[10px] uppercase tracking-[0.4em] text-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all">Order via WhatsApp</a>
-                </div>
-                <div class="mt-6 flex justify-between items-baseline">
-                    <h3 class="serif italic text-xl">Cream Baby Booties</h3>
-                    <span class="text-sm">₹750</span>
-                </div>
-            </div>
-
-            <div class="group">
-                <div class="product-card aspect-[4/5] flex items-center justify-center p-10 relative overflow-hidden">
-                    <img src="./daisy.jpg" alt="Daisy" class="w-full h-full object-contain">
-                    <a href="https://wa.me/918886122232?text=Hi%20Palak!%20I'd%20like%20to%20order%20the%20Daisy%20Keychain." class="absolute bottom-0 left-0 w-full bg-stone-800 text-[#F9F6F0] py-6 text-[10px] uppercase tracking-[0.4em] text-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all">Order via WhatsApp</a>
-                </div>
-                <div class="mt-6 flex justify-between items-baseline">
-                    <h3 class="serif italic text-xl">Daisy Keychain</h3>
-                    <span class="text-sm">₹349</span>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <section class="max-w-7xl mx-auto px-8 py-24 border-t border-stone-200">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div class="bg-stone-800 p-12 text-[#F9F6F0] text-center rounded-sm">
-                <h3 class="serif text-2xl mb-4">8886122232@yapl</h3>
-                <p class="text-[10px] uppercase tracking-widest opacity-60">Payment via UPI | Share SS to confirm</p>
-            </div>
-            <div class="text-center md:text-left flex flex-col justify-center">
-                <h2 class="serif text-3xl italic lowercase">Custom Handmade Orders</h2>
-                <p class="text-stone-500 mt-4 text-sm font-light leading-relaxed italic">Direct message on WhatsApp for custom colors and special requests.</p>
-            </div>
-        </div>
-    </section>
+  <!-- Contact / Order -->
+  <section id="contact">
+    <h2>Order Your Crochet Minis</h2>
+    <p>Custom orders always open. Shipping pan-India.</p>
+    <a href="https://wa.me/91XXXXXXXXXX" class="btn">WhatsApp Us</a>
+    <a href="https://instagram.com/mini.crochetter" class="btn">DM on Instagram</a>
+  </section>
 
 </body>
 </html>
