@@ -1,118 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mini Crochetter — Handmade Crochet Minis with Love</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Crochetter — Handmade Crochet Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="workshops.html">Workshops</a></li>
-    <li><a href="#contact">Order</a></li>
-  </ul>
-  <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
-</nav>
 
-<section class="hero">
-  <div class="hero-dots"></div>
-  <div class="hero-content">
-    <div class="hero-tag">🧶 Custom orders always open</div>
-    <h1>Crochet Minis<br>Made with <em>Love</em></h1>
-    <p>Every piece handcrafted stitch by stitch — booties, plushies, coasters, flowers & more. Made just for you.</p>
-    <div class="hero-btns">
-      <a href="shop.html" class="btn-p">Shop Now</a>
-      <a href="workshops.html" class="btn-s">Join a Workshop</a>
-    </div>
-  </div>
-</section>
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="workshops.html">Workshops</a></li>
+      <li><a href="#contact">Order</a></li>
+    </ul>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
+  </nav>
 
-<section class="reviews-section" id="contact">
-  <div class="sec-head">
-    <span class="sec-tag">Happy customers</span>
-    <h2 class="sec-title">Made someone <em>smile</em> today</h2>
-  </div>
-  <div class="reviews-grid" id="rg"></div>
-</section>
-
-<footer>
-  <div class="foot-top">
-    <div class="foot-brand">
-      <div class="foot-brand-name">🧶 Mini Crochetter</div>
-      <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan-India.</p>
-      <div class="foot-soc">
-        <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
-        <a href="https://wa.me/91XXXXXXXXXX" class="soc-btn" target="_blank">💬</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-dots"></div>
+    <div class="hero-content">
+      <div class="hero-tag">🧶 Custom orders always open</div>
+      <h1>Crochet Minis<br>Made with <em>Love</em></h1>
+      <p>Every piece handcrafted stitch by stitch — booties, plushies, coasters, flowers & more. Made just for you.</p>
+      <div class="hero-btns">
+        <a href="shop.html" class="btn-p">Shop Now</a>
+        <a href="workshops.html" class="btn-s">Join a Workshop</a>
       </div>
     </div>
-    <div class="foot-col"><h4>Shop</h4>
-      <a href="shop.html">Baby Booties</a><a href="shop.html">Mini Plushies</a>
-      <a href="shop.html">Coasters & Mats</a><a href="shop.html">Flowers</a>
-    </div>
-    <div class="foot-col"><h4>Learn</h4>
-      <a href="workshops.html">Crochet Workshops</a>
-      <a href="https://www.instagram.com/mini.crochetter/" target="_blank">Instagram</a>
-    </div>
-    <div class="foot-col"><h4>Order</h4>
-      <a href="https://www.instagram.com/mini.crochetter/" target="_blank">DM on Instagram</a>
-      <a href="https://wa.me/91XXXXXXXXXX">WhatsApp Us</a>
-    </div>
-  </div>
-  <div class="foot-bot">
-    <div class="foot-copy">© 2025 Mini Crochetter · Handmade with love in India 🇮🇳</div>
-    <div class="foot-copy">All pieces made to order · Ships pan-India</div>
-  </div>
-</footer>
+  </section>
 
-<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-head"><h3>Your Cart 🧶</h3><button class="close-c" onclick="closeCart()">✕</button></div>
-  <div class="cart-items" id="cart-items"></div>
-  <div class="cart-foot" id="cart-foot" style="display:none">
-    <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">₹0</span></div>
-    <button class="checkout-btn" onclick="checkout()">Order via WhatsApp →</button>
-    <p class="wa-note">Opens WhatsApp with your full order.<br>We confirm availability & arrange payment.</p>
-  </div>
-</div>
-<div class="toast" id="toast"></div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Order Your Crochet Minis</h2>
+    <p>Custom orders always open. Shipping pan-India.</p>
+    <a href="https://wa.me/91XXXXXXXXXX" class="btn">WhatsApp Us</a>
+    <a href="https://instagram.com/mini.crochetter" class="btn">DM on Instagram</a>
+  </section>
 
-<script>
-let cart=[];
-const reviews=[
-  {stars:5,av:"S",bg:"#faece7",name:"saanvisamriddhitwinsdiaries",handle:"@saanvisamriddhitwinsdiaries",product:"Baby Booties",text:'"These cutest crochet booties for my twins just melted my heart! Thank you for sending so much warmth and love our way."'},
-  {stars:5,av:"T",bg:"#faeeda",name:"Tanya Kapoor",handle:"@tanyakapoor22",product:"Baby Booties & Bear Plushie",text:'"Obsessed with these handmade crochet pieces. So much love & patience in every stitch!"'},
-  {stars:5,av:"T",bg:"#fdf3d0",name:"Tanya Kapoor",handle:"@tanyakapoor22",product:"Bear Plushie",text:'"Because handmade gifts are always special. My heart is still smiling! ❤️"'},
-  {stars:5,av:"D",bg:"#e1f5ee",name:"Deepshika",handle:"@deepshika27",product:"Flower Keychain",text:'"Thank you @mini.crochetter ❤️ — the blue flower keychain is exactly what I wanted!"'},
-  {stars:5,av:"K",bg:"#e8eaf6",name:"Kate",handle:"@kateneverlatee",product:"Shark Plushie",text:'"Only thing keeping me company 😂 — this shark is the best purchase ever!"'},
-  {stars:5,av:"R",bg:"#fdf3d0",name:"Rishika Keval",handle:"@rishikakeval",product:"Penguin + Giraffe",text:'"I\'m so proud of how much you\'ve worked on this. Thank you for curating these special plush toys 😊"'},
-];
-
-document.getElementById("rg").innerHTML=reviews.map(r=>`
-  <div class="rev-card">
-    <div class="rev-stars">${"★".repeat(r.stars)}</div>
-    <div class="rev-text">${r.text}</div>
-    <div class="rev-auth">
-      <div class="rev-av" style="background:${r.bg};color:var(--ter)">${r.av}</div>
-      <div><div class="rev-name">${r.name}</div><div class="rev-handle">${r.handle}</div></div>
+  <!-- REVIEWS -->
+  <section class="reviews-section">
+    <div class="sec-head">
+      <span class="sec-tag">Happy customers</span>
+      <h2 class="sec-title">Made someone <em>smile</em> today</h2>
     </div>
-    <div class="rev-prod">Bought: ${r.product}</div>
-  </div>`).join("");
+    <div class="reviews-grid" id="rg"></div>
+  </section>
 
-function openCart(){document.getElementById("cart-overlay").classList.add("open");document.getElementById("cart-drawer").classList.add("open");}
-function closeCart(){document.getElementById("cart-overlay").classList.remove("open");document.getElementById("cart-drawer").classList.remove("open");}
-function renderCart(){
-  const c=document.getElementById("cart-items"),f=document.getElementById("cart-foot");
-  if(!cart.length){c.innerHTML='<div class="cart-empty"><div style="font-size:48px">🧶</div><p style="color:var(--tl);margin-top:12px">Your cart is empty</p></div>';f.style.display="none";return;}
-  f.style.display="block";
-  c.innerHTML=cart.map((item,i)=>`<div class="cart-item"><div class="ci-info"><div class="ci-name">${item.name}</div><div class="ci-price">₹${item.price}</div></div></div>`).join("");
-  document.getElementById("ct").textContent="₹"+cart.reduce((s,i)=>s+i.price*i.qty,0);
-}
-function checkout(){window.open("shop.html","_self");}
-</script>
+  <!-- FOOTER -->
+  <footer>…</footer>
+
+  <!-- CART + TOAST -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cart-drawer">…</div>
+  <div class="toast" id="toast"></div>
+
+  <!-- SCRIPTS -->
+  <script>…</script>
 </body>
 </html>
