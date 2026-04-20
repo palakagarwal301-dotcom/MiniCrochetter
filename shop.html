@@ -17,7 +17,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="shop.html" class="active">Shop</a></li>
       <li><a href="workshops.html">Workshops</a></li>
-      <li><a href="#contact">Order</a></li>
+      <li><a href="order.html">Order</a></li>
     </ul>
     <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
   </nav>
@@ -50,7 +50,7 @@
           <div class="product-desc-short">Festive crochet Santa doll, handmade with love.</div>
           <div class="product-footer">
             <div class="product-price">₹499 <span>per piece</span></div>
-            <button class="view-btn">View</button>
+            <button class="view-btn" onclick="openModal()">View</button>
           </div>
         </div>
       </div>
@@ -58,14 +58,94 @@
     </div>
   </section>
 
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay"></div>
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body">
+      <div class="modal-gallery">
+        <img src="santa_plushie.jpg" alt="Santa Plushie" class="modal-main-img">
+      </div>
+      <div class="modal-info">
+        <div class="modal-cat">Plushie</div>
+        <div class="modal-name">Santa Plushie</div>
+        <div class="modal-price">₹499 <span>per piece</span></div>
+        <div class="modal-desc">Festive crochet Santa doll, handmade with love.</div>
+        <div class="modal-actions">
+          <button class="modal-add">Add to Cart</button>
+          <a href="https://wa.me/9198XXXXXXX" class="modal-wa" target="_blank">Order via WhatsApp</a>
+          <a href="mailto:palakagarwal@example.com" class="modal-wa" target="_blank">Email Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
-  <footer>…same as index.html…</footer>
+  <footer>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-brand-name">🧶 Mini Crochetter</div>
+        <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan‑India.</p>
+        <div class="foot-soc">
+          <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
+          <a href="https://wa.me/9198XXXXXXX" class="soc-btn" target="_blank">💬</a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Shop</h4>
+        <a href="shop.html">Baby Booties</a>
+        <a href="shop.html">Mini Plushies</a>
+        <a href="shop.html">Coasters & Mats</a>
+        <a href="shop.html">Flowers</a>
+      </div>
+      <div class="foot-col"><h4>Learn</h4>
+        <a href="workshops.html">Crochet Workshops</a>
+        <a href="https://www.instagram.com/mini.crochetter/" target="_blank">Instagram</a>
+      </div>
+      <div class="foot-col"><h4>Order</h4>
+        <a href="mailto:palakagarwal@example.com">Email Us</a>
+        <a href="https://wa.me/9198XXXXXXX">WhatsApp Us</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div class="foot-copy">© 2025 Mini Crochetter · Handmade with love in India 🇮🇳</div>
+      <div class="foot-copy">All pieces made to order · Ships pan‑India</div>
+    </div>
+  </footer>
 
   <!-- CART + TOAST -->
   <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-  <div class="cart-drawer" id="cart-drawer">…</div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-head"><h3>Your Cart 🧶</h3><button class="close-c" onclick="closeCart()">✕</button></div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-foot" id="cart-foot" style="display:none">
+      <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">₹0</span></div>
+      <button class="checkout-btn" onclick="checkout()">Order via WhatsApp →</button>
+      <p class="wa-note">Opens WhatsApp with your full order.<br>We confirm availability & arrange payment.</p>
+    </div>
+  </div>
   <div class="toast" id="toast"></div>
 
-  <script>…cart functions…</script>
+  <!-- SCRIPTS -->
+  <script>
+    function openModal(){
+      document.querySelector(".modal-overlay").classList.add("open");
+      document.querySelector(".modal").classList.add("open");
+    }
+    function closeModal(){
+      document.querySelector(".modal-overlay").classList.remove("open");
+      document.querySelector(".modal").classList.remove("open");
+    }
+    function openCart(){
+      document.getElementById("cart-overlay").classList.add("open");
+      document.getElementById("cart-drawer").classList.add("open");
+    }
+    function closeCart(){
+      document.getElementById("cart-overlay").classList.remove("open");
+      document.getElementById("cart-drawer").classList.remove("open");
+    }
+    function checkout(){
+      window.open("https://wa.me/9198XXXXXXX","_blank");
+    }
+  </script>
 </body>
 </html>
