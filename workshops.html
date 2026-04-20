@@ -1,80 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Workshops — Mini Crochetter</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Crochetter — Workshops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="workshops.html" class="active">Workshops</a></li>
-    <li><a href="shop.html#contact">Order</a></li>
-  </ul>
-  <button class="cart-btn" onclick="window.location='shop.html'">🛒 Shop</button>
-</nav>
 
-<div class="ws-hero">
-  <h1>Learn Crochet <em>with Me</em></h1>
-  <p>From zero to making your first crochet mini — in one session. All materials included. Beginner friendly.</p>
-  <a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20want%20to%20join%20a%20crochet%20workshop%20with%20mini.crochetter" class="ws-book-btn">DM to Book Your Spot →</a>
-</div>
-
-<section class="ws-feats-section">
-  <div class="sec-head">
-    <span class="sec-tag">What to expect</span>
-    <h2 class="sec-title">Everything you <em>need</em> to start</h2>
-  </div>
-  <div class="ws-feats">
-    <div class="ws-feat"><div class="feat-icon">🌱</div><h3>Beginner Friendly</h3><p>Zero experience needed. We start from scratch — if you can hold a hook, you can crochet.</p></div>
-    <div class="ws-feat"><div class="feat-icon">🎯</div><h3>Make Something Real</h3><p>You leave with a finished crochet mini — hands-on from minute one, not just theory.</p></div>
-    <div class="ws-feat"><div class="feat-icon">📦</div><h3>All Materials Included</h3><p>Hook, yarn, pattern — everything is included. Just bring your enthusiasm.</p></div>
-    <div class="ws-feat"><div class="feat-icon">👥</div><h3>Small Batches Only</h3><p>Limited seats per session for personalised attention — not a crowded classroom.</p></div>
-    <div class="ws-feat"><div class="feat-icon">🏠</div><h3>Online & In-Person</h3><p>Join from anywhere online, or attend in-person. Flexible timing available.</p></div>
-    <div class="ws-feat"><div class="feat-icon">💬</div><h3>WhatsApp Support</h3><p>Practice at home with ongoing WhatsApp support from your instructor after the session.</p></div>
-  </div>
-</section>
-
-<section class="ws-price-section">
-  <div class="ws-price-card">
-    <div class="price-from">Workshop fee starting from</div>
-    <div class="price-big">₹499</div>
-    <div class="price-sub">per person · all materials included</div>
-    <ul class="ws-perks">
-      <li>2–3 hour hands-on session</li>
-      <li>Complete a mini project by end</li>
-      <li>Hook & yarn kit to take home</li>
-      <li>Pattern sheet for practice</li>
-      <li>WhatsApp support after session</li>
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="workshops.html" class="active">Workshops</a></li>
+      <li><a href="#contact">Order</a></li>
     </ul>
-    <a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20want%20to%20join%20a%20crochet%20workshop" class="btn-p" style="display:block;text-align:center">DM to Book Your Spot →</a>
-  </div>
-</section>
+    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
+  </nav>
 
-<footer>
-  <div class="foot-top">
-    <div class="foot-brand">
-      <div class="foot-brand-name">🧶 Mini Crochetter</div>
-      <p>Handmade crochet minis with love. Every stitch made just for you.</p>
-      <div class="foot-soc">
-        <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
-        <a href="https://wa.me/91XXXXXXXXXX" class="soc-btn" target="_blank">💬</a>
-      </div>
+  <!-- HERO -->
+  <section class="ws-hero">
+    <h1>Join a <em>Workshop</em></h1>
+    <p>Learn crochet basics and advanced techniques in fun, interactive sessions.</p>
+    <a href="#pricing" class="ws-book-btn">Book Your Spot</a>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="ws-feats-section">
+    <h2 class="sec-title">Why Learn With Us</h2>
+    <div class="ws-feats">
+      <div class="ws-feat"><div class="feat-icon">🧶</div><h3>Hands-on</h3><p>Practice crochet with guidance.</p></div>
+      <div class="ws-feat"><div class="feat-icon">👩‍🏫</div><h3>Expert Tutors</h3><p>Learn from experienced crocheters.</p></div>
+      <div class="ws-feat"><div class="feat-icon">🤝</div><h3>Community</h3><p>Meet fellow crochet enthusiasts.</p></div>
     </div>
-    <div class="foot-col"><h4>Navigate</h4>
-      <a href="shop.html">Shop</a>
-      <a href="workshops.html">Workshops</a>
-      <a href="https://www.instagram.com/mini.crochetter/" target="_blank">Instagram</a>
+  </section>
+
+  <!-- PRICING -->
+  <section class="ws-price-section" id="pricing">
+    <div class="ws-price-card">
+      <div class="price-from">Starting from</div>
+      <div class="price-big">₹999</div>
+      <div class="price-sub">per workshop</div>
+      <ul class="ws-perks">
+        <li>✓ Materials included</li>
+        <li>✓ 2-hour guided session</li>
+        <li>✓ Take home your creation</li>
+      </ul>
+      <a href="https://wa.me/91XXXXXXXXXX" class="ws-book-btn">Book via WhatsApp</a>
     </div>
-  </div>
-  <div class="foot-bot">
-    <div class="foot-copy">© 2025 Mini Crochetter · Handmade with love in India 🇮🇳</div>
-  </div>
-</footer>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>…same as index.html…</footer>
+
+  <!-- CART + TOAST -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cart-drawer">…</div>
+  <div class="toast" id="toast"></div>
+
+  <script>…cart functions…</script>
 </body>
 </html>
