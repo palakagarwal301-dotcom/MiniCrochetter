@@ -17,7 +17,7 @@
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="shop.html">Shop</a></li>
       <li><a href="workshops.html">Workshops</a></li>
-      <li><a href="#contact">Order</a></li>
+      <li><a href="order.html">Order</a></li>
     </ul>
     <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
   </nav>
@@ -28,20 +28,12 @@
     <div class="hero-content">
       <div class="hero-tag">🧶 Custom orders always open</div>
       <h1>Crochet Minis<br>Made with <em>Love</em></h1>
-      <p>Every piece handcrafted stitch by stitch — booties, plushies, coasters, flowers & more. Made just for you.</p>
+      <p>Every piece handcrafted stitch by stitch — booties, plushies, coasters, flowers & more.</p>
       <div class="hero-btns">
         <a href="shop.html" class="btn-p">Shop Now</a>
         <a href="workshops.html" class="btn-s">Join a Workshop</a>
       </div>
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>Order Your Crochet Minis</h2>
-    <p>Custom orders always open. Shipping pan-India.</p>
-    <a href="https://wa.me/91XXXXXXXXXX" class="btn">WhatsApp Us</a>
-    <a href="https://instagram.com/mini.crochetter" class="btn">DM on Instagram</a>
   </section>
 
   <!-- REVIEWS -->
@@ -54,14 +46,36 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>…</footer>
+  <footer>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-brand-name">🧶 Mini Crochetter</div>
+        <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan‑India.</p>
+        <div class="foot-soc">
+          <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
+          <a href="https://wa.me/919812345678" class="soc-btn" target="_blank">💬</a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Order</h4>
+        <a href="mailto:palakagarwal@example.com">Email Us</a>
+        <a href="https://wa.me/919812345678">WhatsApp Us</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div class="foot-copy">© 2025 Mini Crochetter · Handmade with love in India 🇮🇳</div>
+      <div class="foot-copy">All pieces made to order · Ships pan‑India</div>
+    </div>
+  </footer>
 
   <!-- CART + TOAST -->
   <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
   <div class="cart-drawer" id="cart-drawer">…</div>
   <div class="toast" id="toast"></div>
 
-  <!-- SCRIPTS -->
-  <script>…</script>
+  <script>
+    function openCart(){document.getElementById("cart-overlay").classList.add("open");document.getElementById("cart-drawer").classList.add("open");}
+    function closeCart(){document.getElementById("cart-overlay").classList.remove("open");document.getElementById("cart-drawer").classList.remove("open");}
+    function checkout(){window.open("https://wa.me/919812345678","_blank");}
+  </script>
 </body>
 </html>
