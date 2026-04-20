@@ -38,76 +38,118 @@
       <button class="tab">Flowers</button>
     </div>
     <div class="products">
-      <!-- Product cards -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="santa_plushie.jpg" alt="Santa Plushie">
-          <span class="badge seasonal">Seasonal</span>
-        </div>
-        <div class="product-info">
-          <div class="product-cat">Plushie</div>
-          <div class="product-name">Santa Plushie</div>
-          <div class="product-desc-short">Festive crochet Santa doll, handmade with love.</div>
-          <div class="product-footer">
-            <div class="product-price">₹499 <span>per piece</span></div>
-            <button class="view-btn" onclick="openModal()">View</button>
-          </div>
-        </div>
-      </div>
 
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="shark_plushie.jpg" alt="Shark Plushie">
-          <span class="badge best">Best Seller</span>
-        </div>
-        <div class="product-info">
-          <div class="product-cat">Plushie</div>
-          <div class="product-name">Shark Plushie</div>
-          <div class="product-desc-short">Crochet shark with a big smile.</div>
-          <div class="product-footer">
-            <div class="product-price">₹599 <span>per piece</span></div>
-            <button class="view-btn" onclick="openModal()">View</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="daisy_flower.jpg" alt="Crochet Daisy">
-          <span class="badge custom">Custom</span>
-        </div>
-        <div class="product-info">
-          <div class="product-cat">Flower</div>
-          <div class="product-name">Crochet Daisy</div>
-          <div class="product-desc-short">Handmade crochet daisy flower for decor.</div>
-          <div class="product-footer">
-            <div class="product-price">₹299 <span>per piece</span></div>
-            <button class="view-btn" onclick="openModal()">View</button>
-          </div>
-        </div>
-      </div>
-      <!-- Add more products similarly -->
+  <!-- Custom Plushie -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <img src="./images/custom_plushie.jpg" alt="Custom Plushie">
+      <span class="badge custom">Custom</span>
     </div>
-  </section>
-
-  <!-- PRODUCT MODAL (hidden by default) -->
-  <div class="modal-overlay"></div>
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-body">
-      <div class="modal-gallery">
-        <img src="santa_plushie.jpg" alt="Santa Plushie" class="modal-main-img">
+    <div class="product-info">
+      <div class="product-cat">Plushie</div>
+      <div class="product-name">Custom Plushie</div>
+      <div class="product-desc-short">Crochet doll with turquoise dress and pink bows.</div>
+      <div class="product-footer">
+        <div class="product-price">₹699 <span>on order</span></div>
+        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20a%20Custom%20Plushie" target="_blank" class="btn">Order</a>
       </div>
-      <div class="modal-info">
-        <div class="modal-cat">Plushie</div>
-        <div class="modal-name">Santa Plushie</div>
-        <div class="modal-price">₹499 <span>per piece</span></div>
-        <div class="modal-desc">Festive crochet Santa doll, handmade with love.</div>
-        <div class="modal-actions">
-          <button class="modal-add">Add to Cart</button>
-          <a href="https://wa.me/918886122232" class="modal-wa" target="_blank">Order via WhatsApp</a>
-          <a href="mailto:palakagarwal301@gmail.com" class="modal-wa" target="_blank">Email Us</a>
-        </div>
+    </div>
+  </div>
+
+  <!-- Santa Plushie -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <img src="./images/santa_plushie.jpg" alt="Santa Plushie">
+      <span class="badge seasonal">Seasonal</span>
+    </div>
+    <div class="product-info">
+      <div class="product-cat">Plushie</div>
+      <div class="product-name">Santa Plushie</div>
+      <div class="product-desc-short">Classic Santa amigurumi with red suit and white beard.</div>
+      <div class="product-footer">
+        <div class="product-price">₹499</div>
+        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Santa%20Plushie" target="_blank" class="btn">Order</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shark Plushie -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <img src="./images/shark_plushie.jpg" alt="Shark Plushie">
+      <span class="badge best">Best Seller</span>
+    </div>
+    <div class="product-info">
+      <div class="product-cat">Plushie</div>
+      <div class="product-name">Shark Plushie</div>
+      <div class="product-desc-short">Gray crochet shark with white belly and red smile.</div>
+      <div class="product-footer">
+        <div class="product-price">₹599</div>
+        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Shark%20Plushie" target="_blank" class="btn">Order</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini Plushies -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <img src="./images/mini_plushies.jpg" alt="Mini Plushies">
+    </div>
+    <div class="product-info">
+      <div class="product-cat">Plushie</div>
+      <div class="product-name">Mini Plushie Set</div>
+      <div class="product-desc-short">Bunny, bear, and chick trio.</div>
+      <div class="product-footer">
+        <div class="product-price">₹799 <span>set of 3</span></div>
+        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Mini%20Plushie%20Set" target="_blank" class="btn">Order</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daisy -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <img src="./images/daisy_flower.jpg" alt="Daisy Flower">
+    </div>
+    <div class="product-info">
+      <div class="product-cat">Flower</div>
+      <div class="product-name">Crochet Daisy</div>
+      <div class="product-desc-short">Cream petals with bright yellow center.</div>
+      <div class="product-footer">
+        <div class="product-price">₹299</div>
+        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Crochet%20Daisy" target="_blank" class="btn">Order</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sunflower -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <img src="./images/sunflower_flower.jpg" alt="Sunflower">
+    </div>
+    <div class="product-info">
+      <div class="product-cat">Flower</div>
+      <div class="product-name">Sunflower Crochet</div>
+      <div class="product-desc-short">Brown center with yellow petals and border.</div>
+      <div class="product-footer">
+        <div class="product-price">₹349</div>
+        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Sunflower%20Crochet" target="_blank" class="btn">Order</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mandala Doily -->
+  <div class="product-card">
+    <div class="product-img-wrap">
+      <img src="./images/mandala_doily.jpg" alt="Mandala Doily">
+    </div>
+    <div class="product-info">
+      <div class="product-cat">Home Decor</div>
+      <div class="product-name">Mandala Doily</div>
+      <div class="product-desc-short">Yellow center, green ring, white bobbles, scalloped edge.</div>
+      <div class="product-footer">
+        <div class="product-price">₹599</div>
+        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Mandala%20Doily" target="_blank" class="btn">Order</a>
       </div>
     </div>
   </div>
