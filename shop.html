@@ -4,204 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mini Crochetter — Shop</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="shop.html" class="active">Shop</a></li>
-      <li><a href="workshops.html">Workshops</a></li>
-      <li><a href="order.html">Order</a></li>
-    </ul>
-    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
-  </nav>
+<nav>
+  <a href="./index.html">🧶 Mini Crochetter</a>
+  <ul>
+    <li><a href="./index.html">Home</a></li>
+    <li><a href="./shop.html">Shop</a></li>
+    <li><a href="./workshops.html">Workshops</a></li>
+  </ul>
+</nav>
 
-  <!-- PAGE HEADER -->
-  <header class="page-header">
-    <h1>Our <em>Shop</em></h1>
-    <p>Browse handmade crochet booties, plushies, coasters, flowers & more.</p>
-  </header>
+<header class="hero">
+  <h1>Our Shop</h1>
+  <p>Handmade crochet pieces crafted with love</p>
+</header>
 
-  <!-- PRODUCTS GRID -->
-  <section class="shop-wrap">
-    <div class="filter-tabs">
-      <button class="tab active">All</button>
-      <button class="tab">Booties</button>
-      <button class="tab">Plushies</button>
-      <button class="tab">Coasters</button>
-      <button class="tab">Flowers</button>
-    </div>
-    <div class="products">
+<section>
+  <div class="product-grid">
 
-  <!-- Custom Plushie -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="./images/custom_plushie.jpg" alt="Custom Plushie">
-      <span class="badge custom">Custom</span>
+    <!-- Custom Plushie -->
+    <div class="product">
+      <img src="./images/custom_plushie.jpg">
+      <h3>Custom Plushie</h3>
+      <p>Crochet doll with turquoise dress and pink bows</p>
+      <span>₹699</span><br>
+      <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Custom%20Plushie" target="_blank" class="btn">Order</a>
     </div>
-    <div class="product-info">
-      <div class="product-cat">Plushie</div>
-      <div class="product-name">Custom Plushie</div>
-      <div class="product-desc-short">Crochet doll with turquoise dress and pink bows.</div>
-      <div class="product-footer">
-        <div class="product-price">₹699 <span>on order</span></div>
-        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20a%20Custom%20Plushie" target="_blank" class="btn">Order</a>
-      </div>
+
+    <!-- Santa -->
+    <div class="product">
+      <img src="./images/santa_plushie.jpg">
+      <h3>Santa Plushie</h3>
+      <p>Classic Santa with red suit & white beard</p>
+      <span>₹499</span><br>
+      <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Santa%20Plushie" target="_blank" class="btn">Order</a>
     </div>
+
+    <!-- Shark -->
+    <div class="product">
+      <img src="./images/shark_plushie.png">
+      <h3>Shark Plushie</h3>
+      <p>Gray crochet shark with red smile</p>
+      <span>₹599</span><br>
+      <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Shark%20Plushie" target="_blank" class="btn">Order</a>
+    </div>
+
+    <!-- Mini Plushies -->
+    <div class="product">
+      <img src="./images/mini_plushies.png">
+      <h3>Mini Plushie Set</h3>
+      <p>Bunny, bear & chick trio</p>
+      <span>₹799</span><br>
+      <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Mini%20Plushie%20Set" target="_blank" class="btn">Order</a>
+    </div>
+
+    <!-- Daisy -->
+    <div class="product">
+      <img src="./images/daisy_flower.png">
+      <h3>Crochet Daisy</h3>
+      <p>Cream petals with yellow center</p>
+      <span>₹299</span><br>
+      <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Crochet%20Daisy" target="_blank" class="btn">Order</a>
+    </div>
+
+    <!-- Sunflower -->
+    <div class="product">
+      <img src="./images/sunflower_flower.png">
+      <h3>Sunflower Crochet</h3>
+      <p>Brown center with yellow petals</p>
+      <span>₹349</span><br>
+      <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Sunflower%20Crochet" target="_blank" class="btn">Order</a>
+    </div>
+
+    <!-- Mandala -->
+    <div class="product">
+      <img src="./images/mandala_doily.jpg">
+      <h3>Mandala Doily</h3>
+      <p>Yellow, green & white textured design</p>
+      <span>₹599</span><br>
+      <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Mandala%20Doily" target="_blank" class="btn">Order</a>
+    </div>
+
   </div>
+</section>
 
-  <!-- Santa Plushie -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="./images/santa_plushie.jpg" alt="Santa Plushie">
-      <span class="badge seasonal">Seasonal</span>
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Plushie</div>
-      <div class="product-name">Santa Plushie</div>
-      <div class="product-desc-short">Classic Santa amigurumi with red suit and white beard.</div>
-      <div class="product-footer">
-        <div class="product-price">₹499</div>
-        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Santa%20Plushie" target="_blank" class="btn">Order</a>
-      </div>
-    </div>
-  </div>
+<footer style="text-align:center; padding:20px;">
+  <p>© 2026 Mini Crochetter · Handmade with love in India 🇮🇳</p>
+</footer>
 
-  <!-- Shark Plushie -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="./images/shark_plushie.jpg" alt="Shark Plushie">
-      <span class="badge best">Best Seller</span>
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Plushie</div>
-      <div class="product-name">Shark Plushie</div>
-      <div class="product-desc-short">Gray crochet shark with white belly and red smile.</div>
-      <div class="product-footer">
-        <div class="product-price">₹599</div>
-        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Shark%20Plushie" target="_blank" class="btn">Order</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mini Plushies -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="./images/mini_plushies.jpg" alt="Mini Plushies">
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Plushie</div>
-      <div class="product-name">Mini Plushie Set</div>
-      <div class="product-desc-short">Bunny, bear, and chick trio.</div>
-      <div class="product-footer">
-        <div class="product-price">₹799 <span>set of 3</span></div>
-        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Mini%20Plushie%20Set" target="_blank" class="btn">Order</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Daisy -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="./images/daisy_flower.jpg" alt="Daisy Flower">
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Flower</div>
-      <div class="product-name">Crochet Daisy</div>
-      <div class="product-desc-short">Cream petals with bright yellow center.</div>
-      <div class="product-footer">
-        <div class="product-price">₹299</div>
-        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Crochet%20Daisy" target="_blank" class="btn">Order</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sunflower -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="./images/sunflower_flower.jpg" alt="Sunflower">
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Flower</div>
-      <div class="product-name">Sunflower Crochet</div>
-      <div class="product-desc-short">Brown center with yellow petals and border.</div>
-      <div class="product-footer">
-        <div class="product-price">₹349</div>
-        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Sunflower%20Crochet" target="_blank" class="btn">Order</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mandala Doily -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="./images/mandala_doily.jpg" alt="Mandala Doily">
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Home Decor</div>
-      <div class="product-name">Mandala Doily</div>
-      <div class="product-desc-short">Yellow center, green ring, white bobbles, scalloped edge.</div>
-      <div class="product-footer">
-        <div class="product-price">₹599</div>
-        <a href="https://wa.me/918886122232?text=Hi%20I%20want%20to%20order%20Mandala%20Doily" target="_blank" class="btn">Order</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="foot-top">
-      <div class="foot-brand">
-        <div class="foot-brand-name">🧶 Mini Crochetter</div>
-        <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan‑India.</p>
-        <div class="foot-soc">
-          <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
-          <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">💬</a>
-        </div>
-      </div>
-      <div class="foot-col"><h4>Order</h4>
-        <a href="mailto:palakagarwal301@gmail.com">Email Us</a>
-        <a href="https://wa.me/918886122232">WhatsApp Us</a>
-      </div>
-    </div>
-    <div class="foot-bot">
-      <div class="foot-copy">© 2025 Mini Crochetter · Handmade with love in India 🇮🇳</div>
-      <div class="foot-copy">All pieces made to order · Ships pan‑India</div>
-    </div>
-  </footer>
-
-  <!-- CART + TOAST -->
-  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-  <div class="cart-drawer" id="cart-drawer">…</div>
-  <div class="toast" id="toast"></div>
-
-  <!-- SCRIPTS -->
-  <script>
-    function openModal(){
-      document.querySelector(".modal-overlay").classList.add("open");
-      document.querySelector(".modal").classList.add("open");
-    }
-    function closeModal(){
-      document.querySelector(".modal-overlay").classList.remove("open");
-      document.querySelector(".modal").classList.remove("open");
-    }
-    function openCart(){
-      document.getElementById("cart-overlay").classList.add("open");
-      document.getElementById("cart-drawer").classList.add("open");
-    }
-    function closeCart(){
-      document.getElementById("cart-overlay").classList.remove("open");
-      document.getElementById("cart-drawer").classList.remove("open");
-    }
-    function checkout(){
-      window.open("https://wa.me/918886122232","_blank");
-    }
-  </script>
 </body>
 </html>
