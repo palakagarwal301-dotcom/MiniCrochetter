@@ -38,75 +38,6 @@
       <button class="tab">Flowers</button>
     </div>
     <div class="products">
-      <div class="products">
-  <!-- Santa Plushie -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="santa_plushie.jpg" alt="Santa Plushie">
-      <span class="badge seasonal">Seasonal</span>
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Plushie</div>
-      <div class="product-name">Santa Plushie</div>
-      <div class="product-desc-short">Festive crochet Santa doll, handmade with love.</div>
-      <div class="product-footer">
-        <div class="product-price">₹499 <span>per piece</span></div>
-        <button class="view-btn" onclick="openModal()">View</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Shark Plushie -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="shark_plushie.png" alt="Shark Plushie">
-      <span class="badge best">Best Seller</span>
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Plushie</div>
-      <div class="product-name">Shark Plushie</div>
-      <div class="product-desc-short">Crochet shark with a big smile.</div>
-      <div class="product-footer">
-        <div class="product-price">₹599 <span>per piece</span></div>
-        <button class="view-btn" onclick="openModal()">View</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mini Plushies Trio -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="mini_plushies.png" alt="Mini Plushies Trio">
-      <span class="badge new">New</span>
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Plushie</div>
-      <div class="product-name">Mini Plushies Trio</div>
-      <div class="product-desc-short">Set of bunny, bear, and chick crochet minis.</div>
-      <div class="product-footer">
-        <div class="product-price">₹799 <span>set of 3</span></div>
-        <button class="view-btn" onclick="openModal()">View</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Daisy Flower -->
-  <div class="product-card">
-    <div class="product-img-wrap">
-      <img src="daisy_flower.png" alt="Crochet Daisy Flower">
-      <span class="badge custom">Custom</span>
-    </div>
-    <div class="product-info">
-      <div class="product-cat">Flower</div>
-      <div class="product-name">Crochet Daisy</div>
-      <div class="product-desc-short">Handmade crochet daisy flower for decor.</div>
-      <div class="product-footer">
-        <div class="product-price">₹299 <span>per piece</span></div>
-        <button class="view-btn" onclick="openModal()">View</button>
-      </div>
-    </div>
-  </div>
-</div>
       <!-- Example product card -->
       <div class="product-card">
         <div class="product-img-wrap">
@@ -123,11 +54,11 @@
           </div>
         </div>
       </div>
-      <!-- Repeat for other products -->
+      <!-- Add more product-card blocks here for other items -->
     </div>
   </section>
 
-  <!-- PRODUCT MODAL -->
+  <!-- PRODUCT MODAL (hidden by default) -->
   <div class="modal-overlay"></div>
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -142,7 +73,7 @@
         <div class="modal-desc">Festive crochet Santa doll, handmade with love.</div>
         <div class="modal-actions">
           <button class="modal-add">Add to Cart</button>
-          <a href="https://wa.me/918886122232" class="modal-wa" target="_blank">Order via WhatsApp</a>
+          <a href="https://wa.me/919812345678" class="modal-wa" target="_blank">Order via WhatsApp</a>
           <a href="mailto:palakagarwal@example.com" class="modal-wa" target="_blank">Email Us</a>
         </div>
       </div>
@@ -157,7 +88,7 @@
         <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan‑India.</p>
         <div class="foot-soc">
           <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
-          <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">💬</a>
+          <a href="https://wa.me/919812345678" class="soc-btn" target="_blank">💬</a>
         </div>
       </div>
       <div class="foot-col"><h4>Shop</h4>
@@ -172,7 +103,7 @@
       </div>
       <div class="foot-col"><h4>Order</h4>
         <a href="mailto:palakagarwal@example.com">Email Us</a>
-        <a href="https://wa.me/918886122232">WhatsApp Us</a>
+        <a href="https://wa.me/919812345678">WhatsApp Us</a>
       </div>
     </div>
     <div class="foot-bot">
@@ -213,7 +144,7 @@
       document.getElementById("cart-drawer").classList.remove("open");
     }
     function checkout(){
-      window.open("https://wa.me/918886122232","_blank");
+      window.open("https://wa.me/919812345678","_blank");
     }
   </script>
 </body>
