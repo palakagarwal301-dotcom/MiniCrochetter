@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | mini.crochetter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F9F6F0; color: #4A4238; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        .badge { background-color: #E5D3B3; color: #4A4238; font-size: 9px; padding: 2px 8px; letter-spacing: 0.1em; }
+    </style>
+</head>
+<body>
+
+    <nav class="flex justify-between items-center px-8 py-6 bg-white/50 backdrop-blur-md sticky top-0 z-50 border-b border-stone-100">
+        <a href="index.html" class="text-xl tracking-[0.2em] lowercase serif">mini.crochetter</a>
+        <div class="flex space-x-6 text-[10px] uppercase tracking-widest">
+            <a href="index.html">Home</a>
+            <a href="shop.html" class="font-bold border-b border-stone-800">Shop</a>
+            <a href="workshops.html">Workshops</a>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-8 pt-16 pb-8">
+        <h1 class="text-4xl serif lowercase italic mb-4">The Collection</h1>
+        <div class="flex flex-wrap gap-4 text-[10px] uppercase tracking-[0.2em]">
+            <button class="border border-stone-800 bg-stone-800 text-white px-4 py-2">All Items</button>
+            <button class="border border-stone-200 px-4 py-2 hover:border-stone-800 transition">Amigurumi</button>
+            <button class="border border-stone-200 px-4 py-2 hover:border-stone-800 transition">Home Decor</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+            
+            <div class="group">
+                <div class="relative bg-white aspect-[4/5] flex items-center justify-center p-8 mb-4 overflow-hidden shadow-sm">
+                    <span class="absolute top-4 left-4 badge uppercase">Popular</span>
+                    <img src="minion.png" alt="Minion" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
+                    <button class="absolute bottom-0 left-0 w-full bg-stone-800 text-white py-4 text-[9px] uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">Add to Cart</button>
+                </div>
+                <h3 class="serif italic text-lg lowercase">The Minion Friend</h3>
+                <p class="text-[10px] text-stone-400 uppercase tracking-widest mb-2">Amigurumi</p>
+                <p class="text-sm">₹950</p>
+            </div>
+
+            <div class="group">
+                <div class="relative bg-white aspect-[4/5] flex items-center justify-center p-8 mb-4 overflow-hidden shadow-sm">
+                    <img src="sunflower.png" alt="Sunflower" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
+                    <button class="absolute bottom-0 left-0 w-full bg-stone-800 text-white py-4 text-[9px] uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">Add to Cart</button>
+                </div>
+                <h3 class="serif italic text-lg lowercase">Sunflower Coaster</h3>
+                <p class="text-[10px] text-stone-400 uppercase tracking-widest mb-2">Set of 4</p>
+                <p class="text-sm">₹1,299</p>
+            </div>
+
+            <div class="group">
+                <div class="relative bg-white aspect-[4/5] flex items-center justify-center p-8 mb-4 overflow-hidden shadow-sm">
+                    <img src="pooh.png" alt="Winnie Pooh" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110">
+                    <button class="absolute bottom-0 left-0 w-full bg-stone-800 text-white py-4 text-[9px] uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0">Add to Cart</button>
+                </div>
+                <h3 class="serif italic text-lg lowercase">Classic Pooh</h3>
+                <p class="text-[10px] text-stone-400 uppercase tracking-widest mb-2">Amigurumi</p>
+                <p class="text-sm">₹1,100</p>
+            </div>
+
+        </div>
+    </main>
+
+    <section class="border-t border-stone-200 py-16 text-center">
+        <p class="text-[10px] uppercase tracking-[0.4em] text-stone-400 mb-4">Crafting from Kolkata</p>
+        <p class="text-sm font-light italic">"Handmade with love, stitched for your home."</p>
+    </section>
+
+</body>
+</html>
