@@ -46,7 +46,7 @@
       <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan-India.</p>
       <div class="foot-soc">
         <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
-        <a href="https://wa.me/91XXXXXXXXXX" class="soc-btn" target="_blank">💬</a>
+        <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">💬</a>
       </div>
     </div>
     <div class="foot-col"><h4>Shop</h4>
@@ -60,7 +60,7 @@
     </div>
     <div class="foot-col"><h4>Order</h4>
       <a href="https://www.instagram.com/mini.crochetter/" target="_blank">DM on Instagram</a>
-      <a href="https://wa.me/91XXXXXXXXXX">WhatsApp Us</a>
+      <a href="https://wa.me/918886122232">WhatsApp Us</a>
     </div>
   </div>
   <div class="foot-bot">
@@ -272,7 +272,7 @@ function checkout() {
   const lines = cart.map(i => `• ${i.name} x${i.qty} = ₹${i.price*i.qty}`).join("\n");
   const total = cart.reduce((s,i) => s+i.price*i.qty, 0);
   const msg = encodeURIComponent(`Hi Mini Crochetter! 🧶\n\nI would like to order:\n${lines}\n\nEstimated total: ₹${total}\n\nPlease confirm availability, final price & payment details. Thank you!`);
-  window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`, "_blank");
+  window.open(`https://wa.me/918886122232?text=${msg}`, "_blank");
 }
 
 // ── PRODUCT MODAL ─────────────────────────────────────────────────────────
@@ -293,12 +293,10 @@ function openProduct(id) {
   meta.push(`<div class="modal-meta-row"><strong>Custom</strong><span>Colours & sizes always available</span></div>`);
   document.getElementById("mmeta").innerHTML = meta.join("");
 
-  // Main image
   const mainImg = document.getElementById("mimg");
   mainImg.src = p.imgs[0];
   mainImg.alt = p.name;
 
-  // Thumbnails — only show if multiple images
   const thumbs = document.getElementById("mthumbs");
   if (p.imgs.length > 1) {
     thumbs.innerHTML = p.imgs.map((src, i) =>
@@ -341,7 +339,7 @@ function addFromModal() {
 function orderViaWa() {
   if (!currentProduct) return;
   const msg = encodeURIComponent(`Hi Mini Crochetter! 🧶\n\nI'd like to order:\n• ${currentProduct.name}\n\nPrice: ₹${currentProduct.price} onwards\n\nPlease confirm availability, custom options & payment. Thank you!`);
-  window.open(`https://wa.me/91XXXXXXXXXX?text=${msg}`, "_blank");
+  window.open(`https://wa.me/918886122232?text=${msg}`, "_blank");
 }
 
 function toggleWish(e, btn) {
