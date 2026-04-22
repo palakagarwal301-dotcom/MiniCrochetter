@@ -100,29 +100,28 @@
 
 <script>
 const products = [
-  {id:1, cat:"booties", name:"Pink Ruffle Booties & Bow Set", imgs:["booties_pink_basket.jpg"], price:899, desc:"Pink ruffle booties with white scallop trim."},
+  {id:1, cat:"booties", name:"Pink Ruffle Booties", imgs:["booties_pink_basket.jpg"], price:899, desc:"Pink ruffle booties with white scallop trim."},
   {id:2, cat:"booties", name:"Classic Lace-Up Booties", imgs:["booties_lace_wood.jpg"], price:749, desc:"Cream booties with brown lace-up ties."},
   {id:3, cat:"plushies", name:"Winnie the Pooh Plushie", imgs:["pooh.png"], price:2499, desc:"Beloved Pooh in soft velvet yarn."},
   {id:4, cat:"plushies", name:"Minion Plushie (Stuart)", imgs:["minion.png"], price:2199, desc:"Hand-crocheted in soft velvet yarn."},
   {id:5, cat:"plushies", name:"Santa Plushie", imgs:["santa_plushie.jpg"], price:2499, desc:"Jolly Santa in soft red velvet."},
   {id:6, cat:"plushies", name:"Shark Plushie", imgs:["shark_plushie.png"], price:1799, desc:"Chubby blue-grey shark in soft velvet yarn."},
-  {id:7, cat:"plushies", name:"Mini Plushies Trio", imgs:["mini_plushies.png"], price:749, desc:"Sweet set of mini amigurumi: bunny, bear, and chick."},
-  {id:8, cat:"plushies", name:"Custom Doll Plushie", imgs:["custom_plushie.jpg"], price:1499, desc:"Personalized girl doll or any character reference."},
+  {id:7, cat:"plushies", name:"Mini Plushies Trio", imgs:["mini_plushies.png"], price:749, desc:"Sweet set of mini amigurumi."},
+  {id:8, cat:"plushies", name:"Custom Doll Plushie", imgs:["custom_plushie.jpg"], price:1499, desc:"Personalized girl doll or character reference."},
   {id:9, cat:"coasters", name:"Sunflower Coaster", imgs:["sunflower-coaster.png"], price:449, desc:"Golden yellow sunflower coaster."},
   {id:10, cat:"coasters", name:"Mandala Centre Mat", imgs:["mandala_centre_mat.jpg"], price:1499, desc:"Large handcrocheted table mat."},
-  {id:11, cat:"coasters", name:"Leaf & Heart Coasters", imgs:["coaster_leaf_heart.jpg"], price:399, desc:"Set featuring a green monstera leaf and a pink heart coaster."},
-  {id:12, cat:"flowers", name:"Crochet Daisy", imgs:["daisy_flower.png"], price:349, desc:"White daisy with a raised golden yellow centre."},
+  {id:11, cat:"coasters", name:"Leaf & Heart Coasters", imgs:["coaster_leaf_heart.jpg"], price:399, desc:"Monstera leaf and heart coaster set."},
+  {id:12, cat:"flowers", name:"Crochet Daisy", imgs:["daisy_flower.png"], price:349, desc:"White daisy with a raised golden centre."},
   {id:13, cat:"flowers", name:"Sunflower Wall Décor", imgs:["sunflower.png"], price:549, desc:"Large golden sunflower for home décor."},
   {id:14, cat:"bags", name:"Rose Drawstring Bag", imgs:["bag_rose_drawstring.jpg"], price:1699, desc:"Cream bag with rose appliqué."},
-  {id:15, cat:"bags", name:"Sunflower Sling Bag", imgs:["bag_sunflower_sling.jpg"], price:1999, desc:"Round brown sling bag with a full sunflower design."},
-  {id:16, cat:"accessories", name:"Bow Hair Headband", imgs:["bow_headband.png"], price:349, desc:"Pink crochet headband with a bold hot-pink bow."},
+  {id:15, cat:"bags", name:"Sunflower Sling Bag", imgs:["bag_sunflower_sling.jpg"], price:1999, desc:"Round brown sling bag with sunflower design."},
+  {id:16, cat:"accessories", name:"Bow Hair Headband", imgs:["bow_headband.png"], price:349, desc:"Pink crochet headband with a bold bow."},
   {id:17, cat:"rakhis", name:"Custom Crochet Rakhis", imgs:["rakhis_overview.jpg"], price:249, desc:"Handmade rakhis in various styles."}
 ];
 
 let cart = [];
 let currentProduct = null;
 
-// Improved image pathing for Vercel/GitHub
 function setImg(img, src) {
   img.src = src;
   img.onerror = () => { if (!img.src.includes('images/')) img.src = 'images/' + src; };
@@ -147,20 +146,16 @@ function renderProducts(filter) {
   container.querySelectorAll("img").forEach(img => setImg(img, img.getAttribute('src')));
 }
 
-// Fixed Open Product Logic
 function openProduct(id) {
   const p = products.find(x => x.id === id);
   if (!p) return;
-  currentProduct = p; // This updates the global variable so "Add to Cart" works for the RIGHT item
-
+  currentProduct = p;
   document.getElementById("mcat").innerText = p.cat.toUpperCase();
   document.getElementById("mname").innerText = p.name;
   document.getElementById("mprice").innerHTML = `₹${p.price} <span>onwards</span>`;
   document.getElementById("mdesc").innerText = p.desc;
-  
   const mainImg = document.getElementById("mimg");
   setImg(mainImg, p.imgs[0]);
-
   document.getElementById("mo").classList.add("open");
   document.getElementById("modal").classList.add("open");
 }
@@ -175,15 +170,13 @@ function addFromModal() {
   if (!currentProduct) return;
   const exists = cart.find(x => x.id === currentProduct.id);
   if (exists) exists.qty++; else cart.push({...currentProduct, qty:1});
-  
   document.getElementById("cc").innerText = cart.reduce((s,i) => s + i.qty, 0);
   showToast(currentProduct.name + " added! 🧶");
 }
 
 function orderViaWa() {
   if (!currentProduct) return;
-  const msg = encodeURIComponent(`Hi Mini Crochetter! 🧶\nI'm interested in the ${currentProduct.name}.`);
-  window.open(`https://wa.me/918886122232?text=${msg}`, "_blank");
+  window.open(`https://wa.me/918886122232?text=Hi! I want to order ${currentProduct.name}`, "_blank");
 }
 
 function closeModal() {
@@ -197,7 +190,6 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove("show"), 2000);
 }
 
-// Initial render
 renderProducts('all');
 </script>
 </body>
