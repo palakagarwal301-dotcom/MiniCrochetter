@@ -1297,3 +1297,24 @@ function addFromModal() {
   // Optional: Close modal after adding
   // closeModal();
 }
+/* Ensure content starts below the fixed navbar */
+body {
+  padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+  /* Make the tabs swipeable on mobile so they don't cover products */
+  .filter-tabs {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 5% !important;
+    gap: 10px;
+    z-index: 100;
+  }
+  
+  .tab {
+    flex: 0 0 auto;
+  }
+}
