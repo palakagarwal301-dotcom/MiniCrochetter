@@ -1220,3 +1220,29 @@ footer{
 .nav-links a[href*="substack"]:hover {
     color: var(--ter);
 }
+/* Mobile Responsiveness Fixes */
+@media (max-width: 600px) {
+  .filter-tabs {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab {
+    flex: 0 0 auto;
+  }
+  .products {
+    grid-template-columns: 1fr !important; /* Single column on mobile */
+    gap: 15px;
+  }
+  .modal {
+    width: 95vw;
+    height: auto;
+    max-height: 90vh;
+  }
+  .modal-body {
+    grid-template-columns: 1fr; /* Stack image and info on mobile */
+  }
+}
