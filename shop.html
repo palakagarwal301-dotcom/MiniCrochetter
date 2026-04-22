@@ -73,39 +73,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const products = [
-  // BOOTIES
-  {id:1, cat:"booties", name:"Pink Ruffle Booties Set", imgs:["booties_pink_basket.jpg"], price:899, desc:"Soft pink booties with white ruffles and matching headband."},
-  {id:2, cat:"booties", name:"Classic Lace-Up Booties", imgs:["booties_lace_wood.jpg"], price:749, desc:"Clean, classic cream booties with brown ties."},
-
-  // PLUSHIES
-  {id:3, cat:"plushies", name:"Winnie the Pooh Plushie", imgs:["pooh.png"], price:2499, desc:"Velvet yarn Pooh, incredibly soft and technical."},
-  {id:4, cat:"plushies", name:"Minion Plushie (Stuart)", imgs:["minion.png"], price:2199, desc:"Detailed Stuart with denim overalls in velvet yarn."},
-  {id:5, cat:"plushies", name:"Santa Plushie", imgs:["santa_plushie.jpg"], price:2499, desc:"Festive Santa in premium velvet yarn."},
-  {id:6, cat:"plushies", name:"Shark Plushie", imgs:["shark_plushie.png"], price:1799, desc:"Chubby shark with hand-stitched details."},
-  {id:7, cat:"plushies", name:"Mini Plushies Trio", imgs:["mini_plushies.png"], price:749, desc:"Set of three: Bunny, Bear, and Chick."},
-  {id:8, cat:"plushies", name:"Custom Character Doll", imgs:["custom_plushie.jpg"], price:1499, desc:"Handmade doll based on your specific character reference."},
-
-  // COASTERS & MATS
-  {id:9, cat:"coasters", name:"Sunflower Coaster", imgs:["sunflower-coaster.png"], price:449, desc:"Vibrant sunflower design for your table."},
-  {id:10, cat:"coasters", name:"Mandala Table Mat", imgs:["mandala_centre_mat.jpg"], price:1499, desc:"14-17 inch technical centerpiece mat."},
-  {id:11, cat:"coasters", name:"Leaf & Heart Coasters", imgs:["coaster_leaf_heart.jpg"], price:399, desc:"Aesthetic monstera leaf and pink heart set."},
-
-  // FLOWERS
-  {id:12, cat:"flowers", name:"Technical Daisy Bloom", imgs:["daisy_flower.png"], price:349, desc:"3D textured daisy with golden center."},
-  {id:13, cat:"flowers", name:"Sunflower Wall Decor", imgs:["sunflower.png"], price:549, desc:"Large golden sunflower for home or studio walls."},
-
-  // BAGS
-  {id:14, cat:"bags", name:"Rose Drawstring Bag", imgs:["bag_rose_drawstring.jpg"], price:1699, desc:"Elegant cream bag with technical rose appliqué."},
-  {id:15, cat:"bags", name:"Sunflower Sling Bag", imgs:["bag_sunflower_sling.jpg"], price:1999, desc:"Boho round sling with a full sunflower front."},
-
-  // ACCESSORIES
-  {id:16, cat:"accessories", name:"Pink Bow Headband", imgs:["bow_headband.png"], price:349, desc:"Soft stretchy headband with a bold pink bow."},
-  {id:18, cat:"accessories", name:"Daisy Wristlet Keychain", imgs:["daisy.png"], price:299, desc:"Technical daisy charm on a handmade wristlet strap."},
-
-  // RAKHIS
-  {id:17, cat:"rakhis", name:"Custom Rakhi Set", imgs:["rakhis_overview.jpg"], price:249, desc:"Personalized handmade rakhis for your loved ones."}
-];
+// (Your products array is perfect as is - keep it!)
 
 let cart = [];
 let currentProduct = null;
@@ -117,7 +85,9 @@ function setImg(img, src) {
 
 function renderProducts(filter) {
   const g = document.getElementById("pg");
+  // Strict filter check
   const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+  
   g.innerHTML = filtered.map(p => `
     <div class="product-card" onclick="openProduct(${p.id})">
       <div class="product-img-wrap"><img src="${p.imgs[0]}" alt="${p.name}"></div>
@@ -127,20 +97,28 @@ function renderProducts(filter) {
         <div class="product-price">₹${p.price}</div>
       </div>
     </div>`).join("");
+  
   g.querySelectorAll("img").forEach(img => setImg(img, img.getAttribute('src')));
 }
 
 function openProduct(id) {
-  const p = products.find(x => x.id === id);
+  // CRITICAL FIX: Ensure id is treated as a number
+  const p = products.find(x => Number(x.id) === Number(id));
   if(!p) return;
+  
+  // Update the global currentProduct so the Add button knows what to do
   currentProduct = p;
+  
   document.getElementById("mcat").innerText = p.cat.toUpperCase();
   document.getElementById("mname").innerText = p.name;
   document.getElementById("mprice").innerText = "₹" + p.price;
   document.getElementById("mdesc").innerText = p.desc;
+  
   setImg(document.getElementById("mimg"), p.imgs[0]);
+  
   document.getElementById("mo").classList.add("open");
   document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden"; // Prevent background scroll
 }
 
 function filterP(cat, btn) {
@@ -151,10 +129,12 @@ function filterP(cat, btn) {
 
 function addFromModal() {
   if(!currentProduct) return;
+  
   const ex = cart.find(x => x.id === currentProduct.id);
   if(ex) ex.qty++; else cart.push({...currentProduct, qty:1});
+  
   document.getElementById("cc").innerText = cart.reduce((s,i) => s + i.qty, 0);
-  showToast("Added to cart! 🧶");
+  showToast(currentProduct.name + " added! 🧶");
 }
 
 function orderViaWa() {
@@ -165,37 +145,10 @@ function orderViaWa() {
 function closeModal() {
   document.getElementById("mo").classList.remove("open");
   document.getElementById("modal").classList.remove("open");
+  document.body.style.overflow = ""; // Re-enable scroll
 }
 
-function openCart() {
-  const items = document.getElementById("cart-items");
-  if(cart.length === 0) {
-    items.innerHTML = "<p style='text-align:center; padding:20px;'>Your cart is empty.</p>";
-    document.getElementById("cart-foot").style.display = "none";
-  } else {
-    items.innerHTML = cart.map(i => `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px;"><span>${i.name} (x${i.qty})</span><span>₹${i.price * i.qty}</span></div>`).join("");
-    document.getElementById("ct").innerText = "₹" + cart.reduce((s,i) => s + (i.price * i.qty), 0);
-    document.getElementById("cart-foot").style.display = "block";
-  }
-  document.getElementById("cart-overlay").classList.add("open");
-  document.getElementById("cart-drawer").classList.add("open");
-}
-
-function closeCart() {
-  document.getElementById("cart-overlay").classList.remove("open");
-  document.getElementById("cart-drawer").classList.remove("open");
-}
-
-function checkout() {
-  const msg = encodeURIComponent(`Hi! I'd like to order items worth ₹${document.getElementById("ct").innerText}.`);
-  window.open(`https://wa.me/918886122232?text=${msg}`, "_blank");
-}
-
-function showToast(m) {
-  const t = document.getElementById("toast");
-  t.innerText = m; t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2000);
-}
+// ... (keep your openCart, closeCart, checkout, and showToast functions)
 
 renderProducts('all');
 </script>
