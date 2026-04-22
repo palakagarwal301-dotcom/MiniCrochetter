@@ -1246,3 +1246,54 @@ footer{
     grid-template-columns: 1fr; /* Stack image and info on mobile */
   }
 }
+// 1. Updated Open Function: Now correctly sets the 'currentProduct'
+function openProduct(id) {
+  // We use Number(id) to make sure we aren't comparing a string "3" to a number 3
+  const p = products.find(x => Number(x.id) === Number(id));
+  
+  if (!p) {
+    console.error("Could not find product with ID:", id);
+    return;
+  }
+
+  // CRITICAL: This line must happen so the "Add" button knows which item it's looking at
+  currentProduct = p;
+
+  // Update the Modal text
+  document.getElementById("mcat").innerText = p.cat.toUpperCase();
+  document.getElementById("mname").innerText = p.name;
+  document.getElementById("mprice").innerText = "₹" + p.price;
+  document.getElementById("mdesc").innerText = p.desc;
+  
+  // Update the Modal image
+  const mainImg = document.getElementById("mimg");
+  setImg(mainImg, p.imgs[0]);
+
+  // Show the modal
+  document.getElementById("mo").classList.add("open");
+  document.getElementById("modal").classList.add("open");
+}
+
+// 2. Updated Add Function: Uses the specific 'currentProduct' set above
+function addFromModal() {
+  if (!currentProduct) {
+    showToast("Please select a product first! 🧶");
+    return;
+  }
+
+  // Standard cart logic
+  const exists = cart.find(x => x.id === currentProduct.id);
+  if (exists) {
+    exists.qty++;
+  } else {
+    // We spread the currentProduct to ensure we get a fresh copy
+    cart.push({ ...currentProduct, qty: 1 });
+  }
+  
+  // Update UI
+  updateCount();
+  showToast(currentProduct.name + " added to cart! 🧶");
+  
+  // Optional: Close modal after adding
+  // closeModal();
+}
