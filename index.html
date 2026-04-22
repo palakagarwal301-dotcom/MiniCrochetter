@@ -66,6 +66,27 @@
   </footer>
 
   <script>
+    const reviews = [
+      {name:"Ananya K.", handle:"Booties order · Kolkata", initial:"A", accent:"#fbeaf0", text:"The booties were even prettier in real life. The finishing was so neat and the gift looked incredibly special.", product:"Pink Ruffle Booties"},
+      {name:"Riya M.", handle:"Plushie order · Delhi", initial:"R", accent:"#e1f5ee", text:"I sent a reference and got the cutest custom plushie back. It felt personal, well made, and beautifully packed.", product:"Custom Plushie"},
+      {name:"Priya S.", handle:"Coaster set · Mumbai", initial:"P", accent:"#faeeda", text:"Everything looked handmade in the best way possible. The colours were gorgeous and the whole set made my table look so warm.", product:"Sunflower Coasters"}
+    ];
+
+    document.getElementById("rg").innerHTML = reviews.map((review) => `
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">"${review.text}"</div>
+        <div class="rev-auth">
+          <div class="rev-av" style="background:${review.accent};color:var(--ter)">${review.initial}</div>
+          <div>
+            <div class="rev-name">${review.name}</div>
+            <div class="rev-handle">${review.handle}</div>
+          </div>
+        </div>
+        <div class="rev-prod">${review.product}</div>
+      </div>
+    `).join("");
+
     function checkout(){window.open("https://wa.me/918886122232","_blank");}
   </script>
 
