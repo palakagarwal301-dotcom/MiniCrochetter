@@ -80,7 +80,8 @@
   <div class="cart-foot" id="cart-foot" style="display:none">
     <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">₹0</span></div>
     <button class="checkout-btn" onclick="checkout()">Order via WhatsApp →</button>
-    <p class="wa-note">Opens WhatsApp with your full order details.<br>We confirm availability & arrange payment.</p>
+    <button class="checkout-btn" style="background:#5f259f;margin-top:8px;" onclick="payUPI()">💳 Pay via UPI</button>
+    <p class="wa-note">WhatsApp first to confirm availability &amp; final price, then pay via UPI to <strong>8886122232@yapl</strong>.</p>
   </div>
 </div>
 
@@ -291,6 +292,24 @@ function chQty(i, d) { cart[i].qty += d; if(cart[i].qty <= 0) cart.splice(i,1); 
 function rmItem(i) { cart.splice(i,1); updateCount(); }
 function openCart() { renderCart(); document.getElementById("cart-overlay").classList.add("open"); document.getElementById("cart-drawer").classList.add("open"); }
 function closeCart() { document.getElementById("cart-overlay").classList.remove("open"); document.getElementById("cart-drawer").classList.remove("open"); }
+
+function payUPI() {
+  if (!cart.length) return;
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const note = encodeURIComponent("Mini Crochetter Order");
+  const upiUrl = `upi://pay?pa=8886122232@yapl&pn=Mini%20Crochetter&am=${total}&cu=INR&tn=${note}`;
+  // Try to open UPI app; if it fails (desktop), copy UPI ID and show instructions
+  const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+  if (isMobile) {
+    window.location.href = upiUrl;
+  } else {
+    navigator.clipboard.writeText("8886122232@yapl").then(() => {
+      alert(`UPI ID copied to clipboard!\n\n8886122232@yapl\n\nAmount: ₹${total}\n\nOpen any UPI app (PhonePe / GPay / Paytm) on your phone and pay to this UPI ID.`);
+    }).catch(() => {
+      alert(`Pay via UPI to:\n\n8886122232@yapl\n\nAmount: ₹${total}\n\nOpen PhonePe / GPay / Paytm and send to this UPI ID.`);
+    });
+  }
+}
 
 function checkout() {
   if (!cart.length) return;
