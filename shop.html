@@ -74,22 +74,37 @@
 
 <script>
 const products = [
-  {id:1, cat:"booties", name:"Pink Ruffle Booties", imgs:["booties_pink_basket.jpg"], price:899, desc:"Soft pink booties with delicate white ruffles."},
-  {id:2, cat:"booties", name:"Classic Lace-Up Booties", imgs:["booties_lace_wood.jpg"], price:749, desc:"Timeless cream booties with sturdy ties."},
-  {id:3, cat:"plushies", name:"Winnie the Pooh", imgs:["pooh.png"], price:2499, desc:"Velvet yarn Pooh, incredibly soft and huggable."},
-  {id:4, cat:"plushies", name:"Minion Stuart", imgs:["minion.png"], price:2199, desc:"Technical crochet Stuart with denim overalls."},
-  {id:5, cat:"plushies", name:"Santa Plushie", imgs:["santa_plushie.jpg"], price:2499, desc:"Festive Santa in premium red velvet yarn."},
+  // BOOTIES
+  {id:1, cat:"booties", name:"Pink Ruffle Booties Set", imgs:["booties_pink_basket.jpg"], price:899, desc:"Soft pink booties with white ruffles and matching headband."},
+  {id:2, cat:"booties", name:"Classic Lace-Up Booties", imgs:["booties_lace_wood.jpg"], price:749, desc:"Clean, classic cream booties with brown ties."},
+
+  // PLUSHIES
+  {id:3, cat:"plushies", name:"Winnie the Pooh Plushie", imgs:["pooh.png"], price:2499, desc:"Velvet yarn Pooh, incredibly soft and technical."},
+  {id:4, cat:"plushies", name:"Minion Plushie (Stuart)", imgs:["minion.png"], price:2199, desc:"Detailed Stuart with denim overalls in velvet yarn."},
+  {id:5, cat:"plushies", name:"Santa Plushie", imgs:["santa_plushie.jpg"], price:2499, desc:"Festive Santa in premium velvet yarn."},
   {id:6, cat:"plushies", name:"Shark Plushie", imgs:["shark_plushie.png"], price:1799, desc:"Chubby shark with hand-stitched details."},
-  {id:7, cat:"plushies", name:"Mini Trio", imgs:["mini_plushies.png"], price:749, desc:"Set of three: Bunny, Bear, and Chick."},
-  {id:9, cat:"coasters", name:"Sunflower Coaster", imgs:["sunflower-coaster.png"], price:449, desc:"Vibrant sunflower design for your desk."},
-  {id:10, cat:"coasters", name:"Mandala Mat", imgs:["mandala_centre_mat.jpg"], price:1499, desc:"Detailed table centerpiece mat."},
-  {id:11, cat:"coasters", name:"Heart & Leaf Set", imgs:["coaster_leaf_heart.jpg"], price:399, desc:"Aesthetic monstera and heart coasters."},
-  {id:12, cat:"flowers", name:"Technical Daisy", imgs:["daisy_flower.png"], price:349, desc:"Technical 3D crochet daisy bloom."},
-  {id:13, cat:"flowers", name:"Large Sunflower", imgs:["sunflower.png"], price:549, desc:"Wall-hanging sunflower decor."},
-  {id:14, cat:"bags", name:"Rose Drawstring", imgs:["bag_rose_drawstring.jpg"], price:1699, desc:"Elegant cream bag with rose accents."},
-  {id:15, cat:"bags", name:"Sunflower Sling", imgs:["bag_sunflower_sling.jpg"], price:1999, desc:"Boho sling bag with sunflower center."},
-  {id:16, cat:"accessories", name:"Pink Bow Headband", imgs:["bow_headband.png"], price:349, desc:"Stretchy headband with a bold pink bow."},
-  {id:17, cat:"rakhis", name:"Custom Rakhi Set", imgs:["rakhis_overview.jpg"], price:249, desc:"Personalized handmade rakhis."}
+  {id:7, cat:"plushies", name:"Mini Plushies Trio", imgs:["mini_plushies.png"], price:749, desc:"Set of three: Bunny, Bear, and Chick."},
+  {id:8, cat:"plushies", name:"Custom Character Doll", imgs:["custom_plushie.jpg"], price:1499, desc:"Handmade doll based on your specific character reference."},
+
+  // COASTERS & MATS
+  {id:9, cat:"coasters", name:"Sunflower Coaster", imgs:["sunflower-coaster.png"], price:449, desc:"Vibrant sunflower design for your table."},
+  {id:10, cat:"coasters", name:"Mandala Table Mat", imgs:["mandala_centre_mat.jpg"], price:1499, desc:"14-17 inch technical centerpiece mat."},
+  {id:11, cat:"coasters", name:"Leaf & Heart Coasters", imgs:["coaster_leaf_heart.jpg"], price:399, desc:"Aesthetic monstera leaf and pink heart set."},
+
+  // FLOWERS
+  {id:12, cat:"flowers", name:"Technical Daisy Bloom", imgs:["daisy_flower.png"], price:349, desc:"3D textured daisy with golden center."},
+  {id:13, cat:"flowers", name:"Sunflower Wall Decor", imgs:["sunflower.png"], price:549, desc:"Large golden sunflower for home or studio walls."},
+
+  // BAGS
+  {id:14, cat:"bags", name:"Rose Drawstring Bag", imgs:["bag_rose_drawstring.jpg"], price:1699, desc:"Elegant cream bag with technical rose appliqué."},
+  {id:15, cat:"bags", name:"Sunflower Sling Bag", imgs:["bag_sunflower_sling.jpg"], price:1999, desc:"Boho round sling with a full sunflower front."},
+
+  // ACCESSORIES
+  {id:16, cat:"accessories", name:"Pink Bow Headband", imgs:["bow_headband.png"], price:349, desc:"Soft stretchy headband with a bold pink bow."},
+  {id:18, cat:"accessories", name:"Daisy Wristlet Keychain", imgs:["daisy.png"], price:299, desc:"Technical daisy charm on a handmade wristlet strap."},
+
+  // RAKHIS
+  {id:17, cat:"rakhis", name:"Custom Rakhi Set", imgs:["rakhis_overview.jpg"], price:249, desc:"Personalized handmade rakhis for your loved ones."}
 ];
 
 let cart = [];
