@@ -71,9 +71,121 @@
 </div>
 
 <div class="toast" id="toast"></div>
-
 <script>
-// (Your products array is perfect as is - keep it!)
+const products = [
+  {
+    id: 1,
+    cat: "booties",
+    name: "Pink Basket Booties",
+    price: 450,
+    desc: "Soft handmade crochet booties for infants.",
+    imgs: ["images/booties_pink_basket.jpg"]
+  },
+  {
+    id: 2,
+    cat: "booties",
+    name: "Lace Wood Booties",
+    price: 500,
+    desc: "Elegant lace crochet booties with wooden buttons.",
+    imgs: ["images/booties_lace_wood.jpg"]
+  },
+  {
+    id: 3,
+    cat: "bags",
+    name: "Rose Drawstring Bag",
+    price: 950,
+    desc: "Crochet drawstring bag with rose motif.",
+    imgs: ["images/bag_rose_drawstring.jpg"]
+  },
+  {
+    id: 4,
+    cat: "bags",
+    name: "Sunflower Sling Bag",
+    price: 1200,
+    desc: "Crochet sling bag with sunflower design.",
+    imgs: ["images/bag_sunflower_sling.jpg"]
+  },
+  {
+    id: 5,
+    cat: "plushies",
+    name: "Custom Plushie",
+    price: 1500,
+    desc: "Handmade plushie customized to your request.",
+    imgs: ["images/custom_plushie.jpg"]
+  },
+  {
+    id: 6,
+    cat: "plushies",
+    name: "Pooh Plushie",
+    price: 1400,
+    desc: "Crochet plushie inspired by Pooh.",
+    imgs: ["images/pooh.png"]
+  },
+  {
+    id: 7,
+    cat: "plushies",
+    name: "Shark Plushie",
+    price: 1400,
+    desc: "Crochet shark plushie, perfect for kids.",
+    imgs: ["images/shark_plushie.png"]
+  },
+  {
+    id: 8,
+    cat: "plushies",
+    name: "Santa Plushie",
+    price: 1400,
+    desc: "Festive crochet Santa plushie.",
+    imgs: ["images/santa_plushie.jpg"]
+  },
+  {
+    id: 9,
+    cat: "coasters",
+    name: "Leaf Heart Coaster",
+    price: 250,
+    desc: "Crochet coaster shaped like a leaf heart.",
+    imgs: ["images/coaster_leaf_heart.jpg"]
+  },
+  {
+    id: 10,
+    cat: "coasters",
+    name: "Coasters & Mats Set",
+    price: 600,
+    desc: "Handmade crochet coasters and mats.",
+    imgs: ["images/coasters_mats.png"]
+  },
+  {
+    id: 11,
+    cat: "flowers",
+    name: "Sunflower",
+    price: 300,
+    desc: "Crochet sunflower decoration.",
+    imgs: ["images/sunflower.png"]
+  },
+  {
+    id: 12,
+    cat: "flowers",
+    name: "Daisy Flower",
+    price: 300,
+    desc: "Crochet daisy flower decoration.",
+    imgs: ["images/daisy_flower.png"]
+  },
+  {
+    id: 13,
+    cat: "accessories",
+    name: "Bow Headband",
+    price: 350,
+    desc: "Crochet headband with bow.",
+    imgs: ["images/bow_headband.png"]
+  },
+  {
+    id: 14,
+    cat: "rakhis",
+    name: "Rakhi Trio",
+    price: 400,
+    desc: "Set of three handmade crochet rakhis.",
+    imgs: ["images/rakhis_trio.jpg"]
+  }
+];
 
 let cart = [];
 let currentProduct = null;
@@ -85,7 +197,6 @@ function setImg(img, src) {
 
 function renderProducts(filter) {
   const g = document.getElementById("pg");
-  // Strict filter check
   const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
   
   g.innerHTML = filtered.map(p => `
@@ -102,11 +213,8 @@ function renderProducts(filter) {
 }
 
 function openProduct(id) {
-  // CRITICAL FIX: Ensure id is treated as a number
   const p = products.find(x => Number(x.id) === Number(id));
   if(!p) return;
-  
-  // Update the global currentProduct so the Add button knows what to do
   currentProduct = p;
   
   document.getElementById("mcat").innerText = p.cat.toUpperCase();
@@ -118,7 +226,7 @@ function openProduct(id) {
   
   document.getElementById("mo").classList.add("open");
   document.getElementById("modal").classList.add("open");
-  document.body.style.overflow = "hidden"; // Prevent background scroll
+  document.body.style.overflow = "hidden";
 }
 
 function filterP(cat, btn) {
@@ -129,7 +237,6 @@ function filterP(cat, btn) {
 
 function addFromModal() {
   if(!currentProduct) return;
-  
   const ex = cart.find(x => x.id === currentProduct.id);
   if(ex) ex.qty++; else cart.push({...currentProduct, qty:1});
   
@@ -145,10 +252,10 @@ function orderViaWa() {
 function closeModal() {
   document.getElementById("mo").classList.remove("open");
   document.getElementById("modal").classList.remove("open");
-  document.body.style.overflow = ""; // Re-enable scroll
+  document.body.style.overflow = "";
 }
 
-// ... (keep your openCart, closeCart, checkout, and showToast functions)
+// Add your openCart, closeCart, checkout, and showToast functions here
 
 renderProducts('all');
 </script>
