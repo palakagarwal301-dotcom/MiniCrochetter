@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <title>Shop — Mini Crochetter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5"> </head>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=6">
+</head>
 <body>
 
 <nav>
@@ -37,10 +35,12 @@
     <button class="tab" onclick="filterP('bags',this)">Bags</button>
     <button class="tab" onclick="filterP('accessories',this)">Accessories</button>
     <button class="tab" onclick="filterP('rakhis',this)">Rakhis</button>
+    <button class="tab" onclick="filterP('mandala',this)">Mandala</button>
   </div>
   <div class="products" id="pg"></div>
 </div>
 
+<!-- Cart Drawer -->
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
   <div class="cart-head"><h3>Your Cart 🧶</h3><button class="close-c" onclick="closeCart()">✕</button></div>
@@ -52,6 +52,7 @@
   </div>
 </div>
 
+<!-- Product Modal -->
 <div class="modal-overlay" id="mo" onclick="closeModal()"></div>
 <div class="modal" id="modal">
   <button class="modal-close" onclick="closeModal()">✕</button>
@@ -61,7 +62,7 @@
       <div class="modal-cat" id="mcat"></div>
       <div class="modal-name" id="mname"></div>
       <div class="modal-price" id="mprice"></div>
-      <p id="mdesc" style="margin:15px 0; font-size:14px; line-height:1.6;"></p>
+      <p id="mdesc"></p>
       <div class="modal-actions">
         <button class="modal-add" onclick="addFromModal()">Add to Cart</button>
         <button class="modal-wa" onclick="orderViaWa()">WhatsApp Inquiry</button>
@@ -71,193 +72,77 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
 <script>
-const products = [
-  {
-    id: 1,
-    cat: "booties",
-    name: "Pink Basket Booties",
-    price: 450,
-    desc: "Soft handmade crochet booties for infants.",
-    imgs: ["images/booties_pink_basket.jpg"]
-  },
-  {
-    id: 2,
-    cat: "booties",
-    name: "Lace Wood Booties",
-    price: 500,
-    desc: "Elegant lace crochet booties with wooden buttons.",
-    imgs: ["images/booties_lace_wood.jpg"]
-  },
-  {
-    id: 3,
-    cat: "bags",
-    name: "Rose Drawstring Bag",
-    price: 950,
-    desc: "Crochet drawstring bag with rose motif.",
-    imgs: ["images/bag_rose_drawstring.jpg"]
-  },
-  {
-    id: 4,
-    cat: "bags",
-    name: "Sunflower Sling Bag",
-    price: 1200,
-    desc: "Crochet sling bag with sunflower design.",
-    imgs: ["images/bag_sunflower_sling.jpg"]
-  },
-  {
-    id: 5,
-    cat: "plushies",
-    name: "Custom Plushie",
-    price: 1500,
-    desc: "Handmade plushie customized to your request.",
-    imgs: ["images/custom_plushie.jpg"]
-  },
-  {
-    id: 6,
-    cat: "plushies",
-    name: "Pooh Plushie",
-    price: 1400,
-    desc: "Crochet plushie inspired by Pooh.",
-    imgs: ["images/pooh.png"]
-  },
-  {
-    id: 7,
-    cat: "plushies",
-    name: "Shark Plushie",
-    price: 1400,
-    desc: "Crochet shark plushie, perfect for kids.",
-    imgs: ["images/shark_plushie.png"]
-  },
-  {
-    id: 8,
-    cat: "plushies",
-    name: "Santa Plushie",
-    price: 1400,
-    desc: "Festive crochet Santa plushie.",
-    imgs: ["images/santa_plushie.jpg"]
-  },
-  {
-    id: 9,
-    cat: "coasters",
-    name: "Leaf Heart Coaster",
-    price: 250,
-    desc: "Crochet coaster shaped like a leaf heart.",
-    imgs: ["images/coaster_leaf_heart.jpg"]
-  },
-  {
-    id: 10,
-    cat: "coasters",
-    name: "Coasters & Mats Set",
-    price: 600,
-    desc: "Handmade crochet coasters and mats.",
-    imgs: ["images/coasters_mats.png"]
-  },
-  {
-    id: 11,
-    cat: "flowers",
-    name: "Sunflower",
-    price: 300,
-    desc: "Crochet sunflower decoration.",
-    imgs: ["images/sunflower.png"]
-  },
-  {
-    id: 12,
-    cat: "flowers",
-    name: "Daisy Flower",
-    price: 300,
-    desc: "Crochet daisy flower decoration.",
-    imgs: ["images/daisy_flower.png"]
-  },
-  {
-    id: 13,
-    cat: "accessories",
-    name: "Bow Headband",
-    price: 350,
-    desc: "Crochet headband with bow.",
-    imgs: ["images/bow_headband.png"]
-  },
-  {
-    id: 14,
-    cat: "rakhis",
-    name: "Rakhi Trio",
-    price: 400,
-    desc: "Set of three handmade crochet rakhis.",
-    imgs: ["images/rakhis_trio.jpg"]
-  }
-];
-
-let cart = [];
-let currentProduct = null;
-
-function setImg(img, src) {
-  img.src = src;
-  img.onerror = () => { if(!img.src.includes('images/')) img.src = 'images/' + src; };
+function closeModal() {
+  document.getElementById("mo").classList.remove("open");
+  document.getElementById("modal").classList.remove("open");
+  currentProduct = null;
 }
 
-function renderProducts(filter) {
-  const g = document.getElementById("pg");
-  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
-  
-  g.innerHTML = filtered.map(p => `
-    <div class="product-card" onclick="openProduct(${p.id})">
-      <div class="product-img-wrap"><img src="${p.imgs[0]}" alt="${p.name}"></div>
-      <div class="product-info">
-        <div class="product-cat">${p.cat.toUpperCase()}</div>
-        <div class="product-name">${p.name}</div>
-        <div class="product-price">₹${p.price}</div>
-      </div>
-    </div>`).join("");
-  
-  g.querySelectorAll("img").forEach(img => setImg(img, img.getAttribute('src')));
-}
-
-function openProduct(id) {
-  const p = products.find(x => Number(x.id) === Number(id));
-  if(!p) return;
-  currentProduct = p;
-  
-  document.getElementById("mcat").innerText = p.cat.toUpperCase();
-  document.getElementById("mname").innerText = p.name;
-  document.getElementById("mprice").innerText = "₹" + p.price;
-  document.getElementById("mdesc").innerText = p.desc;
-  
-  setImg(document.getElementById("mimg"), p.imgs[0]);
-  
-  document.getElementById("mo").classList.add("open");
-  document.getElementById("modal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
+// --- Filtering ---
 function filterP(cat, btn) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   btn.classList.add("active");
   renderProducts(cat);
 }
 
+// --- Cart ---
 function addFromModal() {
   if(!currentProduct) return;
   const ex = cart.find(x => x.id === currentProduct.id);
   if(ex) ex.qty++; else cart.push({...currentProduct, qty:1});
-  
-  document.getElementById("cc").innerText = cart.reduce((s,i) => s + i.qty, 0);
+  updateCartUI();
   showToast(currentProduct.name + " added! 🧶");
 }
 
+function openCart() {
+  document.getElementById("cart-overlay").classList.add("open");
+  document.getElementById("cart-drawer").classList.add("open");
+}
+
+function closeCart() {
+  document.getElementById("cart-overlay").classList.remove("open");
+  document.getElementById("cart-drawer").classList.remove("open");
+}
+
+function updateCartUI() {
+  const itemsDiv = document.getElementById("cart-items");
+  const footDiv = document.getElementById("cart-foot");
+  itemsDiv.innerHTML = cart.map(i => `
+    <div class="cart-item">
+      <img class="ci-img" src="images/${i.imgs[0]}" alt="${i.name}">
+      <div class="ci-info">
+        <div class="ci-name">${i.name}</div>
+        <div class="ci-price">₹${i.price} × ${i.qty}</div>
+      </div>
+    </div>`).join("");
+  const total = cart.reduce((s,i) => s + i.price*i.qty, 0);
+  document.getElementById("ct").innerText = "₹" + total;
+  document.getElementById("cc").innerText = cart.reduce((s,i) => s + i.qty, 0);
+  footDiv.style.display = cart.length ? "block" : "none";
+}
+
+function checkout() {
+  if(!cart.length) { showToast("Cart is empty!"); return; }
+  const msg = cart.map(i => `${i.name} × ${i.qty}`).join(", ");
+  window.open(`https://wa.me/918886122232?text=Hi! I'd like to order: ${encodeURIComponent(msg)}`, "_blank");
+}
+
+// --- Toast ---
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.innerText = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
+}
+
+// --- WhatsApp Inquiry ---
 function orderViaWa() {
   if(!currentProduct) return;
   window.open(`https://wa.me/918886122232?text=Hi! I'm interested in ${currentProduct.name}`, "_blank");
 }
 
-function closeModal() {
-  document.getElementById("mo").classList.remove("open");
-  document.getElementById("modal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-// Add your openCart, closeCart, checkout, and showToast functions here
-
+// --- Init ---
 renderProducts('all');
 </script>
-</body>
-</html>
