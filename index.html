@@ -4,14 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mini Crochetter — Handmade Crochet Shop</title>
-  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
-  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap)" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
     <ul class="nav-links">
@@ -20,16 +18,14 @@
       <li><a href="workshops.html">Workshops</a></li>
       <li><a href="order.html">Order</a></li>
     </ul>
-    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
+    <button class="cart-btn" onclick="window.location='shop.html'">🛒 Shop</button>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
       <div class="hero-tag">🧶 Custom orders always open</div>
       <h1>Crochet Minis<br>Made with <em>Love</em></h1>
       <p>Every piece handcrafted stitch by stitch — booties, plushies, coasters, flowers & more.</p>
-
       <div class="hero-btns">
         <a href="shop.html" class="btn-p">Shop Now</a>
         <a href="workshops.html" class="btn-s">Join a Workshop</a>
@@ -37,50 +33,40 @@
     </div>
   </section>
 
-  <!-- REVIEWS -->
   <section class="reviews-section">
     <div class="sec-head">
       <span class="sec-tag">Happy customers</span>
       <h2 class="sec-title">Made someone <em>smile</em> today</h2>
     </div>
-
     <div class="reviews-grid" id="rg"></div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="foot-top">
       <div class="foot-brand">
         <div class="foot-brand-name">🧶 Mini Crochetter</div>
-        <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan‑India.</p>
+        <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan-India.</p>
         <div class="foot-soc">
-          <a href="[instagram.com](https://www.instagram.com/mini.crochetter/)" target="_blank">📸</a>
-          <a href="[wa.me](https://wa.me/918886122232)" target="_blank">💬</a>
+          <a href="https://www.instagram.com/mini.crochetter/" target="_blank">📸</a>
+          <a href="https://wa.me/918886122232" target="_blank">💬</a>
         </div>
       </div>
 
       <div class="foot-col">
         <h4>Order</h4>
         <a href="mailto:palakagarwal301@gmail.com">Email Us</a>
-        <a href="[wa.me](https://wa.me/918886122232)">WhatsApp Us</a>
+        <a href="https://wa.me/918886122232" target="_blank">WhatsApp Us</a>
       </div>
     </div>
 
     <div class="foot-bot">
       <div class="foot-copy">© 2025 Mini Crochetter — Handmade with love in India 🇮🇳</div>
-      <div class="foot-copy">All pieces made to order • Ships pan‑India</div>
+      <div class="foot-copy">All pieces made to order • Ships pan-India</div>
     </div>
   </footer>
 
-  <!-- CART -->
-  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-  <div class="cart-drawer" id="cart-drawer">…</div>
-  <div class="toast" id="toast"></div>
-
   <script>
-    function openCart(){document.getElementById("cart-overlay").classList.add("open");document.getElementById("cart-drawer").classList.add("open");}
-    function closeCart(){document.getElementById("cart-overlay").classList.remove("open");document.getElementById("cart-drawer").classList.remove("open");}
-    function checkout(){window.open("[wa.me](https://wa.me/918886122232)","_blank");}
+    function checkout(){window.open("https://wa.me/918886122232","_blank");}
   </script>
 
 </body>
