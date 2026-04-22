@@ -8,16 +8,15 @@
 <title>Shop — Mini Crochetter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
-</head>
+<link rel="stylesheet" href="style.css?v=5"> </head>
 <body>
 
 <nav>
-  <a href="index.html?v=4" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+  <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
   <ul class="nav-links">
-    <li><a href="index.html?v=4">Home</a></li>
-    <li><a href="shop.html?v=4" class="active">Shop</a></li>
-    <li><a href="workshops.html?v=4">Workshops</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html" class="active">Shop</a></li>
+    <li><a href="workshops.html">Workshops</a></li>
     <li><a href="https://minicrochetter.substack.com" target="_blank">Newsletter</a></li>
   </ul>
   <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
@@ -25,7 +24,7 @@
 
 <div class="page-header">
   <h1>Our <em>Handmade</em> Collection</h1>
-  <p>Every piece made to order with love. Click any product to see full details & images.</p>
+  <p>Handcrafted stitch by stitch in Kolkata. Shipping pan-India.</p>
 </div>
 
 <div class="shop-wrap">
@@ -42,55 +41,30 @@
   <div class="products" id="pg"></div>
 </div>
 
-<footer id="contact">
-  <div class="foot-top">
-    <div class="foot-brand">
-      <div class="foot-brand-name">🧶 Mini Crochetter</div>
-      <p>Handmade crochet minis with love. Shipping pan-India.</p>
-      <div class="foot-soc">
-        <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
-        <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">💬</a>
-      </div>
-    </div>
-    <div class="foot-col"><h4>Order</h4>
-      <a href="mailto:palakagarwal301@gmail.com">Email Us</a>
-      <a href="https://wa.me/918886122232" target="_blank">WhatsApp Us</a>
-    </div>
-  </div>
-  <div class="foot-bot">
-    <div class="foot-copy">© 2026 Mini Crochetter · Handmade in India 🇮🇳</div>
-    <div class="foot-copy">No returns or refunds for handmade items.</div>
-  </div>
-</footer>
-
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
   <div class="cart-head"><h3>Your Cart 🧶</h3><button class="close-c" onclick="closeCart()">✕</button></div>
   <div class="cart-items" id="cart-items"></div>
   <div class="cart-foot" id="cart-foot" style="display:none">
-    <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">₹0</span></div>
+    <div class="cart-total-row"><span>Total</span><span id="ct">₹0</span></div>
     <button class="checkout-btn" onclick="checkout()">Order via WhatsApp →</button>
-    <p class="wa-note" style="margin-top:12px; color:var(--cor); font-style:italic;">*Note: All sales are final. No returns or refunds on handmade items.</p>
+    <p style="font-size:11px; text-align:center; margin-top:10px; color:var(--tm);">*Handmade items: No returns or refunds.</p>
   </div>
 </div>
 
-<div class="modal-overlay" id="mo" onclick="closeModal(event)"></div>
+<div class="modal-overlay" id="mo" onclick="closeModal()"></div>
 <div class="modal" id="modal">
   <button class="modal-close" onclick="closeModal()">✕</button>
   <div class="modal-body">
-    <div class="modal-gallery">
-      <img class="modal-main-img" id="mimg" src="" alt="">
-      <div class="modal-thumbs" id="mthumbs"></div>
-    </div>
+    <div class="modal-gallery"><img id="mimg" src="" alt=""></div>
     <div class="modal-info">
       <div class="modal-cat" id="mcat"></div>
       <div class="modal-name" id="mname"></div>
       <div class="modal-price" id="mprice"></div>
-      <div class="modal-desc" id="mdesc"></div>
-      <div class="modal-meta" id="mmeta"></div>
+      <p id="mdesc" style="margin:15px 0; font-size:14px; line-height:1.6;"></p>
       <div class="modal-actions">
-        <button class="modal-add" id="madd" onclick="addFromModal()">Add to Cart</button>
-        <button class="modal-wa" onclick="orderViaWa()">Order via WhatsApp</button>
+        <button class="modal-add" onclick="addFromModal()">Add to Cart</button>
+        <button class="modal-wa" onclick="orderViaWa()">WhatsApp Inquiry</button>
       </div>
     </div>
   </div>
@@ -100,23 +74,22 @@
 
 <script>
 const products = [
-  {id:1, cat:"booties", name:"Pink Ruffle Booties", imgs:["booties_pink_basket.jpg"], price:899, desc:"Pink ruffle booties with white scallop trim."},
-  {id:2, cat:"booties", name:"Classic Lace-Up Booties", imgs:["booties_lace_wood.jpg"], price:749, desc:"Cream booties with brown lace-up ties."},
-  {id:3, cat:"plushies", name:"Winnie the Pooh Plushie", imgs:["pooh.png"], price:2499, desc:"Beloved Pooh in soft velvet yarn."},
-  {id:4, cat:"plushies", name:"Minion Plushie (Stuart)", imgs:["minion.png"], price:2199, desc:"Hand-crocheted in soft velvet yarn."},
-  {id:5, cat:"plushies", name:"Santa Plushie", imgs:["santa_plushie.jpg"], price:2499, desc:"Jolly Santa in soft red velvet."},
-  {id:6, cat:"plushies", name:"Shark Plushie", imgs:["shark_plushie.png"], price:1799, desc:"Chubby blue-grey shark in soft velvet yarn."},
-  {id:7, cat:"plushies", name:"Mini Plushies Trio", imgs:["mini_plushies.png"], price:749, desc:"Sweet set of mini amigurumi."},
-  {id:8, cat:"plushies", name:"Custom Doll Plushie", imgs:["custom_plushie.jpg"], price:1499, desc:"Personalized girl doll or character reference."},
-  {id:9, cat:"coasters", name:"Sunflower Coaster", imgs:["sunflower-coaster.png"], price:449, desc:"Golden yellow sunflower coaster."},
-  {id:10, cat:"coasters", name:"Mandala Centre Mat", imgs:["mandala_centre_mat.jpg"], price:1499, desc:"Large handcrocheted table mat."},
-  {id:11, cat:"coasters", name:"Leaf & Heart Coasters", imgs:["coaster_leaf_heart.jpg"], price:399, desc:"Monstera leaf and heart coaster set."},
-  {id:12, cat:"flowers", name:"Crochet Daisy", imgs:["daisy_flower.png"], price:349, desc:"White daisy with a raised golden centre."},
-  {id:13, cat:"flowers", name:"Sunflower Wall Décor", imgs:["sunflower.png"], price:549, desc:"Large golden sunflower for home décor."},
-  {id:14, cat:"bags", name:"Rose Drawstring Bag", imgs:["bag_rose_drawstring.jpg"], price:1699, desc:"Cream bag with rose appliqué."},
-  {id:15, cat:"bags", name:"Sunflower Sling Bag", imgs:["bag_sunflower_sling.jpg"], price:1999, desc:"Round brown sling bag with sunflower design."},
-  {id:16, cat:"accessories", name:"Bow Hair Headband", imgs:["bow_headband.png"], price:349, desc:"Pink crochet headband with a bold bow."},
-  {id:17, cat:"rakhis", name:"Custom Crochet Rakhis", imgs:["rakhis_overview.jpg"], price:249, desc:"Handmade rakhis in various styles."}
+  {id:1, cat:"booties", name:"Pink Ruffle Booties", imgs:["booties_pink_basket.jpg"], price:899, desc:"Soft pink booties with delicate white ruffles."},
+  {id:2, cat:"booties", name:"Classic Lace-Up Booties", imgs:["booties_lace_wood.jpg"], price:749, desc:"Timeless cream booties with sturdy ties."},
+  {id:3, cat:"plushies", name:"Winnie the Pooh", imgs:["pooh.png"], price:2499, desc:"Velvet yarn Pooh, incredibly soft and huggable."},
+  {id:4, cat:"plushies", name:"Minion Stuart", imgs:["minion.png"], price:2199, desc:"Technical crochet Stuart with denim overalls."},
+  {id:5, cat:"plushies", name:"Santa Plushie", imgs:["santa_plushie.jpg"], price:2499, desc:"Festive Santa in premium red velvet yarn."},
+  {id:6, cat:"plushies", name:"Shark Plushie", imgs:["shark_plushie.png"], price:1799, desc:"Chubby shark with hand-stitched details."},
+  {id:7, cat:"plushies", name:"Mini Trio", imgs:["mini_plushies.png"], price:749, desc:"Set of three: Bunny, Bear, and Chick."},
+  {id:9, cat:"coasters", name:"Sunflower Coaster", imgs:["sunflower-coaster.png"], price:449, desc:"Vibrant sunflower design for your desk."},
+  {id:10, cat:"coasters", name:"Mandala Mat", imgs:["mandala_centre_mat.jpg"], price:1499, desc:"Detailed table centerpiece mat."},
+  {id:11, cat:"coasters", name:"Heart & Leaf Set", imgs:["coaster_leaf_heart.jpg"], price:399, desc:"Aesthetic monstera and heart coasters."},
+  {id:12, cat:"flowers", name:"Technical Daisy", imgs:["daisy_flower.png"], price:349, desc:"Technical 3D crochet daisy bloom."},
+  {id:13, cat:"flowers", name:"Large Sunflower", imgs:["sunflower.png"], price:549, desc:"Wall-hanging sunflower decor."},
+  {id:14, cat:"bags", name:"Rose Drawstring", imgs:["bag_rose_drawstring.jpg"], price:1699, desc:"Elegant cream bag with rose accents."},
+  {id:15, cat:"bags", name:"Sunflower Sling", imgs:["bag_sunflower_sling.jpg"], price:1999, desc:"Boho sling bag with sunflower center."},
+  {id:16, cat:"accessories", name:"Pink Bow Headband", imgs:["bow_headband.png"], price:349, desc:"Stretchy headband with a bold pink bow."},
+  {id:17, cat:"rakhis", name:"Custom Rakhi Set", imgs:["rakhis_overview.jpg"], price:249, desc:"Personalized handmade rakhis."}
 ];
 
 let cart = [];
@@ -124,38 +97,33 @@ let currentProduct = null;
 
 function setImg(img, src) {
   img.src = src;
-  img.onerror = () => { if (!img.src.includes('images/')) img.src = 'images/' + src; };
+  img.onerror = () => { if(!img.src.includes('images/')) img.src = 'images/' + src; };
 }
 
 function renderProducts(filter) {
-  const container = document.getElementById("pg");
+  const g = document.getElementById("pg");
   const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
-  
-  container.innerHTML = filtered.map(p => `
+  g.innerHTML = filtered.map(p => `
     <div class="product-card" onclick="openProduct(${p.id})">
-      <div class="product-img-wrap">
-        <img src="${p.imgs[0]}" alt="${p.name}">
-      </div>
+      <div class="product-img-wrap"><img src="${p.imgs[0]}" alt="${p.name}"></div>
       <div class="product-info">
         <div class="product-cat">${p.cat.toUpperCase()}</div>
         <div class="product-name">${p.name}</div>
         <div class="product-price">₹${p.price}</div>
       </div>
     </div>`).join("");
-  
-  container.querySelectorAll("img").forEach(img => setImg(img, img.getAttribute('src')));
+  g.querySelectorAll("img").forEach(img => setImg(img, img.getAttribute('src')));
 }
 
 function openProduct(id) {
   const p = products.find(x => x.id === id);
-  if (!p) return;
+  if(!p) return;
   currentProduct = p;
   document.getElementById("mcat").innerText = p.cat.toUpperCase();
   document.getElementById("mname").innerText = p.name;
-  document.getElementById("mprice").innerHTML = `₹${p.price} <span>onwards</span>`;
+  document.getElementById("mprice").innerText = "₹" + p.price;
   document.getElementById("mdesc").innerText = p.desc;
-  const mainImg = document.getElementById("mimg");
-  setImg(mainImg, p.imgs[0]);
+  setImg(document.getElementById("mimg"), p.imgs[0]);
   document.getElementById("mo").classList.add("open");
   document.getElementById("modal").classList.add("open");
 }
@@ -167,16 +135,16 @@ function filterP(cat, btn) {
 }
 
 function addFromModal() {
-  if (!currentProduct) return;
-  const exists = cart.find(x => x.id === currentProduct.id);
-  if (exists) exists.qty++; else cart.push({...currentProduct, qty:1});
+  if(!currentProduct) return;
+  const ex = cart.find(x => x.id === currentProduct.id);
+  if(ex) ex.qty++; else cart.push({...currentProduct, qty:1});
   document.getElementById("cc").innerText = cart.reduce((s,i) => s + i.qty, 0);
-  showToast(currentProduct.name + " added! 🧶");
+  showToast("Added to cart! 🧶");
 }
 
 function orderViaWa() {
-  if (!currentProduct) return;
-  window.open(`https://wa.me/918886122232?text=Hi! I want to order ${currentProduct.name}`, "_blank");
+  if(!currentProduct) return;
+  window.open(`https://wa.me/918886122232?text=Hi! I'm interested in ${currentProduct.name}`, "_blank");
 }
 
 function closeModal() {
@@ -184,9 +152,33 @@ function closeModal() {
   document.getElementById("modal").classList.remove("open");
 }
 
-function showToast(msg) {
+function openCart() {
+  const items = document.getElementById("cart-items");
+  if(cart.length === 0) {
+    items.innerHTML = "<p style='text-align:center; padding:20px;'>Your cart is empty.</p>";
+    document.getElementById("cart-foot").style.display = "none";
+  } else {
+    items.innerHTML = cart.map(i => `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px;"><span>${i.name} (x${i.qty})</span><span>₹${i.price * i.qty}</span></div>`).join("");
+    document.getElementById("ct").innerText = "₹" + cart.reduce((s,i) => s + (i.price * i.qty), 0);
+    document.getElementById("cart-foot").style.display = "block";
+  }
+  document.getElementById("cart-overlay").classList.add("open");
+  document.getElementById("cart-drawer").classList.add("open");
+}
+
+function closeCart() {
+  document.getElementById("cart-overlay").classList.remove("open");
+  document.getElementById("cart-drawer").classList.remove("open");
+}
+
+function checkout() {
+  const msg = encodeURIComponent(`Hi! I'd like to order items worth ₹${document.getElementById("ct").innerText}.`);
+  window.open(`https://wa.me/918886122232?text=${msg}`, "_blank");
+}
+
+function showToast(m) {
   const t = document.getElementById("toast");
-  t.innerText = msg; t.classList.add("show");
+  t.innerText = m; t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 2000);
 }
 
