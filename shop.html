@@ -100,66 +100,69 @@
 
 <script>
 const products = [
-  {id:1, cat:"booties", name:"Pink Ruffle Booties & Bow Set", imgs:["booties_pink_basket.jpg"], badge:"bestseller", price:899, size:"Newborn–4 yrs", desc:"Pink ruffle booties with white scallop trim."},
-  {id:2, cat:"booties", name:"Classic Lace-Up Booties", imgs:["booties_lace_wood.jpg"], badge:"", price:749, size:"Newborn–4 yrs", desc:"Cream booties with brown lace-up ties."},
-  {id:3, cat:"plushies", name:"Winnie the Pooh Plushie", imgs:["pooh.png"], badge:"new", price:2499, size:"~25cm tall", desc:"Beloved Pooh in soft velvet yarn."},
-  {id:4, cat:"plushies", name:"Minion Plushie (Stuart)", imgs:["minion.png"], badge:"bestseller", price:2199, size:"~22cm tall", desc:"Hand-crocheted in soft velvet yarn."},
-  {id:5, cat:"plushies", name:"Santa Plushie", imgs:["santa_plushie.jpg"], badge:"seasonal", price:2499, size:"~25cm tall", desc:"Jolly Santa in soft red velvet."},
-  {id:6, cat:"plushies", name:"Shark Plushie", imgs:["shark_plushie.png"], badge:"", price:1799, size:"~18cm", desc:"Chubby blue-grey shark in soft velvet yarn."},
-  {id:7, cat:"plushies", name:"Mini Plushies Trio", imgs:["mini_plushies.png"], badge:"", price:749, size:"~10cm each", desc:"Sweet set of mini amigurumi: bunny, bear, and chick."},
-  {id:8, cat:"plushies", name:"Custom Doll Plushie", imgs:["custom_plushie.jpg"], badge:"custom", price:1499, size:"Varies", desc:"Personalized girl doll or any character reference."},
-  {id:9, cat:"coasters", name:"Sunflower Coaster", imgs:["sunflower-coaster.png"], badge:"bestseller", price:449, size:"~12cm", desc:"Golden yellow sunflower coaster."},
-  {id:10, cat:"coasters", name:"Mandala Centre Mat", imgs:["mandala_centre_mat.jpg"], badge:"", price:1499, size:"14–17 inches", desc:"Large handcrocheted table mat."},
-  {id:11, cat:"coasters", name:"Leaf & Heart Coasters", imgs:["coaster_leaf_heart.jpg"], badge:"", price:399, size:"~10–12cm", desc:"Set featuring a green monstera leaf and a pink heart coaster."},
-  {id:12, cat:"flowers", name:"Crochet Daisy", imgs:["daisy_flower.png"], badge:"", price:349, size:"~8cm", desc:"White daisy with a raised golden yellow centre."},
-  {id:13, cat:"flowers", name:"Sunflower Wall Décor", imgs:["sunflower.png"], badge:"new", price:549, size:"~20cm", desc:"Large golden sunflower for home décor."},
-  {id:14, cat:"bags", name:"Rose Drawstring Bag", imgs:["bag_rose_drawstring.jpg"], badge:"new", price:1699, size:"~15×12cm", desc:"Cream bag with rose appliqué."},
-  {id:15, cat:"bags", name:"Sunflower Sling Bag", imgs:["bag_sunflower_sling.jpg"], badge:"", price:1999, size:"~22cm round", desc:"Round brown sling bag with a full sunflower design."},
-  {id:16, cat:"accessories", name:"Bow Hair Headband", imgs:["bow_headband.png"], badge:"", price:349, size:"One size", desc:"Pink crochet headband with a bold hot-pink bow."},
-  {id:17, cat:"rakhis", name:"Custom Crochet Rakhis", imgs:["rakhis_overview.jpg"], badge:"seasonal", price:249, size:"Standard", desc:"Handmade rakhis in various styles."}
+  {id:1, cat:"booties", name:"Pink Ruffle Booties & Bow Set", imgs:["booties_pink_basket.jpg"], price:899, desc:"Pink ruffle booties with white scallop trim."},
+  {id:2, cat:"booties", name:"Classic Lace-Up Booties", imgs:["booties_lace_wood.jpg"], price:749, desc:"Cream booties with brown lace-up ties."},
+  {id:3, cat:"plushies", name:"Winnie the Pooh Plushie", imgs:["pooh.png"], price:2499, desc:"Beloved Pooh in soft velvet yarn."},
+  {id:4, cat:"plushies", name:"Minion Plushie (Stuart)", imgs:["minion.png"], price:2199, desc:"Hand-crocheted in soft velvet yarn."},
+  {id:5, cat:"plushies", name:"Santa Plushie", imgs:["santa_plushie.jpg"], price:2499, desc:"Jolly Santa in soft red velvet."},
+  {id:6, cat:"plushies", name:"Shark Plushie", imgs:["shark_plushie.png"], price:1799, desc:"Chubby blue-grey shark in soft velvet yarn."},
+  {id:7, cat:"plushies", name:"Mini Plushies Trio", imgs:["mini_plushies.png"], price:749, desc:"Sweet set of mini amigurumi: bunny, bear, and chick."},
+  {id:8, cat:"plushies", name:"Custom Doll Plushie", imgs:["custom_plushie.jpg"], price:1499, desc:"Personalized girl doll or any character reference."},
+  {id:9, cat:"coasters", name:"Sunflower Coaster", imgs:["sunflower-coaster.png"], price:449, desc:"Golden yellow sunflower coaster."},
+  {id:10, cat:"coasters", name:"Mandala Centre Mat", imgs:["mandala_centre_mat.jpg"], price:1499, desc:"Large handcrocheted table mat."},
+  {id:11, cat:"coasters", name:"Leaf & Heart Coasters", imgs:["coaster_leaf_heart.jpg"], price:399, desc:"Set featuring a green monstera leaf and a pink heart coaster."},
+  {id:12, cat:"flowers", name:"Crochet Daisy", imgs:["daisy_flower.png"], price:349, desc:"White daisy with a raised golden yellow centre."},
+  {id:13, cat:"flowers", name:"Sunflower Wall Décor", imgs:["sunflower.png"], price:549, desc:"Large golden sunflower for home décor."},
+  {id:14, cat:"bags", name:"Rose Drawstring Bag", imgs:["bag_rose_drawstring.jpg"], price:1699, desc:"Cream bag with rose appliqué."},
+  {id:15, cat:"bags", name:"Sunflower Sling Bag", imgs:["bag_sunflower_sling.jpg"], price:1999, desc:"Round brown sling bag with a full sunflower design."},
+  {id:16, cat:"accessories", name:"Bow Hair Headband", imgs:["bow_headband.png"], price:349, desc:"Pink crochet headband with a bold hot-pink bow."},
+  {id:17, cat:"rakhis", name:"Custom Crochet Rakhis", imgs:["rakhis_overview.jpg"], price:249, desc:"Handmade rakhis in various styles."}
 ];
 
 let cart = [];
 let currentProduct = null;
 
-// Improved image fallback for GitHub/Vercel paths
-function setImageSource(img, src) {
-  if (!src) return;
+// Improved image pathing for Vercel/GitHub
+function setImg(img, src) {
   img.src = src;
-  img.onerror = () => {
-    if (!img.src.includes('images/')) {
-      img.src = 'images/' + src;
-    } else {
-      img.onerror = null; 
-      img.style.opacity = "0.4";
-    }
-  };
+  img.onerror = () => { if (!img.src.includes('images/')) img.src = 'images/' + src; };
 }
 
 function renderProducts(filter) {
-  const g = document.getElementById("pg");
-  // Filter logic: if 'all', show everything. Else match 'cat' property.
-  const list = (filter === "all") ? products : products.filter(p => p.cat === filter);
+  const container = document.getElementById("pg");
+  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
   
-  if (list.length === 0) {
-    g.innerHTML = "<p style='grid-column: 1/-1; text-align: center; padding: 40px;'>Coming soon! Check back later.</p>";
-    return;
-  }
-
-  g.innerHTML = list.map(p => `
+  container.innerHTML = filtered.map(p => `
     <div class="product-card" onclick="openProduct(${p.id})">
       <div class="product-img-wrap">
         <img src="${p.imgs[0]}" alt="${p.name}">
-        ${p.badge ? `<div class="badge ${p.badge}">${p.badge}</div>` : ""}
       </div>
       <div class="product-info">
-        <div class="product-cat">${p.cat}</div>
+        <div class="product-cat">${p.cat.toUpperCase()}</div>
         <div class="product-name">${p.name}</div>
         <div class="product-price">₹${p.price}</div>
       </div>
     </div>`).join("");
   
-  g.querySelectorAll("img").forEach(img => setImageSource(img, img.getAttribute('src')));
+  container.querySelectorAll("img").forEach(img => setImg(img, img.getAttribute('src')));
+}
+
+// Fixed Open Product Logic
+function openProduct(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  currentProduct = p; // This updates the global variable so "Add to Cart" works for the RIGHT item
+
+  document.getElementById("mcat").innerText = p.cat.toUpperCase();
+  document.getElementById("mname").innerText = p.name;
+  document.getElementById("mprice").innerHTML = `₹${p.price} <span>onwards</span>`;
+  document.getElementById("mdesc").innerText = p.desc;
+  
+  const mainImg = document.getElementById("mimg");
+  setImg(mainImg, p.imgs[0]);
+
+  document.getElementById("mo").classList.add("open");
+  document.getElementById("modal").classList.add("open");
 }
 
 function filterP(cat, btn) {
@@ -168,74 +171,34 @@ function filterP(cat, btn) {
   renderProducts(cat);
 }
 
-function openProduct(id) {
-  const p = products.find(x => x.id === id);
-  if (!p) return;
-  currentProduct = p;
-  document.getElementById("mcat").textContent = p.cat.toUpperCase();
-  document.getElementById("mname").textContent = p.name;
-  document.getElementById("mprice").innerHTML = `₹${p.price} <span>onwards</span>`;
-  document.getElementById("mdesc").textContent = p.desc;
+function addFromModal() {
+  if (!currentProduct) return;
+  const exists = cart.find(x => x.id === currentProduct.id);
+  if (exists) exists.qty++; else cart.push({...currentProduct, qty:1});
   
-  const mainImg = document.getElementById("mimg");
-  setImageSource(mainImg, p.imgs[0]);
-
-  const thumbs = document.getElementById("mthumbs");
-  thumbs.innerHTML = p.imgs.map(src => `<img class="thumb" src="${src}" onclick="setThumb(this)">`).join("");
-  thumbs.querySelectorAll("img").forEach(img => setImageSource(img, img.getAttribute('src')));
-
-  document.getElementById("mo").classList.add("open");
-  document.getElementById("modal").classList.add("open");
+  document.getElementById("cc").innerText = cart.reduce((s,i) => s + i.qty, 0);
+  showToast(currentProduct.name + " added! 🧶");
 }
 
-function setThumb(el) { document.getElementById("mimg").src = el.src; }
-function closeModal() { document.getElementById("mo").classList.remove("open"); document.getElementById("modal").classList.remove("open"); }
-
-// Cart logic
-function updateCount() {
-  document.getElementById("cc").textContent = cart.reduce((s,i) => s+i.qty, 0);
-  renderCart();
-}
-function addToCart(id) {
-  const p = products.find(x => x.id === id);
-  const ex = cart.find(x => x.id === id);
-  if (ex) ex.qty++; else cart.push({...p, qty:1});
-  updateCount();
-  showToast(p.name + " added! 🧶");
-}
-function addFromModal() { if(currentProduct) addToCart(currentProduct.id); }
-function renderCart() {
-  const c = document.getElementById("cart-items");
-  const f = document.getElementById("cart-foot");
-  if (!cart.length) {
-    c.innerHTML = '<p style="text-align:center; padding:20px;">Your cart is empty</p>';
-    f.style.display = "none"; return;
-  }
-  f.style.display = "block";
-  c.innerHTML = cart.map((item,i) => `
-    <div class="cart-item">
-      <img class="ci-img" src="${item.imgs[0]}" alt="${item.name}" style="width:50px; height:50px; object-fit:cover; border-radius:8px;">
-      <div class="ci-info">
-        <div class="ci-name" style="font-size:14px; font-weight:500;">${item.name}</div>
-        <div class="ci-price">₹${item.price}</div>
-      </div>
-    </div>`).join("");
-  document.getElementById("ct").textContent = "₹" + cart.reduce((s,i) => s+i.price*i.qty, 0);
-}
-function openCart() { renderCart(); document.getElementById("cart-overlay").classList.add("open"); document.getElementById("cart-drawer").classList.add("open"); }
-function closeCart() { document.getElementById("cart-overlay").classList.remove("open"); document.getElementById("cart-drawer").classList.remove("open"); }
-function showToast(msg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg; t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2000);
-}
-function checkout() {
-  const msg = encodeURIComponent(`Hi Mini Crochetter! 🧶\nI'd like to order items worth ₹${document.getElementById("ct").textContent}.\n\nPlease confirm availability.`);
+function orderViaWa() {
+  if (!currentProduct) return;
+  const msg = encodeURIComponent(`Hi Mini Crochetter! 🧶\nI'm interested in the ${currentProduct.name}.`);
   window.open(`https://wa.me/918886122232?text=${msg}`, "_blank");
 }
 
+function closeModal() {
+  document.getElementById("mo").classList.remove("open");
+  document.getElementById("modal").classList.remove("open");
+}
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.innerText = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2000);
+}
+
 // Initial render
-renderProducts("all");
+renderProducts('all');
 </script>
 </body>
 </html>
