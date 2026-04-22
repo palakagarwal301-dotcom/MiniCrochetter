@@ -10,7 +10,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
     <ul class="nav-links">
@@ -19,33 +18,41 @@
       <li><a href="workshops.html">Workshops</a></li>
       <li><a href="order.html" class="active">Order</a></li>
     </ul>
-    <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
+    <button class="cart-btn" onclick="window.location='shop.html'">🛍️ Shop</button>
   </nav>
 
-  <!-- ORDER HERO -->
   <section class="hero">
     <div class="hero-content">
       <h1>Order Your <em>Crochet Minis</em></h1>
-      <p>Custom orders always open. Every piece is handmade with love and ships pan‑India.</p>
+      <p>Custom orders are always open. Message us with your preferred design, colour, quantity, and delivery date.</p>
       <div class="hero-btns">
-        <a href="https://wa.me/919812345678" class="btn-p" target="_blank">Order via WhatsApp</a>
-        <a href="mailto:palakagarwal@example.com" class="btn-s" target="_blank">Email Us</a>
+        <a href="https://wa.me/918886122232?text=Hi%20Mini%20Crochetter!%20I%27d%20like%20to%20place%20an%20order." class="btn-p" target="_blank">Order via WhatsApp</a>
+        <a href="mailto:palakagarwal301@gmail.com" class="btn-s" target="_blank">Email Us</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>…same as index.html…</footer>
+  <footer>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-brand-name">🧶 Mini Crochetter</div>
+        <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan-India.</p>
+        <div class="foot-soc">
+          <a href="https://www.instagram.com/mini.crochetter/" target="_blank">📸</a>
+          <a href="https://wa.me/918886122232" target="_blank">💬</a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Contact</h4>
+        <a href="https://www.instagram.com/mini.crochetter/" target="_blank">DM on Instagram</a>
+        <a href="https://wa.me/918886122232" target="_blank">WhatsApp Us</a>
+        <a href="mailto:palakagarwal301@gmail.com">palakagarwal301@gmail.com</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div class="foot-copy">© 2025 Mini Crochetter · Handmade with love in India 🇮🇳</div>
+      <div class="foot-copy">All pieces made to order · Ships pan-India</div>
+    </div>
+  </footer>
 
-  <!-- CART + TOAST -->
-  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-  <div class="cart-drawer" id="cart-drawer">…</div>
-  <div class="toast" id="toast"></div>
-
-  <script>
-    function openCart(){document.getElementById("cart-overlay").classList.add("open");document.getElementById("cart-drawer").classList.add("open");}
-    function closeCart(){document.getElementById("cart-overlay").classList.remove("open");document.getElementById("cart-drawer").classList.remove("open");}
-    function checkout(){window.open("https://wa.me/919812345678","_blank");}
-  </script>
 </body>
 </html>
