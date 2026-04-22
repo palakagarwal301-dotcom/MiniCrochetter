@@ -73,7 +73,45 @@
 
 <div class="toast" id="toast"></div>
 <script src="products.js"></script>
+<!-- Load product data first -->
+<script src="products.js"></script>
+
+<!-- Then your main shop logic -->
 <script>
+let cart = [];
+let currentProduct = null;
+
+// --- Rendering ---
+function setImg(img, src) { img.src = "images/" + src; }
+
+function renderProducts(filter) {
+  const g = document.getElementById("pg");
+  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+  g.innerHTML = filtered.map(p => `
+    <div class="product-card" onclick="openProduct(${p.id})">
+      <div class="product-img-wrap"><img src="images/${p.imgs[0]}" alt="${p.name}"></div>
+      <div class="product-info">
+        <div class="product-cat">${p.cat.toUpperCase()}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">₹${p.price}</div>
+      </div>
+    </div>`).join("");
+}
+
+// --- Modal ---
+function openProduct(id) {
+  const p = products.find(x => Number(x.id) === Number(id));
+  if(!p) return;
+  currentProduct = p;
+  document.getElementById("mcat").innerText = p.cat.toUpperCase();
+  document.getElementById("mname").innerText = p.name;
+  document.getElementById("mprice").innerText = "₹" + p.price;
+  document.getElementById("mdesc").innerText = p.desc;
+  setImg(document.getElementById("mimg"), p.imgs[0]);
+  document.getElementById("mo").classList.add("open");
+  document.getElementById("modal").classList.add("open");
+}
+
 function closeModal() {
   document.getElementById("mo").classList.remove("open");
   document.getElementById("modal").classList.remove("open");
