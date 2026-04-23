@@ -1,32 +1,38 @@
 body{
   margin:0;
-  font-family:Segoe UI;
-  background:#fdf6ee;
-}
-
-.nav{
-  display:flex;
-  justify-content:space-between;
-  padding:12px;
-  background:white;
+  font-family:Arial;
+  background:#faf6f2;
 }
 
 .header{
   text-align:center;
   padding:15px;
-  font-weight:bold;
   background:white;
-  margin-bottom:10px;
+  font-weight:bold;
 }
 
-.container{
+.topbar{
+  display:flex;
+  justify-content:space-between;
   padding:10px;
+  background:#fff;
+  position:sticky;
+  top:0;
 }
 
-.products{
+.tabs button{
+  margin:3px;
+  padding:8px 12px;
+  border:none;
+  background:#eee;
+  border-radius:20px;
+}
+
+.grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:10px;
+  padding:10px;
 }
 
 .card{
@@ -38,30 +44,26 @@ body{
 
 .card img{
   width:100%;
-  aspect-ratio:1/1;
+  height:140px;
   object-fit:cover;
   border-radius:8px;
 }
 
 .card button{
+  margin-top:5px;
+  padding:6px;
   width:100%;
-  padding:12px;
-  margin-top:8px;
-  background:#712b13;
+  background:black;
   color:white;
   border:none;
-  border-radius:8px;
-  font-size:14px;
+  border-radius:6px;
 }
 
-.cart-bar{
+.footer{
   position:fixed;
   bottom:0;
-  left:0;
-  right:0;
+  width:100%;
   background:white;
-  display:flex;
-  justify-content:space-between;
-  padding:12px;
-  border-top:1px solid #ddd;
+  padding:10px;
+  text-align:center;
 }
