@@ -4,182 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mini Crochetter Shop</title>
-
-<style>
-body{
-  margin:0;
-  font-family:Segoe UI;
-  background:#fdf6ee;
-}
-
-header{
-  text-align:center;
-  padding:15px;
-  background:white;
-  font-weight:bold;
-}
-
-.container{
-  padding:10px;
-}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-@media(max-width:600px){
-  .products{
-    grid-template-columns:1fr;
-  }
-}
-
-.card{
-  background:white;
-  padding:10px;
-  border-radius:10px;
-  text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.08);
-}
-
-.card img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  border-radius:8px;
-}
-
-.card button{
-  width:100%;
-  padding:12px;
-  margin-top:8px;
-  background:#712b13;
-  color:white;
-  border:none;
-  border-radius:8px;
-  font-size:14px;
-  font-weight:600;
-}
-
-.cart-bar{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  display:flex;
-  justify-content:space-between;
-  padding:12px;
-  border-top:1px solid #ddd;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>🧶 Mini Crochetter Shop</header>
+<header style="text-align:center;padding:15px;background:#fff;font-weight:bold;">
+🧶 Mini Crochetter Shop
+</header>
 
-<p id="status" style="text-align:center"></p>
-
-<div class="container">
-  <div id="products" class="products"></div>
+<div class="tabs" style="text-align:center;margin:10px;">
+  <button onclick="filter('all')">All</button>
+  <button onclick="filter('booties')">Booties</button>
+  <button onclick="filter('plushies')">Plushies</button>
+  <button onclick="filter('coasters')">Coasters</button>
 </div>
 
-<div class="cart-bar">
-  <div>Total: ₹<span id="total">0</span></div>
-  <button onclick="checkout()">Order</button>
+<div id="products" style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;padding:10px;"></div>
+
+<div style="position:fixed;bottom:0;left:0;right:0;background:#fff;padding:10px;text-align:center;">
+Total: ₹<span id="total">0</span>
+<button onclick="checkout()">Order</button>
 </div>
 
 <script src="products.js"></script>
 
 <script>
-const products = [
-  {
-    id:1,
-    name:"Pink Booties",
-    price:649,
-    cat:"booties",
-    img:"booties1.jpg"
-  },
-  {
-    id:2,
-    name:"Classic Booties",
-    price:549,
-    cat:"booties",
-    img:"booties2.jpg"
-  },
-  {
-    id:3,
-    name:"Winnie Plushie",
-    price:1499,
-    cat:"plushies",
-    img:"pooh.jpg"
-  },
-  {
-    id:4,
-    name:"Minion Plushie",
-    price:1299,
-    cat:"plushies",
-    img:"minion.jpg"
-  },
-  {
-    id:5,
-    name:"Sunflower Coaster",
-    price:349,
-    cat:"coasters",
-    img:"sunflower.jpg"
-  }
-];
-
 let cart = [];
+let currentFilter = "all";
 
-function render(filter="all") {
-  const box = document.getElementById("pg");
-  if (!box) return;
+function render(){
+  const box = document.getElementById("products");
+  box.innerHTML = "";
 
-  const list = filter==="all"
+  let list = currentFilter === "all"
     ? products
-    : products.filter(p=>p.cat===filter);
+    : products.filter(p => p.cat === currentFilter);
 
-  box.innerHTML = list.map(p=>`
-    <div class="product-card">
-      <img src="${p.img}" 
-           onerror="this.style.display='none'">
-      <h3>${p.name}</h3>
-      <p>₹${p.price}</p>
-      <button onclick="add(${p.id})">Add to Cart</button>
-    </div>
-  `).join("");
+  list.forEach(p => {
+    box.innerHTML += `
+      <div style="width:160px;border:1px solid #ddd;padding:10px;border-radius:10px;text-align:center;">
+        <img src="${p.img}" style="width:100%;height:140px;object-fit:cover;border-radius:8px;">
+        <h4>${p.name}</h4>
+        <p>₹${p.price}</p>
+        <button onclick="add(${p.id})">Add</button>
+      </div>
+    `;
+  });
 }
 
 function add(id){
-  const item = products.find(p=>p.id===id);
+  const item = products.find(p => p.id === id);
   cart.push(item);
-  alert(item.name + " added");
+  update();
 }
 
-function filterP(cat, btn){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  btn.classList.add("active");
-  render(cat);
+function update(){
+  document.getElementById("total").innerText =
+    cart.reduce((s,i)=>s+i.price,0);
+}
+
+function filter(cat){
+  currentFilter = cat;
+  render();
 }
 
 function checkout(){
-  if(cart.length===0){
+  if(cart.length === 0){
     alert("Cart empty");
     return;
   }
 
   let msg = "Order:%0A";
-  cart.forEach(i=>{
+  cart.forEach(i => {
     msg += i.name + " - ₹" + i.price + "%0A";
   });
 
-  window.open("https://wa.me/919999999999?text="+encodeURIComponent(msg));
+  window.open("https://wa.me/919999999999?text=" + encodeURIComponent(msg));
 }
 
-document.addEventListener("DOMContentLoaded", ()=>render("all"));
+render();
 </script>
+
 </body>
 </html>
