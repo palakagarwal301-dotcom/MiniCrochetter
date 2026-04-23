@@ -39,15 +39,47 @@ button{
   justify-content:space-between;
   padding:5px 0;
 }
+
+/* navbar (consistent with other pages) */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px 20px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar .logo {
+  font-weight: bold;
+}
+
+.navbar .links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: black;
+}
 </style>
 
 </head>
 
 <body>
 
-<header>
-  <h1>Place Order 🧶</h1>
-</header>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">Mini Crochetter 🧶</div>
+
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="cart.html">Cart 🛒 (<span id="cartCount">0</span>)</a>
+  </div>
+</nav>
 
 <div class="box">
 
@@ -72,20 +104,28 @@ button{
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function load(){
+
   let box = document.getElementById("items");
   box.innerHTML = "";
+
+  if(cart.length === 0){
+    box.innerHTML = "<p>Cart is empty</p>";
+    document.getElementById("total").innerText = "";
+    return;
+  }
 
   let total = 0;
 
   cart.forEach(i=>{
-    total += i.price * i.qty;
+    let qty = i.qty || 1;
+    total += i.price * qty;
 
     let div = document.createElement("div");
     div.className = "item";
 
     div.innerHTML = `
-      <span>${i.name} x ${i.qty}</span>
-      <span>₹${i.price * i.qty}</span>
+      <span>${i.name} x ${qty}</span>
+      <span>₹${i.price * qty}</span>
     `;
 
     box.appendChild(div);
@@ -95,6 +135,11 @@ function load(){
 }
 
 function placeOrder(){
+
+  if(cart.length === 0){
+    alert("Cart is empty");
+    return;
+  }
 
   let name = document.getElementById("name").value;
   let phone = document.getElementById("phone").value;
@@ -111,16 +156,29 @@ function placeOrder(){
   msg += "Phone: " + phone + "%0A";
   msg += "Address: " + address + "%0A%0A";
 
-  cart.forEach(i=>{
-    msg += i.name + " x " + i.qty + " = ₹" + (i.price*i.qty) + "%0A";
-  });
+  let total = 0;
 
-  let total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  cart.forEach(i=>{
+    let qty = i.qty || 1;
+    msg += i.name + " x " + qty + " = ₹" + (i.price * qty) + "%0A";
+    total += i.price * qty;
+  });
 
   msg += "%0ATotal: ₹" + total;
 
   window.open("https://wa.me/918886122232?text=" + msg);
 }
+
+/* CART COUNT */
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let count = cart.reduce((s,i)=>s+(i.qty||1),0);
+
+  let el = document.getElementById("cartCount");
+  if(el) el.innerText = count;
+}
+
+updateCartCount();
 
 load();
 </script>
