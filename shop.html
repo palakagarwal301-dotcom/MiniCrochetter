@@ -151,7 +151,31 @@ button {
 
 <!-- LOAD PRODUCTS FIRST -->
 <script src="products.js"></script>
+</div> <!-- end of container -->
 
+<div class="cart">
+  ₹<span id="total">0</span>
+  <button onclick="checkout()">Order</button>
+</div>
+
+<!-- ✅ PUT POPUP HERE -->
+<div id="popup">
+  <div id="popup-box">
+    <span id="close-popup">&times;</span>
+
+    <img id="popup-img">
+
+    <h3 id="popup-name"></h3>
+    <p id="popup-desc"></p>
+    <p id="popup-price"></p>
+
+    <button id="popup-add">Add to Cart</button>
+  </div>
+</div>
+
+<!-- THEN YOUR SCRIPT -->
+<script src="products.js"></script>
+<script>
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 
