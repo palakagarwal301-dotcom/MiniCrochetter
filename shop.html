@@ -141,69 +141,46 @@ button {
 
 <script>
 
-/* PRODUCTS */
-const products = [
+document.addEventListener("DOMContentLoaded", function () {
 
+const products = [
   {id:1, name:"Daisy Flower", price:399, category:"flower", img:"daisy.png"},
   {id:2, name:"Sunflower", price:449, category:"flower", img:"sunflower.png"},
-  {id:3, name:"Daisy Variant", price:399, category:"flower", img:"daisy_flower.png"},
-  {id:4, name:"Sunflower Variant", price:449, category:"flower", img:"sunflower_flower.png"},
-
-  {id:5, name:"Bow Headband", price:199, category:"accessory", img:"bow_headband.png"},
-  {id:6, name:"Rakhi Bow", price:179, category:"accessory", img:"rakhi_bow.jpg"},
-  {id:7, name:"Rakhi Set", price:399, category:"accessory", img:"rakhis_trio.jpg"},
-
-  {id:8, name:"Mini Plushies", price:699, category:"plushie", img:"mini_plushies.png"},
-  {id:9, name:"Pooh Plushie", price:899, category:"plushie", img:"pooh.png"},
-  {id:10, name:"Minion Plushie", price:899, category:"plushie", img:"minion.png"},
-  {id:11, name:"Shark Plushie", price:899, category:"plushie", img:"shark_plushie.png"},
-  {id:12, name:"Santa Plushie", price:899, category:"plushie", img:"santa_plushie.jpg"},
-
-  {id:13, name:"Mandala Centre Mat", price:799, category:"decor", img:"mandala_centre_mat.jpg"},
-  {id:14, name:"Mandala Doily", price:699, category:"decor", img:"mandala_doily.jpg"},
-  {id:15, name:"Coasters Set", price:399, category:"decor", img:"coasters_mats.png"},
-  {id:16, name:"Leaf Coaster", price:249, category:"decor", img:"coaster_leaf_heart.jpg"},
-  {id:17, name:"Sunflower Coaster", price:249, category:"decor", img:"sunflower-coaster.png"},
-
-  {id:18, name:"Rose Drawstring Bag", price:1299, category:"bags", img:"bag_rose_drawstring.jpg"},
-  {id:19, name:"Sunflower Sling Bag", price:1499, category:"bags", img:"bag_sunflower_sling.jpg"},
-
-  {id:20, name:"Baby Booties Lace", price:399, category:"baby", img:"booties_lace_wood.jpg"},
-  {id:21, name:"Pink Booties", price:399, category:"baby", img:"booties_pink_basket.jpg"},
-
-  {id:22, name:"Custom Plushie", price:1299, category:"custom", img:"custom_plushie.jpg"}
-
+  {id:3, name:"Pooh Plushie", price:899, category:"plushie", img:"pooh.png"},
+  {id:4, name:"Minion Plushie", price:899, category:"plushie", img:"minion.png"}
 ];
 
-/* CART */
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function render(list){
   const container = document.getElementById("products");
+
+  if (!container) {
+    console.error("Products container not found");
+    return;
+  }
+
   container.innerHTML = "";
 
   list.forEach(p => {
-    container.innerHTML += `
-      <div class="card">
-        <img src="${p.img}" onclick="openPopup('${p.img}')">
-        <h4>${p.name}</h4>
-        <p>₹${p.price}</p>
-        <button onclick="addToCart(${p.id})">Add to Cart</button>
-      </div>
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <img src="${p.img}">
+      <h4>${p.name}</h4>
+      <p>₹${p.price}</p>
+      <button>Add to Cart</button>
     `;
+
+    card.querySelector("button").addEventListener("click", () => {
+      cart.push(p);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateTotal();
+    });
+
+    container.appendChild(card);
   });
-}
-
-function filter(category){
-  if(category === "all") return render(products);
-  render(products.filter(p => p.category === category));
-}
-
-function addToCart(id){
-  const item = products.find(p => p.id === id);
-  cart.push(item);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateTotal();
 }
 
 function updateTotal(){
@@ -211,29 +188,15 @@ function updateTotal(){
   document.getElementById("total").innerText = total;
 }
 
-/* POPUP */
-function openPopup(img){
-  document.getElementById("popup").style.display = "flex";
-  document.getElementById("popup-img").src = img;
+window.filter = function(category){
+  if(category === "all") render(products);
+  else render(products.filter(p => p.category === category));
 }
 
-document.getElementById("popup").onclick = function(){
-  this.style.display = "none";
-}
-
-/* CHECKOUT */
-function checkout(){
-  let text = "Order Details:%0A";
-  cart.forEach(item => {
-    text += `${item.name} - ₹${item.price}%0A`;
-  });
-
-  window.open(`https://wa.me/919830160265?text=${text}`, "_blank");
-}
-
-/* INIT */
 render(products);
 updateTotal();
+
+});
 
 </script>
 
