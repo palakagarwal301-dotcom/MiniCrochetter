@@ -6,97 +6,79 @@
 <title>Mini Crochetter Shop</title>
 
 <style>
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  background: #fdf6ee;
-}
+body { margin:0; font-family:Segoe UI; background:#fdf6ee; }
 
 header {
-  padding: 15px;
-  text-align: center;
-  background: white;
-  font-weight: bold;
-  font-size: 20px;
+  text-align:center;
+  padding:15px;
+  background:white;
+  font-weight:bold;
+  font-size:20px;
 }
 
-.container {
-  padding: 15px;
-}
+.container { padding:15px; }
 
-/* Categories */
 .categories {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  margin-bottom: 15px;
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  margin-bottom:15px;
 }
 
 .categories button {
-  padding: 8px 12px;
-  border: none;
-  background: #eee;
-  border-radius: 20px;
-  cursor: pointer;
+  padding:8px 12px;
+  border:none;
+  background:#eee;
+  border-radius:20px;
+  cursor:pointer;
 }
 
-/* Products */
 .products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
 }
 
 .card {
-  background: white;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  background:white;
+  padding:10px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
 .card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  cursor: pointer;
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
+  cursor:pointer;
 }
 
 button {
-  margin-top: 8px;
-  padding: 8px;
-  border: none;
-  background: #712b13;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-top:8px;
+  padding:8px;
+  border:none;
+  background:#712b13;
+  color:white;
+  border-radius:5px;
 }
 
-/* Cart */
 .cart {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: white;
-  padding: 10px;
-  border-top: 1px solid #ddd;
-}
-
-.checkout {
-  margin-top: 10px;
-  width: 100%;
-  background: green;
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:white;
+  padding:10px;
+  border-top:1px solid #ddd;
 }
 
 /* Popup */
 #popup {
   display:none;
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   background:rgba(0,0,0,0.8);
   justify-content:center;
   align-items:center;
@@ -104,7 +86,6 @@ button {
 
 #popup img {
   max-width:90%;
-  border-radius:10px;
 }
 </style>
 </head>
@@ -121,48 +102,34 @@ button {
   <button onclick="filter('plushie')">Plushies</button>
   <button onclick="filter('decor')">Decor</button>
   <button onclick="filter('bags')">Bags</button>
-  <button onclick="filter('baby')">Baby</button>
-  <button onclick="filter('accessory')">Accessories</button>
 </div>
 
-<div class="products" id="products"></div>
+<div id="products" class="products"></div>
 
 </div>
 
 <div class="cart">
-  Cart Total: ₹<span id="total">0</span>
-  <button class="checkout" onclick="checkout()">Order on WhatsApp</button>
+  ₹<span id="total">0</span>
+  <button onclick="checkout()">Order</button>
 </div>
 
-<!-- IMAGE POPUP -->
 <div id="popup">
   <img id="popup-img">
 </div>
 
+<!-- IMPORTANT: LOAD PRODUCTS FIRST -->
+<script src="products.js"></script>
+
 <script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-const products = [
-  {id:1, name:"Daisy Flower", price:399, category:"flower", img:"daisy.png"},
-  {id:2, name:"Sunflower", price:449, category:"flower", img:"sunflower.png"},
-  {id:3, name:"Pooh Plushie", price:899, category:"plushie", img:"pooh.png"},
-  {id:4, name:"Minion Plushie", price:899, category:"plushie", img:"minion.png"}
-];
+document.addEventListener("DOMContentLoaded", function(){
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function render(list){
   const container = document.getElementById("products");
-
-  if (!container) {
-    console.error("Products container not found");
-    return;
-  }
-
   container.innerHTML = "";
 
-  list.forEach(p => {
+  list.forEach(p=>{
     const card = document.createElement("div");
     card.className = "card";
 
@@ -170,34 +137,48 @@ function render(list){
       <img src="${p.img}">
       <h4>${p.name}</h4>
       <p>₹${p.price}</p>
-      <button>Add to Cart</button>
+      <button>Add</button>
     `;
 
-    card.querySelector("button").addEventListener("click", () => {
+    card.querySelector("img").onclick = ()=>{
+      document.getElementById("popup").style.display="flex";
+      document.getElementById("popup-img").src = p.img;
+    };
+
+    card.querySelector("button").onclick = ()=>{
       cart.push(p);
       localStorage.setItem("cart", JSON.stringify(cart));
       updateTotal();
-    });
+    };
 
     container.appendChild(card);
   });
 }
 
 function updateTotal(){
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const total = cart.reduce((s,i)=>s+i.price,0);
   document.getElementById("total").innerText = total;
 }
 
-window.filter = function(category){
-  if(category === "all") render(products);
-  else render(products.filter(p => p.category === category));
+window.filter = function(cat){
+  if(cat==="all") render(products);
+  else render(products.filter(p=>p.category===cat));
+}
+
+window.checkout = function(){
+  let msg="Order:%0A";
+  cart.forEach(i=> msg += i.name+" ₹"+i.price+"%0A");
+  window.open("https://wa.me/919830160265?text="+msg);
 }
 
 render(products);
 updateTotal();
 
-});
+document.getElementById("popup").onclick = ()=>{
+  document.getElementById("popup").style.display="none";
+};
 
+});
 </script>
 
 </body>
