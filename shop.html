@@ -3,179 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini Crochetter</title>
+<title>Shop - Mini Crochetter</title>
 
-<style>
-body { margin:0; font-family:Segoe UI; background:#fdf6ee; }
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="card.css">
 
-header {
-  text-align:center;
-  padding:15px;
-  background:white;
-  font-weight:bold;
-  font-size:20px;
-}
-
-header div {
-  font-size:12px;
-  color:#555;
-}
-
-.container { padding:15px; }
-
-.categories {
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  margin-bottom:15px;
-}
-
-.categories button {
-  padding:8px 12px;
-  border:none;
-  background:#eee;
-  border-radius:20px;
-}
-
-.products {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:15px;
-}
-
-.card {
-  background:white;
-  padding:10px;
-  border-radius:10px;
-  text-align:center;
-}
-
-.card img {
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  object-position:center;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-.card img:hover {
-  transform: scale(1.05);
-  transition: 0.3s;
-}
-
-.card p {
-  font-size:13px;
-  color:#555;
-}
-
-/* Popup */
-#popup {
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.7);
-  justify-content:center;
-  align-items:center;
-}
-
-#popup-box {
-  background:white;
-  padding:15px;
-  border-radius:10px;
-  width:90%;
-  max-width:350px;
-  text-align:center;
-  position:relative;
-}
-
-#popup-box img {
-  width:100%;
-  border-radius:10px;
-}
-
-#close-popup {
-  position:absolute;
-  top:10px;
-  right:15px;
-  font-size:20px;
-  cursor:pointer;
-}
-/* Enhance popup content */
-#popup-name {
-  margin:10px 0 5px;
-}
-
-#popup-desc {
-  font-size:13px;
-  color:#555;
-  margin-bottom:5px;
-}
-
-#popup-price {
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-#popup-add {
-  width:100%;
-  padding:10px;
-  background:#712b13;
-  color:white;
-  border:none;
-  border-radius:5px;
-}
-
-/* smooth animation */
-#popup-box {
-  animation: popupFade 0.3s ease;
-}
-
-@keyframes popupFade {
-  from {
-    transform: scale(0.9);
-    opacity:0;
-  }
-  to {
-    transform: scale(1);
-    opacity:1;
-  }
-}
- 
-/* Cart */
-.cart {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:white;
-  padding:10px;
-  border-top:1px solid #ddd;
-}
-</style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="logo">Mini Crochetter 🧶</div>
-  <div class="sub">Handmade with love • Pan India</div>
+<header>
+  <h1>Shop 🧶</h1>
 </header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="cart.html">Cart 🛒</a>
+</nav>
 
 <div class="container">
 
-<div class="categories">
-  <button onclick="filter('all')">All</button>
-  <button onclick="filter('flower')">Flowers</button>
-  <button onclick="filter('plushie')">Plushies</button>
-  <button onclick="filter('decor')">Decor</button>
-  <button onclick="filter('bags')">Bags</button>
+  <div class="categories">
+    <button onclick="filter('all')">All</button>
+    <button onclick="filter('flower')">Flowers</button>
+    <button onclick="filter('plushie')">Plushies</button>
+    <button onclick="filter('decor')">Decor</button>
+    <button onclick="filter('bags')">Bags</button>
+  </div>
+
+  <div id="products" class="products"></div>
+
 </div>
 
-<div id="products" class="products"></div>
-
-</div>
-
+<!-- CART BAR -->
 <div class="cart">
   ₹<span id="total">0</span>
   <button onclick="checkout()">Order</button>
@@ -196,10 +57,16 @@ header div {
 <script src="products.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+/* ADD TO CART (single function used everywhere) */
+function addToCart(p){
+  cart.push(p);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateTotal();
+}
+
+/* RENDER PRODUCTS */
 function render(list){
   const container = document.getElementById("products");
   container.innerHTML = "";
@@ -218,40 +85,39 @@ function render(list){
 
     card.querySelector("img").onclick = ()=>{
       document.getElementById("popup").style.display = "flex";
+
       document.getElementById("popup-img").src = p.img;
       document.getElementById("popup-name").innerText = p.name;
       document.getElementById("popup-desc").innerText = p.desc;
       document.getElementById("popup-price").innerText = "₹" + p.price;
 
       document.getElementById("popup-add").onclick = ()=>{
-        cart.push(p);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateTotal();
+        addToCart(p);
       };
     };
 
     card.querySelector("button").onclick = ()=>{
-      cart.push(p);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateTotal();
+      addToCart(p);
     };
 
     container.appendChild(card);
   });
 }
 
+/* TOTAL */
 function updateTotal(){
   const total = cart.reduce((s,i)=>s+i.price,0);
   document.getElementById("total").innerText = total;
 }
 
-window.filter = function(cat){
+/* FILTER */
+function filter(cat){
   if(cat==="all") render(products);
   else render(products.filter(p=>p.category===cat));
 }
 
-window.checkout = function(){
-
+/* CHECKOUT */
+function checkout(){
   if(cart.length === 0){
     alert("Your cart is empty");
     return;
@@ -259,29 +125,32 @@ window.checkout = function(){
 
   let msg="🧶 Mini Crochetter Order:%0A";
 
-  cart.forEach(i=> msg += i.name+" ₹"+i.price+"%0A");
+  cart.forEach(i=>{
+    msg += i.name + " ₹" + i.price + "%0A";
+  });
 
   const total = cart.reduce((s,i)=>s+i.price,0);
 
-  msg += "%0ATotal: ₹"+total;
+  msg += "%0ATotal: ₹" + total;
   msg += "%0A📦 Shipping included";
-  msg += "%0A💳 UPI: 8886122232@yapl";
 
   window.open("https://wa.me/918886122232?text="+msg);
 }
 
+/* POPUP CLOSE */
 document.getElementById("close-popup").onclick = ()=>{
   document.getElementById("popup").style.display = "none";
 };
+
 document.getElementById("popup").onclick = (e)=>{
   if(e.target.id === "popup"){
     document.getElementById("popup").style.display = "none";
   }
 };
+
+/* INIT */
 render(products);
 updateTotal();
-
-});
 </script>
 
 </body>
