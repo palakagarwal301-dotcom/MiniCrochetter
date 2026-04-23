@@ -55,6 +55,12 @@ header {
   cursor:pointer;
 }
 
+.card p {
+  margin:4px 0;
+  font-size:13px;
+  color:#555;
+}
+
 button {
   margin-top:8px;
   padding:8px;
@@ -86,6 +92,7 @@ button {
 
 #popup img {
   max-width:90%;
+  border-radius:10px;
 }
 </style>
 </head>
@@ -117,7 +124,6 @@ button {
   <img id="popup-img">
 </div>
 
-<!-- IMPORTANT: LOAD PRODUCTS FIRST -->
 <script src="products.js"></script>
 
 <script>
@@ -136,8 +142,9 @@ function render(list){
     card.innerHTML = `
       <img src="${p.img}">
       <h4>${p.name}</h4>
-      <p>₹${p.price}</p>
-      <button>Add</button>
+      <p>${p.desc}</p>
+      <p><b>₹${p.price}</b></p>
+      <button>Add to Cart</button>
     `;
 
     card.querySelector("img").onclick = ()=>{
