@@ -8,7 +8,8 @@
 <title>Shop — Mini Crochetter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
@@ -293,21 +294,59 @@ function rmItem(i) { cart.splice(i,1); updateCount(); }
 function openCart() { renderCart(); document.getElementById("cart-overlay").classList.add("open"); document.getElementById("cart-drawer").classList.add("open"); }
 function closeCart() { document.getElementById("cart-overlay").classList.remove("open"); document.getElementById("cart-drawer").classList.remove("open"); }
 
+// =====================================================================
+// PAYMENT GATEWAY CONFIG
+// To enable Razorpay (UPI + cards + netbanking), sign up at razorpay.com,
+// go to Settings → API Keys, and paste your Key ID below (starts with rzp_).
+// Until then, the cart will use direct UPI deep-link to 8886122232@yapl.
+// =====================================================================
+const RAZORPAY_KEY_ID = ""; // <-- paste your Razorpay Key ID here, e.g. "rzp_live_XXXXXXXX"
+const UPI_ID = "8886122232@yapl";
+const MERCHANT_NAME = "Mini Crochetter";
+
 function payUPI() {
   if (!cart.length) return;
   const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
-  const note = encodeURIComponent("Mini Crochetter Order");
-  const upiUrl = `upi://pay?pa=8886122232@yapl&pn=Mini%20Crochetter&am=${total}&cu=INR&tn=${note}`;
-  // Try to open UPI app; if it fails (desktop), copy UPI ID and show instructions
+  const itemSummary = cart.map(i => `${i.name} x${i.qty}`).join(", ");
+
+  // Razorpay path (UPI + cards + netbanking + wallets)
+  if (RAZORPAY_KEY_ID && window.Razorpay) {
+    const rzp = new Razorpay({
+      key: RAZORPAY_KEY_ID,
+      amount: total * 100,
+      currency: "INR",
+      name: MERCHANT_NAME,
+      description: itemSummary.slice(0, 100),
+      image: "https://minicrochetter.vercel.app/favicon.png",
+      handler: function (response) {
+        alert("✅ Payment successful!\n\nPayment ID: " + response.razorpay_payment_id + "\n\nWe will WhatsApp you shortly to confirm shipping details.");
+        const waMsg = encodeURIComponent(`Hi Mini Crochetter! 🧶\n\nI just paid ₹${total} via Razorpay.\nPayment ID: ${response.razorpay_payment_id}\n\nOrder: ${itemSummary}\n\nPlease confirm shipping. Thank you!`);
+        window.open(`https://wa.me/918886122232?text=${waMsg}`, "_blank");
+        cart = []; updateCount(); renderCart();
+      },
+      prefill: { contact: "", email: "" },
+      theme: { color: "#712b13" },
+      modal: { ondismiss: function() { /* user closed */ } }
+    });
+    rzp.open();
+    return;
+  }
+
+  // Fallback: direct UPI deep link (works on mobile UPI apps)
+  const note = encodeURIComponent(MERCHANT_NAME + " Order");
+  const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${total}&cu=INR&tn=${note}`;
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
   if (isMobile) {
     window.location.href = upiUrl;
+    setTimeout(() => {
+      // If still on page after 2s, the UPI app didn't open — show fallback
+      alert(`If your UPI app didn't open, please pay manually:\n\nUPI ID: ${UPI_ID}\nAmount: ₹${total}\n\nThen WhatsApp us a screenshot.`);
+    }, 2500);
   } else {
-    navigator.clipboard.writeText("8886122232@yapl").then(() => {
-      alert(`UPI ID copied to clipboard!\n\n8886122232@yapl\n\nAmount: ₹${total}\n\nOpen any UPI app (PhonePe / GPay / Paytm) on your phone and pay to this UPI ID.`);
-    }).catch(() => {
-      alert(`Pay via UPI to:\n\n8886122232@yapl\n\nAmount: ₹${total}\n\nOpen PhonePe / GPay / Paytm and send to this UPI ID.`);
-    });
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(UPI_ID).catch(() => {});
+    }
+    alert(`Pay ₹${total} to UPI ID:\n\n${UPI_ID}\n(copied to clipboard)\n\nOpen PhonePe / GPay / Paytm on your phone and send to this UPI ID, then WhatsApp us a screenshot.`);
   }
 }
 
