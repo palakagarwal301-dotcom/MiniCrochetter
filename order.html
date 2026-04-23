@@ -3,27 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order</title>
+<title>Place Order</title>
+
 <link rel="stylesheet" href="style.css">
+
+<style>
+.box{
+  max-width:500px;
+  margin:20px auto;
+  background:white;
+  padding:15px;
+  border-radius:10px;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:5px;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  background:#712b13;
+  color:white;
+  border:none;
+  border-radius:5px;
+  margin-top:10px;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  padding:5px 0;
+}
+</style>
+
 </head>
 
 <body>
 
-<header><h1>Place Your Order 🧶</h1></header>
+<header>
+  <h1>Place Order 🧶</h1>
+</header>
 
-<section class="container">
+<div class="box">
 
-  <p>To place an order, contact us on:</p>
+  <h3>Your Items</h3>
+  <div id="items"></div>
 
-  <a class="btn" href="https://wa.me/918886122232">📲 WhatsApp Order</a>
+  <h3 id="total"></h3>
 
-  <p>💳 UPI: 8886122232@yapl</p>
+  <hr>
 
-  <p>📦 Shipping across India</p>
-  <p>⏳ Processing time: 5–7 days</p>
-  <p>💸 No returns / refunds</p>
+  <h3>Shipping Details</h3>
 
-</section>
+  <input id="name" placeholder="Your Name">
+  <input id="phone" placeholder="Phone Number">
+  <input id="address" placeholder="Full Address">
+
+  <button onclick="placeOrder()">Place Order on WhatsApp</button>
+
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function load(){
+  let box = document.getElementById("items");
+  box.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach(i=>{
+    total += i.price * i.qty;
+
+    let div = document.createElement("div");
+    div.className = "item";
+
+    div.innerHTML = `
+      <span>${i.name} x ${i.qty}</span>
+      <span>₹${i.price * i.qty}</span>
+    `;
+
+    box.appendChild(div);
+  });
+
+  document.getElementById("total").innerText = "Total: ₹" + total;
+}
+
+function placeOrder(){
+
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+
+  if(!name || !phone || !address){
+    alert("Please fill all details");
+    return;
+  }
+
+  let msg = "🧶 NEW ORDER%0A%0A";
+
+  msg += "Name: " + name + "%0A";
+  msg += "Phone: " + phone + "%0A";
+  msg += "Address: " + address + "%0A%0A";
+
+  cart.forEach(i=>{
+    msg += i.name + " x " + i.qty + " = ₹" + (i.price*i.qty) + "%0A";
+  });
+
+  let total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+
+  msg += "%0ATotal: ₹" + total;
+
+  window.open("https://wa.me/918886122232?text=" + msg);
+}
+
+load();
+</script>
 
 </body>
 </html>
