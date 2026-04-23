@@ -62,3 +62,15 @@ nav{
   padding:12px;
   border-top:1px solid #ddd;
 }
+.card button{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  padding:14px;
+  background:#712b13;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:600;
+}
