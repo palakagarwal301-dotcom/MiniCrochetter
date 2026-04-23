@@ -200,6 +200,22 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
+<script>
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+  let count = cart.reduce((sum,item)=>{
+    return sum + (item.qty || 1);
+  },0);
 
+  let el = document.getElementById("cartCount");
+  if(el){
+    el.innerText = count;
+  }
+}
+
+updateCartCount();
+window.addEventListener("storage", updateCartCount);
+</script>
 </body>
 </html>
