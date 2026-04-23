@@ -183,7 +183,31 @@ if(typeof products === "undefined"){
   document.getElementById("products").innerHTML = "⚠️ Products not loading";
   return;
 }
+document.addEventListener("DOMContentLoaded", function(){
 
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function render(list){
+    // your product rendering code
+  }
+
+  function updateTotal(){
+    // your total logic
+  }
+
+  // ✅ ADD IT HERE (outside render, but inside DOMContentLoaded)
+  document.getElementById("close-popup").onclick = ()=>{
+    document.getElementById("popup").style.display = "none";
+  };
+
+  // existing functions
+  window.filter = function(cat){ ... }
+  window.checkout = function(){ ... }
+
+  render(products);
+  updateTotal();
+
+});
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function render(list){
