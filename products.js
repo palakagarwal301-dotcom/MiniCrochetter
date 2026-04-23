@@ -1,19 +1,39 @@
-// products.js
 const products = [
-  {id:1,cat:"booties",name:"Pink Basket Booties",price:450,desc:"Soft handmade crochet booties.",imgs:["booties_pink_basket.jpg"]},
-  {id:2,cat:"booties",name:"Lace Wood Booties",price:500,desc:"Elegant lace crochet booties.",imgs:["booties_lace_wood.jpg"]},
-  {id:3,cat:"bags",name:"Rose Drawstring Bag",price:950,desc:"Crochet drawstring bag with rose motif.",imgs:["bag_rose_drawstring.jpg"]},
-  {id:4,cat:"bags",name:"Sunflower Sling Bag",price:1200,desc:"Crochet sling bag with sunflower design.",imgs:["bag_sunflower_sling.jpg"]},
-  {id:5,cat:"plushies",name:"Custom Plushie",price:1500,desc:"Handmade plushie customized to your request.",imgs:["custom_plushie.jpg"]},
-  {id:6,cat:"plushies",name:"Pooh Plushie",price:1400,desc:"Crochet plushie inspired by Pooh.",imgs:["pooh.png"]},
-  {id:7,cat:"plushies",name:"Shark Plushie",price:1400,desc:"Crochet shark plushie.",imgs:["shark_plushie.png"]},
-  {id:8,cat:"plushies",name:"Santa Plushie",price:1400,desc:"Festive crochet Santa plushie.",imgs:["santa_plushie.jpg"]},
-  {id:9,cat:"coasters",name:"Leaf Heart Coaster",price:250,desc:"Crochet coaster shaped like a leaf heart.",imgs:["coaster_leaf_heart.jpg"]},
-  {id:10,cat:"coasters",name:"Coasters & Mats Set",price:600,desc:"Handmade crochet coasters and mats.",imgs:["coasters_mats.png"]},
-  {id:11,cat:"flowers",name:"Sunflower",price:300,desc:"Crochet sunflower decoration.",imgs:["sunflower.png"]},
-  {id:12,cat:"flowers",name:"Daisy Flower",price:300,desc:"Crochet daisy flower decoration.",imgs:["daisy_flower.png"]},
-  {id:13,cat:"accessories",name:"Bow Headband",price:350,desc:"Crochet headband with bow.",imgs:["bow_headband.png"]},
-  {id:14,cat:"rakhis",name:"Rakhi Trio",price:400,desc:"Set of three handmade crochet rakhis.",imgs:["rakhis_trio.jpg"]},
-  {id:15,cat:"mandala",name:"Mandala Doily",price:700,desc:"Crochet mandala doily centerpiece.",imgs:["mandala_doily.jpg"]},
-  {id:16,cat:"mandala",name:"Mandala Centre Mat",price:800,desc:"Crochet mandala centre mat.",imgs:["mandala_centre_mat.jpg"]}
+
+  // 🌼 Flowers
+  {id:1, name:"Daisy Flower", price:349, category:"flower", img:"daisy.png"},
+  {id:2, name:"Sunflower", price:399, category:"flower", img:"sunflower.png"},
+  {id:3, name:"Daisy Variant", price:349, category:"flower", img:"daisy_flower.png"},
+  {id:4, name:"Sunflower Variant", price:399, category:"flower", img:"sunflower_flower.png"},
+
+  // 🎀 Accessories
+  {id:5, name:"Bow Headband", price:199, category:"accessory", img:"bow_headband.png"},
+  {id:6, name:"Rakhi Bow", price:149, category:"accessory", img:"rakhi_bow.jpg"},
+  {id:7, name:"Rakhi Set", price:299, category:"accessory", img:"rakhis_trio.jpg"},
+
+  // 🧸 Plushies
+  {id:8, name:"Mini Plushies", price:599, category:"plushie", img:"mini_plushies.png"},
+  {id:9, name:"Pooh Plushie", price:899, category:"plushie", img:"pooh.png"},
+  {id:10, name:"Minion Plushie", price:899, category:"plushie", img:"minion.png"},
+  {id:11, name:"Shark Plushie", price:899, category:"plushie", img:"shark_plushie.png"},
+  {id:12, name:"Santa Plushie", price:899, category:"plushie", img:"santa_plushie.jpg"},
+
+  // 🧶 Decor
+  {id:13, name:"Mandala Centre Mat", price:799, category:"decor", img:"mandala_centre_mat.jpg"},
+  {id:14, name:"Mandala Doily", price:699, category:"decor", img:"mandala_doily.jpg"},
+  {id:15, name:"Coasters Set", price:349, category:"decor", img:"coasters_mats.png"},
+  {id:16, name:"Leaf Coaster", price:199, category:"decor", img:"coaster_leaf_heart.jpg"},
+  {id:17, name:"Sunflower Coaster", price:199, category:"decor", img:"sunflower-coaster.png"},
+
+  // 👜 Bags
+  {id:18, name:"Rose Drawstring Bag", price:1199, category:"bags", img:"bag_rose_drawstring.jpg"},
+  {id:19, name:"Sunflower Sling Bag", price:1399, category:"bags", img:"bag_sunflower_sling.jpg"},
+
+  // 👶 Baby
+  {id:20, name:"Baby Booties Lace", price:349, category:"baby", img:"booties_lace_wood.jpg"},
+  {id:21, name:"Pink Booties", price:349, category:"baby", img:"booties_pink_basket.jpg"},
+
+  // 🎁 Custom
+  {id:22, name:"Custom Plushie", price:1299, category:"custom", img:"custom_plushie.jpg"}
+
 ];
