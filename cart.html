@@ -1,67 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Cart</title>
-
-<link rel="stylesheet" href="style.css">
-
-<style>
-.cart-item{
-  background:white;
-  margin:10px;
-  padding:10px;
-  border-radius:10px;
-  display:flex;
-  justify-content:space-between;
-}
-
-button{
-  background:#712b13;
-  color:white;
-  border:none;
-  padding:5px 10px;
-  border-radius:5px;
-}
-</style>
-
-</head>
-
-<body>
-
-<header>
-  <h1>Your Cart 🛒</h1>
-</header>
-
-<nav>
-  <a href="shop.html">Back to Shop</a>
-</nav>
-
-<div id="cart-list"></div>
-
-<h2 id="total"></h2>
-
-<button onclick="checkout()">Checkout on WhatsApp</button>
-
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function renderCart(){
-  const container = document.getElementById("cart-list");
+/* SAVE CART */
+function saveCart(){
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+/* RENDER CART */
+function render(){
+  let container = document.getElementById("list");
   container.innerHTML = "";
 
   let total = 0;
 
   cart.forEach((item,index)=>{
-    total += item.price;
+    total += item.price * item.qty;
 
     let div = document.createElement("div");
-    div.className = "cart-item";
+    div.className = "item";
 
     div.innerHTML = `
-      <span>${item.name} - ₹${item.price}</span>
-      <button onclick="removeItem(${index})">Remove</button>
+      <div>
+        <b>${item.name}</b><br>
+        ₹${item.price}
+      </div>
+
+      <div>
+        <button onclick="decrease(${index})">-</button>
+        <span>${item.qty}</span>
+        <button onclick="increase(${index})">+</button>
+        <button onclick="removeItem(${index})">🗑</button>
+      </div>
     `;
 
     container.appendChild(div);
@@ -70,28 +39,32 @@ function renderCart(){
   document.getElementById("total").innerText = "Total: ₹" + total;
 }
 
+/* INCREASE QTY */
+function increase(i){
+  cart[i].qty += 1;
+  saveCart();
+  render();
+}
+
+/* DECREASE QTY */
+function decrease(i){
+  cart[i].qty -= 1;
+
+  if(cart[i].qty <= 0){
+    cart.splice(i,1);
+  }
+
+  saveCart();
+  render();
+}
+
+/* REMOVE ITEM */
 function removeItem(i){
   cart.splice(i,1);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart();
+  saveCart();
+  render();
 }
 
-function checkout(){
-  let msg="🧶 Order:%0A";
-
-  cart.forEach(i=>{
-    msg += i.name + " ₹" + i.price + "%0A";
-  });
-
-  const total = cart.reduce((s,i)=>s+i.price,0);
-
-  msg += "%0ATotal: ₹" + total;
-
-  window.open("https://wa.me/918886122232?text="+msg);
-}
-
-renderCart();
+/* INIT */
+render();
 </script>
-
-</body>
-</html>
