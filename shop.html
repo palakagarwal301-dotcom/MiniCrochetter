@@ -1,166 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini Crochetter - Shop</title>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-<link rel="stylesheet" href="style.css">
-
-<style>
-body{
-  margin:0;
-  font-family:Segoe UI;
-  background:#fdf6ee;
+/* SAVE */
+function saveCart(){
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateTotal();
 }
 
-/* NAV */
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px;
-  background:white;
-}
+/* ADD */
+function add(p){
+  let item = cart.find(i => i.id === p.id);
 
-nav a{
-  margin:0 8px;
-  text-decoration:none;
-  color:#000;
-  font-weight:600;
-}
-
-/* PRODUCTS */
-.container{
-  padding:15px;
-}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-@media(min-width:768px){
-  .products{
-    grid-template-columns:repeat(4,1fr);
+  if(item){
+    item.qty += 1;
+  }else{
+    cart.push({...p, qty:1});
   }
+
+  saveCart();
 }
 
-.card{
-  background:white;
-  border-radius:10px;
-  overflow:hidden;
-  text-align:center;
-  padding:10px;
+/* REMOVE */
+function remove(id){
+  cart = cart.filter(i => i.id !== id);
+  saveCart();
 }
 
-.card img{
-  width:100%;
-  height:160px;
-  object-fit:cover;
-  border-radius:8px;
+/* QTY */
+function changeQty(id, delta){
+  let item = cart.find(i => i.id === id);
+  if(!item) return;
+
+  item.qty += delta;
+
+  if(item.qty <= 0){
+    remove(id);
+  }
+
+  saveCart();
 }
 
-/* CART BAR */
-.cart-bar{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  display:flex;
-  justify-content:space-between;
-  padding:12px;
-  border-top:1px solid #ddd;
+/* TOTAL */
+function updateTotal(){
+  let total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById("total").innerText = total;
 }
-button{
-  background:#712b13;
-  color:white;
-  border:none;
-  padding:8px 12px;
-  border-radius:6px;
-}
-</style>
-</head>
 
-<body>
-
-<nav>
-  <div><b>Mini Crochetter 🧶</b></div>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="order.html">Order</a>
-  </div>
-</nav>
-
-<div class="container">
-  <div id="products" class="products"></div>
-</div>
-
-<div class="cart-bar">
-  <div>Total: ₹<span id="total">0</span></div>
-  <button onclick="checkout()">Order</button>
-</div>
-
-<script>
-let products = [
-  {name:"Crochet Flower", price:299, img:"flower.jpg"},
-  {name:"Plush Bunny", price:599, img:"bunny.jpg"},
-  {name:"Baby Booties", price:499, img:"booties.jpg"},
-];
-
-let cart = [];
-
+/* RENDER */
 function render(){
-  let box = document.getElementById("products");
+  const box = document.getElementById("products");
   box.innerHTML = "";
 
-  products.forEach((p,i)=>{
+  products.forEach(p=>{
     let div = document.createElement("div");
-    div.className="card";
+    div.className = "card";
 
     div.innerHTML = `
       <img src="${p.img}">
       <h4>${p.name}</h4>
       <p>₹${p.price}</p>
-      <button>Add</button>
+      <button>Add to Cart</button>
     `;
 
-    div.querySelector("button").onclick = ()=>{
-      cart.push(p);
-      updateTotal();
-    };
+    div.querySelector("button").onclick = ()=> add(p);
 
     box.appendChild(div);
   });
 }
 
-function updateTotal(){
-  let total = cart.reduce((s,i)=>s+i.price,0);
-  document.getElementById("total").innerText = total;
-}
-
+/* CHECKOUT */
 function checkout(){
-  if(cart.length===0){
+  if(cart.length === 0){
     alert("Cart empty");
     return;
   }
 
-  let msg="Order:%0A";
+  let msg = "Order:%0A";
+
   cart.forEach(i=>{
-    msg+=i.name+" ₹"+i.price+"%0A";
+    msg += `${i.name} x${i.qty} = ₹${i.price*i.qty}%0A`;
   });
 
-  let total = cart.reduce((s,i)=>s+i.price,0);
-  msg+="Total ₹"+total;
+  let total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  msg += "%0ATotal: ₹"+total;
 
   window.open("https://wa.me/918886122232?text="+msg);
 }
 
 render();
-</script>
-
-</body>
-</html>
+updateTotal();
