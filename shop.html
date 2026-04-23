@@ -94,72 +94,92 @@ header{
 <script src="products.js"></script>
 
 <script>
+const products = [
+  {
+    id:1,
+    name:"Pink Booties",
+    price:649,
+    cat:"booties",
+    img:"booties1.jpg"
+  },
+  {
+    id:2,
+    name:"Classic Booties",
+    price:549,
+    cat:"booties",
+    img:"booties2.jpg"
+  },
+  {
+    id:3,
+    name:"Winnie Plushie",
+    price:1499,
+    cat:"plushies",
+    img:"pooh.jpg"
+  },
+  {
+    id:4,
+    name:"Minion Plushie",
+    price:1299,
+    cat:"plushies",
+    img:"minion.jpg"
+  },
+  {
+    id:5,
+    name:"Sunflower Coaster",
+    price:349,
+    cat:"coasters",
+    img:"sunflower.jpg"
+  }
+];
+
 let cart = [];
 
-/* DEBUG CHECK */
-document.getElementById("status").innerText =
-typeof products !== "undefined"
-? "Products loaded ✅"
-: "Products NOT loading ❌";
+function render(filter="all") {
+  const box = document.getElementById("pg");
+  if (!box) return;
 
-/* render */
-function render(){
-  const box = document.getElementById("products");
-  box.innerHTML = "";
+  const list = filter==="all"
+    ? products
+    : products.filter(p=>p.cat===filter);
 
-  if(typeof products === "undefined"){
-    box.innerHTML = "<p>products.js not loaded</p>";
-    return;
-  }
-
-  products.forEach(p=>{
-    const div = document.createElement("div");
-    div.className = "card";
-
-    div.innerHTML = `
-      <img src="${p.img}" onerror="this.src='https://via.placeholder.com/300'">
-      <h4>${p.name}</h4>
+  box.innerHTML = list.map(p=>`
+    <div class="product-card">
+      <img src="${p.img}" 
+           onerror="this.style.display='none'">
+      <h3>${p.name}</h3>
       <p>₹${p.price}</p>
-      <button>Add to Cart</button>
-    `;
-
-    div.querySelector("button").onclick = () => {
-      cart.push(p);
-      updateTotal();
-    };
-
-    box.appendChild(div);
-  });
+      <button onclick="add(${p.id})">Add to Cart</button>
+    </div>
+  `).join("");
 }
 
-/* total */
-function updateTotal(){
-  let total = cart.reduce((s,i)=>s+i.price,0);
-  document.getElementById("total").innerText = total;
+function add(id){
+  const item = products.find(p=>p.id===id);
+  cart.push(item);
+  alert(item.name + " added");
 }
 
-/* checkout */
+function filterP(cat, btn){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  btn.classList.add("active");
+  render(cat);
+}
+
 function checkout(){
-  if(cart.length === 0){
-    alert("Cart is empty");
+  if(cart.length===0){
+    alert("Cart empty");
     return;
   }
 
-  let msg = "🧶 Order:%0A";
+  let msg = "Order:%0A";
   cart.forEach(i=>{
     msg += i.name + " - ₹" + i.price + "%0A";
   });
 
-  let total = cart.reduce((s,i)=>s+i.price,0);
-  msg += "%0ATotal: ₹" + total;
-
-  window.open("https://wa.me/918886122232?text=" + msg);
+  window.open("https://wa.me/919999999999?text="+encodeURIComponent(msg));
 }
 
-/* start */
-render();
-updateTotal();
+document.addEventListener("DOMContentLoaded", ()=>render("all"));
 </script>
-
 </body>
 </html>
