@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+<div id="navbar"></div>
 <header>
   <h1>Mini Crochetter 🧶</h1>
   <p>Handmade with love</p>
@@ -46,6 +46,22 @@
   <p>📧 palakagarwal301@gmail.com</p>
   <p>📸 @mini.crochetter</p>
 </footer>
+<script src="components.js"></script>
 
+<script>
+document.getElementById("navbar").innerHTML = loadNavbar();
+
+/* cart count */
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let count = cart.reduce((s,i)=>s+(i.qty||1),0);
+
+  let el = document.getElementById("cartCount");
+  if(el) el.innerText = count;
+}
+
+updateCartCount();
+window.addEventListener("storage", updateCartCount);
+</script>
 </body>
 </html>
