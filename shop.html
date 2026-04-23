@@ -1,168 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop - Mini Crochetter</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="card.css">
-
-</head>
-
-<body>
-
-<header>
-  <h1>Shop 🧶</h1>
-</header>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="shop.html">Shop</a>
-  <a href="cart.html">Cart 🛒</a>
-</nav>
-
-<div class="container">
-
-  <div class="categories">
-    <button onclick="filter('all')">All</button>
-    <button onclick="filter('flower')">Flowers</button>
-    <button onclick="filter('plushie')">Plushies</button>
-    <button onclick="filter('decor')">Decor</button>
-    <button onclick="filter('bags')">Bags</button>
-  </div>
-
-  <div id="products" class="products"></div>
-
-</div>
-
-<!-- CART BAR -->
-<div class="cart">
-  ₹<span id="total">0</span>
-  <button onclick="checkout()">Order</button>
-</div>
-
-<!-- POPUP -->
-<div id="popup">
-  <div id="popup-box">
-    <span id="close-popup">&times;</span>
-    <img id="popup-img">
-    <h3 id="popup-name"></h3>
-    <p id="popup-desc"></p>
-    <p id="popup-price"></p>
-    <button id="popup-add">Add to Cart</button>
-  </div>
-</div>
-
 <script src="products.js"></script>
 
 <script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+document.addEventListener("DOMContentLoaded", function(){
 
-function addToCart(p){
-  let existing = cart.find(item => item.name === p.name);
-
-  if(existing){
-    existing.qty += 1;
-  } else {
-    cart.push({
-      ...p,
-      qty: 1
-    });
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateTotal();
-}
-/* RENDER PRODUCTS */
-function render(list){
-  const container = document.getElementById("products");
-  container.innerHTML = "";
-
-  list.forEach(p=>{
-    const card = document.createElement("div");
-    card.className = "card";
-
-    card.innerHTML = `
-      <img src="${p.img}">
-      <h4>${p.name}</h4>
-      <p>${p.desc}</p>
-      <p><b>₹${p.price}</b></p>
-      <button>Add to Cart</button>
-    `;
-
-    card.querySelector("img").onclick = ()=>{
-      document.getElementById("popup").style.display = "flex";
-
-      document.getElementById("popup-img").src = p.img;
-      document.getElementById("popup-name").innerText = p.name;
-      document.getElementById("popup-desc").innerText = p.desc;
-      document.getElementById("popup-price").innerText = "₹" + p.price;
-
-      document.getElementById("popup-add").onclick = ()=>{
-        addToCart(p);
-      };
-    };
-
-    card.querySelector("button").onclick = ()=>{
-      addToCart(p);
-    };
-
-    container.appendChild(card);
-  });
-}
-
-/* TOTAL */
-function updateTotal(){
-  const total = cart.reduce((sum,item)=>{
-    return sum + (item.price * item.qty);
-  },0);
-
-  document.getElementById("total").innerText = total;
-}
-
-/* FILTER */
-function filter(cat){
-  if(cat==="all") render(products);
-  else render(products.filter(p=>p.category===cat));
-}
-
-/* CHECKOUT */
-function checkout(){
-  if(cart.length === 0){
-    alert("Your cart is empty");
+  if (!window.products) {
+    console.error("products.js not loaded or empty");
     return;
   }
 
-  let msg="🧶 Mini Crochetter Order:%0A";
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  cart.forEach(i=>{
-    msg += i.name + " ₹" + i.price + "%0A";
-  });
-
-  const total = cart.reduce((s,i)=>s+i.price,0);
-
-  msg += "%0ATotal: ₹" + total;
-  msg += "%0A📦 Shipping included";
-
-  window.open("https://wa.me/918886122232?text="+msg);
-}
-
-/* POPUP CLOSE */
-document.getElementById("close-popup").onclick = ()=>{
-  document.getElementById("popup").style.display = "none";
-};
-
-document.getElementById("popup").onclick = (e)=>{
-  if(e.target.id === "popup"){
-    document.getElementById("popup").style.display = "none";
+  function updateTotal(){
+    const total = cart.reduce((s,i)=>s+i.price,0);
+    document.getElementById("total").innerText = total;
   }
-};
 
-/* INIT */
-render(products);
-updateTotal();
+  window.filter = function(cat){
+    if(cat==="all") render(products);
+    else render(products.filter(p=>p.category===cat));
+  }
+
+  function render(list){
+    const container = document.getElementById("products");
+    container.innerHTML = "";
+
+    list.forEach(p=>{
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <img src="${p.img}">
+        <h4>${p.name}</h4>
+        <p>${p.desc}</p>
+        <p><b>₹${p.price}</b></p>
+        <button>Add to Cart</button>
+      `;
+
+      card.querySelector("button").onclick = ()=>{
+        cart.push({...p, qty:1});
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateTotal();
+      };
+
+      container.appendChild(card);
+    });
+  }
+
+  window.checkout = function(){
+    if(cart.length===0){
+      alert("Cart is empty");
+      return;
+    }
+
+    let msg="🧶 Order:%0A";
+    cart.forEach(i=>{
+      msg += i.name + " ₹" + i.price + "%0A";
+    });
+
+    const total = cart.reduce((s,i)=>s+i.price,0);
+    msg += "%0ATotal: ₹"+total;
+
+    window.open("https://wa.me/918886122232?text="+msg);
+  }
+
+  render(products);
+  updateTotal();
+
+});
 </script>
-
-</body>
-</html>
