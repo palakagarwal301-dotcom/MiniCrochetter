@@ -3,26 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mini Crochetter - Shop</title>
-
+<title>Shop</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<nav class="nav">
-  <div class="logo">🧶 Mini Crochetter</div>
-  <a href="index.html">Home</a>
-</nav>
-
-<header class="header">
-  Handmade Crochet Collection
+<header style="text-align:center;padding:15px;background:white;">
+  🧶 Mini Crochetter Shop
 </header>
 
 <div class="container">
-
   <div id="products" class="products"></div>
-
 </div>
 
 <div class="cart-bar">
@@ -31,7 +23,62 @@
 </div>
 
 <script src="products.js"></script>
-<script src="shop.js"></script>
+
+<script>
+let cart = [];
+
+/* render products */
+function render(){
+  const box = document.getElementById("products");
+  box.innerHTML = "";
+
+  products.forEach(p=>{
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <img src="${p.img}">
+      <h4>${p.name}</h4>
+      <p>₹${p.price}</p>
+      <button>Add to Cart</button>
+    `;
+
+    div.querySelector("button").onclick = () => {
+      cart.push(p);
+      updateTotal();
+    };
+
+    box.appendChild(div);
+  });
+}
+
+/* total */
+function updateTotal(){
+  let total = cart.reduce((s,i)=>s+i.price,0);
+  document.getElementById("total").innerText = total;
+}
+
+/* checkout */
+function checkout(){
+  if(cart.length === 0){
+    alert("Cart is empty");
+    return;
+  }
+
+  let msg = "🧶 Order:%0A";
+  cart.forEach(i=>{
+    msg += i.name + " - ₹" + i.price + "%0A";
+  });
+
+  let total = cart.reduce((s,i)=>s+i.price,0);
+  msg += "%0ATotal: ₹" + total;
+
+  window.open("https://wa.me/918886122232?text=" + msg);
+}
+
+render();
+updateTotal();
+</script>
 
 </body>
 </html>
