@@ -1,17 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Crochetter - Shop</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+  font-family: Segoe UI, sans-serif;
+  background: #fdf6ee;
+}
+
+header {
+  text-align: center;
+  padding: 15px;
+  background: white;
+  font-weight: bold;
+}
+
+.container {
+  padding: 15px;
+}
+
+.categories {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-bottom: 15px;
+}
+
+.categories button {
+  padding: 8px 12px;
+  border: none;
+  background: #eee;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card button {
+  margin-top: 8px;
+  padding: 8px;
+  width: 100%;
+  background: #712b13;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+.cart {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ddd;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  Mini Crochetter 🧶
+</header>
+
+<div class="container">
+
+  <div class="categories">
+    <button onclick="filter('all')">All</button>
+    <button onclick="filter('flower')">Flowers</button>
+    <button onclick="filter('plushie')">Plushies</button>
+    <button onclick="filter('decor')">Decor</button>
+  </div>
+
+  <div id="products" class="products"></div>
+
+</div>
+
+<div class="cart">
+  <div>Total: ₹<span id="total">0</span></div>
+  <button onclick="checkout()">Order</button>
+</div>
+
 <script src="products.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 
-  if (!window.products) {
-    console.error("products.js not loaded or empty");
-    return;
-  }
-
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+  function saveCart(){
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateTotal();
+  }
+
   function updateTotal(){
-    const total = cart.reduce((s,i)=>s+i.price,0);
+    let total = cart.reduce((s,i)=>s+i.price,0);
     document.getElementById("total").innerText = total;
   }
 
@@ -25,10 +134,10 @@ document.addEventListener("DOMContentLoaded", function(){
     container.innerHTML = "";
 
     list.forEach(p=>{
-      const card = document.createElement("div");
-      card.className = "card";
+      const div = document.createElement("div");
+      div.className = "card";
 
-      card.innerHTML = `
+      div.innerHTML = `
         <img src="${p.img}">
         <h4>${p.name}</h4>
         <p>${p.desc}</p>
@@ -36,35 +145,44 @@ document.addEventListener("DOMContentLoaded", function(){
         <button>Add to Cart</button>
       `;
 
-      card.querySelector("button").onclick = ()=>{
+      div.querySelector("button").onclick = ()=>{
         cart.push({...p, qty:1});
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateTotal();
+        saveCart();
       };
 
-      container.appendChild(card);
+      container.appendChild(div);
     });
   }
 
   window.checkout = function(){
-    if(cart.length===0){
+    if(cart.length === 0){
       alert("Cart is empty");
       return;
     }
 
-    let msg="🧶 Order:%0A";
+    let msg = "🧶 Mini Crochetter Order%0A%0A";
+
     cart.forEach(i=>{
-      msg += i.name + " ₹" + i.price + "%0A";
+      msg += i.name + " - ₹" + i.price + "%0A";
     });
 
-    const total = cart.reduce((s,i)=>s+i.price,0);
-    msg += "%0ATotal: ₹"+total;
+    let total = cart.reduce((s,i)=>s+i.price,0);
 
-    window.open("https://wa.me/918886122232?text="+msg);
+    msg += "%0ATotal: ₹" + total;
+
+    window.open("https://wa.me/918886122232?text=" + msg);
   }
 
-  render(products);
+  if(typeof products !== "undefined"){
+    render(products);
+  } else {
+    console.error("products.js missing");
+  }
+
   updateTotal();
 
 });
 </script>
+
+</body>
+</html>
