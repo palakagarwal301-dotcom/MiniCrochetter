@@ -1,48 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Shop</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Crochetter - Shop</title>
+
 <link rel="stylesheet" href="style.css">
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:#fdf6ee;
+}
+
+/* NAV */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px;
+  background:white;
+}
+
+nav a{
+  margin:0 8px;
+  text-decoration:none;
+  color:#000;
+  font-weight:600;
+}
+
+/* PRODUCTS */
+.container{
+  padding:15px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+@media(min-width:768px){
+  .products{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
+
+.card{
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+  text-align:center;
+  padding:10px;
+}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+/* CART BAR */
+.cart-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  display:flex;
+  justify-content:space-between;
+  padding:12px;
+  border-top:1px solid #ddd;
+}
+button{
+  background:#712b13;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+}
+</style>
 </head>
 
 <body>
 
 <nav>
-  <a href="index.html">Home</a>
-  <a href="shop.html">Shop</a>
-  <a href="cart.html">Cart (<span id="cartCount">0</span>)</a>
+  <div><b>Mini Crochetter 🧶</b></div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="order.html">Order</a>
+  </div>
 </nav>
 
 <div class="container">
-
-  <h2>Shop</h2>
-
   <div id="products" class="products"></div>
-
 </div>
 
-<div class="cart">
-  Total: ₹<span id="total">0</span>
-  <button onclick="goCart()">Go to Cart</button>
+<div class="cart-bar">
+  <div>Total: ₹<span id="total">0</span></div>
+  <button onclick="checkout()">Order</button>
 </div>
-
-<script src="products.js"></script>
 
 <script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let products = [
+  {name:"Crochet Flower", price:299, img:"flower.jpg"},
+  {name:"Plush Bunny", price:599, img:"bunny.jpg"},
+  {name:"Baby Booties", price:499, img:"booties.jpg"},
+];
 
-function save(){
-  localStorage.setItem("cart", JSON.stringify(cart));
-  update();
-}
+let cart = [];
 
 function render(){
   let box = document.getElementById("products");
   box.innerHTML = "";
 
-  products.forEach(p=>{
+  products.forEach((p,i)=>{
     let div = document.createElement("div");
-    div.className = "card";
+    div.className="card";
 
     div.innerHTML = `
       <img src="${p.img}">
@@ -52,28 +129,37 @@ function render(){
     `;
 
     div.querySelector("button").onclick = ()=>{
-      cart.push({...p, qty:1});
-      save();
+      cart.push(p);
+      updateTotal();
     };
 
     box.appendChild(div);
   });
 }
 
-function update(){
-  document.getElementById("cartCount").innerText =
-    cart.reduce((s,i)=>s+i.qty,0);
-
-  document.getElementById("total").innerText =
-    cart.reduce((s,i)=>s+i.price*i.qty,0);
+function updateTotal(){
+  let total = cart.reduce((s,i)=>s+i.price,0);
+  document.getElementById("total").innerText = total;
 }
 
-function goCart(){
-  window.location.href = "cart.html";
+function checkout(){
+  if(cart.length===0){
+    alert("Cart empty");
+    return;
+  }
+
+  let msg="Order:%0A";
+  cart.forEach(i=>{
+    msg+=i.name+" ₹"+i.price+"%0A";
+  });
+
+  let total = cart.reduce((s,i)=>s+i.price,0);
+  msg+="Total ₹"+total;
+
+  window.open("https://wa.me/918886122232?text="+msg);
 }
 
 render();
-update();
 </script>
 
 </body>
