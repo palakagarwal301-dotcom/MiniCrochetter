@@ -160,6 +160,16 @@ function checkout(){
 
 render();
 </script>
+  <script>
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let count = cart.reduce((s,i)=>s+(i.qty||1),0);
 
+  let el = document.getElementById("cartCount");
+  if(el) el.innerText = count;
+}
+updateCartCount();
+window.addEventListener("storage", updateCartCount);
+</script>
 </body>
 </html>
