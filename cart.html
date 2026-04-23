@@ -1,19 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+  font-family: Segoe UI, sans-serif;
+  background: #fdf6ee;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 15px;
+}
+
+.item {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controls button {
+  margin: 0 3px;
+  padding: 5px 10px;
+  border: none;
+  background: #712b13;
+  color: white;
+  border-radius: 5px;
+}
+
+.total {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.checkout {
+  width: 100%;
+  padding: 10px;
+  background: #712b13;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Your Cart 🛒</h2>
+
+<div id="cartItems"></div>
+
+<div class="total">
+  Total: ₹<span id="total">0</span>
+</div>
+
+<button class="checkout" onclick="checkout()">Checkout on WhatsApp</button>
+
+</div>
+
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-/* SAVE CART */
-function saveCart(){
+function save(){
   localStorage.setItem("cart", JSON.stringify(cart));
+  render();
 }
 
-/* RENDER CART */
 function render(){
-  let container = document.getElementById("list");
-  container.innerHTML = "";
+  let box = document.getElementById("cartItems");
+  box.innerHTML = "";
 
   let total = 0;
 
-  cart.forEach((item,index)=>{
+  cart.forEach((item, index)=>{
     total += item.price * item.qty;
 
     let div = document.createElement("div");
@@ -22,52 +96,62 @@ function render(){
     div.innerHTML = `
       <div>
         <b>${item.name}</b><br>
-        ₹${item.price}
+        ₹${item.price} x ${item.qty}
       </div>
 
-      <div>
-        <button onclick="decrease(${index})">-</button>
-        <span>${item.qty}</span>
-        <button onclick="increase(${index})">+</button>
-        <button onclick="removeItem(${index})">🗑</button>
-      <button onclick="window.location.href='order.html'">
-  Proceed to Checkout
-</button>
-</div>
+      <div class="controls">
+        <button onclick="dec(${index})">-</button>
+        <button onclick="inc(${index})">+</button>
+        <button onclick="removeItem(${index})">x</button>
+      </div>
     `;
 
-    container.appendChild(div);
+    box.appendChild(div);
   });
 
-  document.getElementById("total").innerText = "Total: ₹" + total;
+  document.getElementById("total").innerText = total;
 }
 
-/* INCREASE QTY */
-function increase(i){
-  cart[i].qty += 1;
-  saveCart();
-  render();
+function inc(i){
+  cart[i].qty++;
+  save();
 }
 
-/* DECREASE QTY */
-function decrease(i){
-  cart[i].qty -= 1;
-
-  if(cart[i].qty <= 0){
+function dec(i){
+  if(cart[i].qty > 1){
+    cart[i].qty--;
+  } else {
     cart.splice(i,1);
   }
-
-  saveCart();
-  render();
+  save();
 }
 
-/* REMOVE ITEM */
 function removeItem(i){
   cart.splice(i,1);
-  saveCart();
-  render();
+  save();
 }
 
-/* INIT */
+function checkout(){
+  if(cart.length === 0){
+    alert("Cart is empty");
+    return;
+  }
+
+  let msg = "🧶 Order%0A%0A";
+  let total = 0;
+
+  cart.forEach(i=>{
+    msg += i.name + " x " + i.qty + " = ₹" + (i.price*i.qty) + "%0A";
+    total += i.price * i.qty;
+  });
+
+  msg += "%0ATotal: ₹" + total;
+
+  window.open("https://wa.me/918886122232?text=" + msg);
+}
+
 render();
 </script>
+
+</body>
+</html>
