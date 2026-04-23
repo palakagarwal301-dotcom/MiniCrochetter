@@ -102,7 +102,73 @@ header div {
   font-size:20px;
   cursor:pointer;
 }
+/* Enhance popup content */
+#popup-name {
+  margin:10px 0 5px;
+}
 
+#popup-desc {
+  font-size:13px;
+  color:#555;
+  margin-bottom:5px;
+}
+
+#popup-price {
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+#popup-add {
+  width:100%;
+  padding:10px;
+  background:#712b13;
+  color:white;
+  border:none;
+  border-radius:5px;
+}
+
+/* smooth animation */
+#popup-box {
+  animation: popupFade 0.3s ease;
+}
+
+@keyframes popupFade {
+  from {
+    transform: scale(0.9);
+    opacity:0;
+  }
+  to {
+    transform: scale(1);
+    opacity:1;
+  }
+}
+  document.addEventListener("DOMContentLoaded", function(){
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function render(list){
+    // your product code
+  }
+
+  function updateTotal(){
+    // total logic
+  }
+
+  // ✅ ADD THIS HERE (perfect spot)
+  document.getElementById("popup").onclick = (e)=>{
+    if(e.target.id === "popup"){
+      document.getElementById("popup").style.display = "none";
+    }
+  };
+
+  // other functions
+  window.checkout = function(){ ... }
+  window.filter = function(){ ... }
+
+  render(products);
+  updateTotal();
+
+});
 /* Cart */
 .cart {
   position:fixed;
@@ -211,10 +277,22 @@ window.filter = function(cat){
 }
 
 window.checkout = function(){
+
+  if(cart.length === 0){
+    alert("Your cart is empty");
+    return;
+  }
+
   let msg="🧶 Mini Crochetter Order:%0A";
+
   cart.forEach(i=> msg += i.name+" ₹"+i.price+"%0A");
+
+  const total = cart.reduce((s,i)=>s+i.price,0);
+
+  msg += "%0ATotal: ₹"+total;
   msg += "%0A📦 Shipping included";
   msg += "%0A💳 UPI: 8886122232@yapl";
+
   window.open("https://wa.me/918886122232?text="+msg);
 }
 
