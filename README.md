@@ -24,3 +24,46 @@ Built using HTML, CSS, and JavaScript with cart system and WhatsApp checkout int
 ---
 
 ## 📁 Project Structure
+index.html
+shop.html
+cart.html
+order.html
+style.css
+card.css
+cart.css
+products.js
+---
+
+## ⚙️ Tech Stack
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- LocalStorage API
+- WhatsApp API (wa.me)
+
+---
+
+## 🚀 How to Run
+
+1. Clone the repository
+2. Open `index.html` in browser
+3. Or use Live Server (VS Code)
+
+---
+
+## 📦 Future Improvements
+
+- Payment gateway integration
+- Backend order tracking
+- User login system
+- Admin dashboard
+- Database integration
+
+---
+
+## 👩‍💻 Developer
+
+Palak Agarwal  
+📧 palakagarwal301@gmail.com  
+📸 Instagram: @mini.crochetter
