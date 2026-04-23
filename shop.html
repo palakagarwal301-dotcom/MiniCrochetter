@@ -16,6 +16,11 @@ header {
   font-size:20px;
 }
 
+header div {
+  font-size:12px;
+  color:#555;
+}
+
 .container { padding:15px; }
 
 .categories {
@@ -30,7 +35,6 @@ header {
   border:none;
   background:#eee;
   border-radius:20px;
-  cursor:pointer;
 }
 
 .products {
@@ -44,40 +48,25 @@ header {
   padding:10px;
   border-radius:10px;
   text-align:center;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
 .card img {
   width:100%;
   height:180px;
   object-fit:cover;
+  object-position:center;
   border-radius:10px;
   cursor:pointer;
 }
 
+.card img:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
 .card p {
-  margin:4px 0;
   font-size:13px;
   color:#555;
-}
-
-button {
-  margin-top:8px;
-  padding:8px;
-  border:none;
-  background:#712b13;
-  color:white;
-  border-radius:5px;
-}
-
-/* Cart */
-.cart {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:white;
-  padding:10px;
-  border-top:1px solid #ddd;
 }
 
 /* Popup */
@@ -89,7 +78,6 @@ button {
   background:rgba(0,0,0,0.7);
   justify-content:center;
   align-items:center;
-  z-index:999;
 }
 
 #popup-box {
@@ -115,16 +103,24 @@ button {
   cursor:pointer;
 }
 
-#popup-desc {
-  font-size:13px;
-  color:#555;
+/* Cart */
+.cart {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:white;
+  padding:10px;
+  border-top:1px solid #ddd;
 }
 </style>
 </head>
 
 <body>
 
-<header>Mini Crochetter 🧶</header>
+<header>
+Mini Crochetter 🧶
+<div>Pan India Shipping • Processing 5–7 days</div>
+</header>
 
 <div class="container">
 
@@ -145,118 +141,53 @@ button {
   <button onclick="checkout()">Order</button>
 </div>
 
-<div id="popup">
-  <img id="popup-img">
-</div>
-
-<!-- LOAD PRODUCTS FIRST -->
-<script src="products.js"></script>
-</div> <!-- end of container -->
-
-<div class="cart">
-  ₹<span id="total">0</span>
-  <button onclick="checkout()">Order</button>
-</div>
-
-<!-- ✅ PUT POPUP HERE -->
+<!-- POPUP -->
 <div id="popup">
   <div id="popup-box">
     <span id="close-popup">&times;</span>
-
     <img id="popup-img">
-
     <h3 id="popup-name"></h3>
     <p id="popup-desc"></p>
     <p id="popup-price"></p>
-
     <button id="popup-add">Add to Cart</button>
   </div>
 </div>
 
-<!-- THEN YOUR SCRIPT -->
 <script src="products.js"></script>
-<script>
+
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 
-if(typeof products === "undefined"){
-  document.getElementById("products").innerHTML = "⚠️ Products not loading";
-  return;
-}
-document.addEventListener("DOMContentLoaded", function(){
-
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  function render(list){
-    // your product rendering code
-  }
-
-  function updateTotal(){
-    // your total logic
-  }
-
-  // ✅ ADD IT HERE (outside render, but inside DOMContentLoaded)
-  document.getElementById("close-popup").onclick = ()=>{
-    document.getElementById("popup").style.display = "none";
-  };
-
-  // existing functions
-  window.filter = function(cat){ ... }
-  window.checkout = function(){ ... }
-
-  render(products);
-  updateTotal();
-
-});
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function render(list){
   const container = document.getElementById("products");
   container.innerHTML = "";
 
- list.forEach(p=>{
-  const card = document.createElement("div");
-  card.className = "card";
+  list.forEach(p=>{
+    const card = document.createElement("div");
+    card.className = "card";
 
-  card.innerHTML = `
-    <img src="${p.img}">
-    <h4>${p.name}</h4>
-    <p>${p.desc}</p>
-    <p><b>₹${p.price}</b></p>
-    <button>Add to Cart</button>
-  `;
-
-  // ✅ ADD THIS BLOCK HERE
-  card.querySelector("img").onclick = ()=>{
-
-    document.getElementById("popup").style.display = "flex";
-
-    document.getElementById("popup-img").src = p.img;
-    document.getElementById("popup-name").innerText = p.name;
-    document.getElementById("popup-desc").innerText = p.desc;
-    document.getElementById("popup-price").innerText = "₹" + p.price;
-
-    document.getElementById("popup-add").onclick = ()=>{
-      cart.push(p);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateTotal();
-    };
-
-  };
-
-  // existing add to cart button
-  card.querySelector("button").onclick = ()=>{
-    cart.push(p);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateTotal();
-  };
-
-  container.appendChild(card);
-});
+    card.innerHTML = `
+      <img src="${p.img}">
+      <h4>${p.name}</h4>
+      <p>${p.desc}</p>
+      <p><b>₹${p.price}</b></p>
+      <button>Add to Cart</button>
+    `;
 
     card.querySelector("img").onclick = ()=>{
-      document.getElementById("popup").style.display="flex";
+      document.getElementById("popup").style.display = "flex";
       document.getElementById("popup-img").src = p.img;
+      document.getElementById("popup-name").innerText = p.name;
+      document.getElementById("popup-desc").innerText = p.desc;
+      document.getElementById("popup-price").innerText = "₹" + p.price;
+
+      document.getElementById("popup-add").onclick = ()=>{
+        cart.push(p);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateTotal();
+      };
     };
 
     card.querySelector("button").onclick = ()=>{
@@ -280,17 +211,19 @@ window.filter = function(cat){
 }
 
 window.checkout = function(){
-  let msg="Order:%0A";
+  let msg="🧶 Mini Crochetter Order:%0A";
   cart.forEach(i=> msg += i.name+" ₹"+i.price+"%0A");
-  window.open("https://wa.me/919830160265?text="+msg);
+  msg += "%0A📦 Shipping included";
+  msg += "%0A💳 UPI: 8886122232@yapl";
+  window.open("https://wa.me/918886122232?text="+msg);
 }
+
+document.getElementById("close-popup").onclick = ()=>{
+  document.getElementById("popup").style.display = "none";
+};
 
 render(products);
 updateTotal();
-
-document.getElementById("popup").onclick = ()=>{
-  document.getElementById("popup").style.display="none";
-};
 
 });
 </script>
