@@ -24,6 +24,7 @@ Built using HTML, CSS, and JavaScript with cart system and WhatsApp checkout int
 ---
 
 ## 📁 Project Structure
+
 index.html
 shop.html
 cart.html
@@ -32,6 +33,7 @@ style.css
 card.css
 cart.css
 products.js
+
 ---
 
 ## ⚙️ Tech Stack
