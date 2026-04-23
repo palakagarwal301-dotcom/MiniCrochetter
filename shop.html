@@ -14,12 +14,13 @@
 <body>
 
 <nav>
-  <a href="index.html?v=4" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+  <a href="index.html?v=5" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+  <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
   <ul class="nav-links">
-    <li><a href="index.html?v=4">Home</a></li>
-    <li><a href="shop.html?v=4" class="active">Shop</a></li>
-    <li><a href="workshops.html?v=4">Workshops</a></li>
-    <li><a href="order.html?v=4">Order</a></li>
+    <li><a href="index.html?v=5">Home</a></li>
+    <li><a href="shop.html?v=5" class="active">Shop</a></li>
+    <li><a href="workshops.html?v=5">Workshops</a></li>
+    <li><a href="order.html?v=5">Order</a></li>
   </ul>
   <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
 </nav>
@@ -54,12 +55,12 @@
       </div>
     </div>
     <div class="foot-col"><h4>Shop</h4>
-      <a href="shop.html?v=4">Baby Booties</a><a href="shop.html?v=4">Mini Plushies</a>
-      <a href="shop.html?v=4">Coasters & Mats</a><a href="shop.html?v=4">Flowers</a>
-      <a href="shop.html?v=4">Bags</a><a href="shop.html?v=4">Crochet Rakhis</a>
+      <a href="shop.html?v=5">Baby Booties</a><a href="shop.html?v=5">Mini Plushies</a>
+      <a href="shop.html?v=5">Coasters & Mats</a><a href="shop.html?v=5">Flowers</a>
+      <a href="shop.html?v=5">Bags</a><a href="shop.html?v=5">Crochet Rakhis</a>
     </div>
     <div class="foot-col"><h4>Learn</h4>
-      <a href="workshops.html?v=4">Crochet Workshops</a>
+      <a href="workshops.html?v=5">Crochet Workshops</a>
       <a href="https://www.instagram.com/mini.crochetter/" target="_blank">Follow on Instagram</a>
     </div>
     <div class="foot-col"><h4>Order</h4>
@@ -118,44 +119,44 @@ const products = [
   {id:1, cat:"booties",
    name:"Pink Ruffle Booties & Bow Set",
    imgs:["booties_pink_basket.jpg"],
-   badge:"bestseller", price:899, size:"Newborn–4 yrs",
+   badge:"bestseller", price:749, size:"Newborn–4 yrs",
    desc:"Pink ruffle booties with white scallop trim, paired with a matching pink bow headband — presented in a wicker basket. Every pair made to order in your size and colour."},
 
   {id:2, cat:"booties",
    name:"Classic Lace-Up Booties",
    imgs:["booties_lace_wood.jpg"],
-   badge:"", price:749, size:"Newborn–4 yrs",
+   badge:"", price:599, size:"Newborn–4 yrs",
    desc:"Cream booties with brown lace-up ties on a wooden slice. Clean, classic, and beautifully handcrafted. Available in all sizes and custom colours."},
 
   // PLUSHIES — all correctly labelled with correct filenames
   {id:3, cat:"plushies",
    name:"Winnie the Pooh Plushie",
    imgs:["pooh.png"],
-   badge:"new", price:2499, size:"~25cm tall",
+   badge:"new", price:2299, size:"~25cm tall",
    desc:"Beloved Winnie the Pooh in golden yellow with his iconic red top. Made in soft velvet yarn for an extra plush, huggable feel. Hand-embroidered smile, safety eyes, and a squishy body — a childhood classic brought to life."},
 
   {id:4, cat:"plushies",
    name:"Minion Plushie (Stuart)",
    imgs:["minion.png"],
-   badge:"bestseller", price:2199, size:"~22cm tall",
+   badge:"bestseller", price:1999, size:"~22cm tall",
    desc:"Everyone's favourite yellow troublemaker — hand-crocheted in soft velvet yarn with blue denim overalls, single grey goggle, safety eyes and button details. Incredibly detailed, plush and well-made."},
 
   {id:5, cat:"plushies",
    name:"Santa Plushie",
    imgs:["santa_plushie.jpg","plushies_collage.jpg"],
-   badge:"seasonal", price:2499, size:"~25cm tall",
+   badge:"seasonal", price:2299, size:"~25cm tall",
    desc:"Jolly Santa in soft red velvet with fluffy white beard, black belt and boots — sitting by a mini Christmas tree with fairy lights. Made in premium velvet yarn for an extra plush, festive feel."},
 
   {id:6, cat:"plushies",
    name:"Shark Plushie",
    imgs:["shark_plushie.png","plushies_collage.jpg"],
-   badge:"", price:1799, size:"~18cm",
+   badge:"", price:1499, size:"~18cm",
    desc:"Chubby blue-grey shark in soft velvet yarn with rosy cheeks, safety eyes and a red-stitched smile — photographed on sand with seashells. Plush, huggable, and perfect as a desk buddy or kids' gift."},
 
   {id:7, cat:"plushies",
-   name:"Mini Plushies — Bunny, Bear & Chick",
+   name:"Mini Plushie — Bunny / Bear / Chick",
    imgs:["mini_plushies.png","plushies_collage.jpg"],
-   badge:"", price:749, size:"~10cm each",
+   badge:"", price:449, size:"~10cm — single piece",
    desc:"Sweet trio of mini amigurumi in soft cotton yarn — white bunny with pink ears, caramel bear, and yellow chick with orange beak. All with rosy cheeks and safety eyes. Price is for the set of 3. Choose your characters and colours."},
 
   {id:8, cat:"plushies",
@@ -168,7 +169,7 @@ const products = [
   {id:9, cat:"coasters",
    name:"Sunflower Coaster",
    imgs:["sunflower-coaster.png","sunflower_flower.png","sunflower.png"],
-   badge:"bestseller", price:449, size:"~12cm diameter",
+   badge:"bestseller", price:199, size:"~12cm diameter",
    desc:"Golden yellow sunflower coaster with rich brown centre. Available in two beautiful styles — petal style (flat on wood, brown outline) and bobble-edge style (cream shadows). Both handcrocheted with care."},
 
   {id:10, cat:"coasters",
@@ -180,14 +181,14 @@ const products = [
   {id:11, cat:"coasters",
    name:"Leaf & Heart Coasters",
    imgs:["coaster_leaf_heart.jpg"],
-   badge:"", price:399, size:"~10–12cm each",
+   badge:"", price:349, size:"~10–12cm each",
    desc:"Green monstera leaf coaster and pink heart coaster — both handcrocheted, shown with a cup of tea and candle. Sweet, practical, and perfect as a set. Custom shapes and colours available."},
 
   // FLOWERS — correct filenames
   {id:12, cat:"flowers",
    name:"Crochet Daisy",
    imgs:["daisy_flower.png","daisy.png"],
-   badge:"", price:349, size:"~8cm bloom",
+   badge:"", price:149, size:"~8cm bloom",
    desc:"White daisy with a raised golden yellow centre on natural linen — beautiful, three-dimensional, and textured. Can be worn as a brooch, hair clip, or used as home décor. Available in custom colours."},
 
   {id:13, cat:"flowers",
@@ -200,20 +201,20 @@ const products = [
   {id:14, cat:"bags",
    name:"Rose Drawstring Bag",
    imgs:["bag_rose_drawstring.jpg"],
-   badge:"new", price:1699, size:"~15×12cm",
+   badge:"new", price:1499, size:"~15×12cm",
    desc:"Cream crochet drawstring bag with pink and red roses and green leaves appliquéd on the front, with tassel ties and rope handles. Photographed on leather with gold jewellery. A beautiful gifting piece."},
 
   {id:15, cat:"bags",
    name:"Sunflower Round Sling Bag",
    imgs:["bag_sunflower_sling.jpg"],
-   badge:"", price:1999, size:"~22cm round",
+   badge:"", price:1799, size:"~22cm round",
    desc:"Round brown sling bag with a full sunflower design on the front and a slim rope strap. Photographed with wheat stalks on wood — a gorgeous boho accessory that doubles as a statement piece."},
 
   // ACCESSORIES — correct filename
   {id:16, cat:"accessories",
    name:"Bow Hair Headband",
    imgs:["bow_headband.png"],
-   badge:"", price:349, size:"Adjustable / one size",
+   badge:"", price:249, size:"Adjustable / one size",
    desc:"Pink crochet headband with white scallop border and a bold hot-pink bow at the front. Photographed with a wooden comb and perfume bottle. Soft, stretchy, and available in all colours."},
 
   // RAKHIS — correct filename

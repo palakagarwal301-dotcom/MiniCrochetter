@@ -1248,3 +1248,48 @@ footer{
 }
 
 /* End of stylesheet - cleaned up corrupted JS-in-CSS and duplicate rules */
+
+
+/* === MOBILE NAV (hamburger) — Apr 2026 === */
+.menu-toggle{display:none;background:none;border:none;font-size:26px;cursor:pointer;color:var(--ter);padding:6px 10px;line-height:1;margin-left:auto;margin-right:8px}
+@media(max-width:768px){
+  nav{position:sticky;top:0;background:#fff;z-index:50;padding:12px 5%;flex-wrap:wrap}
+  .menu-toggle{display:inline-block;order:3}
+  .nav-links{display:none;flex-basis:100%;flex-direction:column;gap:4px;padding:10px 0 4px;order:4;border-top:1px solid #f0e7df;margin-top:10px}
+  .nav-links.open{display:flex}
+  .nav-links li{list-style:none}
+  .nav-links a{display:block;padding:12px 6px;font-size:16px;border-bottom:1px solid #fbf3ec}
+  .cart-btn{padding:8px 14px;font-size:13px;order:2}
+  .nl{order:1}
+  .ni{font-size:22px}
+  .nt{font-size:15px}
+
+  /* Tighter content padding so cards aren't squished */
+  .shop-wrap{padding:24px 4% 60px}
+  .page-header{padding:30px 5% 20px}
+  .page-header h1{font-size:clamp(28px,8vw,40px)}
+
+  /* Ensure no horizontal scroll on body */
+  html,body{overflow-x:hidden;max-width:100vw}
+
+  /* Bigger tap targets in cart */
+  .cart-drawer{width:min(100vw,400px)}
+  .cart-item button,.qty-btn{min-width:36px;min-height:36px}
+  .checkout-btn{padding:14px;font-size:15px}
+
+  /* Modal close button — easier to tap */
+  .modal-close{width:44px;height:44px;font-size:20px}
+  .modal{padding:18px}
+  .modal-main-img{max-height:55vh}
+  .modal-name{font-size:22px}
+  .modal-price{font-size:24px}
+
+  /* Filter tabs visual cue for scroll */
+  .filter-tabs{padding:6px 4% 12px;margin:0 -4%;mask-image:linear-gradient(to right,#000 90%,transparent);}
+  .tab{padding:8px 14px;font-size:13px}
+}
+
+/* iOS safe-area bottom for fixed buttons */
+@supports(padding:max(0px)){
+  .cart-drawer .cart-foot{padding-bottom:max(20px,env(safe-area-inset-bottom))}
+}
