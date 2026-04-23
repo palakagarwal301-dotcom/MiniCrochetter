@@ -190,17 +190,45 @@ function render(list){
   const container = document.getElementById("products");
   container.innerHTML = "";
 
-  list.forEach(p=>{
-    const card = document.createElement("div");
-    card.className = "card";
+ list.forEach(p=>{
+  const card = document.createElement("div");
+  card.className = "card";
 
-    card.innerHTML = `
-      <img src="${p.img}">
-      <h4>${p.name}</h4>
-      <p>${p.desc}</p>
-      <p><b>₹${p.price}</b></p>
-      <button>Add to Cart</button>
-    `;
+  card.innerHTML = `
+    <img src="${p.img}">
+    <h4>${p.name}</h4>
+    <p>${p.desc}</p>
+    <p><b>₹${p.price}</b></p>
+    <button>Add to Cart</button>
+  `;
+
+  // ✅ ADD THIS BLOCK HERE
+  card.querySelector("img").onclick = ()=>{
+
+    document.getElementById("popup").style.display = "flex";
+
+    document.getElementById("popup-img").src = p.img;
+    document.getElementById("popup-name").innerText = p.name;
+    document.getElementById("popup-desc").innerText = p.desc;
+    document.getElementById("popup-price").innerText = "₹" + p.price;
+
+    document.getElementById("popup-add").onclick = ()=>{
+      cart.push(p);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateTotal();
+    };
+
+  };
+
+  // existing add to cart button
+  card.querySelector("button").onclick = ()=>{
+    cart.push(p);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateTotal();
+  };
+
+  container.appendChild(card);
+});
 
     card.querySelector("img").onclick = ()=>{
       document.getElementById("popup").style.display="flex";
