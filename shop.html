@@ -114,7 +114,10 @@ function render(list){
 
 /* TOTAL */
 function updateTotal(){
-  const total = cart.reduce((s,i)=>s+i.price,0);
+  const total = cart.reduce((sum,item)=>{
+    return sum + (item.price * item.qty);
+  },0);
+
   document.getElementById("total").innerText = total;
 }
 
