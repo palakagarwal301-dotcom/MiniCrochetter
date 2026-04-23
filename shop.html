@@ -34,9 +34,23 @@ header {
 }
 
 .container {
-  <input type="text" id="searchBox" placeholder="Search crochet items..." 
-style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
-  padding: 15px;
+  <div class="container">
+
+  <!-- SEARCH (NEW) -->
+  <input type="text" id="searchBox" placeholder="Search crochet items...">
+
+  <!-- CATEGORIES -->
+  <div class="categories">
+    <button onclick="filter('all')">All</button>
+    <button onclick="filter('flower')">Flowers</button>
+    <button onclick="filter('plushie')">Plushies</button>
+    <button onclick="filter('decor')">Decor</button>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div id="products" class="products"></div>
+
+</div>
 }
 
 .categories {
