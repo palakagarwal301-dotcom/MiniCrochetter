@@ -142,33 +142,7 @@ header div {
     opacity:1;
   }
 }
-  document.addEventListener("DOMContentLoaded", function(){
-
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  function render(list){
-    // your product code
-  }
-
-  function updateTotal(){
-    // total logic
-  }
-
-  // ✅ ADD THIS HERE (perfect spot)
-  document.getElementById("popup").onclick = (e)=>{
-    if(e.target.id === "popup"){
-      document.getElementById("popup").style.display = "none";
-    }
-  };
-
-  // other functions
-  window.checkout = function(){ ... }
-  window.filter = function(){ ... }
-
-  render(products);
-  updateTotal();
-
-});
+ 
 /* Cart */
 .cart {
   position:fixed;
@@ -299,7 +273,11 @@ window.checkout = function(){
 document.getElementById("close-popup").onclick = ()=>{
   document.getElementById("popup").style.display = "none";
 };
-
+document.getElementById("popup").onclick = (e)=>{
+  if(e.target.id === "popup"){
+    document.getElementById("popup").style.display = "none";
+  }
+};
 render(products);
 updateTotal();
 
