@@ -1,5 +1,5 @@
 const products = [
-  {name:"Flower Keychain", price:199, img:"img1.jpg"},
-  {name:"Crochet Bear", price:499, img:"img2.jpg"},
-  {name:"Mini Bouquet", price:299, img:"img3.jpg"}
+  { id:1, name:"Crochet Flower", price:299, img:"flower.jpg", category:"flowers" },
+  { id:2, name:"Plush Bunny", price:599, img:"bunny.jpg", category:"plushies" },
+  { id:3, name:"Baby Booties", price:499, img:"booties.jpg", category:"booties" }
 ];
