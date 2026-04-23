@@ -1,98 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>Mini Crochetter — Handmade Crochet Shop</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=5">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Crochetter</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <nav>
-    <a href="index.html?v=5" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
-  <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
-    <ul class="nav-links">
-      <li><a href="index.html?v=5" class="active">Home</a></li>
-      <li><a href="shop.html?v=5">Shop</a></li>
-      <li><a href="workshops.html?v=5">Workshops</a></li>
-      <li><a href="order.html?v=5">Order</a></li>
-    </ul>
-    <button class="cart-btn" onclick="window.location='shop.html'">🛒 Shop</button>
-  </nav>
+<header>
+  <h1>Mini Crochetter 🧶</h1>
+  <p>Handmade with love</p>
+</header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-tag">🧶 Custom orders always open</div>
-      <h1>Crochet Minis<br>Made with <em>Love</em></h1>
-      <p>Every piece handcrafted stitch by stitch — booties, plushies, coasters, flowers & more.</p>
-      <div class="hero-btns">
-        <a href="shop.html?v=5" class="btn-p">Shop Now</a>
-        <a href="workshops.html?v=5" class="btn-s">Join a Workshop</a>
-      </div>
-    </div>
-  </section>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="workshops.html">Workshops</a>
+  <a href="order.html">Order</a>
+</nav>
 
-  <section class="reviews-section">
-    <div class="sec-head">
-      <span class="sec-tag">Happy customers</span>
-      <h2 class="sec-title">Made someone <em>smile</em> today</h2>
-    </div>
-    <div class="reviews-grid" id="rg"></div>
-  </section>
+<section class="hero">
+  <h2>Handmade Crochet Gifts 🎁</h2>
+  <p>Perfect for gifting & decor</p>
+  <a href="shop.html" class="btn">Shop Now</a>
+</section>
 
-  <footer>
-    <div class="foot-top">
-      <div class="foot-brand">
-        <div class="foot-brand-name">🧶 Mini Crochetter</div>
-        <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan-India.</p>
-        <div class="foot-soc">
-          <a href="https://www.instagram.com/mini.crochetter/" target="_blank">📸</a>
-          <a href="https://wa.me/918886122232" target="_blank">💬</a>
-        </div>
-      </div>
+<section class="info">
+  <p>📦 Pan India Shipping</p>
+  <p>⏳ Processing time: 5–7 days</p>
+  <p>💸 No returns / no refunds</p>
+</section>
 
-      <div class="foot-col">
-        <h4>Order</h4>
-        <a href="mailto:palakagarwal301@gmail.com">Email Us</a>
-        <a href="https://wa.me/918886122232" target="_blank">WhatsApp Us</a>
-      </div>
-    </div>
-
-    <div class="foot-bot">
-      <div class="foot-copy">© 2025 Mini Crochetter — Handmade with love in India 🇮🇳</div>
-      <div class="foot-copy">All pieces made to order • Ships pan-India</div>
-    </div>
-  </footer>
-
-  <script>
-    const reviews = [
-      {name:"Ananya K.", handle:"Booties order · Kolkata", initial:"A", accent:"#fbeaf0", text:"The booties were even prettier in real life. The finishing was so neat and the gift looked incredibly special.", product:"Pink Ruffle Booties"},
-      {name:"Riya M.", handle:"Plushie order · Delhi", initial:"R", accent:"#e1f5ee", text:"I sent a reference and got the cutest custom plushie back. It felt personal, well made, and beautifully packed.", product:"Custom Plushie"},
-      {name:"Priya S.", handle:"Coaster set · Mumbai", initial:"P", accent:"#faeeda", text:"Everything looked handmade in the best way possible. The colours were gorgeous and the whole set made my table look so warm.", product:"Sunflower Coasters"}
-    ];
-
-    document.getElementById("rg").innerHTML = reviews.map((review) => `
-      <div class="rev-card">
-        <div class="rev-stars">★★★★★</div>
-        <div class="rev-text">"${review.text}"</div>
-        <div class="rev-auth">
-          <div class="rev-av" style="background:${review.accent};color:var(--ter)">${review.initial}</div>
-          <div>
-            <div class="rev-name">${review.name}</div>
-            <div class="rev-handle">${review.handle}</div>
-          </div>
-        </div>
-        <div class="rev-prod">${review.product}</div>
-      </div>
-    `).join("");
-
-    function checkout(){window.open("https://wa.me/918886122232","_blank");}
-  </script>
+<footer>
+  <p>📞 +91 8886122232</p>
+  <p>📧 palakagarwal301@gmail.com</p>
+  <p>📸 @mini.crochetter</p>
+</footer>
 
 </body>
 </html>
