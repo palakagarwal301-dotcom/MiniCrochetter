@@ -166,7 +166,8 @@ function placeOrder(){
 
   msg += "%0ATotal: ₹" + total;
 
-  window.open("https://wa.me/918886122232?text=" + msg);
+  localStorage.setItem("cart", JSON.stringify(cart));
+window.location.href = "success.html";
 }
 
 /* CART COUNT */
