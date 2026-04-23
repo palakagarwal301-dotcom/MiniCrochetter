@@ -34,6 +34,8 @@ header {
 }
 
 .container {
+  <input type="text" id="searchBox" placeholder="Search crochet items..." 
+style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
   padding: 15px;
 }
 
@@ -133,6 +135,16 @@ header {
 <script src="products.js"></script>
 
 <script>
+  document.getElementById("searchBox").addEventListener("input", function(e){
+  let value = e.target.value.toLowerCase();
+
+  let filtered = products.filter(p =>
+    p.name.toLowerCase().includes(value) ||
+    p.desc.toLowerCase().includes(value)
+  );
+
+  render(filtered);
+});
 document.addEventListener("DOMContentLoaded", function(){
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
