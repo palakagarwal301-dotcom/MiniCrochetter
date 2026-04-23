@@ -1,90 +1,37 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Crochetter - Shop</title>
 
-/* SAVE */
-function saveCart(){
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateTotal();
-}
+<link rel="stylesheet" href="style.css">
+</head>
 
-/* ADD */
-function add(p){
-  let item = cart.find(i => i.id === p.id);
+<body>
 
-  if(item){
-    item.qty += 1;
-  }else{
-    cart.push({...p, qty:1});
-  }
+<nav class="nav">
+  <div class="logo">🧶 Mini Crochetter</div>
+  <a href="index.html">Home</a>
+</nav>
 
-  saveCart();
-}
+<header class="header">
+  Handmade Crochet Collection
+</header>
 
-/* REMOVE */
-function remove(id){
-  cart = cart.filter(i => i.id !== id);
-  saveCart();
-}
+<div class="container">
 
-/* QTY */
-function changeQty(id, delta){
-  let item = cart.find(i => i.id === id);
-  if(!item) return;
+  <div id="products" class="products"></div>
 
-  item.qty += delta;
+</div>
 
-  if(item.qty <= 0){
-    remove(id);
-  }
+<div class="cart-bar">
+  <div>Total: ₹<span id="total">0</span></div>
+  <button onclick="checkout()">Order</button>
+</div>
 
-  saveCart();
-}
+<script src="products.js"></script>
+<script src="shop.js"></script>
 
-/* TOTAL */
-function updateTotal(){
-  let total = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  document.getElementById("total").innerText = total;
-}
-
-/* RENDER */
-function render(){
-  const box = document.getElementById("products");
-  box.innerHTML = "";
-
-  products.forEach(p=>{
-    let div = document.createElement("div");
-    div.className = "card";
-
-    div.innerHTML = `
-      <img src="${p.img}">
-      <h4>${p.name}</h4>
-      <p>₹${p.price}</p>
-      <button>Add to Cart</button>
-    `;
-
-    div.querySelector("button").onclick = ()=> add(p);
-
-    box.appendChild(div);
-  });
-}
-
-/* CHECKOUT */
-function checkout(){
-  if(cart.length === 0){
-    alert("Cart empty");
-    return;
-  }
-
-  let msg = "Order:%0A";
-
-  cart.forEach(i=>{
-    msg += `${i.name} x${i.qty} = ₹${i.price*i.qty}%0A`;
-  });
-
-  let total = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  msg += "%0ATotal: ₹"+total;
-
-  window.open("https://wa.me/918886122232?text="+msg);
-}
-
-render();
-updateTotal();
+</body>
+</html>
