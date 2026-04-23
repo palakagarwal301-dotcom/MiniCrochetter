@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function(){
       `;
 
       div.querySelector("button").onclick = ()=>{
-        cart.push({...p, qty:1});
+        addToCart(p);
         saveCart();
       };
 
