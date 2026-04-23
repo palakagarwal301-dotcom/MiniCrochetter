@@ -30,7 +30,10 @@ function render(){
         <span>${item.qty}</span>
         <button onclick="increase(${index})">+</button>
         <button onclick="removeItem(${index})">🗑</button>
-      </div>
+      <button onclick="window.location.href='order.html'">
+  Proceed to Checkout
+</button>
+</div>
     `;
 
     container.appendChild(div);
