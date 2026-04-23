@@ -58,6 +58,7 @@ body {
 </head>
 
 <body>
+  <div id="navbar"></div>
   <nav class="navbar">
   <div class="logo">Mini Crochetter 🧶</div>
 
@@ -168,6 +169,23 @@ function updateCartCount(){
   let el = document.getElementById("cartCount");
   if(el) el.innerText = count;
 }
+updateCartCount();
+window.addEventListener("storage", updateCartCount);
+</script>
+  <script src="components.js"></script>
+
+<script>
+document.getElementById("navbar").innerHTML = loadNavbar();
+
+/* cart count */
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let count = cart.reduce((s,i)=>s+(i.qty||1),0);
+
+  let el = document.getElementById("cartCount");
+  if(el) el.innerText = count;
+}
+
 updateCartCount();
 window.addEventListener("storage", updateCartCount);
 </script>
