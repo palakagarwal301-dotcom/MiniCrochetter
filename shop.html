@@ -59,13 +59,21 @@
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-/* ADD TO CART (single function used everywhere) */
 function addToCart(p){
-  cart.push(p);
+  let existing = cart.find(item => item.name === p.name);
+
+  if(existing){
+    existing.qty += 1;
+  } else {
+    cart.push({
+      ...p,
+      qty: 1
+    });
+  }
+
   localStorage.setItem("cart", JSON.stringify(cart));
   updateTotal();
 }
-
 /* RENDER PRODUCTS */
 function render(list){
   const container = document.getElementById("products");
