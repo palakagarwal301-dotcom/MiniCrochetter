@@ -50,6 +50,15 @@
     .alt-contact a:hover{background:#fdf6f0;border-color:#d49a7a}
     .alt-contact a.wa{background:#25d366;color:#fff;border-color:#25d366}
     .alt-contact a.wa:hover{background:#1ebe57;border-color:#1ebe57}
+    .cart-summary{background:#fdf6f0;border:1px solid #f0e0d0;border-radius:14px;padding:16px 18px;margin-bottom:22px}
+    .cart-summary h3{margin:0 0 10px;font-family:'Playfair Display',serif;color:#5b3d2b;font-size:18px;display:flex;justify-content:space-between;align-items:center}
+    .cart-summary h3 a{font-family:Jost,sans-serif;font-size:13px;font-weight:400;color:#b87a5c;text-decoration:none}
+    .cart-summary h3 a:hover{text-decoration:underline}
+    .cart-summary ul{list-style:none;padding:0;margin:0 0 10px;display:flex;flex-direction:column;gap:6px}
+    .cart-summary li{display:flex;justify-content:space-between;font-size:14px;color:#3d2a1f}
+    .cart-summary li .nm{color:#5b3d2b}
+    .cart-summary .total{display:flex;justify-content:space-between;font-weight:700;color:#3d2a1f;border-top:1px solid #f0e0d0;padding-top:8px;margin-top:6px}
+    .cart-summary .total span:last-child{color:#712b13}
   </style>
 </head>
 <body>
@@ -75,6 +84,8 @@
     <form class="order-form" onsubmit="return sendOrder(event)">
       <h2>Order Details</h2>
       <p class="sub">Fill this in and tap submit — it opens WhatsApp with your order pre-filled.</p>
+
+      <div id="cartSummary"></div>
 
       <div class="row2">
         <div class="field">
@@ -196,6 +207,33 @@
   </footer>
 
   <script>
+    const CART_KEY = 'mc_cart';
+    const rupee = n => '₹' + n.toLocaleString('en-IN');
+
+    function loadCart(){
+      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      catch(e){ return []; }
+    }
+    function clearCart(){ localStorage.removeItem(CART_KEY); }
+
+    function renderCartSummary(){
+      const cart = loadCart();
+      const el = document.getElementById('cartSummary');
+      if(!cart.length){ el.innerHTML = ''; return; }
+      const total = cart.reduce((s,i)=>s + i.qty*i.price, 0);
+      const items = cart.reduce((s,i)=>s + i.qty, 0);
+      el.innerHTML = `
+        <div class="cart-summary">
+          <h3><span>🧺 Your Cart (${items})</span><a href="shop.html">Edit cart</a></h3>
+          <ul>
+            ${cart.map(i => `<li><span class="nm">${i.qty} × ${i.name}</span><span>${rupee(i.qty*i.price)}</span></li>`).join('')}
+          </ul>
+          <div class="total"><span>Subtotal</span><span>${rupee(total)}</span></div>
+        </div>`;
+      const qtyEl = document.getElementById('qty');
+      if(qtyEl && qtyEl.value === '1') qtyEl.value = items;
+    }
+
     function sendOrder(e){
       e.preventDefault();
       const v = id => document.getElementById(id).value.trim();
@@ -203,6 +241,7 @@
             cat=v('cat'), qty=v('qty'), size=v('size'),
             colour=v('colour'), date=v('date'), notes=v('notes');
 
+      const cart = loadCart();
       const lines = [
         "Hi Mini Crochetter! 🧶 I'd like to place an order:",
         "",
@@ -210,6 +249,14 @@
         "📱 Phone: " + phone,
       ];
       if(email) lines.push("✉️ Email: " + email);
+
+      if(cart.length){
+        const total = cart.reduce((s,i)=>s + i.qty*i.price, 0);
+        lines.push("", "🛒 Cart:");
+        cart.forEach(i => lines.push(`  • ${i.qty} × ${i.name} — ₹${(i.qty*i.price).toLocaleString('en-IN')}`));
+        lines.push(`💰 Subtotal: ₹${total.toLocaleString('en-IN')}`);
+      }
+
       lines.push(
         "",
         "🧺 Category: " + cat,
@@ -222,8 +269,11 @@
 
       const url = "https://wa.me/918886122232?text=" + encodeURIComponent(lines.join("\n"));
       window.open(url, "_blank");
+      if(cart.length) clearCart();
       return false;
     }
+
+    renderCartSummary();
   </script>
 </body>
 </html>
