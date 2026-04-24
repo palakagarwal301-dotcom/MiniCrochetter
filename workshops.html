@@ -79,94 +79,6 @@
   <div class="ws-sessions" id="sessionsList"></div>
 </section>
 
-<section class="ws-feats-section">
-  <div class="sec-head">
-    <span class="sec-tag">What to expect</span>
-    <h2 class="sec-title">Everything you <em>need</em> to start</h2>
-  </div>
-  <div class="ws-feats">
-    <div class="ws-feat">
-      <div class="feat-icon">🌱</div>
-      <h3>Beginner Friendly</h3>
-      <p>Zero experience needed. We start from complete scratch — if you can hold a hook, you can crochet.</p>
-    </div>
-    <div class="ws-feat">
-      <div class="feat-icon">🎯</div>
-      <h3>Make Something Real</h3>
-      <p>You leave with a finished crochet mini — hands-on from minute one, not just theory.</p>
-    </div>
-    <div class="ws-feat">
-      <div class="feat-icon">📦</div>
-      <h3>All Materials Included</h3>
-      <p>Hook, yarn, pattern — everything is provided. Just bring your enthusiasm.</p>
-    </div>
-    <div class="ws-feat">
-      <div class="feat-icon">👥</div>
-      <h3>Small Batches Only</h3>
-      <p>Limited seats per session so you get personalised attention — not a crowded classroom.</p>
-    </div>
-    <div class="ws-feat">
-      <div class="feat-icon">🏠</div>
-      <h3>Online & In-Person</h3>
-      <p>Join from anywhere online, or attend in-person sessions. Flexible timing available.</p>
-    </div>
-    <div class="ws-feat">
-      <div class="feat-icon">💬</div>
-      <h3>WhatsApp Support</h3>
-      <p>Practice at home with ongoing WhatsApp support from your instructor after the session.</p>
-    </div>
-  </div>
-</section>
-
-<section class="ws-price-section">
-  <div class="ws-price-card">
-    <div class="price-from">Workshop fee starting from</div>
-    <div class="price-big">₹1,499</div>
-    <div class="price-sub">per person · all materials included</div>
-    <ul class="ws-perks">
-      <li>2–3 hour hands-on session</li>
-      <li>Complete a mini project by end of session</li>
-      <li>Hook & yarn kit to take home</li>
-      <li>Pattern sheet for practice at home</li>
-      <li>WhatsApp support after the session</li>
-    </ul>
-    <a href="#sessions" class="btn-p" style="display:block;text-align:center">Pick a Session →</a>
-  </div>
-</section>
-
-<section class="reviews-section">
-  <div class="sec-head">
-    <span class="sec-tag">Why learn with me</span>
-    <h2 class="sec-title">From <em>zero</em> to crocheting</h2>
-  </div>
-  <div class="reviews-grid">
-    <div class="rev-card">
-      <div class="rev-stars">★★★★★</div>
-      <div class="rev-text">"I attended the crochet workshop and made my first flower! Never thought I could do it. The instruction was so patient and clear. Already planning the next session."</div>
-      <div class="rev-auth">
-        <div class="rev-av" style="background:#fbeaf0;color:var(--ter)">A</div>
-        <div><div class="rev-name">Ananya K.</div><div class="rev-handle">Workshop student · Kolkata</div></div>
-      </div>
-    </div>
-    <div class="rev-card">
-      <div class="rev-stars">★★★★★</div>
-      <div class="rev-text">"Started with no experience at all and left with my own little crochet chick. The pace was perfect and I felt supported throughout. Highly recommend!"</div>
-      <div class="rev-auth">
-        <div class="rev-av" style="background:#faeeda;color:var(--ter)">P</div>
-        <div><div class="rev-name">Priya S.</div><div class="rev-handle">Workshop student · Mumbai</div></div>
-      </div>
-    </div>
-    <div class="rev-card">
-      <div class="rev-stars">★★★★★</div>
-      <div class="rev-text">"Such a calming, fun experience. I had no idea crochet was this satisfying. Made a mini daisy in one sitting. Already bought yarn to practice at home!"</div>
-      <div class="rev-auth">
-        <div class="rev-av" style="background:#e1f5ee;color:var(--ter)">R</div>
-        <div><div class="rev-name">Riya M.</div><div class="rev-handle">Workshop student · Delhi</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="foot-top">
     <div class="foot-brand">
@@ -218,13 +130,13 @@
           <input id="rSeats" type="number" min="1" max="6" value="1" required oninput="updateRsvpTotal()">
         </div>
         <div class="field">
-          <label for="rEmail">Email (optional)</label>
-          <input id="rEmail" type="email" placeholder="you@example.com">
+          <label for="rCity">City *</label>
+          <input id="rCity" required placeholder="Kolkata / Delhi / etc.">
         </div>
       </div>
       <div class="field">
         <label for="rNotes">Anything else? (optional)</label>
-        <textarea id="rNotes" placeholder="e.g. dietary needs, friend joining, accessibility"></textarea>
+        <textarea id="rNotes" placeholder="e.g. friend joining, accessibility"></textarea>
       </div>
       <div class="total-line"><span>Total</span><span id="rTotal">₹0</span></div>
       <button type="submit" class="submit">Send RSVP via WhatsApp →</button>
@@ -233,121 +145,94 @@
   </div>
 </div>
 
-<div class="rsvp-bg" id="rsvpModal">
-  <div class="rsvp-modal">
-    <button class="close" onclick="closeModal()">×</button>
-    <h3 id="modalTitle">Workshop RSVP</h3>
-    <div class="sess-info" id="modalSessInfo"></div>
-    <form id="rsvpForm">
-      <div class="field">
-        <label>Full Name</label>
-        <input type="text" required placeholder="Your name">
-      </div>
-      <div class="field">
-        <label>WhatsApp Number</label>
-        <input type="tel" required placeholder="For workshop details">
-      </div>
-      <div class="row2">
-        <div class="field">
-          <label>No. of Seats</label>
-          <input type="number" value="1" min="1" max="5" id="seatInput" oninput="updateTotal()">
-        </div>
-        <div class="field">
-          <label>City</label>
-          <input type="text" placeholder="Your city">
-        </div>
-      </div>
-      <div class="total-line">
-        <span>Total Amount</span>
-        <span id="totalPrice">₹1,499</span>
-      </div>
-      <button type="submit" class="submit">Confirm RSVP via WhatsApp</button>
-      <p class="note">Payment details will be shared on WhatsApp</p>
-    </form>
-  </div>
-</div>
-
 <script>
-  // YOUR REQUESTED CHANGE: Updated location to Kolkata
-  const sessions = [
-    {
-      id: 1,
-      title: "Beginner Crochet Workshop",
-      date: "Sunday, Oct 20",
-      time: "11 AM - 2 PM",
-      location: "Kolkata", 
-      price: 1499,
-      type: "In-person",
-      seats: "4 seats left",
-      isFew: true
-    },
-    {
-      id: 2,
-      title: "Amigurumi Masterclass",
-      date: "Saturday, Oct 26",
-      time: "4 PM - 6 PM",
-      location: "Online (Zoom)",
-      price: 999,
-      type: "Online",
-      seats: "8 seats left",
-      isFew: false
-    }
-  ];
+// UPDATED SESSIONS: Fixed locations to Rabindra Sadan (Exide) for Kolkata sessions
+const SESSIONS = [
+  { id:'on-1', title:'Crochet Mini Flower', mode:'online', date:'Sat, May 9, 2026', time:'4:00–6:30 PM IST', price:1499, seatsLeft:6, level:'Beginner' },
+  { id:'ip-1', title:'Booties for Beginners', mode:'in-person', date:'Sun, May 17, 2026', time:'11:00 AM–2:00 PM', price:1899, location:'Rabindra Sadan (Exide)', seatsLeft:3, level:'Beginner' },
+  { id:'on-2', title:'Amigurumi Mini Plushie', mode:'online', date:'Sat, May 30, 2026', time:'4:00–7:00 PM IST', price:1799, seatsLeft:8, level:'Some experience helpful' },
+  { id:'ip-2', title:'Coasters & Décor Brunch', mode:'in-person', date:'Sun, Jun 7, 2026', time:'10:30 AM–1:30 PM', price:1999, location:'Rabindra Sadan (Exide)', seatsLeft:2, level:'All levels' },
+];
 
-  let activeSession = null;
+const rupee = n => '₹' + n.toLocaleString('en-IN');
+let currentSession = null;
 
-  function renderSessions() {
-    const list = document.getElementById('sessionsList');
-    list.innerHTML = sessions.map(s => `
+function renderSessions(){
+  document.getElementById('sessionsList').innerHTML = SESSIONS.map(s => {
+    const sold = s.seatsLeft <= 0;
+    const few = s.seatsLeft > 0 && s.seatsLeft <= 3;
+    const where = s.mode === 'online' ? 'Online (Zoom)' : (s.location || 'Kolkata');
+    return `
       <div class="ws-sess">
-        <div class="badge ${s.type.toLowerCase().replace(' ', '-')}">${s.type}</div>
+        <span class="badge ${s.mode}">${s.mode === 'online' ? '💻 Online' : '📍 In person'}</span>
         <h3>${s.title}</h3>
         <div class="meta">
           <span>📅 ${s.date}</span>
           <span>⏰ ${s.time}</span>
-          <span>📍 ${s.location}</span>
+          <span>📍 ${where}</span>
         </div>
         <div class="price-line">
           <div>
-            <div class="pp">₹${s.price.toLocaleString()}<small>/person</small></div>
-            <div class="seats ${s.isFew ? 'few' : ''}">${s.seats}</div>
+            <div class="pp">${rupee(s.price)}<small> / seat</small></div>
+            <div class="seats ${few ? 'few' : ''}">${sold ? 'Fully booked' : (few ? `Only ${s.seatsLeft} seats left` : `${s.seatsLeft} seats available`)}</div>
           </div>
-          <button class="rsvp" onclick="openModal(${s.id})">Reserve Spot</button>
+          <button class="rsvp" ${sold ? 'disabled' : ''} onclick="openRsvp('${s.id}')">${sold ? 'Sold out' : 'RSVP →'}</button>
         </div>
-      </div>
-    `).join('');
-  }
+      </div>`;
+  }).join('');
+}
 
-  function openModal(id) {
-    activeSession = sessions.find(s => s.id === id);
-    document.getElementById('modalSessInfo').innerHTML = `
-      <strong>${activeSession.title}</strong><br>
-      ${activeSession.date} • ${activeSession.location}
-    `;
-    updateTotal();
-    document.getElementById('rsvpModal').classList.add('open');
-  }
+function openRsvp(id){
+  currentSession = SESSIONS.find(s => s.id === id);
+  if(!currentSession) return;
+  const where = currentSession.mode === 'online' ? 'Online' : (currentSession.location || 'Kolkata');
+  document.getElementById('sessInfo').innerHTML = `
+    <strong>${currentSession.title}</strong><br>
+    ${currentSession.date} · ${currentSession.time}<br>
+    ${where} · ${rupee(currentSession.price)} / seat
+  `;
+  document.getElementById('rSeats').max = currentSession.seatsLeft;
+  document.getElementById('rSeats').value = 1;
+  updateRsvpTotal();
+  document.getElementById('rsvpBg').classList.add('open');
+}
 
-  function closeModal() {
-    document.getElementById('rsvpModal').classList.remove('open');
-  }
+function closeRsvp(){ document.getElementById('rsvpBg').classList.remove('open'); }
 
-  function updateTotal() {
-    const seats = document.getElementById('seatInput').value || 1;
-    const total = seats * activeSession.price;
-    document.getElementById('totalPrice').innerText = '₹' + total.toLocaleString();
-  }
+function updateRsvpTotal(){
+  if(!currentSession) return;
+  const seats = Math.max(1, parseInt(document.getElementById('rSeats').value,10) || 1);
+  document.getElementById('rTotal').innerText = rupee(seats * currentSession.price);
+}
 
-  // Initialize page
-  renderSessions();
+function submitRsvp(e){
+  e.preventDefault();
+  const v = id => document.getElementById(id).value.trim();
+  const name = v('rName'), phone = v('rPhone'), city = v('rCity');
+  const seats = v('rSeats'), notes = v('rNotes');
+  const total = seats * currentSession.price;
 
-  // Close modal on outside click
-  window.onclick = (e) => {
-    if(e.target.id === 'rsvpModal') closeModal();
-  }
+  const lines = [
+    "Hi Mini Crochetter! 🧶 I'd like to RSVP for a workshop:",
+    "",
+    "🎨 Workshop: " + currentSession.title,
+    "📅 Date: " + currentSession.date,
+    "📍 Location: " + (currentSession.mode === 'online' ? 'Online' : currentSession.location),
+    "",
+    "👤 Name: " + name,
+    "📱 Phone: " + phone,
+    "🏙️ City: " + city,
+    "🔢 Seats: " + seats,
+    "💰 Total: ₹" + total.toLocaleString('en-IN'),
+  ];
+  if(notes) lines.push("📝 Notes: " + notes);
+
+  window.open("https://wa.me/918886122232?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+  closeRsvp();
+  return false;
+}
+
+renderSessions();
 </script>
-</body>
-</html>
-
 </body>
 </html>
