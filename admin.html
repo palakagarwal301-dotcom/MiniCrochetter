@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Admin · Workshops — Mini Crochetter</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Jost,system-ui,sans-serif;background:#fdf6ee;color:#3d2a1f}
+.wrap{max-width:980px;margin:0 auto;padding:32px 20px 80px}
+.head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:6px}
+h1{font-family:'Playfair Display',serif;color:#5b3d2b;margin:0;font-size:30px}
+.sub{color:#8a6f5e;margin:0 0 24px;font-size:15px}
+.head a{color:#b87a5c;text-decoration:none;font-size:14px}
+.head a:hover{text-decoration:underline}
+
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.btn{background:#fff;border:1px solid #e9dccf;color:#5b3d2b;padding:10px 16px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+.btn:hover{border-color:#d49a7a;background:#fdf6f0}
+.btn.primary{background:linear-gradient(135deg,#d49a7a,#b87a5c);color:#fff;border:none;box-shadow:0 4px 14px rgba(184,122,92,.25)}
+.btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(184,122,92,.35)}
+.btn.danger{color:#a4346d;border-color:#f0c8d8}
+.btn.danger:hover{background:#fbeaf0;border-color:#e6a5be}
+
+.banner{background:#e1f5ee;border:1px solid #c2e6d3;color:#1f6b4a;padding:10px 14px;border-radius:10px;margin-bottom:18px;font-size:14px;display:none}
+.banner.show{display:block}
+
+.list{display:flex;flex-direction:column;gap:14px}
+.card{background:#fff;border:1px solid #f0e7df;border-radius:14px;padding:20px}
+.card .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.card .row.three{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:640px){.card .row,.card .row.three{grid-template-columns:1fr}}
+.field label{display:block;font-size:13px;color:#5b3d2b;font-weight:500;margin-bottom:5px}
+.field input,.field select{width:100%;padding:10px 12px;border:1px solid #e9dccf;border-radius:8px;font-family:inherit;font-size:14px;background:#fffaf6;color:#3d2a1f}
+.field input:focus,.field select:focus{outline:none;border-color:#d49a7a;background:#fff;box-shadow:0 0 0 3px rgba(212,154,122,.15)}
+.card .actions{display:flex;justify-content:space-between;align-items:center;margin-top:8px;border-top:1px solid #f3ebe2;padding-top:14px}
+.card .badge{background:#fdf6f0;color:#5b3d2b;border:1px solid #e9dccf;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:500}
+.card .badge.online{background:#e1f5ee;color:#1f6b4a;border-color:#c2e6d3}
+.card .badge.in-person{background:#fbeaf0;color:#a4346d;border-color:#f0c8d8}
+
+.empty{text-align:center;padding:60px 20px;color:#8a6f5e;background:#fff;border:1px dashed #e9dccf;border-radius:14px}
+.empty .ico{font-size:42px;margin-bottom:8px}
+.note{font-size:13px;color:#8a6f5e;margin-top:18px;line-height:1.5}
+.note code{background:#fff7ec;border:1px solid #e9d6b8;padding:2px 7px;border-radius:6px;color:#5a3a1a;font-size:12px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="head">
+    <div>
+      <h1>Workshops · Admin</h1>
+      <p class="sub">Edit your upcoming sessions. Saved in this browser only.</p>
+    </div>
+    <a href="workshops.html" target="_blank">View public page →</a>
+  </div>
+
+  <div class="banner" id="banner"></div>
+
+  <div class="bar">
+    <button class="btn primary" onclick="addSession()">+ Add session</button>
+    <button class="btn" onclick="saveAll()">💾 Save changes</button>
+    <button class="btn" onclick="resetAll()">↺ Reset to defaults</button>
+    <button class="btn" onclick="exportJson()">⬇ Export</button>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <p class="note">
+    Sessions are saved in your browser under <code>mc_sessions</code> and read by the Workshops page automatically. Clearing browser data resets them. Use Export to keep a backup.
+  </p>
+</div>
+
+<script>
+const STORE_KEY = 'mc_sessions';
+const DEFAULTS = [
+  { id:'on-1', title:'Crochet Mini Flower', mode:'online', date:'Sat, May 9, 2026', time:'4:00–6:30 PM IST', price:1499, seatsLeft:6, level:'Beginner', location:'' },
+  { id:'ip-1', title:'Booties for Beginners', mode:'in-person', date:'Sun, May 17, 2026', time:'11:00 AM–2:00 PM', price:1899, seatsLeft:3, level:'Beginner', location:'Hyderabad · Banjara Hills' },
+  { id:'on-2', title:'Amigurumi Mini Plushie', mode:'online', date:'Sat, May 30, 2026', time:'4:00–7:00 PM IST', price:1799, seatsLeft:8, level:'Some experience helpful', location:'' },
+  { id:'ip-2', title:'Coasters & Décor Brunch', mode:'in-person', date:'Sun, Jun 7, 2026', time:'10:30 AM–1:30 PM', price:1999, seatsLeft:2, level:'All levels', location:'Hyderabad · Jubilee Hills' },
+];
+
+function load(){
+  try {
+    const v = JSON.parse(localStorage.getItem(STORE_KEY));
+    if(Array.isArray(v) && v.length) return v.map(normalize);
+  } catch(e){}
+  return DEFAULTS.map(normalize);
+}
+function normalize(s){
+  return {
+    id: s.id || ('s-' + Math.random().toString(36).slice(2,8)),
+    title: s.title || '',
+    mode: s.mode === 'in-person' ? 'in-person' : 'online',
+    date: s.date || '',
+    time: s.time || '',
+    price: Number.isFinite(+s.price) ? +s.price : 0,
+    seatsLeft: Number.isFinite(+s.seatsLeft) ? +s.seatsLeft : 0,
+    level: s.level || '',
+    location: s.location || '',
+  };
+}
+
+let sessions = load();
+
+function render(){
+  const list = document.getElementById('list');
+  if(!sessions.length){
+    list.innerHTML = `<div class="empty"><div class="ico">📅</div>No sessions yet.<br><span style="font-size:13px">Click "Add session" to create one.</span></div>`;
+    return;
+  }
+  list.innerHTML = sessions.map((s, i) => `
+    <div class="card">
+      <div class="row">
+        <div class="field">
+          <label>Title</label>
+          <input value="${escapeAttr(s.title)}" oninput="upd(${i},'title',this.value)" placeholder="e.g. Crochet Mini Flower">
+        </div>
+        <div class="field">
+          <label>Mode</label>
+          <select onchange="upd(${i},'mode',this.value)">
+            <option value="online" ${s.mode==='online'?'selected':''}>💻 Online</option>
+            <option value="in-person" ${s.mode==='in-person'?'selected':''}>📍 In person</option>
+          </select>
+        </div>
+      </div>
+      <div class="row three">
+        <div class="field">
+          <label>Date</label>
+          <input value="${escapeAttr(s.date)}" oninput="upd(${i},'date',this.value)" placeholder="Sat, May 9, 2026">
+        </div>
+        <div class="field">
+          <label>Time</label>
+          <input value="${escapeAttr(s.time)}" oninput="upd(${i},'time',this.value)" placeholder="4:00–6:30 PM IST">
+        </div>
+        <div class="field">
+          <label>Level</label>
+          <input value="${escapeAttr(s.level)}" oninput="upd(${i},'level',this.value)" placeholder="Beginner / All levels">
+        </div>
+      </div>
+      <div class="row three">
+        <div class="field">
+          <label>Price (₹ / seat)</label>
+          <input type="number" min="0" value="${s.price}" oninput="upd(${i},'price',+this.value||0)">
+        </div>
+        <div class="field">
+          <label>Seats left</label>
+          <input type="number" min="0" value="${s.seatsLeft}" oninput="upd(${i},'seatsLeft',+this.value||0)">
+        </div>
+        <div class="field">
+          <label>Location ${s.mode==='online'?'(optional)':'*'}</label>
+          <input value="${escapeAttr(s.location)}" oninput="upd(${i},'location',this.value)" placeholder="${s.mode==='online'?'Online (Zoom link shared after RSVP)':'e.g. Hyderabad · Banjara Hills'}">
+        </div>
+      </div>
+      <div class="actions">
+        <span class="badge ${s.mode}">${s.mode === 'online' ? '💻 Online' : '📍 In person'}</span>
+        <button class="btn danger" onclick="del(${i})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function escapeAttr(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+function upd(i, key, val){
+  sessions[i][key] = val;
+}
+function addSession(){
+  sessions.push(normalize({ title:'New workshop', mode:'online', date:'', time:'', price:1499, seatsLeft:6, level:'Beginner' }));
+  render();
+}
+function del(i){
+  sessions.splice(i,1);
+  render();
+  saveAll(true);
+}
+function saveAll(silent){
+  localStorage.setItem(STORE_KEY, JSON.stringify(sessions.map(normalize)));
+  if(!silent) flash('Saved. Refresh the Workshops page to see the changes.');
+}
+function resetAll(){
+  if(!confirm('Reset to the original sessions? Your edits will be lost.')) return;
+  localStorage.removeItem(STORE_KEY);
+  sessions = load();
+  render();
+  flash('Reset to defaults.');
+}
+function exportJson(){
+  const blob = new Blob([JSON.stringify(sessions.map(normalize), null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'workshop-sessions.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+let flashTimer;
+function flash(msg){
+  const b = document.getElementById('banner');
+  b.innerText = msg;
+  b.classList.add('show');
+  clearTimeout(flashTimer);
+  flashTimer = setTimeout(() => b.classList.remove('show'), 2400);
+}
+
+render();
+</script>
+</body>
+</html>
