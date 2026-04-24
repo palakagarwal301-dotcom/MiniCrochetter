@@ -233,156 +233,121 @@
   </div>
 </div>
 
+<div class="rsvp-bg" id="rsvpModal">
+  <div class="rsvp-modal">
+    <button class="close" onclick="closeModal()">×</button>
+    <h3 id="modalTitle">Workshop RSVP</h3>
+    <div class="sess-info" id="modalSessInfo"></div>
+    <form id="rsvpForm">
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" required placeholder="Your name">
+      </div>
+      <div class="field">
+        <label>WhatsApp Number</label>
+        <input type="tel" required placeholder="For workshop details">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>No. of Seats</label>
+          <input type="number" value="1" min="1" max="5" id="seatInput" oninput="updateTotal()">
+        </div>
+        <div class="field">
+          <label>City</label>
+          <input type="text" placeholder="Your city">
+        </div>
+      </div>
+      <div class="total-line">
+        <span>Total Amount</span>
+        <span id="totalPrice">₹1,499</span>
+      </div>
+      <button type="submit" class="submit">Confirm RSVP via WhatsApp</button>
+      <p class="note">Payment details will be shared on WhatsApp</p>
+    </form>
+  </div>
+</div>
+
 <script>
-const DEFAULT_SESSIONS = [
-  {
-    id: "on-1",
-    title: "Crochet Mini Flower",
-    mode: "online",
-    date: "Sat, May 9, 2026",
-    time: "4:00–6:30 PM IST",
-    price: 1499,
-    seatsLeft: 6,
-    level: "Beginner",
-  },
-  {
-    id: "ip-1",
-    title: "Booties for Beginners",
-    mode: "in-person",
-    date: "Sun, May 17, 2026",
-    time: "11:00 AM–2:00 PM",
-    price: 1899,
-    location: "Kolkata, West Bengal",
-    seatsLeft: 3,
-    level: "Beginner",
-  },
-  {
-    id: "on-2",
-    title: "Amigurumi Mini Plushie",
-    mode: "online",
-    date: "Sat, May 30, 2026",
-    time: "4:00–7:00 PM IST",
-    price: 1799,
-    seatsLeft: 8,
-    level: "Some experience helpful",
-  },
-  {
-    id: "ip-2",
-    title: "Coasters & Décor Brunch",
-    mode: "in-person",
-    date: "Sun, Jun 7, 2026",
-    time: "10:30 AM–1:30 PM",
-    price: 1999,
-    location: "Kolkata, West Bengal",
-    seatsLeft: 2,
-    level: "All levels",
-  },
-];
-function loadSessions() {
-  try {
-    const v = JSON.parse(localStorage.getItem("mc_sessions"));
-
-    // ignore old/stale data if structure mismatch
-    if (Array.isArray(v) && v.length && v[0].location !== "Hyderabad") {
-      return v;
+  // YOUR REQUESTED CHANGE: Updated location to Kolkata
+  const sessions = [
+    {
+      id: 1,
+      title: "Beginner Crochet Workshop",
+      date: "Sunday, Oct 20",
+      time: "11 AM - 2 PM",
+      location: "Kolkata", 
+      price: 1499,
+      type: "In-person",
+      seats: "4 seats left",
+      isFew: true
+    },
+    {
+      id: 2,
+      title: "Amigurumi Masterclass",
+      date: "Saturday, Oct 26",
+      time: "4 PM - 6 PM",
+      location: "Online (Zoom)",
+      price: 999,
+      type: "Online",
+      seats: "8 seats left",
+      isFew: false
     }
-  } catch (e) {}
+  ];
 
-  return DEFAULT_SESSIONS;
-}
-const SESSIONS = loadSessions();
+  let activeSession = null;
 
-const rupee = n => '₹' + n.toLocaleString('en-IN');
-let currentSession = null;
-
-function renderSessions(){
-  document.getElementById('sessionsList').innerHTML = SESSIONS.map(s => {
-    const sold = s.seatsLeft <= 0;
-    const few = s.seatsLeft > 0 && s.seatsLeft <= 3;
-    const where = s.mode === 'online' ? 'Online (Zoom link shared after RSVP)' : (s.location || 'In person');
-    return `
+  function renderSessions() {
+    const list = document.getElementById('sessionsList');
+    list.innerHTML = sessions.map(s => `
       <div class="ws-sess">
-        <span class="badge ${s.mode}">${s.mode === 'online' ? '💻 Online' : '📍 In person'}</span>
+        <div class="badge ${s.type.toLowerCase().replace(' ', '-')}">${s.type}</div>
         <h3>${s.title}</h3>
         <div class="meta">
           <span>📅 ${s.date}</span>
           <span>⏰ ${s.time}</span>
-        </div>
-        <div class="meta">
-          <span>🪡 ${s.level}</span>
-          <span>📍 ${where}</span>
+          <span>📍 ${s.location}</span>
         </div>
         <div class="price-line">
           <div>
-            <div class="pp">${rupee(s.price)}<small> / seat</small></div>
-            <div class="seats ${few ? 'few' : ''}">${sold ? 'Fully booked' : (few ? `Only ${s.seatsLeft} seats left` : `${s.seatsLeft} seats available`)}</div>
+            <div class="pp">₹${s.price.toLocaleString()}<small>/person</small></div>
+            <div class="seats ${s.isFew ? 'few' : ''}">${s.seats}</div>
           </div>
-          <button class="rsvp" ${sold ? 'disabled' : ''} onclick="openRsvp('${s.id}')">${sold ? 'Sold out' : 'RSVP →'}</button>
+          <button class="rsvp" onclick="openModal(${s.id})">Reserve Spot</button>
         </div>
-      </div>`;
-  }).join('');
-}
+      </div>
+    `).join('');
+  }
 
-function openRsvp(id){
-  currentSession = SESSIONS.find(s => s.id === id);
-  if(!currentSession) return;
-  const where = currentSession.mode === 'online' ? 'Online' : (currentSession.location || 'In person');
-  document.getElementById('sessInfo').innerHTML = `
-    <strong>${currentSession.title}</strong><br>
-    ${currentSession.date} · ${currentSession.time}<br>
-    ${where} · ${rupee(currentSession.price)} / seat
-  `;
-  document.getElementById('rSeats').max = currentSession.seatsLeft;
-  document.getElementById('rSeats').value = 1;
-  updateRsvpTotal();
-  document.getElementById('rsvpBg').classList.add('open');
-}
-function closeRsvp(){ document.getElementById('rsvpBg').classList.remove('open'); }
-document.getElementById('rsvpBg').addEventListener('click', e => {
-  if(e.target.id === 'rsvpBg') closeRsvp();
-});
-function updateRsvpTotal(){
-  if(!currentSession) return;
-  const seats = Math.max(1, parseInt(document.getElementById('rSeats').value,10) || 1);
-  document.getElementById('rTotal').innerText = rupee(seats * currentSession.price);
-}
+  function openModal(id) {
+    activeSession = sessions.find(s => s.id === id);
+    document.getElementById('modalSessInfo').innerHTML = `
+      <strong>${activeSession.title}</strong><br>
+      ${activeSession.date} • ${activeSession.location}
+    `;
+    updateTotal();
+    document.getElementById('rsvpModal').classList.add('open');
+  }
 
-function submitRsvp(e){
-  e.preventDefault();
-  if(!currentSession) return false;
-  const v = id => document.getElementById(id).value.trim();
-  const name = v('rName'), phone = v('rPhone'), email = v('rEmail');
-  const seats = Math.max(1, parseInt(v('rSeats'),10) || 1);
-  const notes = v('rNotes');
-  const total = seats * currentSession.price;
-  const where = currentSession.mode === 'online' ? 'Online' : (currentSession.location || 'In person');
+  function closeModal() {
+    document.getElementById('rsvpModal').classList.remove('open');
+  }
 
-  const lines = [
-    "Hi Mini Crochetter! 🧶 I'd like to RSVP for a workshop:",
-    "",
-    "🎨 Workshop: " + currentSession.title,
-    "📅 Date: " + currentSession.date,
-    "⏰ Time: " + currentSession.time,
-    "📍 Mode: " + (currentSession.mode === 'online' ? 'Online' : 'In person — ' + where),
-    "",
-    "👤 Name: " + name,
-    "📱 Phone: " + phone,
-  ];
-  if(email) lines.push("✉️ Email: " + email);
-  lines.push(
-    "🔢 Seats: " + seats,
-    "💰 Total: ₹" + total.toLocaleString('en-IN'),
-  );
-  if(notes) lines.push("", "📝 Notes: " + notes);
-  lines.push("", "Please confirm my spot. Thank you!");
+  function updateTotal() {
+    const seats = document.getElementById('seatInput').value || 1;
+    const total = seats * activeSession.price;
+    document.getElementById('totalPrice').innerText = '₹' + total.toLocaleString();
+  }
 
-  window.open("https://wa.me/918886122232?text=" + encodeURIComponent(lines.join("\n")), "_blank");
-  closeRsvp();
-  return false;
-}
+  // Initialize page
+  renderSessions();
 
-renderSessions();
+  // Close modal on outside click
+  window.onclick = (e) => {
+    if(e.target.id === 'rsvpModal') closeModal();
+  }
 </script>
+</body>
+</html>
 
 </body>
 </html>
