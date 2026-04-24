@@ -102,10 +102,14 @@ function filterCat(cat,btn){
 }
 
 function openProduct(id){
-  current = products.find(p=>p.id===id);
-  document.getElementById("mimg").src = img(current.imgs[0]);
-  document.getElementById("mname").innerText = current.name;
-  document.getElementById("mdesc").innerText = current.desc;
+  const p = products.find(x=>x.id===id);
+
+  current = p;
+
+  document.getElementById("mimg").src = IMG(p.imgs[0]);
+  document.getElementById("mname").innerText = p.name;
+  document.getElementById("mdesc").innerText = p.desc;
+
   document.getElementById("modalBg").style.display="flex";
 }
 
