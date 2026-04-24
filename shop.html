@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Shop — Mini Crochetter</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@ nav{display:flex;justify-content:space-between;padding:12px 16px;background:#fff
 .products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:768px){.products{grid-template-columns:repeat(4,1fr)}}
 
-.card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #eee;cursor:pointer;position:relative}
+.card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #eee;cursor:pointer}
 .img{height:160px;background:#f3e7d7}
 .img img{width:100%;height:100%;object-fit:cover}
 
@@ -28,11 +28,12 @@ nav{display:flex;justify-content:space-between;padding:12px 16px;background:#fff
 .name{font-weight:600}
 .price{color:#712b13;font-weight:700}
 
-.wish{position:absolute;top:8px;right:8px;background:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer}
+.cart{position:fixed;right:10px;top:10px;background:#712b13;color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer}
 
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center}
 .modal{background:#fff;width:90%;max-width:500px;border-radius:12px;padding:16px}
 .close{float:right;cursor:pointer}
+.modal img{width:100%;border-radius:10px}
 </style>
 </head>
 
@@ -40,7 +41,7 @@ nav{display:flex;justify-content:space-between;padding:12px 16px;background:#fff
 
 <nav>
   <div>🧶 Mini Crochetter</div>
-  <div>Cart (<span id="cc">0</span>)</div>
+  <div class="cart" onclick="openCart()">Cart (<span id="cc">0</span>)</div>
 </nav>
 
 <div class="shop-wrap">
@@ -61,84 +62,57 @@ nav{display:flex;justify-content:space-between;padding:12px 16px;background:#fff
 <div class="modal-bg" id="modalBg" onclick="closeModal(event)">
   <div class="modal">
     <span class="close" onclick="closeModal()">✕</span>
-    <img id="mimg" style="width:100%;border-radius:10px">
+    <img id="mimg">
     <h3 id="mname"></h3>
     <p id="mdesc"></p>
     <button onclick="addFromModal()">Add to Cart</button>
   </div>
 </div>
 
-<script src="products.js"></script>
-
 <script>
-
-/* ---------------- IMAGE SYSTEM ---------------- */
-
 const IMG_FALLBACK = "pooh.png";
 
 function img(src){
   return src ? src : IMG_FALLBACK;
 }
 
-/* ---------------- DATA ---------------- */
+/* PRODUCTS (NO DUPLICATES) */
+const products = [
+  {id:1,cat:"booties",name:"Pink Booties",price:649,imgs:["booties_ruffle.jpg"],desc:"Soft handmade booties"},
+  {id:2,cat:"plushies",name:"Pooh Plushie",price:1499,imgs:["pooh.png"],desc:"Cute Pooh plush"},
+  {id:3,cat:"bags",name:"Rose Bag",price:999,imgs:["bag_rose.jpg"],desc:"Crochet sling bag"}
+];
 
-const products = window.PRODUCTS || [];
-
-/* ---------------- CART ---------------- */
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart=[];
 let current=null;
 
-function saveCart(){
-  localStorage.setItem("cart",JSON.stringify(cart));
-}
-
-function updateCart(){
-  document.getElementById("cc").innerText =
-  cart.reduce((s,i)=>s+i.qty,0);
-  saveCart();
-}
-
-/* ---------------- RENDER ---------------- */
-
 function render(list){
-  const g=document.getElementById("grid");
-
-  g.innerHTML = list.map(p=>`
+  document.getElementById("grid").innerHTML =
+  list.map(p=>`
     <div class="card" onclick="openProduct(${p.id})">
       <div class="img">
         <img src="${img(p.imgs[0])}">
       </div>
-
       <div class="info">
         <div class="name">${p.name}</div>
         <div class="price">₹${p.price}</div>
       </div>
-
-      <button class="wish" onclick="wish(event,this)">🤍</button>
     </div>
   `).join("");
 }
-
-/* ---------------- FILTER ---------------- */
 
 function filterCat(cat,btn){
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   btn.classList.add("active");
 
-  const list = cat==="all"?products:products.filter(p=>p.cat===cat);
-  render(list);
+  render(cat==="all"?products:products.filter(p=>p.cat===cat));
 }
-
-/* ---------------- MODAL ---------------- */
 
 function openProduct(id){
   current = products.find(p=>p.id===id);
-
-  document.getElementById("mimg").src=img(current.imgs[0]);
-  document.getElementById("mname").innerText=current.name;
-  document.getElementById("mdesc").innerText=current.desc;
-
+  document.getElementById("mimg").src = img(current.imgs[0]);
+  document.getElementById("mname").innerText = current.name;
+  document.getElementById("mdesc").innerText = current.desc;
   document.getElementById("modalBg").style.display="flex";
 }
 
@@ -148,19 +122,16 @@ function closeModal(e){
 }
 
 function addFromModal(){
-  let ex = cart.find(x=>x.id===current.id);
-  if(ex) ex.qty++;
-  else cart.push({...current,qty:1});
-
-  updateCart();
+  cart.push(current);
+  document.getElementById("cc").innerText = cart.length;
   closeModal();
 }
 
-/* ---------------- INIT ---------------- */
+function openCart(){
+  alert(cart.map(i=>i.name).join("\n") || "Empty cart");
+}
 
 render(products);
-updateCart();
-
 </script>
 
 </body>
