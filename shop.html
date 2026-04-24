@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -45,86 +44,85 @@
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(44,26,14,.6);z-index:400;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(3px)}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{position:fixed;z-index:401;background:var(–wht);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden;bottom:0;left:0;right:0;top:auto;border-radius:20px 20px 0 0;max-height:92vh;transform:translateY(100%)}
+.modal{position:fixed;z-index:401;background:var(--wht);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden;bottom:0;left:0;right:0;top:auto;border-radius:20px 20px 0 0;max-height:92vh;transform:translateY(100%)}
 .modal.open{transform:translateY(0)}
 @media(min-width:768px){.modal{top:50%;left:50%;bottom:auto;right:auto;border-radius:20px;width:min(860px,94vw);max-height:88vh;transform:translate(-50%,-46%) scale(.96)}.modal.open{transform:translate(-50%,-50%) scale(1)}}
-.modal-handle{width:40px;height:4px;border-radius:2px;background:var(–bdr);margin:10px auto 4px;flex-shrink:0}
+.modal-handle{width:40px;height:4px;border-radius:2px;background:var(--bdr);margin:10px auto 4px;flex-shrink:0}
 @media(min-width:768px){.modal-handle{display:none}}
 .modal-body{display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0}
 @media(min-width:768px){.modal-body{flex-direction:row}}
-.modal-gallery{background:var(–cr2);height:230px;flex-shrink:0;position:relative}
+.modal-gallery{background:var(--cr2);height:230px;flex-shrink:0;position:relative}
 @media(min-width:768px){.modal-gallery{width:44%;height:auto}}
 .modal-main-img{width:100%;height:100%;object-fit:cover;display:block}
 .modal-thumbs{display:flex;gap:8px;padding:8px 12px;background:rgba(255,255,255,.92);flex-wrap:wrap}
 .thumb{width:46px;height:46px;border-radius:8px;object-fit:cover;cursor:pointer;border:2px solid transparent;transition:all .2s;opacity:.65}
-.thumb.active,.thumb:hover{border-color:var(–ter);opacity:1}
+.thumb.active,.thumb:hover{border-color:var(--ter);opacity:1}
 .modal-info{flex:1;padding:14px 16px;overflow-y:auto;display:flex;flex-direction:column}
 @media(min-width:768px){.modal-info{padding:24px 28px}}
 .modal-close{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.95);border:none;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.modal-cat{font-size:11px;color:var(–tl);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
-.modal-name{font-family:“Playfair Display”,serif;font-size:clamp(17px,2.5vw,24px);color:var(–ter);margin-bottom:8px;line-height:1.25}
-.modal-price{font-family:“Playfair Display”,serif;font-size:22px;color:var(–ter);font-weight:700;margin-bottom:10px}
-.modal-price span{font-size:13px;color:var(–tl);font-weight:400;font-family:“Jost”,sans-serif}
-.modal-desc{font-size:13px;color:var(–tm);line-height:1.7;font-weight:300;margin-bottom:12px}
+.modal-cat{font-size:11px;color:var(--tl);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.modal-name{font-family:"Playfair Display",serif;font-size:clamp(17px,2.5vw,24px);color:var(--ter);margin-bottom:8px;line-height:1.25}
+.modal-price{font-family:"Playfair Display",serif;font-size:22px;color:var(--ter);font-weight:700;margin-bottom:10px}
+.modal-price span{font-size:13px;color:var(--tl);font-weight:400;font-family:"Jost",sans-serif}
+.modal-desc{font-size:13px;color:var(--tm);line-height:1.7;font-weight:300;margin-bottom:12px}
 @media(min-width:768px){.modal-desc{font-size:15px}}
-.modal-meta{background:var(–cr);border-radius:10px;border:1px solid var(–bdr);padding:10px 14px;margin-bottom:12px}
+.modal-meta{background:var(--cr);border-radius:10px;border:1px solid var(--bdr);padding:10px 14px;margin-bottom:12px}
 .modal-meta-row{display:flex;gap:8px;font-size:12px;margin-bottom:5px}
 .modal-meta-row:last-child{margin:0}
-.modal-meta-row strong{color:var(–ter);min-width:52px}
-.modal-meta-row span{color:var(–tm);font-weight:300}
-.modal-actions{display:flex;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid var(–bdr)}
-.modal-add{flex:1;background:var(–ter);color:#fff;border:none;padding:13px;border-radius:22px;font-size:14px;font-weight:500;cursor:pointer;font-family:“Jost”,sans-serif;transition:all .2s}
-.modal-add:active{background:var(–ter2)}
-.modal-add.added{background:var(–gld);color:var(–ter)}
-.modal-wa{flex:1;background:#fff;color:var(–ter);border:1.5px solid var(–ter);padding:13px;border-radius:22px;font-size:13px;font-weight:500;cursor:pointer;font-family:“Jost”,sans-serif}
+.modal-meta-row strong{color:var(--ter);min-width:52px}
+.modal-meta-row span{color:var(--tm);font-weight:300}
+.modal-actions{display:flex;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid var(--bdr)}
+.modal-add{flex:1;background:var(--ter);color:#fff;border:none;padding:13px;border-radius:22px;font-size:14px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif;transition:all .2s}
+.modal-add:active{background:var(--ter2)}
+.modal-add.added{background:var(--gld);color:var(--ter)}
+.modal-wa{flex:1;background:#fff;color:var(--ter);border:1.5px solid var(--ter);padding:13px;border-radius:22px;font-size:13px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif}
 
 /* CART */
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s}
 .cart-overlay.open{opacity:1;pointer-events:all}
-.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,100vw);background:var(–wht);z-index:301;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,100vw);background:var(--wht);z-index:301;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column}
 .cart-drawer.open{transform:translateX(0)}
-.cart-head{padding:16px 20px;border-bottom:1px solid var(–bdr);display:flex;align-items:center;justify-content:space-between}
-.cart-head h3{font-family:“Playfair Display”,serif;font-size:20px;color:var(–ter)}
-.close-c{background:none;border:none;font-size:22px;cursor:pointer;color:var(–tm);padding:4px}
+.cart-head{padding:16px 20px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.cart-head h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--ter)}
+.close-c{background:none;border:none;font-size:22px;cursor:pointer;color:var(--tm);padding:4px}
 .cart-items{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 18px}
-.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(–bdr)}
-.ci-img{width:62px;height:62px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(–cr2)}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--bdr)}
+.ci-img{width:62px;height:62px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--cr2)}
 .ci-info{flex:1;min-width:0}
-.ci-name{font-size:13px;font-weight:500;color:var(–ter);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ci-price{font-size:12px;color:var(–tm)}
+.ci-name{font-size:13px;font-weight:500;color:var(--ter);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-price{font-size:12px;color:var(--tm)}
 .qty-ctrl{display:flex;align-items:center;gap:8px;margin-top:6px}
-.qty-btn{width:28px;height:28px;border:1.5px solid var(–bdr);background:var(–cr);border-radius:7px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;font-family:“Jost”,sans-serif}
+.qty-btn{width:28px;height:28px;border:1.5px solid var(--bdr);background:var(--cr);border-radius:7px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;font-family:"Jost",sans-serif}
 .qty-n{font-size:14px;font-weight:500;min-width:18px;text-align:center}
-.rm-btn{background:none;border:none;color:var(–tl);cursor:pointer;font-size:11px;margin-left:auto;padding:2px 6px}
-.cart-empty{text-align:center;padding:48px 16px;color:var(–tl)}
-.cart-foot{padding:14px 18px;border-top:1px solid var(–bdr)}
+.rm-btn{background:none;border:none;color:var(--tl);cursor:pointer;font-size:11px;margin-left:auto;padding:2px 6px}
+.cart-empty{text-align:center;padding:48px 16px;color:var(--tl)}
+.cart-foot{padding:14px 18px;border-top:1px solid var(--bdr)}
 .cart-total-row{display:flex;justify-content:space-between;margin-bottom:12px}
-.ct-label{font-size:15px;color:var(–tm)}
-.ct-num{font-family:“Playfair Display”,serif;font-size:22px;color:var(–ter);font-weight:700}
-.checkout-btn{width:100%;background:var(–ter);color:#fff;border:none;padding:14px;border-radius:26px;font-size:14px;font-weight:500;cursor:pointer;font-family:“Jost”,sans-serif;transition:background .2s;margin-bottom:8px}
-.checkout-btn:active{background:var(–ter2)}
-.upi-btn{width:100%;background:#fff;color:#4a2b8a;border:1.5px solid #7c4dff;padding:12px;border-radius:26px;font-size:14px;font-weight:600;cursor:pointer;font-family:“Jost”,sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:10px}
+.ct-label{font-size:15px;color:var(--tm)}
+.ct-num{font-family:"Playfair Display",serif;font-size:22px;color:var(--ter);font-weight:700}
+.checkout-btn{width:100%;background:var(--ter);color:#fff;border:none;padding:14px;border-radius:26px;font-size:14px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif;transition:background .2s;margin-bottom:8px}
+.checkout-btn:active{background:var(--ter2)}
+.upi-btn{width:100%;background:#fff;color:#4a2b8a;border:1.5px solid #7c4dff;padding:12px;border-radius:26px;font-size:14px;font-weight:600;cursor:pointer;font-family:"Jost",sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:10px}
 .upi-btn:active{background:#f3f0ff}
-.wa-note{text-align:center;font-size:11px;color:var(–tl);line-height:1.6}
+.wa-note{text-align:center;font-size:11px;color:var(--tl);line-height:1.6}
 
 /* UPI MODAL */
 .upi-modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
 .upi-modal.open{display:flex}
 .upi-card{background:#fff;border-radius:20px;padding:24px 22px;width:min(320px,90vw);text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.2)}
-.upi-card h3{font-family:“Playfair Display”,serif;color:var(–ter);font-size:20px;margin-bottom:6px}
-.upi-card p{font-size:13px;color:var(–tm);margin-bottom:16px;font-weight:300;line-height:1.6}
-.upi-qr{width:160px;height:160px;margin:0 auto 14px;border:2px solid var(–bdr);border-radius:12px;overflow:hidden;background:var(–cr)}
-.upi-id-box{background:var(–gp);border:1px solid var(–gl);border-radius:10px;padding:10px 16px;font-size:15px;font-weight:700;color:var(–ter);margin-bottom:14px;letter-spacing:.03em;cursor:pointer;position:relative}
-.upi-id-box::after{content:“Tap to copy”;display:block;font-size:10px;font-weight:400;color:var(–tl);margin-top:2px}
-.upi-id-box.copied::after{content:“Copied! ✓”;color:green}
-.upi-close{background:var(–ter);color:#fff;border:none;padding:12px 32px;border-radius:22px;font-size:14px;font-weight:500;cursor:pointer;font-family:“Jost”,sans-serif}
+.upi-card h3{font-family:"Playfair Display",serif;color:var(--ter);font-size:20px;margin-bottom:6px}
+.upi-card p{font-size:13px;color:var(--tm);margin-bottom:16px;font-weight:300;line-height:1.6}
+.upi-qr{width:160px;height:160px;margin:0 auto 14px;border:2px solid var(--bdr);border-radius:12px;overflow:hidden;background:var(--cr)}
+.upi-id-box{background:var(--gp);border:1px solid var(--gl);border-radius:10px;padding:10px 16px;font-size:15px;font-weight:700;color:var(--ter);margin-bottom:14px;letter-spacing:.03em;cursor:pointer;position:relative}
+.upi-id-box::after{content:"Tap to copy";display:block;font-size:10px;font-weight:400;color:var(--tl);margin-top:2px}
+.upi-id-box.copied::after{content:"Copied! ✓";color:green}
+.upi-close{background:var(--ter);color:#fff;border:none;padding:12px 32px;border-radius:22px;font-size:14px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif}
 
-.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(60px);background:var(–ter);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:600;transition:transform .3s;box-shadow:0 4px 18px rgba(0,0,0,.22);white-space:nowrap;pointer-events:none}
+.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--ter);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:600;transition:transform .3s;box-shadow:0 4px 18px rgba(0,0,0,.22);white-space:nowrap;pointer-events:none}
 @media(min-width:768px){.toast{bottom:28px}}
 .toast.show{transform:translateX(-50%) translateY(0)}
 @media(max-width:767px){.nav-links{display:none}.page-header{padding:80px 4% 20px}.shop-wrap{padding:16px 3% 60px}}
 </style>
-
 </head>
 <body>
 <nav>
@@ -185,7 +183,6 @@
 </footer>
 
 <!-- CART -->
-
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
   <div class="cart-head"><h3>Your Cart &#x1F9F6;</h3><button class="close-c" onclick="closeCart()">&#x2715;</button></div>
@@ -199,7 +196,6 @@
 </div>
 
 <!-- PRODUCT MODAL -->
-
 <div class="modal-overlay" id="mo" onclick="closeModal(event)"></div>
 <div class="modal" id="modal">
   <div class="modal-handle"></div>
@@ -224,7 +220,6 @@
 </div>
 
 <!-- UPI MODAL -->
-
 <div class="upi-modal" id="upi-modal">
   <div class="upi-card">
     <h3>Pay via UPI &#x1F4B3;</h3>
@@ -459,6 +454,5 @@ document.getElementById("modal").addEventListener("touchend",e=>{if(e.changedTou
 
 renderProducts("all");
 </script>
-
 </body>
 </html>
