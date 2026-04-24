@@ -278,11 +278,16 @@ const DEFAULT_SESSIONS = [
     level: "All levels",
   },
 ];
-function loadSessions(){
+function loadSessions() {
   try {
-    const v = JSON.parse(localStorage.getItem('mc_sessions'));
-    if(Array.isArray(v) && v.length) return v;
-  } catch(e){}
+    const v = JSON.parse(localStorage.getItem("mc_sessions"));
+
+    // ignore old/stale data if structure mismatch
+    if (Array.isArray(v) && v.length && v[0].location !== "Hyderabad") {
+      return v;
+    }
+  } catch (e) {}
+
   return DEFAULT_SESSIONS;
 }
 const SESSIONS = loadSessions();
