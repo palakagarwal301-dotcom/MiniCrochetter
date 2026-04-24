@@ -25,10 +25,21 @@ nav .links a:hover{color:#b87a5c}
 .shop-head h1{font-family:'Playfair Display',serif;margin:0 0 4px;color:#5b3d2b;font-size:30px}
 .shop-head p{margin:0;color:#8a6f5e}
 
-.tabs{display:flex;gap:8px;overflow-x:auto;margin:18px 0 20px;padding-bottom:4px}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin:18px 0 14px;padding-bottom:4px}
 .tab{padding:8px 16px;border:1px solid #e9dccf;border-radius:22px;background:#fff;white-space:nowrap;cursor:pointer;font-family:inherit;font-size:14px;color:#5b3d2b;transition:.15s}
 .tab:hover{border-color:#d49a7a}
 .tab.active{background:#712b13;color:#fff;border-color:#712b13}
+
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+.search{flex:1;min-width:220px;position:relative}
+.search input{width:100%;padding:11px 14px 11px 38px;border:1px solid #e9dccf;border-radius:22px;font-family:inherit;font-size:14px;background:#fff;color:#3d2a1f}
+.search input:focus{outline:none;border-color:#d49a7a;box-shadow:0 0 0 3px rgba(212,154,122,.15)}
+.search .ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#a4886f;font-size:14px;pointer-events:none}
+.sort select{padding:10px 14px;border:1px solid #e9dccf;border-radius:22px;font-family:inherit;font-size:14px;background:#fff;color:#5b3d2b;cursor:pointer}
+.sort select:focus{outline:none;border-color:#d49a7a;box-shadow:0 0 0 3px rgba(212,154,122,.15)}
+.result-count{font-size:13px;color:#8a6f5e;margin-bottom:12px}
+.no-results{text-align:center;padding:60px 20px;color:#8a6f5e;background:#fff;border:1px dashed #e9dccf;border-radius:14px;grid-column:1/-1}
+.no-results .ico{font-size:42px;margin-bottom:8px}
 
 .products{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 @media(min-width:640px){.products{grid-template-columns:repeat(3,1fr)}}
@@ -123,6 +134,23 @@ nav .links a:hover{color:#b87a5c}
     <button class="tab" data-cat="coasters">Coasters</button>
   </div>
 
+  <div class="toolbar">
+    <div class="search">
+      <span class="ico">🔍</span>
+      <input id="searchInput" type="search" placeholder="Search by name…" aria-label="Search products">
+    </div>
+    <div class="sort">
+      <select id="sortSelect" aria-label="Sort products">
+        <option value="featured">Sort: Featured</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="name-asc">Name: A → Z</option>
+        <option value="newest">Newest first</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="result-count" id="resultCount"></div>
   <div class="products" id="grid"></div>
 </div>
 
@@ -182,8 +210,41 @@ function saveCart(){
 function img(src){ return src || IMG_FALLBACK; }
 function rupee(n){ return '₹' + n.toLocaleString('en-IN'); }
 
+let currentCat = 'all';
+let currentSearch = '';
+let currentSort = 'featured';
+
+function applyFilters(){
+  let list = products.slice();
+  if(currentCat !== 'all') list = list.filter(p => p.cat === currentCat);
+  if(currentSearch){
+    const q = currentSearch.toLowerCase();
+    list = list.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      (p.desc && p.desc.toLowerCase().includes(q)) ||
+      p.cat.toLowerCase().includes(q)
+    );
+  }
+  switch(currentSort){
+    case 'price-asc':  list.sort((a,b) => a.price - b.price); break;
+    case 'price-desc': list.sort((a,b) => b.price - a.price); break;
+    case 'name-asc':   list.sort((a,b) => a.name.localeCompare(b.name)); break;
+    case 'newest':     list.sort((a,b) => b.id - a.id); break;
+  }
+  render(list);
+}
+
 function render(list){
-  document.getElementById('grid').innerHTML = list.map(p => `
+  const grid = document.getElementById('grid');
+  const count = document.getElementById('resultCount');
+  count.innerText = list.length === products.length
+    ? `${list.length} products`
+    : `${list.length} of ${products.length} products`;
+  if(list.length === 0){
+    grid.innerHTML = `<div class="no-results"><div class="ico">🧶</div>Nothing matched your search.<br><span style="font-size:13px">Try a different word or category.</span></div>`;
+    return;
+  }
+  grid.innerHTML = list.map(p => `
     <div class="card">
       <div class="img" onclick="openProduct(${p.id})"><img src="${img(p.imgs[0])}" alt="${p.name}"></div>
       <div class="info">
@@ -199,9 +260,23 @@ document.querySelectorAll('.tab').forEach(t => {
   t.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
     t.classList.add('active');
-    const cat = t.dataset.cat;
-    render(cat === 'all' ? products : products.filter(p => p.cat === cat));
+    currentCat = t.dataset.cat;
+    applyFilters();
   });
+});
+
+let searchTimer;
+document.getElementById('searchInput').addEventListener('input', e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    currentSearch = e.target.value.trim();
+    applyFilters();
+  }, 120);
+});
+
+document.getElementById('sortSelect').addEventListener('change', e => {
+  currentSort = e.target.value;
+  applyFilters();
 });
 
 function openProduct(id){
@@ -309,7 +384,7 @@ function showToast(msg){
   toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-render(products);
+applyFilters();
 updateCartUI();
 </script>
 
