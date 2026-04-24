@@ -77,21 +77,14 @@ function img(src){
 }
 
 /* PRODUCTS (NO DUPLICATES) */
-const products = [
-  {id:1,cat:"booties",name:"Pink Booties",price:649,imgs:["booties_ruffle.jpg"],desc:"Soft handmade booties"},
-  {id:2,cat:"plushies",name:"Pooh Plushie",price:1499,imgs:["pooh.png"],desc:"Cute Pooh plush"},
-  {id:3,cat:"bags",name:"Rose Bag",price:999,imgs:["bag_rose.jpg"],desc:"Crochet sling bag"}
-];
-
-let cart=[];
-let current=null;
+const products = window.PRODUCTS;
 
 function render(list){
   document.getElementById("grid").innerHTML =
   list.map(p=>`
     <div class="card" onclick="openProduct(${p.id})">
       <div class="img">
-        <img src="${img(p.imgs[0])}">
+        <img src="${IMG(p.imgs[0])}">
       </div>
       <div class="info">
         <div class="name">${p.name}</div>
