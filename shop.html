@@ -114,7 +114,10 @@
 .upi-card{background:#fff;border-radius:20px;padding:24px 22px;width:min(320px,90vw);text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.2)}
 .upi-card h3{font-family:"Playfair Display",serif;color:var(--ter);font-size:20px;margin-bottom:6px}
 .upi-card p{font-size:13px;color:var(--tm);margin-bottom:16px;font-weight:300;line-height:1.6}
-.upi-qr{width:160px;height:160px;margin:0 auto 14px;border:2px solid var(--bdr);border-radius:12px;overflow:hidden;background:var(--cr)}
+.upi-qr{width:200px;height:200px;margin:0 auto 8px;border:2px solid var(--bdr);border-radius:12px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.upi-qr canvas{display:block}
+.upi-amt{font-family:"Jost",sans-serif;font-size:13px;color:var(--tm);margin-bottom:14px}
+.upi-amt strong{color:var(--ter);font-size:15px;font-weight:700}
 .upi-id-box{background:var(--gp);border:1px solid var(--gl);border-radius:10px;padding:10px 16px;font-size:15px;font-weight:700;color:var(--ter);margin-bottom:14px;letter-spacing:.03em;cursor:pointer;position:relative}
 .upi-id-box::after{content:"Tap to copy";display:block;font-size:10px;font-weight:400;color:var(--tl);margin-top:2px}
 .upi-id-box.copied::after{content:"Copied! ✓";color:green}
@@ -125,6 +128,7 @@
 .toast.show{transform:translateX(-50%) translateY(0)}
 @media(max-width:767px){.nav-links{display:none}.page-header{padding:80px 4% 20px}.shop-wrap{padding:16px 3% 60px}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 </head>
 <body>
 <nav>
@@ -226,7 +230,8 @@
   <div class="upi-card">
     <h3>Pay via UPI 💳</h3>
     <p>Use the UPI ID below to pay. After payment, send your screenshot on WhatsApp to confirm your order.</p>
-    <div class="upi-qr"><canvas id="upi-canvas" width="156" height="156"></canvas></div>
+    <div class="upi-qr"><canvas id="upi-canvas" width="190" height="190"></canvas></div>
+    <div class="upi-amt" id="upi-amt">Scan with any UPI app</div>
     <div class="upi-id-box" id="upi-id-box" onclick="copyUpiId()">8886122232@yapl</div>
     <p style="font-size:12px;color:var(--tl);margin-bottom:16px">
       After payment, WhatsApp your screenshot:<br>
@@ -327,29 +332,40 @@ function checkout(){
   window.location.href="order.html";
 }
 
+function buildUpiUri(amount,note){
+  const params=["pa=8886122232@yapl","pn="+encodeURIComponent("Mini Crochetter"),"cu=INR"];
+  if(amount>0)params.push("am="+amount.toFixed(2));
+  if(note)params.push("tn="+encodeURIComponent(note));
+  return "upi://pay?"+params.join("&");
+}
+
 function openUpi(){
   document.getElementById("upi-modal").classList.add("open");
   const canvas=document.getElementById("upi-canvas");
-  const ctx=canvas.getContext("2d");
   const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  ctx.fillStyle="#fff";ctx.fillRect(0,0,156,156);
-  const ter="#712b13";
-  ctx.strokeStyle=ter;ctx.lineWidth=2;ctx.strokeRect(6,6,144,144);
-  [[8,8],[108,8],[8,108]].forEach(([x,y])=>{
-    ctx.fillStyle=ter;ctx.fillRect(x,y,40,40);
-    ctx.fillStyle="#fff";ctx.fillRect(x+5,y+5,30,30);
-    ctx.fillStyle=ter;ctx.fillRect(x+10,y+10,20,20);
-  });
-  ctx.fillStyle=ter;
-  for(let r=0;r<8;r++)for(let c=0;c<8;c++){
-    if((r+c)%3===0&&!(r<3&&c<3)&&!(r<3&&c>4)&&!(r>4&&c<3)){
-      ctx.fillRect(20+c*14,20+r*14,10,10);
-    }
+  const ref="MC"+Date.now().toString(36).toUpperCase().slice(-6);
+  const note=cart.length?("Order "+ref+" ("+cart.reduce((n,i)=>n+i.qty,0)+" items)"):"Mini Crochetter Order";
+  const uri=buildUpiUri(total,note);
+  // Render real scannable QR
+  if(window.QRious){
+    new QRious({element:canvas,value:uri,size:190,level:"M",foreground:"#712b13",background:"#ffffff",padding:4});
+  }else{
+    // Fallback: external QR image if library failed to load
+    const img=new Image();
+    img.onload=()=>{const ctx=canvas.getContext("2d");ctx.clearRect(0,0,190,190);ctx.drawImage(img,0,0,190,190);};
+    img.src="https://api.qrserver.com/v1/create-qr-code/?size=190x190&data="+encodeURIComponent(uri);
   }
-  ctx.fillStyle=ter;ctx.font="bold 9px sans-serif";ctx.textAlign="center";
-  ctx.fillText("UPI",78,72);
-  ctx.font="8px sans-serif";ctx.fillStyle="#7a4a2a";
-  ctx.fillText(total>0?"Pay ₹"+total:"Scan to Pay",78,84);
+  // Update amount caption + make the modal "tap QR to open UPI app" friendly on mobile
+  const amtEl=document.getElementById("upi-amt");
+  if(total>0){
+    amtEl.innerHTML="Pay <strong>₹"+total+"</strong> &middot; tap QR on mobile to open UPI app";
+  }else{
+    amtEl.innerHTML="Scan with any UPI app";
+  }
+  // Mobile tap-to-pay: clicking the QR launches the UPI intent
+  const qrBox=canvas.parentElement;
+  qrBox.style.cursor="pointer";
+  qrBox.onclick=()=>{ if(/Android|iPhone|iPad/i.test(navigator.userAgent)) window.location.href=uri; };
 }
 
 function copyUpiId(){
