@@ -66,6 +66,43 @@
 
   <div class="home-toast" id="homeToast"></div>
 
+  <section class="whats-new-section" style="padding:50px 24px;max-width:1100px;margin:0 auto">
+    <div class="sec-head">
+      <span class="sec-tag">What's new</span>
+      <h2 class="sec-title">A smoother way to <em>shop &amp; book</em></h2>
+    </div>
+    <div class="wn-grid">
+      <a href="shop.html" class="wn-card">
+        <div class="wn-ico">🛒</div>
+        <h3>Shopping cart</h3>
+        <p>Add pieces from the shop, adjust quantities, and check out — your cart follows you to the order page.</p>
+        <span class="wn-link">Open Shop →</span>
+      </a>
+      <a href="shop.html" class="wn-card">
+        <div class="wn-ico">🔍</div>
+        <h3>Search &amp; sort</h3>
+        <p>Find the piece you want by name or sort by price, name, or what's newest in the shop.</p>
+        <span class="wn-link">Try search →</span>
+      </a>
+      <a href="workshops.html#sessions" class="wn-card">
+        <div class="wn-ico">🎟️</div>
+        <h3>Workshop RSVP</h3>
+        <p>Pick a session, see how many seats are left, and reserve your spot — confirmation lands on WhatsApp.</p>
+        <span class="wn-link">See sessions →</span>
+      </a>
+    </div>
+    <style>
+      .wn-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px}
+      @media(min-width:720px){.wn-grid{grid-template-columns:repeat(3,1fr)}}
+      .wn-card{background:#fff;border:1px solid #f0e7df;border-radius:14px;padding:22px 20px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;transition:.15s}
+      .wn-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(180,140,110,.12);border-color:#e9c8a8}
+      .wn-card .wn-ico{font-size:28px;margin-bottom:4px}
+      .wn-card h3{font-family:'Playfair Display',serif;color:#5b3d2b;margin:0;font-size:19px}
+      .wn-card p{color:#7a5e4d;font-size:14px;line-height:1.55;margin:0}
+      .wn-card .wn-link{color:#b87a5c;font-weight:500;font-size:14px;margin-top:auto;padding-top:6px}
+    </style>
+  </section>
+
   <section class="reviews-section">
     <div class="sec-head">
       <span class="sec-tag">Happy customers</span>
