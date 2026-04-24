@@ -1,187 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Place Order</title>
-
-<link rel="stylesheet" href="style.css">
-
-<style>
-.box{
-  max-width:500px;
-  margin:20px auto;
-  background:white;
-  padding:15px;
-  border-radius:10px;
-}
-
-input{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:5px;
-}
-
-button{
-  width:100%;
-  padding:10px;
-  background:#712b13;
-  color:white;
-  border:none;
-  border-radius:5px;
-  margin-top:10px;
-}
-
-.item{
-  display:flex;
-  justify-content:space-between;
-  padding:5px 0;
-}
-
-/* navbar (consistent with other pages) */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 12px 20px;
-  background: white;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.navbar .logo {
-  font-weight: bold;
-}
-
-.navbar .links a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: black;
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Order — Mini Crochetter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=5">
+  <style>
+    .order-wrap{max-width:1100px;margin:0 auto;padding:60px 24px 80px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
+    @media(max-width:860px){.order-wrap{grid-template-columns:1fr;padding:40px 18px 60px}}
+    .order-form{background:#fff;border:1px solid #f0e7df;border-radius:18px;padding:32px;box-shadow:0 6px 24px rgba(180,140,110,.06)}
+    .order-form h2{font-family:'Playfair Display',serif;font-size:28px;margin:0 0 6px;color:#5b3d2b}
+    .order-form .sub{color:#8a6f5e;margin:0 0 24px;font-size:15px}
+    .field{display:block;margin-bottom:18px}
+    .field label{display:block;font-weight:500;font-size:14px;color:#5b3d2b;margin-bottom:6px}
+    .field input,.field select,.field textarea{
+      width:100%;padding:12px 14px;border:1px solid #e9dccf;border-radius:10px;
+      font-family:inherit;font-size:15px;background:#fffaf6;color:#3d2a1f;transition:.2s
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#d49a7a;background:#fff;box-shadow:0 0 0 3px rgba(212,154,122,.15)}
+    .field textarea{resize:vertical;min-height:90px}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:520px){.row2{grid-template-columns:1fr}}
+    .submit-btn{
+      width:100%;padding:14px;border:none;border-radius:10px;
+      background:linear-gradient(135deg,#d49a7a,#b87a5c);color:#fff;
+      font-family:inherit;font-size:16px;font-weight:500;cursor:pointer;transition:.2s;
+      box-shadow:0 4px 14px rgba(184,122,92,.25)
+    }
+    .submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(184,122,92,.35)}
+    .form-note{font-size:13px;color:#8a6f5e;text-align:center;margin:14px 0 0}
+    .order-side{padding:8px 0}
+    .order-side h2{font-family:'Playfair Display',serif;font-size:30px;color:#5b3d2b;margin:0 0 14px;line-height:1.2}
+    .order-side h2 em{color:#b87a5c;font-style:italic}
+    .order-side p{color:#6b5345;font-size:16px;line-height:1.65;margin:0 0 22px}
+    .info-card{background:#fdf6f0;border:1px solid #f0e0d0;border-radius:14px;padding:18px 20px;margin-bottom:14px}
+    .info-card h4{margin:0 0 6px;font-size:15px;color:#5b3d2b;font-weight:600}
+    .info-card p{margin:0;color:#7a5e4d;font-size:14px;line-height:1.55}
+    .alt-contact{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .alt-contact a{
+      flex:1;min-width:140px;text-align:center;padding:11px 14px;border-radius:10px;
+      text-decoration:none;font-size:14px;font-weight:500;border:1px solid #e9dccf;color:#5b3d2b;background:#fff;transition:.2s
+    }
+    .alt-contact a:hover{background:#fdf6f0;border-color:#d49a7a}
+    .alt-contact a.wa{background:#25d366;color:#fff;border-color:#25d366}
+    .alt-contact a.wa:hover{background:#1ebe57;border-color:#1ebe57}
+  </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="logo">Mini Crochetter 🧶</div>
+  <nav>
+    <a href="index.html?v=5" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+  <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html?v=5">Home</a></li>
+      <li><a href="shop.html?v=5">Shop</a></li>
+      <li><a href="workshops.html?v=5">Workshops</a></li>
+      <li><a href="order.html?v=5" class="active">Order</a></li>
+    </ul>
+    <button class="cart-btn" onclick="window.location='shop.html'">🛍️ Shop</button>
+  </nav>
 
-  <div class="links">
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="cart.html">Cart 🛒 (<span id="cartCount">0</span>)</a>
+  <div class="page-header">
+    <h1>Place Your <em>Custom Order</em></h1>
+    <p>Tell us what you'd like and we'll get back on WhatsApp with confirmation, final pricing, and timeline.</p>
   </div>
-</nav>
-<div class="box">
 
-  <h3>Your Items</h3>
-  <div id="items"></div>
+  <div class="order-wrap">
+    <form class="order-form" onsubmit="return sendOrder(event)">
+      <h2>Order Details</h2>
+      <p class="sub">Fill this in and tap submit — it opens WhatsApp with your order pre-filled.</p>
 
-  <h3 id="total"></h3>
+      <div class="row2">
+        <div class="field">
+          <label for="name">Your Name *</label>
+          <input id="name" required placeholder="e.g. Priya Sharma">
+        </div>
+        <div class="field">
+          <label for="phone">Phone / WhatsApp *</label>
+          <input id="phone" required placeholder="+91 98xxxxxxxx">
+        </div>
+      </div>
 
-  <hr>
+      <div class="field">
+        <label for="email">Email (optional)</label>
+        <input id="email" type="email" placeholder="you@example.com">
+      </div>
 
-  <h3>Shipping Details</h3>
+      <div class="row2">
+        <div class="field">
+          <label for="cat">Product Category *</label>
+          <select id="cat" required>
+            <option value="">Choose…</option>
+            <option>Baby Booties</option>
+            <option>Plushie / Custom Doll</option>
+            <option>Coaster / Mat</option>
+            <option>Flower / Décor</option>
+            <option>Bag</option>
+            <option>Hair Accessory</option>
+            <option>Rakhi (set)</option>
+            <option>Workshop booking</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="qty">Quantity *</label>
+          <input id="qty" type="number" min="1" value="1" required>
+        </div>
+      </div>
 
-  <input id="name" placeholder="Your Name">
-  <input id="phone" placeholder="Phone Number">
-  <input id="address" placeholder="Full Address">
+      <div class="row2">
+        <div class="field">
+          <label for="size">Size (if applicable)</label>
+          <input id="size" placeholder="e.g. Newborn / 0-3m / ~20cm">
+        </div>
+        <div class="field">
+          <label for="colour">Preferred Colour(s)</label>
+          <input id="colour" placeholder="e.g. blush pink + cream">
+        </div>
+      </div>
 
-  <button onclick="placeOrder()">Place Order on WhatsApp</button>
+      <div class="field">
+        <label for="date">Need it by (optional)</label>
+        <input id="date" type="date">
+      </div>
 
-</div>
+      <div class="field">
+        <label for="notes">Description / Special Requests *</label>
+        <textarea id="notes" required placeholder="Tell us about the design, who it's for, any reference image you have, gift wrapping etc."></textarea>
+      </div>
 
-<script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      <button class="submit-btn" type="submit">Send Order via WhatsApp →</button>
+      <p class="form-note">We'll confirm availability, final price &amp; payment over WhatsApp.</p>
+    </form>
 
-function load(){
+    <aside class="order-side">
+      <h2>How <em>custom orders</em> work</h2>
+      <p>Every piece is made to order, just for you. Once we receive your details we'll confirm the design, share final pricing, and start crocheting.</p>
 
-  let box = document.getElementById("items");
-  box.innerHTML = "";
+      <div class="info-card">
+        <h4>⏱️ Turnaround</h4>
+        <p>5–10 days for most items. Larger pieces and full custom dolls may take 2 weeks.</p>
+      </div>
+      <div class="info-card">
+        <h4>📦 Shipping</h4>
+        <p>Pan-India shipping. Gift packaging available on request.</p>
+      </div>
+      <div class="info-card">
+        <h4>💳 Payment</h4>
+        <p>Pay via UPI after we confirm your order on WhatsApp. 50% advance for custom dolls and bulk orders.</p>
+        <p style="margin-top:10px;"><strong>UPI ID:</strong><br>
+          <code style="display:inline-block;background:#fff7ec;border:1px solid #e9d6b8;padding:6px 10px;border-radius:8px;font-size:15px;color:#5a3a1a;margin-top:4px;">8886122232@yapl</code>
+        </p>
+        <p class="form-note" style="margin-top:6px;">Works on PhonePe, GPay, Paytm &amp; any UPI app.</p>
+      </div>
 
-  if(cart.length === 0){
-    box.innerHTML = "<p>Cart is empty</p>";
-    document.getElementById("total").innerText = "";
-    return;
-  }
+      <div class="alt-contact">
+        <a class="wa" href="https://wa.me/918886122232" target="_blank">💬 WhatsApp</a>
+        <a href="https://www.instagram.com/mini.crochetter/" target="_blank">📸 Instagram</a>
+        <a href="mailto:palakagarwal301@gmail.com">✉️ Email</a>
+      </div>
+    </aside>
+  </div>
 
-  let total = 0;
+  <footer id="contact">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-brand-name">🧶 Mini Crochetter</div>
+        <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan-India.</p>
+        <div class="foot-soc">
+          <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
+          <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">💬</a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Shop</h4>
+        <a href="shop.html?v=5">Baby Booties</a><a href="shop.html?v=5">Mini Plushies</a>
+        <a href="shop.html?v=5">Coasters &amp; Mats</a><a href="shop.html?v=5">Flowers</a>
+        <a href="shop.html?v=5">Bags</a><a href="shop.html?v=5">Crochet Rakhis</a>
+      </div>
+      <div class="foot-col"><h4>Contact</h4>
+        <a href="https://www.instagram.com/mini.crochetter/" target="_blank">DM on Instagram</a>
+        <a href="https://wa.me/918886122232" target="_blank">WhatsApp Us</a>
+        <a href="mailto:palakagarwal301@gmail.com">palakagarwal301@gmail.com</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div class="foot-copy">© 2025 Mini Crochetter · Handmade with love in India 🇮🇳</div>
+      <div class="foot-copy">All pieces made to order · Ships pan-India</div>
+    </div>
+  </footer>
 
-  cart.forEach(i=>{
-    let qty = i.qty || 1;
-    total += i.price * qty;
+  <script>
+    function sendOrder(e){
+      e.preventDefault();
+      const v = id => document.getElementById(id).value.trim();
+      const name=v('name'), phone=v('phone'), email=v('email'),
+            cat=v('cat'), qty=v('qty'), size=v('size'),
+            colour=v('colour'), date=v('date'), notes=v('notes');
 
-    let div = document.createElement("div");
-    div.className = "item";
+      const lines = [
+        "Hi Mini Crochetter! 🧶 I'd like to place an order:",
+        "",
+        "👤 Name: " + name,
+        "📱 Phone: " + phone,
+      ];
+      if(email) lines.push("✉️ Email: " + email);
+      lines.push(
+        "",
+        "🧺 Category: " + cat,
+        "🔢 Quantity: " + qty,
+      );
+      if(size)   lines.push("📏 Size: " + size);
+      if(colour) lines.push("🎨 Colour: " + colour);
+      if(date)   lines.push("📅 Need by: " + date);
+      lines.push("", "📝 Details: " + notes, "", "Please confirm availability, final price & payment. Thank you!");
 
-    div.innerHTML = `
-      <span>${i.name} x ${qty}</span>
-      <span>₹${i.price * qty}</span>
-    `;
-
-    box.appendChild(div);
-  });
-
-  document.getElementById("total").innerText = "Total: ₹" + total;
-}
-
-function placeOrder(){
-
-  if(cart.length === 0){
-    alert("Cart is empty");
-    return;
-  }
-
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let address = document.getElementById("address").value;
-
-  if(!name || !phone || !address){
-    alert("Please fill all details");
-    return;
-  }
-
-  let msg = "🧶 NEW ORDER%0A%0A";
-
-  msg += "Name: " + name + "%0A";
-  msg += "Phone: " + phone + "%0A";
-  msg += "Address: " + address + "%0A%0A";
-
-  let total = 0;
-
-  cart.forEach(i=>{
-    let qty = i.qty || 1;
-    msg += i.name + " x " + qty + " = ₹" + (i.price * qty) + "%0A";
-    total += i.price * qty;
-  });
-
-  msg += "%0ATotal: ₹" + total;
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-window.location.href = "success.html";
-}
-
-/* CART COUNT */
-function updateCartCount(){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let count = cart.reduce((s,i)=>s+(i.qty||1),0);
-
-  let el = document.getElementById("cartCount");
-  if(el) el.innerText = count;
-}
-
-updateCartCount();
-
-load();
-</script>
-
+      const url = "https://wa.me/918886122232?text=" + encodeURIComponent(lines.join("\n"));
+      window.open(url, "_blank");
+      return false;
+    }
+  </script>
 </body>
 </html>

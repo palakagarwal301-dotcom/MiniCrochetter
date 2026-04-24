@@ -1,144 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Shop — Mini Crochetter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-*{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.filter-tabs{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;scrollbar-width:none;margin-bottom:24px}
-.filter-tabs::-webkit-scrollbar{display:none}
-.tab{flex-shrink:0;border:1.5px solid var(--bdr);background:var(--wht);color:var(--tm);padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;transition:all .2s;font-family:"Jost",sans-serif;white-space:nowrap;min-height:36px}
-.tab.active,.tab:hover{background:var(--ter);color:var(--wht);border-color:var(--ter)}
-.products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media(min-width:600px){.products{grid-template-columns:repeat(3,1fr);gap:18px}}
-@media(min-width:1000px){.products{grid-template-columns:repeat(4,1fr);gap:22px}}
-.product-card{background:var(--wht);border-radius:14px;overflow:hidden;border:1px solid var(--bdr);cursor:pointer;-webkit-user-select:none;user-select:none;transition:transform .2s,box-shadow .2s}
-.product-card:active{transform:scale(.97)}
-@media(min-width:768px){.product-card:hover{transform:translateY(-4px);box-shadow:var(--sh)}}
-.product-img-wrap{height:180px;overflow:hidden;background:var(--cr2);position:relative}
-@media(min-width:600px){.product-img-wrap{height:220px}}
-.product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .35s;display:block}
-.badge{position:absolute;top:8px;left:8px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;letter-spacing:.04em}
-.badge.best{background:var(--gld);color:var(--ter)}
-.badge.new{background:var(--ter);color:#fff}
-.badge.seasonal{background:#b71c1c;color:#fff}
-.badge.custom{background:var(--ter2);color:#fff}
-.wl-btn{position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:2}
-.product-info{padding:10px 12px 14px}
-.product-cat{font-size:10px;color:var(--tl);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
-.product-name{font-family:"Playfair Display",serif;font-size:14px;color:var(--ter);margin-bottom:4px;line-height:1.3}
-@media(min-width:600px){.product-name{font-size:16px}}
-.product-desc-short{display:none}
-@media(min-width:768px){.product-desc-short{display:block;font-size:13px;color:var(--tm);line-height:1.5;font-weight:300;margin-bottom:10px;height:40px;overflow:hidden}}
-.product-footer{display:flex;align-items:center;justify-content:space-between;gap:6px}
-.product-price{font-family:"Playfair Display",serif;font-size:15px;color:var(--ter);font-weight:700}
-@media(min-width:600px){.product-price{font-size:18px}}
-.product-price span{font-size:10px;color:var(--tl);font-weight:400;font-family:"Jost",sans-serif}
-.view-btn{background:var(--ter);color:#fff;border:none;padding:7px 11px;border-radius:14px;font-size:11px;cursor:pointer;font-family:"Jost",sans-serif;white-space:nowrap}
-@media(min-width:600px){.view-btn{font-size:13px;padding:8px 14px;border-radius:16px}}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(44,26,14,.6);z-index:400;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(3px)}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{position:fixed;z-index:401;background:var(--wht);transition:transform .3s;display:flex;flex-direction:column;overflow:hidden;bottom:0;left:0;right:0;top:auto;border-radius:20px 20px 0 0;max-height:92vh;transform:translateY(100%)}
-.modal.open{transform:translateY(0)}
-@media(min-width:768px){.modal{top:50%;left:50%;bottom:auto;right:auto;border-radius:20px;width:min(860px,94vw);max-height:88vh;transform:translate(-50%,-46%) scale(.96)}.modal.open{transform:translate(-50%,-50%) scale(1)}}
-.modal-handle{width:40px;height:4px;border-radius:2px;background:var(--bdr);margin:10px auto 4px;flex-shrink:0}
-@media(min-width:768px){.modal-handle{display:none}}
-.modal-body{display:flex;flex-direction:column;flex:1;overflow:hidden;min-height:0}
-@media(min-width:768px){.modal-body{flex-direction:row}}
-.modal-gallery{background:var(--cr2);height:230px;flex-shrink:0;position:relative}
-@media(min-width:768px){.modal-gallery{width:44%;height:auto}}
-.modal-main-img{width:100%;height:100%;object-fit:cover;display:block}
-.modal-thumbs{display:flex;gap:8px;padding:8px 12px;background:rgba(255,255,255,.92);flex-wrap:wrap}
-.thumb{width:46px;height:46px;border-radius:8px;object-fit:cover;cursor:pointer;border:2px solid transparent;transition:all .2s;opacity:.65}
-.thumb.active,.thumb:hover{border-color:var(--ter);opacity:1}
-.modal-info{flex:1;padding:14px 16px;overflow-y:auto;display:flex;flex-direction:column}
-@media(min-width:768px){.modal-info{padding:24px 28px}}
-.modal-close{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.95);border:none;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.modal-cat{font-size:11px;color:var(--tl);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
-.modal-name{font-family:"Playfair Display",serif;font-size:clamp(17px,2.5vw,24px);color:var(--ter);margin-bottom:8px;line-height:1.25}
-.modal-price{font-family:"Playfair Display",serif;font-size:22px;color:var(--ter);font-weight:700;margin-bottom:10px}
-.modal-price span{font-size:13px;color:var(--tl);font-weight:400;font-family:"Jost",sans-serif}
-.modal-desc{font-size:13px;color:var(--tm);line-height:1.7;font-weight:300;margin-bottom:12px}
-@media(min-width:768px){.modal-desc{font-size:15px}}
-.modal-meta{background:var(--cr);border-radius:10px;border:1px solid var(--bdr);padding:10px 14px;margin-bottom:12px}
-.modal-meta-row{display:flex;gap:8px;font-size:12px;margin-bottom:5px}
-.modal-meta-row:last-child{margin:0}
-.modal-meta-row strong{color:var(--ter);min-width:52px}
-.modal-meta-row span{color:var(--tm);font-weight:300}
-.modal-actions{display:flex;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid var(--bdr)}
-.modal-add{flex:1;background:var(--ter);color:#fff;border:none;padding:13px;border-radius:22px;font-size:14px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif;transition:all .2s}
-.modal-add:active{background:var(--ter2)}
-.modal-add.added{background:var(--gld);color:var(--ter)}
-.modal-wa{flex:1;background:#fff;color:var(--ter);border:1.5px solid var(--ter);padding:13px;border-radius:22px;font-size:13px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif}
-
-/* CART */
-.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s}
-.cart-overlay.open{opacity:1;pointer-events:all}
-.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,100vw);background:var(--wht);z-index:301;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column}
-.cart-drawer.open{transform:translateX(0)}
-.cart-head{padding:16px 20px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
-.cart-head h3{font-family:"Playfair Display",serif;font-size:20px;color:var(--ter)}
-.close-c{background:none;border:none;font-size:22px;cursor:pointer;color:var(--tm);padding:4px}
-.cart-items{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 18px}
-.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--bdr)}
-.ci-img{width:62px;height:62px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--cr2)}
-.ci-info{flex:1;min-width:0}
-.ci-name{font-size:13px;font-weight:500;color:var(--ter);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ci-price{font-size:12px;color:var(--tm)}
-.qty-ctrl{display:flex;align-items:center;gap:8px;margin-top:6px}
-.qty-btn{width:28px;height:28px;border:1.5px solid var(--bdr);background:var(--cr);border-radius:7px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;font-family:"Jost",sans-serif}
-.qty-n{font-size:14px;font-weight:500;min-width:18px;text-align:center}
-.rm-btn{background:none;border:none;color:var(--tl);cursor:pointer;font-size:11px;margin-left:auto;padding:2px 6px}
-.cart-empty{text-align:center;padding:48px 16px;color:var(--tl)}
-.cart-foot{padding:14px 18px;border-top:1px solid var(--bdr)}
-.cart-total-row{display:flex;justify-content:space-between;margin-bottom:12px}
-.ct-label{font-size:15px;color:var(--tm)}
-.ct-num{font-family:"Playfair Display",serif;font-size:22px;color:var(--ter);font-weight:700}
-.checkout-btn{width:100%;background:var(--ter);color:#fff;border:none;padding:14px;border-radius:26px;font-size:14px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif;transition:background .2s;margin-bottom:8px}
-.checkout-btn:active{background:var(--ter2)}
-.upi-btn{width:100%;background:#fff;color:#4a2b8a;border:1.5px solid #7c4dff;padding:12px;border-radius:26px;font-size:14px;font-weight:600;cursor:pointer;font-family:"Jost",sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:10px}
-.upi-btn:active{background:#f3f0ff}
-.wa-note{text-align:center;font-size:11px;color:var(--tl);line-height:1.6}
-
-/* UPI MODAL */
-.upi-modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
-.upi-modal.open{display:flex}
-.upi-card{background:#fff;border-radius:20px;padding:24px 22px;width:min(320px,90vw);text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.2)}
-.upi-card h3{font-family:"Playfair Display",serif;color:var(--ter);font-size:20px;margin-bottom:6px}
-.upi-card p{font-size:13px;color:var(--tm);margin-bottom:16px;font-weight:300;line-height:1.6}
-.upi-qr{width:160px;height:160px;margin:0 auto 14px;border:2px solid var(--bdr);border-radius:12px;overflow:hidden;background:var(--cr)}
-.upi-id-box{background:var(--gp);border:1px solid var(--gl);border-radius:10px;padding:10px 16px;font-size:15px;font-weight:700;color:var(--ter);margin-bottom:14px;letter-spacing:.03em;cursor:pointer;position:relative}
-.upi-id-box::after{content:"Tap to copy";display:block;font-size:10px;font-weight:400;color:var(--tl);margin-top:2px}
-.upi-id-box.copied::after{content:"Copied! ✓";color:green}
-.upi-close{background:var(--ter);color:#fff;border:none;padding:12px 32px;border-radius:22px;font-size:14px;font-weight:500;cursor:pointer;font-family:"Jost",sans-serif}
-
-.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--ter);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:600;transition:transform .3s;box-shadow:0 4px 18px rgba(0,0,0,.22);white-space:nowrap;pointer-events:none}
-@media(min-width:768px){.toast{bottom:28px}}
-.toast.show{transform:translateX(-50%) translateY(0)}
-@media(max-width:767px){.nav-links{display:none}.page-header{padding:80px 4% 20px}.shop-wrap{padding:16px 3% 60px}}
-</style>
+<link rel="stylesheet" href="style.css?v=5">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
+
 <nav>
-  <a href="index.html" class="nl"><div class="ni">&#x1F9F6;</div><div class="nt">Mini Crochetter</div></a>
+  <a href="index.html?v=5" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+  <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html" class="active">Shop</a></li>
-    <li><a href="workshops.html">Workshops</a></li>
-    <li><a href="#contact">Order</a></li>
+    <li><a href="index.html?v=5">Home</a></li>
+    <li><a href="shop.html?v=5" class="active">Shop</a></li>
+    <li><a href="workshops.html?v=5">Workshops</a></li>
+    <li><a href="order.html?v=5">Order</a></li>
   </ul>
-  <button class="cart-btn" onclick="openCart()">&#x1F6D2; Cart <span class="cart-count" id="cc">0</span></button>
+  <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
 </nav>
 
 <div class="page-header">
   <h1>Our <em>Handmade</em> Collection</h1>
-  <p>Every piece made to order with love. Tap any product to see full details.</p>
+  <p>Every piece made to order with love. Click any product to see full details & images.</p>
 </div>
 
 <div class="shop-wrap">
@@ -158,48 +47,50 @@
 <footer id="contact">
   <div class="foot-top">
     <div class="foot-brand">
-      <div class="foot-brand-name">&#x1F9F6; Mini Crochetter</div>
+      <div class="foot-brand-name">🧶 Mini Crochetter</div>
       <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan-India.</p>
       <div class="foot-soc">
-        <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">&#x1F4F8;</a>
-        <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">&#x1F4AC;</a>
+        <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
+        <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">💬</a>
       </div>
     </div>
     <div class="foot-col"><h4>Shop</h4>
-      <a href="shop.html">Booties</a><a href="shop.html">Plushies</a>
-      <a href="shop.html">Coasters & Mats</a><a href="shop.html">Flowers</a>
-      <a href="shop.html">Bags</a><a href="shop.html">Rakhis</a>
+      <a href="shop.html?v=5">Baby Booties</a><a href="shop.html?v=5">Mini Plushies</a>
+      <a href="shop.html?v=5">Coasters & Mats</a><a href="shop.html?v=5">Flowers</a>
+      <a href="shop.html?v=5">Bags</a><a href="shop.html?v=5">Crochet Rakhis</a>
+    </div>
+    <div class="foot-col"><h4>Learn</h4>
+      <a href="workshops.html?v=5">Crochet Workshops</a>
+      <a href="https://www.instagram.com/mini.crochetter/" target="_blank">Follow on Instagram</a>
     </div>
     <div class="foot-col"><h4>Order</h4>
-      <a href="https://wa.me/918886122232">WhatsApp</a>
-      <a href="https://www.instagram.com/mini.crochetter/" target="_blank">Instagram DM</a>
-      <a href="workshops.html">Workshops</a>
+      <a href="https://www.instagram.com/mini.crochetter/" target="_blank">DM on Instagram</a>
+      <a href="https://wa.me/918886122232">WhatsApp Us</a>
     </div>
   </div>
   <div class="foot-bot">
-    <div class="foot-copy">&#169; 2025 Mini Crochetter &#183; Handmade with love in India &#x1F1EE;&#x1F1F3;</div>
-    <div class="foot-copy">All pieces made to order &#183; Ships pan-India</div>
+    <div class="foot-copy">© 2025 Mini Crochetter · Handmade with love in India 🇮🇳</div>
+    <div class="foot-copy">All pieces made to order · Ships pan-India</div>
   </div>
 </footer>
 
-<!-- CART -->
+<!-- CART DRAWER -->
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
-  <div class="cart-head"><h3>Your Cart &#x1F9F6;</h3><button class="close-c" onclick="closeCart()">&#x2715;</button></div>
+  <div class="cart-head"><h3>Your Cart 🧶</h3><button class="close-c" onclick="closeCart()">✕</button></div>
   <div class="cart-items" id="cart-items"></div>
   <div class="cart-foot" id="cart-foot" style="display:none">
-    <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">&#x20B9;0</span></div>
-    <button class="checkout-btn" onclick="checkout()">&#x1F4F1; Order via WhatsApp &#x2192;</button>
-    <button class="upi-btn" onclick="openUpi()"><span>&#x1F4B3;</span> Pay via UPI</button>
-    <p class="wa-note">WhatsApp to confirm &#x2192; then pay via UPI<br>UPI ID: <strong>8886122232@yapl</strong></p>
+    <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">₹0</span></div>
+    <button class="checkout-btn" onclick="checkout()">Order via WhatsApp →</button>
+    <button class="checkout-btn" style="background:#5f259f;margin-top:8px;" onclick="payUPI()">💳 Pay via UPI</button>
+    <p class="wa-note">WhatsApp first to confirm availability &amp; final price, then pay via UPI to <strong>8886122232@yapl</strong>.</p>
   </div>
 </div>
 
 <!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="mo" onclick="closeModal(event)"></div>
 <div class="modal" id="modal">
-  <div class="modal-handle"></div>
-  <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+  <button class="modal-close" onclick="closeModal()">✕</button>
   <div class="modal-body">
     <div class="modal-gallery">
       <img class="modal-main-img" id="mimg" src="" alt="">
@@ -213,244 +104,373 @@
       <div class="modal-meta" id="mmeta"></div>
       <div class="modal-actions">
         <button class="modal-add" id="madd" onclick="addFromModal()">Add to Cart</button>
-        <button class="modal-wa" onclick="orderViaWa()">WhatsApp Order</button>
+        <button class="modal-wa" onclick="orderViaWa()">Order via WhatsApp</button>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- UPI MODAL -->
-<div class="upi-modal" id="upi-modal">
-  <div class="upi-card">
-    <h3>Pay via UPI &#x1F4B3;</h3>
-    <p>Use the UPI ID below to pay. After payment, send your screenshot on WhatsApp to confirm your order.</p>
-    <div class="upi-qr"><canvas id="upi-canvas" width="156" height="156"></canvas></div>
-    <div class="upi-id-box" id="upi-id-box" onclick="copyUpiId()">8886122232@yapl</div>
-    <p style="font-size:12px;color:var(--tl);margin-bottom:16px">
-      After payment, WhatsApp your screenshot:<br>
-      <a href="https://wa.me/918886122232" style="color:var(--ter);font-weight:600">wa.me/918886122232</a>
-    </p>
-    <button class="upi-close" onclick="closeUpi()">Done &#x2713;</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const products=[
-  {id:1,cat:"booties",name:"Pink Ruffle Booties & Bow Headband",imgs:["booties_ruffle.jpg","booties_collage.png"],badge:"bestseller",price:649,size:"Newborn-4 yrs",desc:"Soft pink booties with white ruffle trim and a matching pink bow headband in a wicker basket. Made to order in your size and colour. Perfect baby shower gift."},
-  {id:2,cat:"booties",name:"Classic Lace-Up Booties",imgs:["booties_classic.jpg","booties_collage.png"],badge:"",price:549,size:"Newborn-4 yrs",desc:"Cream booties with jute lace-up ties on a wooden slice. Warm, snug and beautifully handcrafted. Available in all sizes and custom colour combinations."},
-  {id:3,cat:"plushies",name:"Winnie the Pooh Plushie",imgs:["pooh.png"],badge:"new",price:1499,size:"~25cm tall",desc:"Beloved Winnie the Pooh in golden yellow with his iconic red top. Hand-embroidered smile, safety eyes and squishy body. A childhood classic in crochet."},
-  {id:4,cat:"plushies",name:"Minion Plushie (Stuart)",imgs:["minion.png"],badge:"bestseller",price:1299,size:"~22cm tall",desc:"Everyone's favourite yellow troublemaker - hand-crocheted with blue denim overalls, single grey goggle, safety eyes and button details."},
-  {id:5,cat:"plushies",name:"Santa Plushie",imgs:["santa_plushie.jpg","plushie_santa_q.jpg"],badge:"seasonal",price:1299,size:"~25cm tall",desc:"Jolly Santa in red with fluffy white beard, black belt and boots - sitting by a mini Christmas tree with fairy lights. Festive and full of joy."},
-  {id:6,cat:"plushies",name:"Shark Plushie",imgs:["shark_plushie.png","plushie_shark_q.jpg"],badge:"",price:799,size:"~18cm",desc:"Chubby blue-grey shark with rosy cheeks, safety eyes and a red-stitched smile, photographed on sand with seashells. Adorable desk buddy or kids gift."},
-  {id:7,cat:"plushies",name:"Mini Plushies - Bunny, Bear & Chick",imgs:["mini_plushies.png","plushie_mini_q.jpg"],badge:"",price:499,size:"~10cm each",desc:"Sweet trio of mini amigurumi - white bunny, caramel bear and yellow chick with rosy cheeks and safety eyes. Choose your character and colour."},
-  {id:8,cat:"plushies",name:"Custom Character Plushie",imgs:["custom_plushie.jpg","plushie_custom_q.jpg"],badge:"custom",price:699,size:"As per design",desc:"Girl doll in blue ruffled dress shown as an example - we can make any character, animal or doll you imagine. DM with reference image for quote."},
-  {id:9,cat:"coasters",name:"Sunflower Coaster",imgs:["sunflower-coaster.png","sunflower_flower.png","sunflower.png"],badge:"bestseller",price:349,size:"~12cm diameter",desc:"Golden sunflower coaster with rich brown centre. Available in petal style (flat on wood) and bobble-edge style. Both handcrocheted with care."},
-  {id:10,cat:"coasters",name:"Mandala Centre Mat - 14-17 inches",imgs:["mandala-centerpiece.png","mandala_doily.jpg"],badge:"",price:899,size:"14-17 inches",desc:"Large handcrocheted mandala in yellow and green with white bobble border. Full TABLE MAT - stunning centrepiece for dining tables, coffee tables or puja spaces."},
-  {id:11,cat:"coasters",name:"Leaf & Heart Coasters",imgs:["coasters_leaf_heart.jpg","coasters_mats.png"],badge:"",price:299,size:"~10-12cm each",desc:"Green monstera leaf coaster and pink heart coaster, shown with a cup of tea and candle. Sweet, practical and perfect as a set. Custom shapes available."},
-  {id:12,cat:"flowers",name:"Crochet Daisy",imgs:["daisy_flower.png","daisy.png"],badge:"",price:249,size:"~8cm bloom",desc:"White daisy with raised golden centre on natural linen. Wear as a brooch or hair clip, or use as home decor. Available in custom colours."},
-  {id:13,cat:"flowers",name:"Sunflower Wall Hanging",imgs:["sunflower.png"],badge:"new",price:349,size:"~20cm",desc:"Large golden sunflower with brown centre photographed with natural light shadows on a cream wall. A warm handmade piece for any room."},
-  {id:14,cat:"bags",name:"Rose Drawstring Bag",imgs:["bag_rose.jpg","crochet_bags.png"],badge:"new",price:999,size:"~15x12cm",desc:"Cream crochet drawstring bag with pink and red roses and green leaves on the front, with tassel ties. A beautiful gifting piece."},
-  {id:15,cat:"bags",name:"Sunflower Round Sling Bag",imgs:["bag_sunflower.jpg","crochet_bags.png"],badge:"",price:1299,size:"~22cm round",desc:"Round brown sling bag with a full sunflower on the front and a slim rope strap. A gorgeous boho accessory and statement piece."},
-  {id:16,cat:"accessories",name:"Bow Hair Headband",imgs:["bow_headband.png"],badge:"",price:249,size:"Adjustable",desc:"Pink crochet headband with white scallop border and a bold hot-pink bow at the front. Soft, stretchy and available in all colours."},
-  {id:17,cat:"rakhis",name:"Custom Crochet Rakhi Set",imgs:["rakhis_main.jpg","rakhis_marble.jpg","rakhi_bow.jpg","crochet_rakhis.png"],badge:"seasonal",price:199,size:"Standard rakhi",desc:"Handmade rakhis - heart, evil eye, rose, name charm, daisy, moon, bow and more. Each one unique and fully personalised. DM to order any set size."},
+// ── ALL PRODUCTS — correct filenames matching GitHub repo ──────────────────
+const products = [
+  // BOOTIES
+  {id:1, cat:"booties",
+   name:"Pink Ruffle Booties & Bow Set",
+   imgs:["booties_pink_basket.jpg"],
+   badge:"bestseller", price:749, size:"Newborn–4 yrs",
+   desc:"Pink ruffle booties with white scallop trim, paired with a matching pink bow headband — presented in a wicker basket. Every pair made to order in your size and colour."},
+
+  {id:2, cat:"booties",
+   name:"Classic Lace-Up Booties",
+   imgs:["booties_lace_wood.jpg"],
+   badge:"", price:599, size:"Newborn–4 yrs",
+   desc:"Cream booties with brown lace-up ties on a wooden slice. Clean, classic, and beautifully handcrafted. Available in all sizes and custom colours."},
+
+  // PLUSHIES — all correctly labelled with correct filenames
+  {id:3, cat:"plushies",
+   name:"Winnie the Pooh Plushie",
+   imgs:["pooh.png"],
+   badge:"new", price:2299, size:"~25cm tall",
+   desc:"Beloved Winnie the Pooh in golden yellow with his iconic red top. Made in soft velvet yarn for an extra plush, huggable feel. Hand-embroidered smile, safety eyes, and a squishy body — a childhood classic brought to life."},
+
+  {id:4, cat:"plushies",
+   name:"Minion Plushie (Stuart)",
+   imgs:["minion.png"],
+   badge:"bestseller", price:1999, size:"~22cm tall",
+   desc:"Everyone's favourite yellow troublemaker — hand-crocheted in soft velvet yarn with blue denim overalls, single grey goggle, safety eyes and button details. Incredibly detailed, plush and well-made."},
+
+  {id:5, cat:"plushies",
+   name:"Santa Plushie",
+   imgs:["santa_plushie.jpg","plushies_collage.jpg"],
+   badge:"seasonal", price:2299, size:"~25cm tall",
+   desc:"Jolly Santa in soft red velvet with fluffy white beard, black belt and boots — sitting by a mini Christmas tree with fairy lights. Made in premium velvet yarn for an extra plush, festive feel."},
+
+  {id:6, cat:"plushies",
+   name:"Shark Plushie",
+   imgs:["shark_plushie.png","plushies_collage.jpg"],
+   badge:"", price:1499, size:"~18cm",
+   desc:"Chubby blue-grey shark in soft velvet yarn with rosy cheeks, safety eyes and a red-stitched smile — photographed on sand with seashells. Plush, huggable, and perfect as a desk buddy or kids' gift."},
+
+  {id:7, cat:"plushies",
+   name:"Mini Plushie — Bunny / Bear / Chick",
+   imgs:["mini_plushies.png","plushies_collage.jpg"],
+   badge:"", price:449, size:"~10cm — single piece",
+   desc:"Sweet trio of mini amigurumi in soft cotton yarn — white bunny with pink ears, caramel bear, and yellow chick with orange beak. All with rosy cheeks and safety eyes. Price is for the set of 3. Choose your characters and colours."},
+
+  {id:8, cat:"plushies",
+   name:"Custom Doll / Character Plushie",
+   imgs:["custom_plushie.jpg","plushies_collage.jpg"],
+   badge:"custom", price:1499, size:"As per design",
+   desc:"Girl doll in a blue ruffled dress shown as an example — but we can make any character, animal or doll you want. DM us with a reference image for a personalised quote."},
+
+  // COASTERS & MATS — correctly separated, correct filenames
+  {id:9, cat:"coasters",
+   name:"Sunflower Coaster",
+   imgs:["sunflower-coaster.png","sunflower_flower.png","sunflower.png"],
+   badge:"bestseller", price:199, size:"~12cm diameter",
+   desc:"Golden yellow sunflower coaster with rich brown centre. Available in two beautiful styles — petal style (flat on wood, brown outline) and bobble-edge style (cream shadows). Both handcrocheted with care."},
+
+  {id:10, cat:"coasters",
+   name:"Mandala Centre Mat / Table Mat",
+   imgs:["mandala_centre_mat.jpg","mandala-centerpiece.png","mandala_doily.jpg"],
+   badge:"", price:1499, size:"14–17 inches",
+   desc:"Large 14–17 inch handcrocheted mandala in bright yellow & forest green with white bobble border. This is a FULL TABLE MAT — not a coaster. Stunning centrepiece for dining tables, coffee tables or puja spaces."},
+
+  {id:11, cat:"coasters",
+   name:"Leaf & Heart Coasters",
+   imgs:["coaster_leaf_heart.jpg"],
+   badge:"", price:349, size:"~10–12cm each",
+   desc:"Green monstera leaf coaster and pink heart coaster — both handcrocheted, shown with a cup of tea and candle. Sweet, practical, and perfect as a set. Custom shapes and colours available."},
+
+  // FLOWERS — correct filenames
+  {id:12, cat:"flowers",
+   name:"Crochet Daisy",
+   imgs:["daisy_flower.png","daisy.png"],
+   badge:"", price:149, size:"~8cm bloom",
+   desc:"White daisy with a raised golden yellow centre on natural linen — beautiful, three-dimensional, and textured. Can be worn as a brooch, hair clip, or used as home décor. Available in custom colours."},
+
+  {id:13, cat:"flowers",
+   name:"Sunflower Wall Hanging / Décor",
+   imgs:["sunflower.png"],
+   badge:"new", price:549, size:"~20cm",
+   desc:"Large golden sunflower with brown centre, photographed with beautiful natural light shadows on a cream wall. A warm, handmade piece for any room — hang it or prop it."},
+
+  // BAGS — correct filenames, separate descriptions
+  {id:14, cat:"bags",
+   name:"Rose Drawstring Bag",
+   imgs:["bag_rose_drawstring.jpg"],
+   badge:"new", price:1499, size:"~15×12cm",
+   desc:"Cream crochet drawstring bag with pink and red roses and green leaves appliquéd on the front, with tassel ties and rope handles. Photographed on leather with gold jewellery. A beautiful gifting piece."},
+
+  {id:15, cat:"bags",
+   name:"Sunflower Round Sling Bag",
+   imgs:["bag_sunflower_sling.jpg"],
+   badge:"", price:1799, size:"~22cm round",
+   desc:"Round brown sling bag with a full sunflower design on the front and a slim rope strap. Photographed with wheat stalks on wood — a gorgeous boho accessory that doubles as a statement piece."},
+
+  // ACCESSORIES — correct filename
+  {id:16, cat:"accessories",
+   name:"Bow Hair Headband",
+   imgs:["bow_headband.png"],
+   badge:"", price:249, size:"Adjustable / one size",
+   desc:"Pink crochet headband with white scallop border and a bold hot-pink bow at the front. Photographed with a wooden comb and perfume bottle. Soft, stretchy, and available in all colours."},
+
+  // RAKHIS — correct filename
+  {id:17, cat:"rakhis",
+   name:"Crochet Rakhis — Custom Set",
+   imgs:["rakhis_overview.jpg","rakhis_trio.jpg","rakhi_bow.jpg"],
+   badge:"seasonal", price:249,
+   size:"Standard rakhi size",
+   desc:"Handmade rakhis in various styles — red heart, blue evil eye, roses with leaves, name charm (Aarav shown), white daisy, moon design, and bow. Photographed with a diya and thread spools. Each rakhi unique and fully personalised. DM to order a set."},
 ];
 
-let cart=[],currentProduct=null;
+// ── CART ──────────────────────────────────────────────────────────────────
+let cart = [];
+let currentProduct = null;
 
-function updateCount(){
-  document.getElementById("cc").textContent=cart.reduce((s,i)=>s+i.qty,0);
+function imageCandidates(src) {
+  return [src, `images/${src}`];
+}
+
+function setImageSource(img, src) {
+  const candidates = imageCandidates(src);
+  let index = 0;
+
+  img.onerror = () => {
+    index += 1;
+    if (index < candidates.length) {
+      img.src = candidates[index];
+      return;
+    }
+    img.onerror = null;
+    img.style.opacity = "0.3";
+  };
+
+  img.src = candidates[index];
+}
+
+function updateCount() {
+  document.getElementById("cc").textContent = cart.reduce((s,i) => s+i.qty, 0);
   renderCart();
 }
 
-function addToCart(id){
-  const p=products.find(x=>x.id===id);
-  const ex=cart.find(x=>x.id===id);
-  if(ex)ex.qty++;else cart.push({...p,qty:1});
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  const ex = cart.find(x => x.id === id);
+  if (ex) ex.qty++; else cart.push({...p, qty:1});
   updateCount();
-  showToast(p.name.split(" ").slice(0,3).join(" ")+" added!");
+  showToast(p.name + " added! 🧶");
 }
 
-function renderCart(){
-  const c=document.getElementById("cart-items"),f=document.getElementById("cart-foot");
-  if(!cart.length){
-    c.innerHTML='<div class="cart-empty"><div style="font-size:44px;margin-bottom:10px">&#x1F9F6;</div><p style="color:var(--tl)">Cart is empty<br><small style="display:block;margin-top:6px;font-size:12px">Tap a product to add</small></p></div>';
-    if(f)f.style.display="none";return;
+function renderCart() {
+  const c = document.getElementById("cart-items");
+  const f = document.getElementById("cart-foot");
+  if (!cart.length) {
+    c.innerHTML = '<div class="cart-empty"><div style="font-size:48px;margin-bottom:12px">🧶</div><p style="color:var(--tl)">Your cart is empty<br><small style="display:block;margin-top:6px">Add some handmade goodies!</small></p></div>';
+    f.style.display = "none"; return;
   }
-  if(f)f.style.display="block";
-  c.innerHTML=cart.map((item,i)=>`
+  f.style.display = "block";
+  c.innerHTML = cart.map((item,i) => `
     <div class="cart-item">
-      <img class="ci-img" src="${item.imgs[0]}" alt="${item.name}" onerror="this.src='${item.imgs[1]||""}';this.onerror=null">
+      <img class="ci-img" src="${item.imgs[0]}" data-src="${item.imgs[0]}" alt="${item.name}">
       <div class="ci-info">
         <div class="ci-name">${item.name}</div>
-        <div class="ci-price">&#x20B9;${item.price} onwards</div>
+        <div class="ci-price">₹${item.price} onwards</div>
         <div class="qty-ctrl">
-          <button class="qty-btn" onclick="chQty(${i},-1)">&#x2212;</button>
+          <button class="qty-btn" onclick="chQty(${i},-1)">−</button>
           <span class="qty-n">${item.qty}</span>
           <button class="qty-btn" onclick="chQty(${i},1)">+</button>
           <button class="rm-btn" onclick="rmItem(${i})">Remove</button>
         </div>
       </div>
     </div>`).join("");
-  document.getElementById("ct").textContent="&#x20B9;"+cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById("ct").textContent = "₹" + cart.reduce((s,i) => s+i.price*i.qty, 0);
+  c.querySelectorAll(".ci-img").forEach((img) => setImageSource(img, img.dataset.src));
 }
 
-function chQty(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);updateCount();}
-function rmItem(i){cart.splice(i,1);updateCount();}
-function openCart(){renderCart();document.getElementById("cart-overlay").classList.add("open");document.getElementById("cart-drawer").classList.add("open");}
-function closeCart(){document.getElementById("cart-overlay").classList.remove("open");document.getElementById("cart-drawer").classList.remove("open");}
+function chQty(i, d) { cart[i].qty += d; if(cart[i].qty <= 0) cart.splice(i,1); updateCount(); }
+function rmItem(i) { cart.splice(i,1); updateCount(); }
+function openCart() { renderCart(); document.getElementById("cart-overlay").classList.add("open"); document.getElementById("cart-drawer").classList.add("open"); }
+function closeCart() { document.getElementById("cart-overlay").classList.remove("open"); document.getElementById("cart-drawer").classList.remove("open"); }
 
-function checkout(){
-  if(!cart.length)return;
-  const lines=cart.map(i=>`• ${i.name} x${i.qty} = ₹${i.price*i.qty}`).join("\n");
-  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const msg=encodeURIComponent(`Hi Mini Crochetter! ᾟ6\n\nI would like to order:\n${lines}\n\nTotal: ₹${total}\n\nPlease confirm availability and payment. Thank you!`);
-  window.open(`https://wa.me/918886122232?text=${msg}`,"_blank");
-}
+// =====================================================================
+// PAYMENT GATEWAY CONFIG
+// To enable Razorpay (UPI + cards + netbanking), sign up at razorpay.com,
+// go to Settings → API Keys, and paste your Key ID below (starts with rzp_).
+// Until then, the cart will use direct UPI deep-link to 8886122232@yapl.
+// =====================================================================
+const RAZORPAY_KEY_ID = ""; // <-- paste your Razorpay Key ID here, e.g. "rzp_live_XXXXXXXX"
+const UPI_ID = "8886122232@yapl";
+const MERCHANT_NAME = "Mini Crochetter";
 
-function openUpi(){
-  document.getElementById("upi-modal").classList.add("open");
-  const canvas=document.getElementById("upi-canvas");
-  const ctx=canvas.getContext("2d");
-  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  ctx.fillStyle="#fff";ctx.fillRect(0,0,156,156);
-  const ter="#712b13";
-  // Outer border
-  ctx.strokeStyle=ter;ctx.lineWidth=2;ctx.strokeRect(6,6,144,144);
-  // 3 corner finder patterns
-  [[8,8],[108,8],[8,108]].forEach(([x,y])=>{
-    ctx.fillStyle=ter;ctx.fillRect(x,y,40,40);
-    ctx.fillStyle="#fff";ctx.fillRect(x+5,y+5,30,30);
-    ctx.fillStyle=ter;ctx.fillRect(x+10,y+10,20,20);
-  });
-  // Data dots (simplified)
-  ctx.fillStyle=ter;
-  for(let r=0;r<8;r++)for(let c=0;c<8;c++){
-    if((r+c)%3===0&&!(r<3&&c<3)&&!(r<3&&c>4)&&!(r>4&&c<3)){
-      ctx.fillRect(20+c*14,20+r*14,10,10);
-    }
+function payUPI() {
+  if (!cart.length) return;
+  const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const itemSummary = cart.map(i => `${i.name} x${i.qty}`).join(", ");
+
+  // Razorpay path (UPI + cards + netbanking + wallets)
+  if (RAZORPAY_KEY_ID && window.Razorpay) {
+    const rzp = new Razorpay({
+      key: RAZORPAY_KEY_ID,
+      amount: total * 100,
+      currency: "INR",
+      name: MERCHANT_NAME,
+      description: itemSummary.slice(0, 100),
+      image: "https://minicrochetter.vercel.app/favicon.png",
+      handler: function (response) {
+        alert("✅ Payment successful!\n\nPayment ID: " + response.razorpay_payment_id + "\n\nWe will WhatsApp you shortly to confirm shipping details.");
+        const waMsg = encodeURIComponent(`Hi Mini Crochetter! 🧶\n\nI just paid ₹${total} via Razorpay.\nPayment ID: ${response.razorpay_payment_id}\n\nOrder: ${itemSummary}\n\nPlease confirm shipping. Thank you!`);
+        window.open(`https://wa.me/918886122232?text=${waMsg}`, "_blank");
+        cart = []; updateCount(); renderCart();
+      },
+      prefill: { contact: "", email: "" },
+      theme: { color: "#712b13" },
+      modal: { ondismiss: function() { /* user closed */ } }
+    });
+    rzp.open();
+    return;
   }
-  // Center text
-  ctx.fillStyle=ter;ctx.font="bold 9px sans-serif";ctx.textAlign="center";
-  ctx.fillText("UPI",78,72);
-  ctx.font="8px sans-serif";ctx.fillStyle="#7a4a2a";
-  ctx.fillText(total>0?"Pay ₹"+total:"Scan to Pay",78,84);
+
+  // Fallback: direct UPI deep link (works on mobile UPI apps)
+  const note = encodeURIComponent(MERCHANT_NAME + " Order");
+  const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${total}&cu=INR&tn=${note}`;
+  const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+  if (isMobile) {
+    window.location.href = upiUrl;
+    setTimeout(() => {
+      // If still on page after 2s, the UPI app didn't open — show fallback
+      alert(`If your UPI app didn't open, please pay manually:\n\nUPI ID: ${UPI_ID}\nAmount: ₹${total}\n\nThen WhatsApp us a screenshot.`);
+    }, 2500);
+  } else {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(UPI_ID).catch(() => {});
+    }
+    alert(`Pay ₹${total} to UPI ID:\n\n${UPI_ID}\n(copied to clipboard)\n\nOpen PhonePe / GPay / Paytm on your phone and send to this UPI ID, then WhatsApp us a screenshot.`);
+  }
 }
 
-function copyUpiId(){
-  navigator.clipboard.writeText("8886122232@yapl").then(()=>{
-    const box=document.getElementById("upi-id-box");
-    box.classList.add("copied");
-    setTimeout(()=>box.classList.remove("copied"),2000);
-  }).catch(()=>showToast("UPI ID: 8886122232@yapl"));
+function checkout() {
+  if (!cart.length) return;
+  const lines = cart.map(i => `• ${i.name} x${i.qty} = ₹${i.price*i.qty}`).join("\n");
+  const total = cart.reduce((s,i) => s+i.price*i.qty, 0);
+  const msg = encodeURIComponent(`Hi Mini Crochetter! 🧶\n\nI would like to order:\n${lines}\n\nEstimated total: ₹${total}\n\nPlease confirm availability, final price & payment details. Thank you!`);
+  window.open(`https://wa.me/918886122232?text=${msg}`, "_blank");
 }
 
-function closeUpi(){document.getElementById("upi-modal").classList.remove("open");}
+// ── PRODUCT MODAL ─────────────────────────────────────────────────────────
+function openProduct(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  currentProduct = p;
 
-function openProduct(id){
-  const p=products.find(x=>x.id===id);
-  if(!p)return;
-  currentProduct=p;
-  document.getElementById("mcat").textContent=p.cat.charAt(0).toUpperCase()+p.cat.slice(1);
-  document.getElementById("mname").textContent=p.name;
-  document.getElementById("mprice").innerHTML=`₹${p.price} <span>onwards</span>`;
-  document.getElementById("mdesc").textContent=p.desc;
-  const meta=[];
-  if(p.size)meta.push(`<div class="modal-meta-row"><strong>Size</strong><span>${p.size}</span></div>`);
-  meta.push(`<div class="modal-meta-row"><strong>Made</strong><span>Handcrocheted to order — 5–10 days</span></div>`);
-  meta.push(`<div class="modal-meta-row"><strong>Ships</strong><span>Pan-India · Gift packaging available</span></div>`);
+  document.getElementById("mcat").textContent = p.cat.charAt(0).toUpperCase() + p.cat.slice(1);
+  document.getElementById("mname").textContent = p.name;
+  document.getElementById("mprice").innerHTML = `₹${p.price} <span>onwards</span>`;
+  document.getElementById("mdesc").textContent = p.desc;
+
+  const meta = [];
+  if (p.size) meta.push(`<div class="modal-meta-row"><strong>Size</strong><span>${p.size}</span></div>`);
+  meta.push(`<div class="modal-meta-row"><strong>Made</strong><span>Handcrocheted to order — allow 5–10 days</span></div>`);
+  meta.push(`<div class="modal-meta-row"><strong>Shipping</strong><span>Pan-India · Gift packaging available</span></div>`);
   meta.push(`<div class="modal-meta-row"><strong>Custom</strong><span>Colours & sizes always available</span></div>`);
-  document.getElementById("mmeta").innerHTML=meta.join("");
-  const mi=document.getElementById("mimg");
-  mi.src=p.imgs[0];mi.alt=p.name;
-  mi.onerror=function(){if(p.imgs[1]){this.src=p.imgs[1];this.onerror=null;}};
-  const thumbs=document.getElementById("mthumbs");
-  if(p.imgs.length>1){
-    thumbs.innerHTML=p.imgs.map((src,i)=>
-      `<img class="thumb${i===0?" active":""}" src="${src}" onclick="setThumb(this,'${src}')" alt="" onerror="this.style.display='none'">`
+  document.getElementById("mmeta").innerHTML = meta.join("");
+
+  const mainImg = document.getElementById("mimg");
+  mainImg.alt = p.name;
+  mainImg.style.opacity = "";
+  setImageSource(mainImg, p.imgs[0]);
+
+  const thumbs = document.getElementById("mthumbs");
+  if (p.imgs.length > 1) {
+    thumbs.innerHTML = p.imgs.map((src, i) =>
+      `<img class="thumb${i===0?" active":""}" src="${src}" data-src="${src}" onclick="setThumb(this)" alt="">`
     ).join("");
-    thumbs.style.display="flex";
-  }else{thumbs.innerHTML="";thumbs.style.display="none";}
-  document.getElementById("madd").textContent="Add to Cart";
+    thumbs.style.display = "flex";
+    thumbs.querySelectorAll(".thumb").forEach((img) => setImageSource(img, img.dataset.src));
+  } else {
+    thumbs.innerHTML = "";
+    thumbs.style.display = "none";
+  }
+
+  document.getElementById("madd").textContent = "Add to Cart";
   document.getElementById("madd").classList.remove("added");
   document.getElementById("mo").classList.add("open");
   document.getElementById("modal").classList.add("open");
-  document.body.style.overflow="hidden";
+  document.body.style.overflow = "hidden";
 }
 
-function setThumb(el,src){
-  document.querySelectorAll(".thumb").forEach(t=>t.classList.remove("active"));
+function setThumb(el) {
+  document.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
   el.classList.add("active");
-  document.getElementById("mimg").src=src;
+  const mainImg = document.getElementById("mimg");
+  mainImg.style.opacity = "";
+  setImageSource(mainImg, el.dataset.src);
 }
 
-function closeModal(e){
-  if(e&&e.target!==document.getElementById("mo"))return;
+function closeModal(e) {
+  if (e && e.target !== document.getElementById("mo")) return;
   document.getElementById("mo").classList.remove("open");
   document.getElementById("modal").classList.remove("open");
-  document.body.style.overflow="";
+  document.body.style.overflow = "";
 }
 
-function addFromModal(){
-  if(!currentProduct)return;
+function addFromModal() {
+  if (!currentProduct) return;
   addToCart(currentProduct.id);
-  const btn=document.getElementById("madd");
-  btn.textContent="Added ✓";btn.classList.add("added");
-  setTimeout(()=>{btn.textContent="Add to Cart";btn.classList.remove("added");},1500);
+  const btn = document.getElementById("madd");
+  btn.textContent = "Added ✓"; btn.classList.add("added");
+  setTimeout(() => { btn.textContent = "Add to Cart"; btn.classList.remove("added"); }, 1500);
 }
 
-function orderViaWa(){
-  if(!currentProduct)return;
-  const msg=encodeURIComponent(`Hi Mini Crochetter! ᾟ6\n\nI\'d like to order:\n• ${currentProduct.name}\n\nPrice: ₹${currentProduct.price} onwards\n\nPlease confirm & share payment details. Thank you!`);
-  window.open(`https://wa.me/918886122232?text=${msg}`,"_blank");
+function orderViaWa() {
+  if (!currentProduct) return;
+  const msg = encodeURIComponent(`Hi Mini Crochetter! 🧶\n\nI'd like to order:\n• ${currentProduct.name}\n\nPrice: ₹${currentProduct.price} onwards\n\nPlease confirm availability, custom options & payment. Thank you!`);
+  window.open(`https://wa.me/918886122232?text=${msg}`, "_blank");
 }
 
-function toggleWish(e,btn){
+function toggleWish(e, btn) {
   e.stopPropagation();
   btn.classList.toggle("active");
-  btn.textContent=btn.classList.contains("active")?"\u2764\uFE0F":"\u1F90D";
+  btn.textContent = btn.classList.contains("active") ? "❤️" : "🤍";
 }
 
-function renderProducts(filter){
-  const g=document.getElementById("pg");
-  const list=filter==="all"?products:products.filter(p=>p.cat===filter);
-  if(!list.length){g.innerHTML='<div style="text-align:center;padding:40px;color:var(--tl);grid-column:1/-1">No products in this category yet.</div>';return;}
-  g.innerHTML=list.map(p=>`
+// ── RENDER PRODUCTS ───────────────────────────────────────────────────────
+function renderProducts(filter) {
+  const g = document.getElementById("pg");
+  const list = filter === "all" ? products : products.filter(p => p.cat === filter);
+  g.innerHTML = list.map(p => `
     <div class="product-card" onclick="openProduct(${p.id})">
       <div class="product-img-wrap">
-        <img src="${p.imgs[0]}" alt="${p.name}" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${p.imgs[1]||""}'}">
-        ${p.badge?`<div class="badge ${p.badge==="bestseller"?"best":p.badge}">${p.badge}</div>`:""}
-        <button class="wl-btn" onclick="toggleWish(event,this)">\u1F90D</button>
+        <img src="${p.imgs[0]}" data-src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
+        ${p.badge ? `<div class="badge ${p.badge==="bestseller"?"best":p.badge}">${p.badge}</div>` : ""}
+        <button type="button" class="wl-btn" onclick="toggleWish(event,this)">🤍</button>
       </div>
       <div class="product-info">
         <div class="product-cat">${p.cat}</div>
         <div class="product-name">${p.name}</div>
         <div class="product-desc-short">${p.desc}</div>
         <div class="product-footer">
-          <div class="product-price">\u20B9${p.price} <span>onwards</span></div>
-          <button class="view-btn">View &#x2192;</button>
+          <div class="product-price">₹${p.price} <span>onwards</span></div>
+          <button type="button" class="view-btn" onclick="event.stopPropagation(); openProduct(${p.id});">View details →</button>
         </div>
       </div>
     </div>`).join("");
+  g.querySelectorAll(".product-img-wrap img").forEach((img) => setImageSource(img, img.dataset.src));
 }
 
-function filterP(cat,btn){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  btn.classList.add("active");renderProducts(cat);
-  btn.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});
+function filterP(cat, btn) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  btn.classList.add("active");
+  renderProducts(cat);
 }
 
-function showToast(msg){
-  const t=document.getElementById("toast");
-  t.textContent=msg;t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),2000);
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2200);
 }
-
-// Swipe down to close modal on mobile
-let _sy=0;
-document.getElementById("modal").addEventListener("touchstart",e=>{_sy=e.touches[0].clientY;},{passive:true});
-document.getElementById("modal").addEventListener("touchend",e=>{if(e.changedTouches[0].clientY-_sy>80)closeModal();},{passive:true});
 
 renderProducts("all");
 </script>
