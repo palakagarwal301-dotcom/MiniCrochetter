@@ -5,169 +5,177 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Shop — Mini Crochetter</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body{margin:0;font-family:Jost;background:#fdf6ee}
+nav{display:flex;justify-content:space-between;padding:12px 16px;background:#fff;border-bottom:1px solid #eee}
 
-.filter-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:24px}
-.tab{flex-shrink:0;border:1.5px solid var(--bdr);background:var(--wht);color:var(--tm);
-padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;white-space:nowrap}
-.tab.active{background:var(--ter);color:#fff}
+.shop-wrap{padding:16px}
+
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px}
+.tab{padding:8px 14px;border:1px solid #ddd;border-radius:20px;background:#fff;white-space:nowrap;cursor:pointer}
+.tab.active{background:#712b13;color:#fff;border-color:#712b13}
 
 .products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media(min-width:600px){.products{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1000px){.products{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:768px){.products{grid-template-columns:repeat(4,1fr)}}
 
-.product-card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--bdr);cursor:pointer}
+.card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #eee;cursor:pointer}
+.img{height:160px;background:#f3e7d7}
+.img img{width:100%;height:100%;object-fit:cover}
 
-.product-img-wrap{height:180px;position:relative;background:var(--cr2)}
-.product-img-wrap img{width:100%;height:100%;object-fit:cover}
+.info{padding:10px}
+.name{font-weight:600}
+.price{color:#712b13;font-weight:700}
 
-.wl-btn{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;
-background:#fff;border:none;cursor:pointer}
+.wish{position:absolute;top:8px;right:8px;background:#fff;border:none;border-radius:50%;width:28px;height:28px}
 
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center}
+.modal{background:#fff;width:90%;max-width:500px;border-radius:12px;padding:16px}
+.modal img{width:100%;border-radius:10px}
+.close{float:right;cursor:pointer}
+
+.cart{position:fixed;right:10px;top:10px;background:#712b13;color:#fff;padding:8px 12px;border-radius:20px;cursor:pointer}
 </style>
 </head>
 
 <body>
 
 <nav>
-  <a href="index.html">🧶 Mini Crochetter</a>
-  <button onclick="openCart()">🛒 Cart <span id="cc">0</span></button>
+  <div>🧶 Mini Crochetter</div>
+  <div class="cart" onclick="openCart()">Cart (<span id="cc">0</span>)</div>
 </nav>
 
 <div class="shop-wrap">
-  <div class="filter-tabs">
-    <button class="tab active" onclick="filterP('all',this)">All</button>
-    <button class="tab" onclick="filterP('booties',this)">Booties</button>
-    <button class="tab" onclick="filterP('plushies',this)">Plushies</button>
-    <button class="tab" onclick="filterP('coasters',this)">Coasters</button>
-    <button class="tab" onclick="filterP('flowers',this)">Flowers</button>
-    <button class="tab" onclick="filterP('bags',this)">Bags</button>
-    <button class="tab" onclick="filterP('accessories',this)">Accessories</button>
-    <button class="tab" onclick="filterP('rakhis',this)">Rakhis</button>
-  </div>
 
-  <div class="products" id="pg"></div>
+<div class="tabs">
+  <button class="tab active" onclick="filterCat('all',this)">All</button>
+  <button class="tab" onclick="filterCat('booties',this)">Booties</button>
+  <button class="tab" onclick="filterCat('plushies',this)">Plushies</button>
+  <button class="tab" onclick="filterCat('bags',this)">Bags</button>
+  <button class="tab" onclick="filterCat('coasters',this)">Coasters</button>
 </div>
 
-<!-- CART -->
-<div id="cart"></div>
+<div class="products" id="grid"></div>
+
+</div>
 
 <!-- MODAL -->
-<div id="mo" onclick="closeModal(event)">
-<div id="modal">
-  <button onclick="closeModal()">✕</button>
-  <img id="mimg">
-  <h3 id="mname"></h3>
-  <p id="mdesc"></p>
-  <button onclick="addFromModal()">Add</button>
-</div>
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal">
+    <span class="close" onclick="closeModal()">✕</span>
+    <img id="mimg">
+    <h3 id="mname"></h3>
+    <p id="mdesc"></p>
+    <button onclick="addFromModal()">Add to Cart</button>
+  </div>
 </div>
 
 <script>
 
+/* ---------------- DATA ---------------- */
+
 const products = [
-  {
-    id:1,cat:"booties",
-    name:"Pink Ruffle Booties",
-    imgs:["booties_ruffle.jpg"],
-    price:649,
-    desc:"Soft handmade baby booties with bow."
-  },
-  {
-    id:2,cat:"plushies",
-    name:"Winnie the Pooh",
-    imgs:["pooh.png"],
-    price:1499,
-    desc:"Soft handmade Pooh plushie."
-  },
-  {
-    id:3,cat:"bags",
-    name:"Rose Drawstring Bag",
-    imgs:["bag_rose.jpg"],
-    price:999,
-    desc:"Elegant handmade crochet bag."
-  }
+  {id:1,cat:"booties",name:"Pink Booties",price:649,imgs:["booties_ruffle.jpg"],desc:"Soft handmade booties"},
+  {id:2,cat:"plushies",name:"Pooh Plushie",price:1499,imgs:["pooh.png"],desc:"Cute Pooh plush"},
+  {id:3,cat:"bags",name:"Rose Bag",price:999,imgs:["bag_rose.jpg"],desc:"Crochet sling bag"}
 ];
 
-let cart=[];
-let currentProduct=null;
+/* ---------------- CART ---------------- */
 
-/* ---------------- PRODUCTS ---------------- */
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let current=null;
 
-function renderProducts(filter){
-  const g=document.getElementById("pg");
-  const list=filter==="all"?products:products.filter(p=>p.cat===filter);
+function saveCart(){
+  localStorage.setItem("cart",JSON.stringify(cart));
+}
 
-  g.innerHTML=list.map(p=>`
-    <div class="product-card" onclick="openProduct(${p.id})">
-      <div class="product-img-wrap">
-        <img src="${p.imgs[0]}"
-        onerror="this.style.display='none'">
+function updateCart(){
+  document.getElementById("cc").innerText =
+  cart.reduce((s,i)=>s+i.qty,0);
+  saveCart();
+}
 
-        <button class="wl-btn" onclick="toggleWish(event,this)">🤍</button>
+function addToCart(id){
+  let p = products.find(x=>x.id===id);
+  let ex = cart.find(x=>x.id===id);
+
+  if(ex) ex.qty++;
+  else cart.push({...p,qty:1});
+
+  updateCart();
+}
+
+/* ---------------- RENDER ---------------- */
+
+function render(list){
+  const g=document.getElementById("grid");
+
+  g.innerHTML = list.map(p=>`
+    <div class="card" onclick="openProduct(${p.id})">
+      <div class="img">
+        <img src="${p.imgs[0]}" onerror="this.style.display='none'">
       </div>
-      <div style="padding:10px">
-        <b>${p.name}</b><br>
-        ₹${p.price}
+
+      <div class="info">
+        <div class="name">${p.name}</div>
+        <div class="price">₹${p.price}</div>
       </div>
+
+      <button class="wish" onclick="wish(event,this)">🤍</button>
     </div>
   `).join("");
 }
 
 /* ---------------- FILTER ---------------- */
 
-function filterP(cat,btn){
+function filterCat(cat,btn){
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   btn.classList.add("active");
-  renderProducts(cat);
+
+  const list = cat==="all"?products:products.filter(p=>p.cat===cat);
+  render(list);
 }
 
-/* ---------------- PRODUCT MODAL ---------------- */
+/* ---------------- MODAL ---------------- */
 
 function openProduct(id){
-  currentProduct=products.find(p=>p.id===id);
-  document.getElementById("mimg").src=currentProduct.imgs[0];
-  document.getElementById("mname").textContent=currentProduct.name;
-  document.getElementById("mdesc").textContent=currentProduct.desc;
+  current = products.find(p=>p.id===id);
 
-  document.getElementById("mo").style.display="flex";
+  document.getElementById("mimg").src=current.imgs[0];
+  document.getElementById("mname").innerText=current.name;
+  document.getElementById("mdesc").innerText=current.desc;
+
+  document.getElementById("modalBg").style.display="flex";
 }
 
 function closeModal(e){
-  if(e && e.target.id!=="mo") return;
-  document.getElementById("mo").style.display="none";
+  if(e && e.target.id!=="modalBg") return;
+  document.getElementById("modalBg").style.display="none";
+}
+
+function addFromModal(){
+  addToCart(current.id);
+  closeModal();
+}
+
+/* ---------------- WISHLIST ---------------- */
+
+function wish(e,btn){
+  e.stopPropagation();
+  btn.textContent = btn.textContent==="🤍"?"❤️":"🤍";
 }
 
 /* ---------------- CART ---------------- */
 
-function addToCart(id){
-  const p=products.find(x=>x.id===id);
-  const ex=cart.find(x=>x.id===id);
-  if(ex) ex.qty++;
-  else cart.push({...p,qty:1});
-  updateCart();
-}
-
-function addFromModal(){
-  if(!currentProduct) return;
-  addToCart(currentProduct.id);
-  closeModal();
-}
-
-function updateCart(){
-  document.getElementById("cc").textContent=
-  cart.reduce((s,i)=>s+i.qty,0);
+function openCart(){
+  alert("Cart:\n\n"+cart.map(i=>i.name+" x"+i.qty).join("\n"));
 }
 
 /* ---------------- WHATSAPP ---------------- */
 
 function checkout(){
-  const msg=encodeURIComponent(
+  const msg = encodeURIComponent(
 `Hi Mini Crochetter 🧶
 
 Order:
@@ -176,19 +184,12 @@ ${cart.map(i=>`• ${i.name} x${i.qty}`).join("\n")}
 Thank you!`
   );
 
-  window.open(`https://wa.me/918886122232?text=${msg}`);
-}
-
-/* ---------------- WISHLIST ---------------- */
-
-function toggleWish(e,btn){
-  e.stopPropagation();
-  btn.classList.toggle("active");
-  btn.textContent = btn.classList.contains("active") ? "❤️" : "🤍";
+  window.open("https://wa.me/918886122232?text="+msg);
 }
 
 /* INIT */
-renderProducts("all");
+render(products);
+updateCart();
 
 </script>
 
