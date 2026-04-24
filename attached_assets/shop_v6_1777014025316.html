@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Shop — Mini Crochetter</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -23,13 +22,12 @@
 .product-img-wrap{height:180px;overflow:hidden;background:var(--cr2);position:relative}
 @media(min-width:600px){.product-img-wrap{height:220px}}
 .product-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .35s;display:block}
-.badge{position:absolute;top:8px;left:8px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;letter-spacing:.04em;text-transform:capitalize}
+.badge{position:absolute;top:8px;left:8px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;letter-spacing:.04em}
 .badge.best{background:var(--gld);color:var(--ter)}
 .badge.new{background:var(--ter);color:#fff}
 .badge.seasonal{background:#b71c1c;color:#fff}
 .badge.custom{background:var(--ter2);color:#fff}
-.wl-btn{position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:2;color:var(--ter)}
-.wl-btn.active{color:#d33}
+.wl-btn{position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:2}
 .product-info{padding:10px 12px 14px}
 .product-cat{font-size:10px;color:var(--tl);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
 .product-name{font-family:"Playfair Display",serif;font-size:14px;color:var(--ter);margin-bottom:4px;line-height:1.3}
@@ -128,14 +126,14 @@
 </head>
 <body>
 <nav>
-  <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
+  <a href="index.html" class="nl"><div class="ni">&#x1F9F6;</div><div class="nt">Mini Crochetter</div></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="shop.html" class="active">Shop</a></li>
     <li><a href="workshops.html">Workshops</a></li>
-    <li><a href="order.html">Order</a></li>
+    <li><a href="#contact">Order</a></li>
   </ul>
-  <button class="cart-btn" onclick="openCart()">🛒 Cart <span class="cart-count" id="cc">0</span></button>
+  <button class="cart-btn" onclick="openCart()">&#x1F6D2; Cart <span class="cart-count" id="cc">0</span></button>
 </nav>
 
 <div class="page-header">
@@ -148,7 +146,7 @@
     <button class="tab active" onclick="filterP('all',this)">All</button>
     <button class="tab" onclick="filterP('booties',this)">Booties</button>
     <button class="tab" onclick="filterP('plushies',this)">Plushies</button>
-    <button class="tab" onclick="filterP('coasters',this)">Coasters &amp; Mats</button>
+    <button class="tab" onclick="filterP('coasters',this)">Coasters & Mats</button>
     <button class="tab" onclick="filterP('flowers',this)">Flowers</button>
     <button class="tab" onclick="filterP('bags',this)">Bags</button>
     <button class="tab" onclick="filterP('accessories',this)">Accessories</button>
@@ -160,16 +158,16 @@
 <footer id="contact">
   <div class="foot-top">
     <div class="foot-brand">
-      <div class="foot-brand-name">🧶 Mini Crochetter</div>
+      <div class="foot-brand-name">&#x1F9F6; Mini Crochetter</div>
       <p>Handmade crochet minis with love. Every stitch made just for you. Shipping pan-India.</p>
       <div class="foot-soc">
-        <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">📸</a>
-        <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">💬</a>
+        <a href="https://www.instagram.com/mini.crochetter/" class="soc-btn" target="_blank">&#x1F4F8;</a>
+        <a href="https://wa.me/918886122232" class="soc-btn" target="_blank">&#x1F4AC;</a>
       </div>
     </div>
     <div class="foot-col"><h4>Shop</h4>
       <a href="shop.html">Booties</a><a href="shop.html">Plushies</a>
-      <a href="shop.html">Coasters &amp; Mats</a><a href="shop.html">Flowers</a>
+      <a href="shop.html">Coasters & Mats</a><a href="shop.html">Flowers</a>
       <a href="shop.html">Bags</a><a href="shop.html">Rakhis</a>
     </div>
     <div class="foot-col"><h4>Order</h4>
@@ -179,21 +177,21 @@
     </div>
   </div>
   <div class="foot-bot">
-    <div class="foot-copy">© 2026 Mini Crochetter · Handmade with love in India 🇮🇳</div>
-    <div class="foot-copy">All pieces made to order · Ships pan-India</div>
+    <div class="foot-copy">&#169; 2025 Mini Crochetter &#183; Handmade with love in India &#x1F1EE;&#x1F1F3;</div>
+    <div class="foot-copy">All pieces made to order &#183; Ships pan-India</div>
   </div>
 </footer>
 
 <!-- CART -->
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
-  <div class="cart-head"><h3>Your Cart 🧶</h3><button class="close-c" onclick="closeCart()">✕</button></div>
+  <div class="cart-head"><h3>Your Cart &#x1F9F6;</h3><button class="close-c" onclick="closeCart()">&#x2715;</button></div>
   <div class="cart-items" id="cart-items"></div>
   <div class="cart-foot" id="cart-foot" style="display:none">
-    <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">₹0</span></div>
-    <button class="checkout-btn" onclick="checkout()">📱 Order via WhatsApp →</button>
-    <button class="upi-btn" onclick="openUpi()"><span>💳</span> Pay via UPI</button>
-    <p class="wa-note">WhatsApp to confirm → then pay via UPI<br>UPI ID: <strong>8886122232@yapl</strong></p>
+    <div class="cart-total-row"><span class="ct-label">Estimated total</span><span class="ct-num" id="ct">&#x20B9;0</span></div>
+    <button class="checkout-btn" onclick="checkout()">&#x1F4F1; Order via WhatsApp &#x2192;</button>
+    <button class="upi-btn" onclick="openUpi()"><span>&#x1F4B3;</span> Pay via UPI</button>
+    <p class="wa-note">WhatsApp to confirm &#x2192; then pay via UPI<br>UPI ID: <strong>8886122232@yapl</strong></p>
   </div>
 </div>
 
@@ -201,7 +199,7 @@
 <div class="modal-overlay" id="mo" onclick="closeModal(event)"></div>
 <div class="modal" id="modal">
   <div class="modal-handle"></div>
-  <button class="modal-close" onclick="closeModal()">✕</button>
+  <button class="modal-close" onclick="closeModal()">&#x2715;</button>
   <div class="modal-body">
     <div class="modal-gallery">
       <img class="modal-main-img" id="mimg" src="" alt="">
@@ -224,7 +222,7 @@
 <!-- UPI MODAL -->
 <div class="upi-modal" id="upi-modal">
   <div class="upi-card">
-    <h3>Pay via UPI 💳</h3>
+    <h3>Pay via UPI &#x1F4B3;</h3>
     <p>Use the UPI ID below to pay. After payment, send your screenshot on WhatsApp to confirm your order.</p>
     <div class="upi-qr"><canvas id="upi-canvas" width="156" height="156"></canvas></div>
     <div class="upi-id-box" id="upi-id-box" onclick="copyUpiId()">8886122232@yapl</div>
@@ -232,7 +230,7 @@
       After payment, WhatsApp your screenshot:<br>
       <a href="https://wa.me/918886122232" style="color:var(--ter);font-weight:600">wa.me/918886122232</a>
     </p>
-    <button class="upi-close" onclick="closeUpi()">Done ✓</button>
+    <button class="upi-close" onclick="closeUpi()">Done &#x2713;</button>
   </div>
 </div>
 
@@ -240,47 +238,29 @@
 
 <script>
 const products=[
-  {id:1,cat:"booties",name:"Pink Ruffle Booties & Bow Headband",imgs:["booties_ruffle.jpg","booties_collage.png"],badge:"bestseller",price:649,size:"Newborn–4 yrs",desc:"Soft pink booties with white ruffle trim and a matching pink bow headband in a wicker basket. Made to order in your size and colour. Perfect baby shower gift."},
-  {id:2,cat:"booties",name:"Classic Lace-Up Booties",imgs:["booties_classic.jpg","booties_collage.png"],badge:"",price:549,size:"Newborn–4 yrs",desc:"Cream booties with jute lace-up ties on a wooden slice. Warm, snug and beautifully handcrafted. Available in all sizes and custom colour combinations."},
+  {id:1,cat:"booties",name:"Pink Ruffle Booties & Bow Headband",imgs:["booties_ruffle.jpg","booties_collage.png"],badge:"bestseller",price:649,size:"Newborn-4 yrs",desc:"Soft pink booties with white ruffle trim and a matching pink bow headband in a wicker basket. Made to order in your size and colour. Perfect baby shower gift."},
+  {id:2,cat:"booties",name:"Classic Lace-Up Booties",imgs:["booties_classic.jpg","booties_collage.png"],badge:"",price:549,size:"Newborn-4 yrs",desc:"Cream booties with jute lace-up ties on a wooden slice. Warm, snug and beautifully handcrafted. Available in all sizes and custom colour combinations."},
   {id:3,cat:"plushies",name:"Winnie the Pooh Plushie",imgs:["pooh.png"],badge:"new",price:1499,size:"~25cm tall",desc:"Beloved Winnie the Pooh in golden yellow with his iconic red top. Hand-embroidered smile, safety eyes and squishy body. A childhood classic in crochet."},
-  {id:4,cat:"plushies",name:"Minion Plushie (Stuart)",imgs:["minion.png"],badge:"bestseller",price:1299,size:"~22cm tall",desc:"Everyone's favourite yellow troublemaker — hand-crocheted with blue denim overalls, single grey goggle, safety eyes and button details."},
-  {id:5,cat:"plushies",name:"Santa Plushie",imgs:["santa_plushie.jpg","plushie_santa_q.jpg"],badge:"seasonal",price:1299,size:"~25cm tall",desc:"Jolly Santa in red with fluffy white beard, black belt and boots — sitting by a mini Christmas tree with fairy lights. Festive and full of joy."},
+  {id:4,cat:"plushies",name:"Minion Plushie (Stuart)",imgs:["minion.png"],badge:"bestseller",price:1299,size:"~22cm tall",desc:"Everyone's favourite yellow troublemaker - hand-crocheted with blue denim overalls, single grey goggle, safety eyes and button details."},
+  {id:5,cat:"plushies",name:"Santa Plushie",imgs:["santa_plushie.jpg","plushie_santa_q.jpg"],badge:"seasonal",price:1299,size:"~25cm tall",desc:"Jolly Santa in red with fluffy white beard, black belt and boots - sitting by a mini Christmas tree with fairy lights. Festive and full of joy."},
   {id:6,cat:"plushies",name:"Shark Plushie",imgs:["shark_plushie.png","plushie_shark_q.jpg"],badge:"",price:799,size:"~18cm",desc:"Chubby blue-grey shark with rosy cheeks, safety eyes and a red-stitched smile, photographed on sand with seashells. Adorable desk buddy or kids gift."},
-  {id:7,cat:"plushies",name:"Mini Plushies — Bunny, Bear & Chick",imgs:["mini_plushies.png","plushie_mini_q.jpg"],badge:"",price:499,size:"~10cm each",desc:"Sweet trio of mini amigurumi — white bunny, caramel bear and yellow chick with rosy cheeks and safety eyes. Choose your character and colour."},
-  {id:8,cat:"plushies",name:"Custom Character Plushie",imgs:["custom_plushie.jpg","plushie_custom_q.jpg"],badge:"custom",price:699,size:"As per design",desc:"Girl doll in blue ruffled dress shown as an example — we can make any character, animal or doll you imagine. DM with reference image for quote."},
+  {id:7,cat:"plushies",name:"Mini Plushies - Bunny, Bear & Chick",imgs:["mini_plushies.png","plushie_mini_q.jpg"],badge:"",price:499,size:"~10cm each",desc:"Sweet trio of mini amigurumi - white bunny, caramel bear and yellow chick with rosy cheeks and safety eyes. Choose your character and colour."},
+  {id:8,cat:"plushies",name:"Custom Character Plushie",imgs:["custom_plushie.jpg","plushie_custom_q.jpg"],badge:"custom",price:699,size:"As per design",desc:"Girl doll in blue ruffled dress shown as an example - we can make any character, animal or doll you imagine. DM with reference image for quote."},
   {id:9,cat:"coasters",name:"Sunflower Coaster",imgs:["sunflower-coaster.png","sunflower_flower.png","sunflower.png"],badge:"bestseller",price:349,size:"~12cm diameter",desc:"Golden sunflower coaster with rich brown centre. Available in petal style (flat on wood) and bobble-edge style. Both handcrocheted with care."},
-  {id:10,cat:"coasters",name:"Mandala Centre Mat — 14–17 inches",imgs:["mandala_centre_mat.jpg"],badge:"",price:899,size:"14–17 inches",desc:"Large handcrocheted mandala in yellow and green with white bobble border. Full table mat — stunning centrepiece for dining tables, coffee tables or puja spaces."},
-  {id:11,cat:"coasters",name:"Leaf & Heart Coasters",imgs:["coasters_leaf_heart.jpg","coasters_mats.png"],badge:"",price:299,size:"~10–12cm each",desc:"Green monstera leaf coaster and pink heart coaster, shown with a cup of tea and candle. Sweet, practical and perfect as a set. Custom shapes available."},
+  {id:10,cat:"coasters",name:"Mandala Centre Mat - 14-17 inches",imgs:["mandala-centerpiece.png","mandala_doily.jpg"],badge:"",price:899,size:"14-17 inches",desc:"Large handcrocheted mandala in yellow and green with white bobble border. Full TABLE MAT - stunning centrepiece for dining tables, coffee tables or puja spaces."},
+  {id:11,cat:"coasters",name:"Leaf & Heart Coasters",imgs:["coasters_leaf_heart.jpg","coasters_mats.png"],badge:"",price:299,size:"~10-12cm each",desc:"Green monstera leaf coaster and pink heart coaster, shown with a cup of tea and candle. Sweet, practical and perfect as a set. Custom shapes available."},
   {id:12,cat:"flowers",name:"Crochet Daisy",imgs:["daisy_flower.png","daisy.png"],badge:"",price:249,size:"~8cm bloom",desc:"White daisy with raised golden centre on natural linen. Wear as a brooch or hair clip, or use as home decor. Available in custom colours."},
-  {id:13,cat:"flowers",name:"Sunflower Wall Hanging",imgs:["sunflower.png","sunflower_flower.png"],badge:"new",price:349,size:"~20cm",desc:"Large golden sunflower with brown centre photographed with natural light shadows on a cream wall. A warm handmade piece for any room."},
-  {id:14,cat:"bags",name:"Rose Drawstring Bag",imgs:["bag_rose.jpg","bag_rose_drawstring.jpg"],badge:"new",price:999,size:"~15×12cm",desc:"Cream crochet drawstring bag with pink and red roses and green leaves on the front, with tassel ties. A beautiful gifting piece."},
-  {id:15,cat:"bags",name:"Sunflower Round Sling Bag",imgs:["bag_sunflower.jpg","bag_sunflower_sling.jpg"],badge:"",price:1299,size:"~22cm round",desc:"Round brown sling bag with a full sunflower on the front and a slim rope strap. A gorgeous boho accessory and statement piece."},
+  {id:13,cat:"flowers",name:"Sunflower Wall Hanging",imgs:["sunflower.png"],badge:"new",price:349,size:"~20cm",desc:"Large golden sunflower with brown centre photographed with natural light shadows on a cream wall. A warm handmade piece for any room."},
+  {id:14,cat:"bags",name:"Rose Drawstring Bag",imgs:["bag_rose.jpg","crochet_bags.png"],badge:"new",price:999,size:"~15x12cm",desc:"Cream crochet drawstring bag with pink and red roses and green leaves on the front, with tassel ties. A beautiful gifting piece."},
+  {id:15,cat:"bags",name:"Sunflower Round Sling Bag",imgs:["bag_sunflower.jpg","crochet_bags.png"],badge:"",price:1299,size:"~22cm round",desc:"Round brown sling bag with a full sunflower on the front and a slim rope strap. A gorgeous boho accessory and statement piece."},
   {id:16,cat:"accessories",name:"Bow Hair Headband",imgs:["bow_headband.png"],badge:"",price:249,size:"Adjustable",desc:"Pink crochet headband with white scallop border and a bold hot-pink bow at the front. Soft, stretchy and available in all colours."},
-  {id:17,cat:"rakhis",name:"Custom Crochet Rakhi Set",imgs:["rakhis_main.jpg","rakhis_marble.jpg","rakhi_bow.jpg","rakhis_trio.jpg"],badge:"seasonal",price:199,size:"Standard rakhi",desc:"Handmade rakhis — heart, evil eye, rose, name charm, daisy, moon, bow and more. Each one unique and fully personalised. DM to order any set size."}
+  {id:17,cat:"rakhis",name:"Custom Crochet Rakhi Set",imgs:["rakhis_main.jpg","rakhis_marble.jpg","rakhi_bow.jpg","crochet_rakhis.png"],badge:"seasonal",price:199,size:"Standard rakhi",desc:"Handmade rakhis - heart, evil eye, rose, name charm, daisy, moon, bow and more. Each one unique and fully personalised. DM to order any set size."},
 ];
 
-// ---- mc_cart-backed cart (shared with index.html and order.html) ----
-const CART_KEY="mc_cart";
-function loadCart(){
-  let saved=[];
-  try{saved=JSON.parse(localStorage.getItem(CART_KEY))||[];}catch(e){saved=[];}
-  return saved.map(it=>{
-    const p=products.find(x=>x.id===it.id);
-    if(p) return {...p, qty: it.qty||1};
-    return {id:it.id, name:it.name, price:it.price, imgs:[it.img||""], qty:it.qty||1, desc:"", size:""};
-  });
-}
-function saveCart(){
-  const minimal=cart.map(i=>({id:i.id,name:i.name,price:i.price,img:(i.imgs&&i.imgs[0])||"",qty:i.qty}));
-  localStorage.setItem(CART_KEY, JSON.stringify(minimal));
-}
-
-let cart=loadCart(), currentProduct=null;
+let cart=[],currentProduct=null;
 
 function updateCount(){
-  const el=document.getElementById("cc");
-  if(el) el.textContent=cart.reduce((s,i)=>s+i.qty,0);
-  saveCart();
+  document.getElementById("cc").textContent=cart.reduce((s,i)=>s+i.qty,0);
   renderCart();
 }
 
@@ -295,25 +275,25 @@ function addToCart(id){
 function renderCart(){
   const c=document.getElementById("cart-items"),f=document.getElementById("cart-foot");
   if(!cart.length){
-    c.innerHTML='<div class="cart-empty"><div style="font-size:44px;margin-bottom:10px">🧶</div><p style="color:var(--tl)">Cart is empty<br><small style="display:block;margin-top:6px;font-size:12px">Tap a product to add</small></p></div>';
+    c.innerHTML='<div class="cart-empty"><div style="font-size:44px;margin-bottom:10px">&#x1F9F6;</div><p style="color:var(--tl)">Cart is empty<br><small style="display:block;margin-top:6px;font-size:12px">Tap a product to add</small></p></div>';
     if(f)f.style.display="none";return;
   }
   if(f)f.style.display="block";
   c.innerHTML=cart.map((item,i)=>`
     <div class="cart-item">
-      <img class="ci-img" src="${(item.imgs&&item.imgs[0])||""}" alt="${item.name}" onerror="this.src='${(item.imgs&&item.imgs[1])||""}';this.onerror=null">
+      <img class="ci-img" src="${item.imgs[0]}" alt="${item.name}" onerror="this.src='${item.imgs[1]||""}';this.onerror=null">
       <div class="ci-info">
         <div class="ci-name">${item.name}</div>
-        <div class="ci-price">₹${item.price} onwards</div>
+        <div class="ci-price">&#x20B9;${item.price} onwards</div>
         <div class="qty-ctrl">
-          <button class="qty-btn" onclick="chQty(${i},-1)">−</button>
+          <button class="qty-btn" onclick="chQty(${i},-1)">&#x2212;</button>
           <span class="qty-n">${item.qty}</span>
           <button class="qty-btn" onclick="chQty(${i},1)">+</button>
           <button class="rm-btn" onclick="rmItem(${i})">Remove</button>
         </div>
       </div>
     </div>`).join("");
-  document.getElementById("ct").textContent="₹"+cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById("ct").textContent="&#x20B9;"+cart.reduce((s,i)=>s+i.price*i.qty,0);
 }
 
 function chQty(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);updateCount();}
@@ -323,8 +303,10 @@ function closeCart(){document.getElementById("cart-overlay").classList.remove("o
 
 function checkout(){
   if(!cart.length)return;
-  // hand the cart off to /order so the page can render it + collect address
-  window.location.href="order.html";
+  const lines=cart.map(i=>`• ${i.name} x${i.qty} = ₹${i.price*i.qty}`).join("\n");
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const msg=encodeURIComponent(`Hi Mini Crochetter! ᾟ6\n\nI would like to order:\n${lines}\n\nTotal: ₹${total}\n\nPlease confirm availability and payment. Thank you!`);
+  window.open(`https://wa.me/918886122232?text=${msg}`,"_blank");
 }
 
 function openUpi(){
@@ -334,18 +316,22 @@ function openUpi(){
   const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
   ctx.fillStyle="#fff";ctx.fillRect(0,0,156,156);
   const ter="#712b13";
+  // Outer border
   ctx.strokeStyle=ter;ctx.lineWidth=2;ctx.strokeRect(6,6,144,144);
+  // 3 corner finder patterns
   [[8,8],[108,8],[8,108]].forEach(([x,y])=>{
     ctx.fillStyle=ter;ctx.fillRect(x,y,40,40);
     ctx.fillStyle="#fff";ctx.fillRect(x+5,y+5,30,30);
     ctx.fillStyle=ter;ctx.fillRect(x+10,y+10,20,20);
   });
+  // Data dots (simplified)
   ctx.fillStyle=ter;
   for(let r=0;r<8;r++)for(let c=0;c<8;c++){
     if((r+c)%3===0&&!(r<3&&c<3)&&!(r<3&&c>4)&&!(r>4&&c<3)){
       ctx.fillRect(20+c*14,20+r*14,10,10);
     }
   }
+  // Center text
   ctx.fillStyle=ter;ctx.font="bold 9px sans-serif";ctx.textAlign="center";
   ctx.fillText("UPI",78,72);
   ctx.font="8px sans-serif";ctx.fillStyle="#7a4a2a";
@@ -416,14 +402,14 @@ function addFromModal(){
 
 function orderViaWa(){
   if(!currentProduct)return;
-  const msg=encodeURIComponent(`Hi Mini Crochetter! 🧶\n\nI'd like to order:\n• ${currentProduct.name}\n\nPrice: ₹${currentProduct.price} onwards\n\nPlease confirm & share payment details. Thank you!`);
+  const msg=encodeURIComponent(`Hi Mini Crochetter! ᾟ6\n\nI\'d like to order:\n• ${currentProduct.name}\n\nPrice: ₹${currentProduct.price} onwards\n\nPlease confirm & share payment details. Thank you!`);
   window.open(`https://wa.me/918886122232?text=${msg}`,"_blank");
 }
 
 function toggleWish(e,btn){
   e.stopPropagation();
   btn.classList.toggle("active");
-  btn.textContent=btn.classList.contains("active")?"❤️":"🤍";
+  btn.textContent=btn.classList.contains("active")?"\u2764\uFE0F":"\u1F90D";
 }
 
 function renderProducts(filter){
@@ -435,15 +421,15 @@ function renderProducts(filter){
       <div class="product-img-wrap">
         <img src="${p.imgs[0]}" alt="${p.name}" loading="lazy" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${p.imgs[1]||""}'}">
         ${p.badge?`<div class="badge ${p.badge==="bestseller"?"best":p.badge}">${p.badge}</div>`:""}
-        <button class="wl-btn" onclick="toggleWish(event,this)">🤍</button>
+        <button class="wl-btn" onclick="toggleWish(event,this)">\u1F90D</button>
       </div>
       <div class="product-info">
         <div class="product-cat">${p.cat}</div>
         <div class="product-name">${p.name}</div>
         <div class="product-desc-short">${p.desc}</div>
         <div class="product-footer">
-          <div class="product-price">₹${p.price} <span>onwards</span></div>
-          <button class="view-btn">View →</button>
+          <div class="product-price">\u20B9${p.price} <span>onwards</span></div>
+          <button class="view-btn">View &#x2192;</button>
         </div>
       </div>
     </div>`).join("");
@@ -467,12 +453,6 @@ document.getElementById("modal").addEventListener("touchstart",e=>{_sy=e.touches
 document.getElementById("modal").addEventListener("touchend",e=>{if(e.changedTouches[0].clientY-_sy>80)closeModal();},{passive:true});
 
 renderProducts("all");
-updateCount();
-
-// keep cart count in sync if another tab updates mc_cart
-window.addEventListener("storage",e=>{if(e.key===CART_KEY){cart=loadCart();updateCount();}});
 </script>
 </body>
 </html>
-</content>
-</invoke>
