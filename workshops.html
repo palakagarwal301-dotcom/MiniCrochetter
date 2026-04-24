@@ -146,8 +146,8 @@
 </div>
 
 <script>
-// UPDATED SESSIONS: Fixed locations to Rabindra Sadan (Exide) for Kolkata sessions
-const SESSIONS = [
+Update the DEFAULT_SESSIONS constant
+const DEFAULT_SESSIONS = [
   { id:'on-1', title:'Crochet Mini Flower', mode:'online', date:'Sat, May 9, 2026', time:'4:00–6:30 PM IST', price:1499, seatsLeft:6, level:'Beginner' },
   { id:'ip-1', title:'Booties for Beginners', mode:'in-person', date:'Sun, May 17, 2026', time:'11:00 AM–2:00 PM', price:1899, location:'Rabindra Sadan (Exide)', seatsLeft:3, level:'Beginner' },
   { id:'on-2', title:'Amigurumi Mini Plushie', mode:'online', date:'Sat, May 30, 2026', time:'4:00–7:00 PM IST', price:1799, seatsLeft:8, level:'Some experience helpful' },
@@ -157,11 +157,15 @@ const SESSIONS = [
 const rupee = n => '₹' + n.toLocaleString('en-IN');
 let currentSession = null;
 
+Update the location logic in renderSessions()
 function renderSessions(){
   document.getElementById('sessionsList').innerHTML = SESSIONS.map(s => {
     const sold = s.seatsLeft <= 0;
     const few = s.seatsLeft > 0 && s.seatsLeft <= 3;
+    
+    // Updated this line to default to Kolkata
     const where = s.mode === 'online' ? 'Online (Zoom)' : (s.location || 'Kolkata');
+    
     return `
       <div class="ws-sess">
         <span class="badge ${s.mode}">${s.mode === 'online' ? '💻 Online' : '📍 In person'}</span>
