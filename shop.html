@@ -1,3 +1,9 @@
+const IMG_FALLBACK = "pooh.png"; // or any safe image
+
+function img(src){
+  if(!src) return IMG_FALLBACK;
+  return src; // root-based system (your current setup)
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
