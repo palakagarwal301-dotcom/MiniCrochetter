@@ -2,81 +2,120 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <title>Workshops — Mini Crochetter</title>
+<title>Workshops — Mini Crochetter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
-<style>
-  .ws-sessions-section{padding:60px 24px 20px;max-width:1100px;margin:0 auto}
-  .ws-sessions{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px}
-  @media(min-width:720px){.ws-sessions{grid-template-columns:repeat(2,1fr)}}
-  .ws-sess{background:#fff;border:1px solid #f0e7df;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:.15s}
-  .ws-sess:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(180,140,110,.12)}
-  .ws-sess .badge{align-self:flex-start;background:#fdf6f0;color:#5b3d2b;border:1px solid #e9dccf;padding:4px 10px;border-radius:14px;font-size:12px;font-weight:500}
-  .ws-sess .badge.online{background:#e1f5ee;color:#1f6b4a;border-color:#c2e6d3}
-  .ws-sess .badge.in-person{background:#fbeaf0;color:#a4346d;border-color:#f0c8d8}
-  .ws-sess h3{font-family:'Playfair Display',serif;color:#5b3d2b;margin:4px 0 0;font-size:20px}
-  .ws-sess .meta{display:flex;flex-wrap:wrap;gap:14px;color:#7a5e4d;font-size:14px}
-  .ws-sess .meta span{display:inline-flex;gap:6px;align-items:center}
-  .ws-sess .price-line{display:flex;justify-content:space-between;align-items:center;margin-top:8px;border-top:1px solid #f3ebe2;padding-top:12px}
-  .ws-sess .price-line .pp{color:#712b13;font-weight:700;font-size:18px}
-  .ws-sess .price-line .pp small{color:#8a6f5e;font-weight:400;font-size:13px;margin-left:2px}
-  .ws-sess .seats{font-size:13px;color:#8a6f5e}
-  .ws-sess .seats.few{color:#b87a5c;font-weight:500}
-  .ws-sess .rsvp{background:linear-gradient(135deg,#d49a7a,#b87a5c);color:#fff;border:none;padding:11px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:500;box-shadow:0 4px 14px rgba(184,122,92,.25);transition:.15s}
-  .ws-sess .rsvp:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(184,122,92,.35)}
-  .ws-sess .rsvp[disabled]{background:#d6c7b8;box-shadow:none;cursor:not-allowed;transform:none}
-
-  .rsvp-bg{position:fixed;inset:0;background:rgba(60,40,28,.55);display:none;align-items:center;justify-content:center;z-index:80;padding:20px}
-  .rsvp-bg.open{display:flex}
-  .rsvp-modal{background:#fff;width:100%;max-width:480px;border-radius:16px;padding:24px;position:relative;max-height:90vh;overflow-y:auto}
-  .rsvp-modal .close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;cursor:pointer;color:#8a6f5e}
-  .rsvp-modal h3{font-family:'Playfair Display',serif;color:#5b3d2b;margin:0 0 4px;font-size:22px}
-  .rsvp-modal .sess-info{background:#fdf6f0;border:1px solid #f0e0d0;border-radius:10px;padding:10px 12px;margin:14px 0 18px;font-size:14px;color:#5b3d2b}
-  .rsvp-modal .sess-info strong{color:#3d2a1f}
-  .rsvp-modal label{display:block;font-size:14px;color:#5b3d2b;margin-bottom:6px;font-weight:500}
-  .rsvp-modal .field{margin-bottom:14px}
-  .rsvp-modal input,.rsvp-modal textarea{width:100%;padding:11px 13px;border:1px solid #e9dccf;border-radius:10px;font-family:inherit;font-size:14px;background:#fffaf6;color:#3d2a1f;box-sizing:border-box}
-  .rsvp-modal input:focus,.rsvp-modal textarea:focus{outline:none;border-color:#d49a7a;background:#fff;box-shadow:0 0 0 3px rgba(212,154,122,.15)}
-  .rsvp-modal textarea{resize:vertical;min-height:70px}
-  .rsvp-modal .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .rsvp-modal .total-line{display:flex;justify-content:space-between;border-top:1px solid #f0e0d0;padding-top:12px;margin-top:6px;font-weight:700;color:#3d2a1f}
-  .rsvp-modal .total-line span:last-child{color:#712b13}
-  .rsvp-modal .submit{width:100%;background:linear-gradient(135deg,#d49a7a,#b87a5c);color:#fff;border:none;padding:13px;border-radius:10px;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;margin-top:14px;box-shadow:0 4px 14px rgba(184,122,92,.25)}
-  .rsvp-modal .submit:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(184,122,92,.35)}
-  .rsvp-modal .note{text-align:center;font-size:12px;color:#8a6f5e;margin:10px 0 0}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav>
-  <a href="index.html?v=5" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
-  <button class="menu-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <a href="index.html" class="nl"><div class="ni">🧶</div><div class="nt">Mini Crochetter</div></a>
   <ul class="nav-links">
-    <li><a href="index.html?v=5">Home</a></li>
-    <li><a href="shop.html?v=5">Shop</a></li>
-    <li><a href="workshops.html?v=5" class="active">Workshops</a></li>
-    <li><a href="order.html?v=5">Order</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="workshops.html" class="active">Workshops</a></li>
+    <li><a href="shop.html#contact">Order</a></li>
   </ul>
   <button class="cart-btn" onclick="window.location='shop.html'">🛍️ Shop</button>
 </nav>
 
 <div class="ws-hero">
   <h1>Learn Crochet <em>with Me</em></h1>
-  <p>From zero to making your first crochet mini — in one session. All materials included. Completely beginner friendly.</p>
-  <a href="#sessions" class="ws-book-btn">See Upcoming Sessions →</a>
+  <p>In-person sessions in <strong style="color:var(--gl)">Kolkata</strong> · Online sessions open pan-India.<br>From zero to your first crochet mini — all materials included. Completely beginner friendly.</p>
+  <a href="https://wa.me/918886122232?text=Hi!%20I%20want%20to%20join%20a%20crochet%20workshop%20with%20mini.crochetter" class="ws-book-btn">DM to Book Your Spot →</a>
 </div>
 
-<section class="ws-sessions-section" id="sessions">
+<section class="ws-feats-section">
   <div class="sec-head">
-    <span class="sec-tag">Upcoming sessions</span>
-    <h2 class="sec-title">Pick a <em>workshop</em> to join</h2>
+    <span class="sec-tag">What to expect</span>
+    <h2 class="sec-title">Everything you <em>need</em> to start</h2>
   </div>
-  <div class="ws-sessions" id="sessionsList"></div>
+  <div class="ws-feats">
+    <div class="ws-feat">
+      <div class="feat-icon">🌱</div>
+      <h3>Beginner Friendly</h3>
+      <p>Zero experience needed. We start from complete scratch — if you can hold a hook, you can crochet.</p>
+    </div>
+    <div class="ws-feat">
+      <div class="feat-icon">🎯</div>
+      <h3>Make Something Real</h3>
+      <p>You leave with a finished crochet mini — hands-on from minute one, not just theory.</p>
+    </div>
+    <div class="ws-feat">
+      <div class="feat-icon">📦</div>
+      <h3>All Materials Included</h3>
+      <p>Hook, yarn, pattern — everything is provided. Just bring your enthusiasm.</p>
+    </div>
+    <div class="ws-feat">
+      <div class="feat-icon">👥</div>
+      <h3>Small Batches Only</h3>
+      <p>Limited seats per session so you get personalised attention — not a crowded classroom.</p>
+    </div>
+    <div class="ws-feat">
+      <div class="feat-icon">📍</div>
+      <h3>Kolkata & Online</h3>
+      <p>In-person sessions held in Kolkata. Online sessions open to anyone across India. Flexible timing.</p>
+    </div>
+    <div class="ws-feat">
+      <div class="feat-icon">💬</div>
+      <h3>WhatsApp Support</h3>
+      <p>Practice at home with ongoing WhatsApp support from your instructor after the session.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ws-price-section">
+  <div class="ws-price-card">
+    <div class="price-from">Workshop fee starting from</div>
+    <div class="price-big">₹499</div>
+    <div class="price-sub">per person · all materials included</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-bottom:16px;flex-wrap:wrap">
+      <span style="background:var(--gp);border:1px solid var(--gl);color:var(--gd);padding:5px 14px;border-radius:14px;font-size:13px;font-weight:500">📍 In-person · Kolkata</span>
+      <span style="background:var(--gp);border:1px solid var(--gl);color:var(--gd);padding:5px 14px;border-radius:14px;font-size:13px;font-weight:500">💻 Online · Pan-India</span>
+    </div>
+    <ul class="ws-perks">
+      <li>2–3 hour hands-on session</li>
+      <li>Complete a mini project by end of session</li>
+      <li>Hook & yarn kit to take home</li>
+      <li>Pattern sheet for practice at home</li>
+      <li>WhatsApp support after the session</li>
+    </ul>
+    <a href="https://wa.me/918886122232?text=Hi!%20I%20want%20to%20join%20a%20crochet%20workshop%20with%20mini.crochetter" class="btn-p" style="display:block;text-align:center">DM to Book Your Spot →</a>
+  </div>
+</section>
+
+<section class="reviews-section">
+  <div class="sec-head">
+    <span class="sec-tag">Why learn with me</span>
+    <h2 class="sec-title">From <em>zero</em> to crocheting</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"I attended the crochet workshop and made my first flower! Never thought I could do it. The instruction was so patient and clear. Already planning the next session."</div>
+      <div class="rev-auth">
+        <div class="rev-av" style="background:#fbeaf0;color:var(--ter)">A</div>
+        <div><div class="rev-name">Ananya K.</div><div class="rev-handle">Workshop student · Kolkata</div></div>
+      </div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Started with no experience at all and left with my own little crochet chick. The pace was perfect and I felt supported throughout. Highly recommend!"</div>
+      <div class="rev-auth">
+        <div class="rev-av" style="background:#faeeda;color:var(--ter)">P</div>
+        <div><div class="rev-name">Priya S.</div><div class="rev-handle">Workshop student · Mumbai</div></div>
+      </div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Such a calming, fun experience. I had no idea crochet was this satisfying. Made a mini daisy in one sitting. Already bought yarn to practice at home!"</div>
+      <div class="rev-auth">
+        <div class="rev-av" style="background:#e1f5ee;color:var(--ter)">R</div>
+        <div><div class="rev-name">Riya M.</div><div class="rev-handle">Workshop student · Delhi</div></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
@@ -90,15 +129,14 @@
       </div>
     </div>
     <div class="foot-col"><h4>Navigate</h4>
-      <a href="index.html?v=5">Home</a>
-      <a href="shop.html?v=5">Shop</a>
-      <a href="workshops.html?v=5">Workshops</a>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="workshops.html">Workshops</a>
       <a href="https://www.instagram.com/mini.crochetter/" target="_blank">Instagram</a>
     </div>
     <div class="foot-col"><h4>Order</h4>
       <a href="https://www.instagram.com/mini.crochetter/" target="_blank">DM on Instagram</a>
-      <a href="https://wa.me/918886122232" target="_blank">WhatsApp Us</a>
-      <a href="mailto:palakagarwal301@gmail.com">Email Us</a>
+      <a href="https://wa.me/918886122232">WhatsApp Us</a>
     </div>
   </div>
   <div class="foot-bot">
@@ -107,135 +145,5 @@
   </div>
 </footer>
 
-<div class="rsvp-bg" id="rsvpBg">
-  <div class="rsvp-modal">
-    <button class="close" onclick="closeRsvp()" aria-label="Close">✕</button>
-    <h3>Reserve your spot</h3>
-    <p style="color:#8a6f5e;margin:4px 0 0;font-size:14px">Fill in a few details and we'll confirm on WhatsApp.</p>
-    <div class="sess-info" id="sessInfo"></div>
-    <form onsubmit="return submitRsvp(event)">
-      <div class="row2">
-        <div class="field">
-          <label for="rName">Your Name *</label>
-          <input id="rName" required placeholder="e.g. Priya Sharma">
-        </div>
-        <div class="field">
-          <label for="rPhone">WhatsApp Number *</label>
-          <input id="rPhone" required placeholder="+91 98xxxxxxxx">
-        </div>
-      </div>
-      <div class="row2">
-        <div class="field">
-          <label for="rSeats">Seats *</label>
-          <input id="rSeats" type="number" min="1" max="6" value="1" required oninput="updateRsvpTotal()">
-        </div>
-        <div class="field">
-          <label for="rCity">City *</label>
-          <input id="rCity" required placeholder="Kolkata / Delhi / etc.">
-        </div>
-      </div>
-      <div class="field">
-        <label for="rNotes">Anything else? (optional)</label>
-        <textarea id="rNotes" placeholder="e.g. friend joining, accessibility"></textarea>
-      </div>
-      <div class="total-line"><span>Total</span><span id="rTotal">₹0</span></div>
-      <button type="submit" class="submit">Send RSVP via WhatsApp →</button>
-      <p class="note">Spot is held once we reply on WhatsApp. UPI payment after confirmation.</p>
-    </form>
-  </div>
-</div>
-
-<script>
-Update the DEFAULT_SESSIONS constant
-const DEFAULT_SESSIONS = [
-  { id:'on-1', title:'Crochet Mini Flower', mode:'online', date:'Sat, May 9, 2026', time:'4:00–6:30 PM IST', price:1499, seatsLeft:6, level:'Beginner' },
-  { id:'ip-1', title:'Booties for Beginners', mode:'in-person', date:'Sun, May 17, 2026', time:'11:00 AM–2:00 PM', price:1899, location:'Rabindra Sadan (Exide)', seatsLeft:3, level:'Beginner' },
-  { id:'on-2', title:'Amigurumi Mini Plushie', mode:'online', date:'Sat, May 30, 2026', time:'4:00–7:00 PM IST', price:1799, seatsLeft:8, level:'Some experience helpful' },
-  { id:'ip-2', title:'Coasters & Décor Brunch', mode:'in-person', date:'Sun, Jun 7, 2026', time:'10:30 AM–1:30 PM', price:1999, location:'Rabindra Sadan (Exide)', seatsLeft:2, level:'All levels' },
-];
-const rupee = n => '₹' + n.toLocaleString('en-IN');
-let currentSession = null;
-
-Update the location logic in renderSessions()
-function renderSessions(){
-  document.getElementById('sessionsList').innerHTML = SESSIONS.map(s => {
-    const sold = s.seatsLeft <= 0;
-    const few = s.seatsLeft > 0 && s.seatsLeft <= 3;
-    
-    // Updated this line to default to Kolkata
-    const where = s.mode === 'online' ? 'Online (Zoom)' : (s.location || 'Kolkata');
-    
-    return `
-      <div class="ws-sess">
-        <span class="badge ${s.mode}">${s.mode === 'online' ? '💻 Online' : '📍 In person'}</span>
-        <h3>${s.title}</h3>
-        <div class="meta">
-          <span>📅 ${s.date}</span>
-          <span>⏰ ${s.time}</span>
-          <span>📍 ${where}</span>
-        </div>
-        <div class="price-line">
-          <div>
-            <div class="pp">${rupee(s.price)}<small> / seat</small></div>
-            <div class="seats ${few ? 'few' : ''}">${sold ? 'Fully booked' : (few ? `Only ${s.seatsLeft} seats left` : `${s.seatsLeft} seats available`)}</div>
-          </div>
-          <button class="rsvp" ${sold ? 'disabled' : ''} onclick="openRsvp('${s.id}')">${sold ? 'Sold out' : 'RSVP →'}</button>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-function openRsvp(id){
-  currentSession = SESSIONS.find(s => s.id === id);
-  if(!currentSession) return;
-  const where = currentSession.mode === 'online' ? 'Online' : (currentSession.location || 'Kolkata');
-  document.getElementById('sessInfo').innerHTML = `
-    <strong>${currentSession.title}</strong><br>
-    ${currentSession.date} · ${currentSession.time}<br>
-    ${where} · ${rupee(currentSession.price)} / seat
-  `;
-  document.getElementById('rSeats').max = currentSession.seatsLeft;
-  document.getElementById('rSeats').value = 1;
-  updateRsvpTotal();
-  document.getElementById('rsvpBg').classList.add('open');
-}
-
-function closeRsvp(){ document.getElementById('rsvpBg').classList.remove('open'); }
-
-function updateRsvpTotal(){
-  if(!currentSession) return;
-  const seats = Math.max(1, parseInt(document.getElementById('rSeats').value,10) || 1);
-  document.getElementById('rTotal').innerText = rupee(seats * currentSession.price);
-}
-
-function submitRsvp(e){
-  e.preventDefault();
-  const v = id => document.getElementById(id).value.trim();
-  const name = v('rName'), phone = v('rPhone'), city = v('rCity');
-  const seats = v('rSeats'), notes = v('rNotes');
-  const total = seats * currentSession.price;
-
-  const lines = [
-    "Hi Mini Crochetter! 🧶 I'd like to RSVP for a workshop:",
-    "",
-    "🎨 Workshop: " + currentSession.title,
-    "📅 Date: " + currentSession.date,
-    "📍 Location: " + (currentSession.mode === 'online' ? 'Online' : currentSession.location),
-    "",
-    "👤 Name: " + name,
-    "📱 Phone: " + phone,
-    "🏙️ City: " + city,
-    "🔢 Seats: " + seats,
-    "💰 Total: ₹" + total.toLocaleString('en-IN'),
-  ];
-  if(notes) lines.push("📝 Notes: " + notes);
-
-  window.open("https://wa.me/918886122232?text=" + encodeURIComponent(lines.join("\n")), "_blank");
-  closeRsvp();
-  return false;
-}
-
-renderSessions();
-</script>
 </body>
 </html>
