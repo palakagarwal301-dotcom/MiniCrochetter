@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="style.css">
 <style>
 *{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;overflow:visible;padding-bottom:6px;margin-bottom:24px}
-.tab{flex-shrink:0;border:1.5px solid var(--bdr);background:var(--wht);color:var(--tm);padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;transition:all .2s;font-family:"Jost",sans-serif;white-space:nowrap;min-height:36px}
+.filter-tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;overflow:visible;padding-bottom:6px;margin-bottom:24px}
+.tab{width:100%;border:1.5px solid var(--bdr);background:var(--wht);color:var(--tm);padding:8px 12px;border-radius:20px;font-size:13px;cursor:pointer;transition:all .2s;font-family:"Jost",sans-serif;white-space:normal;min-height:38px}
 .tab.active,.tab:hover{background:var(--ter);color:var(--wht);border-color:var(--ter)}
 .products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:600px){.products{grid-template-columns:repeat(3,1fr);gap:18px}}
@@ -467,7 +467,6 @@ function renderProducts(filter){
 function filterP(cat,btn){
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   btn.classList.add("active");renderProducts(cat);
-  btn.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});
 }
 
 function showToast(msg){

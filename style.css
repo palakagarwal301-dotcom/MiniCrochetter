@@ -280,9 +280,9 @@ nav{
 }
 
 .filter-tabs{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
   gap:8px;
-  flex-wrap:wrap;
   margin-bottom:28px;
 }
 
@@ -295,6 +295,7 @@ nav{
   font-size:13px;
   cursor:pointer;
   font-family:"Jost",sans-serif;
+  width:100%;
 }
 
 .tab.active,
@@ -1223,15 +1224,15 @@ footer{
 /* Mobile Responsiveness Fixes */
 @media (max-width: 600px) {
   .filter-tabs {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
     overflow: visible;
     white-space: normal;
-    flex-wrap: wrap;
     padding-bottom: 10px;
     gap: 8px;
   }
   .tab {
-    flex: 0 0 auto;
+    width: 100%;
   }
   .products {
     grid-template-columns: 1fr !important; /* Single column on mobile */
