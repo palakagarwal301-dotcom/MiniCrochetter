@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="style.css">
 <style>
 *{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.filter-tabs{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;scrollbar-width:none;margin-bottom:24px}
-.filter-tabs::-webkit-scrollbar{display:none}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;overflow:visible;padding-bottom:6px;margin-bottom:24px}
 .tab{flex-shrink:0;border:1.5px solid var(--bdr);background:var(--wht);color:var(--tm);padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;transition:all .2s;font-family:"Jost",sans-serif;white-space:nowrap;min-height:36px}
 .tab.active,.tab:hover{background:var(--ter);color:var(--wht);border-color:var(--ter)}
 .products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}

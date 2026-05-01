@@ -1224,11 +1224,11 @@ footer{
 @media (max-width: 600px) {
   .filter-tabs {
     display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
+    overflow: visible;
+    white-space: normal;
+    flex-wrap: wrap;
     padding-bottom: 10px;
     gap: 8px;
-    -webkit-overflow-scrolling: touch;
   }
   .tab {
     flex: 0 0 auto;
@@ -1285,7 +1285,7 @@ footer{
   .modal-price{font-size:24px}
 
   /* Filter tabs visual cue for scroll */
-  .filter-tabs{padding:6px 4% 12px;margin:0 -4%;mask-image:linear-gradient(to right,#000 90%,transparent);}
+  .filter-tabs{padding:6px 0 12px;margin:0;mask-image:none;}
   .tab{padding:8px 14px;font-size:13px}
 }
 
