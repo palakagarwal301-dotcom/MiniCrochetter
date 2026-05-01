@@ -13,6 +13,7 @@
 .filter-tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px;overflow:visible;padding-bottom:6px;margin-bottom:24px}
 .tab{width:100%;border:1.5px solid var(--bdr);background:var(--wht);color:var(--tm);padding:8px 12px;border-radius:20px;font-size:13px;cursor:pointer;transition:all .2s;font-family:"Jost",sans-serif;white-space:normal;min-height:38px}
 .tab.active,.tab:hover{background:var(--ter);color:var(--wht);border-color:var(--ter)}
+.category-select{display:none;width:100%;border:1.5px solid var(--bdr);background:var(--wht);color:var(--ter);padding:11px 14px;border-radius:14px;font-family:"Jost",sans-serif;font-size:14px;margin-bottom:18px}
 .products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:600px){.products{grid-template-columns:repeat(3,1fr);gap:18px}}
 @media(min-width:1000px){.products{grid-template-columns:repeat(4,1fr);gap:22px}}
@@ -125,7 +126,7 @@
 .toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--ter);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;z-index:600;transition:transform .3s;box-shadow:0 4px 18px rgba(0,0,0,.22);white-space:nowrap;pointer-events:none}
 @media(min-width:768px){.toast{bottom:28px}}
 .toast.show{transform:translateX(-50%) translateY(0)}
-@media(max-width:767px){.nav-links{display:none}.page-header{padding:80px 4% 20px}.shop-wrap{padding:16px 3% 60px}}
+@media(max-width:767px){.nav-links{display:none}.page-header{padding:80px 4% 20px}.shop-wrap{padding:16px 3% 60px}.category-select{display:block}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 </head>
@@ -148,15 +149,25 @@
 
 <div class="shop-wrap">
   <div class="filter-tabs">
-    <button class="tab active" onclick="filterP('all',this)">All</button>
-    <button class="tab" onclick="filterP('booties',this)">Booties</button>
-    <button class="tab" onclick="filterP('plushies',this)">Plushies</button>
-    <button class="tab" onclick="filterP('coasters',this)">Coasters &amp; Mats</button>
-    <button class="tab" onclick="filterP('flowers',this)">Flowers</button>
-    <button class="tab" onclick="filterP('bags',this)">Bags</button>
-    <button class="tab" onclick="filterP('accessories',this)">Accessories</button>
-    <button class="tab" onclick="filterP('rakhis',this)">Rakhis</button>
+    <button class="tab active" type="button" data-cat="all">All</button>
+    <button class="tab" type="button" data-cat="booties">Booties</button>
+    <button class="tab" type="button" data-cat="plushies">Plushies</button>
+    <button class="tab" type="button" data-cat="coasters">Coasters &amp; Mats</button>
+    <button class="tab" type="button" data-cat="flowers">Flowers</button>
+    <button class="tab" type="button" data-cat="bags">Bags</button>
+    <button class="tab" type="button" data-cat="accessories">Accessories</button>
+    <button class="tab" type="button" data-cat="rakhis">Rakhis</button>
   </div>
+  <select class="category-select" id="categorySelect" aria-label="Filter products by category">
+    <option value="all">All products</option>
+    <option value="booties">Booties</option>
+    <option value="plushies">Plushies</option>
+    <option value="coasters">Coasters &amp; Mats</option>
+    <option value="flowers">Flowers</option>
+    <option value="bags">Bags</option>
+    <option value="accessories">Accessories</option>
+    <option value="rakhis">Rakhis</option>
+  </select>
   <div class="products" id="pg"></div>
 </div>
 
@@ -171,9 +182,9 @@
       </div>
     </div>
     <div class="foot-col"><h4>Shop</h4>
-      <a href="shop.html">Booties</a><a href="shop.html">Plushies</a>
-      <a href="shop.html">Coasters &amp; Mats</a><a href="shop.html">Flowers</a>
-      <a href="shop.html">Bags</a><a href="shop.html">Rakhis</a>
+      <a href="shop.html#booties">Booties</a><a href="shop.html#plushies">Plushies</a>
+      <a href="shop.html#coasters">Coasters &amp; Mats</a><a href="shop.html#flowers">Flowers</a>
+      <a href="shop.html#bags">Bags</a><a href="shop.html#rakhis">Rakhis</a>
     </div>
     <div class="foot-col"><h4>Order</h4>
       <a href="https://wa.me/918886122232">WhatsApp</a>
@@ -464,9 +475,22 @@ function renderProducts(filter){
     </div>`).join("");
 }
 
-function filterP(cat,btn){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  btn.classList.add("active");renderProducts(cat);
+function setActiveCategory(cat){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.cat===cat));
+  const select=document.getElementById("categorySelect");
+  if(select) select.value=cat;
+}
+
+function applyFilter(cat){
+  const valid=["all",...new Set(products.map(p=>p.cat))];
+  const next=valid.includes(cat)?cat:"all";
+  setActiveCategory(next);
+  renderProducts(next);
+  if(location.hash.slice(1)!==next) history.replaceState(null,"",next==="all"?location.pathname:("#"+next));
+}
+
+function filterP(cat){
+  applyFilter(cat);
 }
 
 function showToast(msg){
@@ -480,7 +504,13 @@ let _sy=0;
 document.getElementById("modal").addEventListener("touchstart",e=>{_sy=e.touches[0].clientY;},{passive:true});
 document.getElementById("modal").addEventListener("touchend",e=>{if(e.changedTouches[0].clientY-_sy>80)closeModal();},{passive:true});
 
-renderProducts("all");
+document.querySelectorAll(".filter-tabs .tab").forEach(btn=>{
+  btn.addEventListener("click",()=>applyFilter(btn.dataset.cat));
+});
+const categorySelect=document.getElementById("categorySelect");
+if(categorySelect) categorySelect.addEventListener("change",e=>applyFilter(e.target.value));
+window.addEventListener("hashchange",()=>applyFilter(location.hash.slice(1)||"all"));
+applyFilter(location.hash.slice(1)||"all");
 updateCount();
 
 // keep cart count in sync if another tab updates mc_cart
