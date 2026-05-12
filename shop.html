@@ -150,7 +150,6 @@
 <div class="shop-wrap">
   <div class="filter-tabs">
     <button class="tab active" type="button" data-cat="all">All</button>
-    <button class="tab" type="button" data-cat="new">✨ New Arrivals</button>
     <button class="tab" type="button" data-cat="booties">Booties</button>
     <button class="tab" type="button" data-cat="plushies">Plushies</button>
     <button class="tab" type="button" data-cat="coasters">Coasters &amp; Mats</button>
@@ -161,7 +160,6 @@
   </div>
   <select class="category-select" id="categorySelect" aria-label="Filter products by category">
     <option value="all">All products</option>
-    <option value="new">✨ New Arrivals</option>
     <option value="booties">Booties</option>
     <option value="plushies">Plushies</option>
     <option value="coasters">Coasters &amp; Mats</option>
@@ -269,7 +267,7 @@ const products=[
   {id:10,cat:"coasters",name:"Mandala Centre Mat — 14–17 inches",imgs:["insta_mandala_mat.jpg","mandala_centre_mat.jpg"],badge:"",price:899,size:"14–17 inches",desc:"Vibrant crochet centre mat, customisable in any colour and size for tables, puja spaces and decor corners."},
   {id:11,cat:"coasters",name:"Leaf & Heart Coasters",imgs:["coasters_leaf_heart.jpg","coasters_mats.png"],badge:"",price:599,size:"~10–12cm each",desc:"Green monstera leaf coaster and pink heart coaster, shown with a cup of tea and candle. Sweet, practical and perfect as a set. Custom shapes available."},
   {id:12,cat:"flowers",name:"Crochet Daisy",imgs:["daisy_flower.png","daisy.png"],badge:"",price:349,size:"~8cm bloom",desc:"White daisy with raised golden centre on natural linen. Wear as a brooch or hair clip, or use as home decor. Available in custom colours."},
-  {id:13,cat:"flowers",name:"Golden Tangled Bloom",imgs:["insta_golden_bloom.jpg","sunflower.png","sunflower_flower.png"],badge:"new",price:499,size:"~20cm",desc:"A twist of sunlight and spellwork. A golden handcrafted bloom for decor, gifting and cosy corners."},
+  {id:13,cat:"flowers",name:"Golden Tangled Bloom",imgs:["sunflower_flower.png","sunflower.png","sunflower_flower.png"],badge:"new",price:499,size:"~20cm",desc:"A twist of sunlight and spellwork. A golden handcrafted bloom for decor, gifting and cosy corners."},
   {id:14,cat:"bags",name:"Rose Drawstring Bag",imgs:["bag_rose.jpg","bag_rose_drawstring.jpg"],badge:"new",price:1999,size:"~15×12cm",desc:"Cream crochet drawstring bag with pink and red roses and green leaves on the front, with tassel ties. A beautiful gifting piece."},
   {id:15,cat:"bags",name:"Sunflower Round Sling Bag",imgs:["bag_sunflower.jpg","bag_sunflower_sling.jpg"],badge:"",price:1999,size:"~22cm round",desc:"Round brown sling bag with a full sunflower on the front and a slim rope strap. A gorgeous boho accessory and statement piece."},
   {id:16,cat:"accessories",name:"Bow Hair Headband",imgs:["insta_kids_accessory.jpg","bow_headband.png"],badge:"",price:549,size:"Adjustable",desc:"Little handmade crochet details for kids. Soft, sweet, stretchy and available in custom colours."},
@@ -278,7 +276,7 @@ const products=[
   {id:19,cat:"booties",name:"Lace-Up Wooden Booties",imgs:["booties_lace_wood.jpg","booties_classic.jpg"],badge:"",price:799,size:"Newborn–4 yrs",desc:"Cosy booties displayed on a wooden prop with neat lace-up ties — available in cream, white and custom colour combinations."},
   {id:20,cat:"plushies",name:"Plushie Gift Set",imgs:["plushies_collage.jpg","mini_plushies.png"],badge:"new",price:2499,size:"Set of 3–4 pieces",desc:"A curated gift set of handmade crochet plushies — perfect as a birthday, baby shower or anniversary gift. DM to choose your characters."},
   {id:21,cat:"rakhis",name:"Rakhi Collection Overview",imgs:["rakhis_overview.jpg","rakhis_main.jpg","rakhis_trio.jpg"],badge:"",price:649,size:"Standard rakhi",desc:"Explore the full range of handmade crochet rakhis — hearts, evil eyes, roses, name charms, daisies and more. Order any combination."},
-  {id:22,cat:"flowers",name:"Crochet Rose Bunch",imgs:["bag_rose.jpg","insta_golden_bloom.jpg"],badge:"new",price:549,size:"Set of 3 roses",desc:"Handcrocheted roses in soft pink and red — each one made petal by petal. Beautiful as a bouquet, hair clip or decor piece. Custom colours available."},
+  {id:22,cat:"flowers",name:"Crochet Rose Bunch",imgs:["bag_rose.jpg","sunflower_flower.png"],badge:"new",price:549,size:"Set of 3 roses",desc:"Handcrocheted roses in soft pink and red — each one made petal by petal. Beautiful as a bouquet, hair clip or decor piece. Custom colours available."},
   {id:23,cat:"coasters",name:"Round Mandala Coaster Set",imgs:["coasters_mats.png","coasters_leaf_heart.jpg"],badge:"",price:799,size:"Set of 4 · ~10cm each",desc:"A matching set of four round mandala coasters in coordinating colours — soft, washable and charming on any table. Custom colours available."}
 ];
 
@@ -462,7 +460,7 @@ function toggleWish(e,btn){
 
 function renderProducts(filter){
   const g=document.getElementById("pg");
-  const list=filter==="all"?products:filter==="new"?products.filter(p=>p.badge==="new"):products.filter(p=>p.cat===filter);
+  const list=filter==="all"?products:products.filter(p=>p.cat===filter);
   if(!list.length){g.innerHTML='<div style="text-align:center;padding:40px;color:var(--tl);grid-column:1/-1">No products in this category yet.</div>';return;}
   g.innerHTML=list.map(p=>`
     <div class="product-card" onclick="openProduct(${p.id})">
@@ -490,7 +488,7 @@ function setActiveCategory(cat){
 }
 
 function applyFilter(cat){
-  const valid=["all","new",...new Set(products.map(p=>p.cat))];
+  const valid=["all",...new Set(products.map(p=>p.cat))];
   const next=valid.includes(cat)?cat:"all";
   setActiveCategory(next);
   renderProducts(next);
