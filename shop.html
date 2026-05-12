@@ -150,6 +150,7 @@
 <div class="shop-wrap">
   <div class="filter-tabs">
     <button class="tab active" type="button" data-cat="all">All</button>
+    <button class="tab" type="button" data-cat="new">✨ New Arrivals</button>
     <button class="tab" type="button" data-cat="booties">Booties</button>
     <button class="tab" type="button" data-cat="plushies">Plushies</button>
     <button class="tab" type="button" data-cat="coasters">Coasters &amp; Mats</button>
@@ -160,6 +161,7 @@
   </div>
   <select class="category-select" id="categorySelect" aria-label="Filter products by category">
     <option value="all">All products</option>
+    <option value="new">✨ New Arrivals</option>
     <option value="booties">Booties</option>
     <option value="plushies">Plushies</option>
     <option value="coasters">Coasters &amp; Mats</option>
@@ -460,7 +462,7 @@ function toggleWish(e,btn){
 
 function renderProducts(filter){
   const g=document.getElementById("pg");
-  const list=filter==="all"?products:products.filter(p=>p.cat===filter);
+  const list=filter==="all"?products:filter==="new"?products.filter(p=>p.badge==="new"):products.filter(p=>p.cat===filter);
   if(!list.length){g.innerHTML='<div style="text-align:center;padding:40px;color:var(--tl);grid-column:1/-1">No products in this category yet.</div>';return;}
   g.innerHTML=list.map(p=>`
     <div class="product-card" onclick="openProduct(${p.id})">
@@ -488,7 +490,7 @@ function setActiveCategory(cat){
 }
 
 function applyFilter(cat){
-  const valid=["all",...new Set(products.map(p=>p.cat))];
+  const valid=["all","new",...new Set(products.map(p=>p.cat))];
   const next=valid.includes(cat)?cat:"all";
   setActiveCategory(next);
   renderProducts(next);
